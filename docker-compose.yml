@@ -1,0 +1,14 @@
+services:
+  stockml-api:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./artifacts:/app/artifacts
+      - ./checkpoints:/app/checkpoints
+      - ./results:/app/results
+      - ./logs:/app/logs
+    restart: unless-stopped

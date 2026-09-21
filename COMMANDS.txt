@@ -1,0 +1,71 @@
+STOCK DIRECTION PLATFORM - COMMANDS
+====================================
+
+1) Windows - recommended
+-------------------------
+python start_run.py
+
+or double-click:
+start_run.bat
+
+2) Git Bash / WSL / macOS / Linux
+---------------------------------
+./start_run.sh
+
+or:
+python3 start_run.py
+
+3) Install manually (optional)
+------------------------------
+python -m venv .venv
+
+Windows:
+.venv\Scripts\python.exe -m pip install --upgrade pip
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+.venv\Scripts\python.exe -m pip install -e .
+
+macOS/Linux:
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -e .
+
+4) Run individual pipeline stages
+----------------------------------
+python -m stockml.main fetch
+python -m stockml.main news
+python -m stockml.main features
+python -m stockml.main cross-sectional
+python -m stockml.main labels
+python -m stockml.main baseline
+python -m stockml.main train
+python -m stockml.main evaluate
+python -m stockml.main backtest
+python -m stockml.main monitor
+python -m stockml.main predict
+
+5) Run everything
+-----------------
+python -m stockml.main all
+
+6) Compare market-only vs multimodal (out-of-sample ablation)
+----------------------------------------------------------
+python -m stockml.main ablation
+
+7) Start API
+------------
+python -m uvicorn stockml.api.server:app --host 127.0.0.1 --port 8000
+
+8) Restart after an interrupted run
+------------------------------------
+python start_run.py
+
+The launcher verifies installed package versions and repairs incompatible environments. Pipeline state/checkpoint files skip completed work and resume eligible incomplete work. Optuna uses persistent SQLite storage; LightGBM final training uses an atomic, fingerprinted booster checkpoint that can be resumed only when dataset, parameters and feature shape match.
+
+9) Configure a point-in-time universe for historical multi-stock research
+------------------------------------------------------------------------
+Copy config/universe_history.json.example to a real universe-history JSON/adapter and load it in the UniverseProvider. Do not treat today's NIFTY-500 membership as historical membership.
+
+10) FinBERT/news sentiment
+------------------------------
+.venv\Scripts\python.exe -m pip install -r requirements-optional.txt
+Then provide timestamped article text through a licensed/news adapter and enable sentiment in configuration.
