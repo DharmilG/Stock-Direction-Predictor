@@ -1,0 +1,22 @@
+# Secrets — never commit. API keys live ONLY in .env (git-ignored).
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# Large rebuildable binaries (data refetch/rebuild via pipeline; see docs/PROJECT_SETUP.md)
+*.parquet
+*.png
+mlruns/
+artifacts/hf_cache/
+artifacts/mlflow/
+artifacts/*.db
+
+# Kept deliberately: logs/, checkpoints/ (optuna.db + booster checkpoints),
+# results/*.json + *.csv (metrics, ledgers, reports), configs, docs, code.
