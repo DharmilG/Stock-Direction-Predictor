@@ -1,0 +1,12 @@
+2026-09-15 10:42:20,443 | INFO | Backtest net return -5.06%, max drawdown -5.84%
+2026-09-15 10:42:20,447 | INFO | ========== COMPLETE backtest ==========
+2026-09-15 10:42:20,447 | INFO | ========== START monitor ==========
+2026-09-15 21:33:55,584 | INFO | Backtest net return -48.03%, max drawdown -50.09%
+2026-09-16 00:18:33,724 | INFO | Backtest net return -23.85%, max drawdown -26.15%
+2026-09-18 19:28:27,932 | INFO | Backtest net return -37.27%, max drawdown -38.04%
+2026-09-19 10:38:34,549 | INFO | Backtest net return -19.89%, max drawdown -20.35%
+2026-09-19 10:54:40,072 | INFO | Backtest net return -34.08%, max drawdown -34.87%
+2026-09-19 11:22:09,920 | INFO | Backtest net return -37.27%, max drawdown -38.04%
+2026-09-19 11:25:58,302 | INFO | Backtest net return -37.27%, max drawdown -38.04%
+2026-09-19 12:33:00,015 | INFO | Backtest net return -26.34%, max drawdown -28.34%
+2026-09-20 09:25:47,542 | INFO | Backtest net return -37.27%, max drawdown -38.04%

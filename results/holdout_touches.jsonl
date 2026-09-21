@@ -1,0 +1,22 @@
+{"date": "2026-09-15", "track": "G1", "phase": "ablation", "description": "Week-2 25-trial train + evaluate", "rows_touched": 37292, "artifact_ref": "artifacts/g1_baseline_freeze.json", "eligible": true}
+{"date": "2026-09-15", "track": "G1-R", "phase": "ablation", "description": "horizon-10 relabel + retrain + evaluate", "rows_touched": 37292, "artifact_ref": "logs/train.log", "eligible": true}
+{"date": "2026-09-16", "track": "G1-R", "phase": "D1", "description": "threshold sweep on frozen test predictions", "rows_touched": 37292, "artifact_ref": "results/confidence_accuracy.csv", "eligible": true}
+{"date": "2026-09-16", "track": "G1-R", "phase": "ablation", "description": "horizon-10 revert retrain + evaluate", "rows_touched": 37292, "artifact_ref": "logs/train.log", "eligible": true}
+{"date": "2026-09-18", "track": "G1", "phase": "ablation", "description": "attempt-2 features + retrain + evaluate", "rows_touched": 37292, "artifact_ref": "results/metrics.json", "eligible": true}
+{"date": "2026-09-19", "track": "H1", "phase": "ablation", "description": "delivery\u00d7turnover interaction + retrain", "rows_touched": 37292, "artifact_ref": "results/metrics.json", "eligible": true}
+{"date": "2026-09-19", "track": "H1b", "phase": "ablation", "description": "CLV\u00d7delivery + retrain (memorization flag)", "rows_touched": 37292, "artifact_ref": "results/metrics.json", "eligible": false, "note": "memorization flag"}
+{"date": "2026-09-19", "track": "Issue-1", "phase": "D1", "description": "up-autopsy slice joins on frozen predictions", "rows_touched": 37292, "artifact_ref": "results/up_autopsy.json", "eligible": true}
+{"date": "2026-09-19", "track": "F", "phase": "D1", "description": "tau_flat swept on calibration, judged once on test", "rows_touched": 37292, "artifact_ref": "results/flat_threshold.json", "eligible": true}
+{"date": "2026-09-19", "track": "U", "phase": "ablation", "description": "announcement counts + retrain", "rows_touched": 37292, "artifact_ref": "results/metrics.json", "eligible": true}
+{"date": "2026-09-19", "track": "U2", "phase": "D1", "description": "scope-activity slice join (u2_d1.json)", "rows_touched": 37292, "artifact_ref": "results/u2_d1.json", "eligible": true}
+{"date": "2026-09-19", "track": "U3", "phase": "D1", "description": "sentiment slice join (u3_d1.json)", "rows_touched": 15216, "artifact_ref": "results/u3_d1.json", "eligible": true}
+{"date": "2026-09-20", "track": "G3", "phase": "ablation", "description": "G3b-thr65 sharpe -1.90", "rows_touched": 37292, "artifact_ref": "results/economics.json", "eligible": true}
+{"date": "2026-09-20", "track": "G3", "phase": "ablation", "description": "G3b-thr70 sharpe -0.85", "rows_touched": 37292, "artifact_ref": "results/economics.json", "eligible": true}
+{"date": "2026-09-20", "track": "G3", "phase": "ablation", "description": "G3b-cap10 sharpe -2.26", "rows_touched": 37292, "artifact_ref": "results/economics.json", "eligible": true}
+{"date": "2026-09-20", "track": "G3", "phase": "ablation", "description": "G3b-cap5 sharpe -1.87", "rows_touched": 37292, "artifact_ref": "results/economics.json", "eligible": true}
+{"date": "2026-09-20", "track": "G3", "phase": "ablation", "description": "G3c-proxy sharpe -0.28 kill-confirming only", "rows_touched": 37292, "artifact_ref": "results/economics.json", "eligible": true}
+{"date": "2026-09-20", "track": "I0", "phase": "D1", "description": "earnings-proximity slice", "rows_touched": 37292, "artifact_ref": "results/i01_d1.json", "eligible": true}
+{"date": "2026-09-20", "track": "I1", "phase": "D1", "description": "lead-lag slice", "rows_touched": 37292, "artifact_ref": "results/i01_d1.json", "eligible": true}
+{"date": "2026-09-20", "track": "DOWNFLAG", "phase": "D1", "description": "tau_down sweep + test judgment", "rows_touched": 37292, "artifact_ref": "results/down_flag.json", "eligible": true}
+{"date": "2026-09-20", "track": "DOWNFLAG", "phase": "D1", "description": "tau_down sweep + test judgment", "rows_touched": 37292, "artifact_ref": "results/down_flag.json", "eligible": true}
+{"date": "2026-09-20", "track": "DOWNFLAG", "phase": "D1", "description": "tau_down sweep + test judgment", "rows_touched": 37292, "artifact_ref": "results/down_flag.json", "eligible": true}

@@ -1,0 +1,25 @@
+2026-09-15 10:42:19,862 | INFO | 3-class accuracy: 0.4910 | Balanced accuracy: 0.3466 | MCC: 0.0442 | Directional accuracy (non-flat actual): 0.5101 | Directional accuracy (model takes direction): 0.5133 | Coverage: 0.9940
+2026-09-15 10:42:19,869 | INFO | ========== COMPLETE evaluate ==========
+2026-09-15 10:42:19,869 | INFO | ========== START backtest ==========
+2026-09-15 21:33:43,514 | INFO | 3-class accuracy: 0.4641 | Balanced accuracy: 0.3873 | MCC: 0.0367 | Directional accuracy (non-flat actual): 0.4837 | Directional accuracy (model takes direction): 0.5101 | Coverage: 0.9377
+2026-09-15 21:33:43,514 | INFO | EDGE OVER MAJORITY: -1.4480 pp  ✗ BELOW BASELINE
+2026-09-15 23:30:39,317 | INFO | 3-class accuracy: 0.4693 | Balanced accuracy: 0.3703 | MCC: 0.0148 | Directional accuracy (non-flat actual): 0.4810 | Directional accuracy (model takes direction): 0.5065 | Coverage: 0.9460
+2026-09-15 23:30:39,319 | INFO | EDGE OVER MAJORITY: -2.4948 pp  ✗ BELOW BASELINE
+2026-09-16 00:18:22,452 | INFO | 3-class accuracy: 0.4641 | Balanced accuracy: 0.3873 | MCC: 0.0367 | Directional accuracy (non-flat actual): 0.4837 | Directional accuracy (model takes direction): 0.5101 | Coverage: 0.9377
+2026-09-16 00:18:22,455 | INFO | EDGE OVER MAJORITY: -1.4480 pp  ✗ BELOW BASELINE
+2026-09-18 19:17:04,417 | INFO | 3-class accuracy: 0.4478 | Balanced accuracy: 0.3866 | MCC: 0.0359 | Directional accuracy (non-flat actual): 0.4655 | Directional accuracy (model takes direction): 0.5054 | Coverage: 0.9099
+2026-09-18 19:17:04,418 | INFO | EDGE OVER MAJORITY: -3.0707 pp  ✗ BELOW BASELINE
+2026-09-18 19:28:16,950 | INFO | 3-class accuracy: 0.4662 | Balanced accuracy: 0.3841 | MCC: 0.0398 | Directional accuracy (non-flat actual): 0.4863 | Directional accuracy (model takes direction): 0.5140 | Coverage: 0.9360
+2026-09-18 19:28:16,953 | INFO | EDGE OVER MAJORITY: -1.2389 pp  ✗ BELOW BASELINE
+2026-09-19 10:38:08,541 | INFO | 3-class accuracy: 0.4656 | Balanced accuracy: 0.3842 | MCC: 0.0391 | Directional accuracy (non-flat actual): 0.4859 | Directional accuracy (model takes direction): 0.5140 | Coverage: 0.9355
+2026-09-19 10:38:08,541 | INFO | EDGE OVER MAJORITY: -1.2925 pp  ✗ BELOW BASELINE
+2026-09-19 10:54:26,517 | INFO | 3-class accuracy: 0.4705 | Balanced accuracy: 0.3818 | MCC: 0.0374 | Directional accuracy (non-flat actual): 0.4927 | Directional accuracy (model takes direction): 0.5131 | Coverage: 0.9506
+2026-09-19 10:54:26,517 | INFO | EDGE OVER MAJORITY: -0.8018 pp  ✗ BELOW BASELINE
+2026-09-19 11:22:02,390 | INFO | 3-class accuracy: 0.4662 | Balanced accuracy: 0.3841 | MCC: 0.0398 | Directional accuracy (non-flat actual): 0.4863 | Directional accuracy (model takes direction): 0.5140 | Coverage: 0.9360
+2026-09-19 11:22:02,393 | INFO | EDGE OVER MAJORITY: -1.2389 pp  ✗ BELOW BASELINE
+2026-09-19 11:25:40,535 | INFO | 3-class accuracy: 0.4714 | Balanced accuracy: 0.3803 | MCC: 0.0372 | Directional accuracy (non-flat actual): 0.4939 | Directional accuracy (model takes direction): 0.5132 | Coverage: 0.9530
+2026-09-19 11:25:40,536 | INFO | EDGE OVER MAJORITY: -0.7160 pp  ✗ BELOW BASELINE
+2026-09-19 12:31:54,212 | INFO | 3-class accuracy: 0.4689 | Balanced accuracy: 0.3768 | MCC: 0.0325 | Directional accuracy (non-flat actual): 0.4924 | Directional accuracy (model takes direction): 0.5110 | Coverage: 0.9552
+2026-09-19 12:31:54,215 | INFO | EDGE OVER MAJORITY: -0.9680 pp  ✗ BELOW BASELINE
+2026-09-20 09:25:39,515 | INFO | 3-class accuracy: 0.4714 | Balanced accuracy: 0.3803 | MCC: 0.0372 | Directional accuracy (non-flat actual): 0.4939 | Directional accuracy (model takes direction): 0.5132 | Coverage: 0.9530
+2026-09-20 09:25:39,515 | INFO | EDGE OVER MAJORITY: -0.7160 pp  ✗ BELOW BASELINE

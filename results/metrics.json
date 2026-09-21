@@ -1,0 +1,184 @@
+{
+  "test_start": "2023-08-29",
+  "accuracy": 0.471387965247238,
+  "balanced_accuracy": 0.3803452910535447,
+  "mcc": 0.037246091964415216,
+  "precision_macro": 0.40152364941083496,
+  "recall_macro": 0.3803452910535447,
+  "f1_macro": 0.3516643010200389,
+  "confusion_matrix": [
+    [
+      14339,
+      649,
+      2858
+    ],
+    [
+      1787,
+      447,
+      369
+    ],
+    [
+      13392,
+      658,
+      2793
+    ]
+  ],
+  "classification_report": {
+    "0": {
+      "precision": 0.4857713937258622,
+      "recall": 0.8034853748739214,
+      "f1-score": 0.6054809560003378,
+      "support": 17846.0
+    },
+    "1": {
+      "precision": 0.2548460661345496,
+      "recall": 0.1717249327698809,
+      "f1-score": 0.20518705531328896,
+      "support": 2603.0
+    },
+    "2": {
+      "precision": 0.46395348837209305,
+      "recall": 0.16582556551683192,
+      "f1-score": 0.24432489174648997,
+      "support": 16843.0
+    },
+    "accuracy": 0.471387965247238,
+    "macro avg": {
+      "precision": 0.40152364941083496,
+      "recall": 0.3803452910535447,
+      "f1-score": 0.3516643010200389,
+      "support": 37292.0
+    },
+    "weighted avg": {
+      "precision": 0.45979859506680076,
+      "recall": 0.471387965247238,
+      "f1-score": 0.41442344731976427,
+      "support": 37292.0
+    }
+  },
+  "directional_accuracy_nonflat_actual": 0.49387413877598085,
+  "directional_samples_nonflat_actual": 34689,
+  "directional_accuracy_when_model_takes_direction": 0.5132107123599544,
+  "directional_signal_coverage": 0.9529657835460689,
+  "directional_samples_when_model_takes_direction": 33382,
+  "roc_auc_ovr_macro": 0.554378051027698,
+  "ece": 0.042442487054207854,
+  "ece_bins": [
+    {
+      "bin": 0,
+      "lo": 0.0,
+      "hi": 0.1,
+      "count": 0,
+      "accuracy": null,
+      "confidence": null,
+      "gap": null
+    },
+    {
+      "bin": 1,
+      "lo": 0.1,
+      "hi": 0.2,
+      "count": 0,
+      "accuracy": null,
+      "confidence": null,
+      "gap": null
+    },
+    {
+      "bin": 2,
+      "lo": 0.2,
+      "hi": 0.30000000000000004,
+      "count": 0,
+      "accuracy": null,
+      "confidence": null,
+      "gap": null
+    },
+    {
+      "bin": 3,
+      "lo": 0.30000000000000004,
+      "hi": 0.4,
+      "count": 3837,
+      "accuracy": 0.3896273130049518,
+      "confidence": 0.37843101151040387,
+      "gap": 0.011196301494547922
+    },
+    {
+      "bin": 4,
+      "lo": 0.4,
+      "hi": 0.5,
+      "count": 17072,
+      "accuracy": 0.46163308341143394,
+      "confidence": 0.45130971774192,
+      "gap": 0.010323365669513918
+    },
+    {
+      "bin": 5,
+      "lo": 0.5,
+      "hi": 0.6000000000000001,
+      "count": 12045,
+      "accuracy": 0.4841012868410129,
+      "confidence": 0.5438372302787505,
+      "gap": 0.05973594343773764
+    },
+    {
+      "bin": 6,
+      "lo": 0.6000000000000001,
+      "hi": 0.7000000000000001,
+      "count": 3794,
+      "accuracy": 0.5013178703215604,
+      "confidence": 0.6368284779261201,
+      "gap": 0.13551060760455969
+    },
+    {
+      "bin": 7,
+      "lo": 0.7000000000000001,
+      "hi": 0.8,
+      "count": 472,
+      "accuracy": 0.4978813559322034,
+      "confidence": 0.7296178261392374,
+      "gap": 0.23173647020703403
+    },
+    {
+      "bin": 8,
+      "lo": 0.8,
+      "hi": 0.9,
+      "count": 66,
+      "accuracy": 0.5606060606060606,
+      "confidence": 0.8346574326811068,
+      "gap": 0.27405137207504626
+    },
+    {
+      "bin": 9,
+      "lo": 0.9,
+      "hi": 1.0,
+      "count": 6,
+      "accuracy": 0.5,
+      "confidence": 0.908471871179147,
+      "gap": 0.40847187117914696
+    }
+  ],
+  "test_class_counts": {
+    "0": 17846,
+    "1": 2603,
+    "2": 16843
+  },
+  "majority_class": 0,
+  "majority_baseline_accuracy": 0.47854767778612034,
+  "lightgbm_minus_majority_accuracy": -0.007159712538882312,
+  "beats_majority_baseline": false,
+  "prediction_class_counts": {
+    "0": 29518,
+    "1": 1754,
+    "2": 6020
+  },
+  "directional_predictions_taken": 33382,
+  "baseline_accuracy": 0.48021023275769603,
+  "lightgbm_minus_baseline_accuracy": -0.008822267510458004,
+  "dm_up": {
+    "stat": -4.829457136717209,
+    "p_value": 1.3690577998101538e-06,
+    "n": 37292,
+    "mean_d": -0.011664700203797061,
+    "model_up_accuracy": 0.5367102863885016,
+    "base_up_accuracy": 0.5483749865922987
+  },
+  "n_test": 37292
+}

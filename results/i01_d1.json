@@ -1,0 +1,111 @@
+{
+  "n_test": 37292,
+  "i0_earnings": {
+    "buckets": {
+      "0-5": {
+        "rows": 1484,
+        "up_rows": 613,
+        "miss_rate": 0.8238172920065253
+      },
+      "6-10": {
+        "rows": 1647,
+        "up_rows": 714,
+        "miss_rate": 0.7955182072829131
+      },
+      "11-20": {
+        "rows": 3054,
+        "up_rows": 1335,
+        "miss_rate": 0.8202247191011236
+      },
+      "21+": {
+        "rows": 30321,
+        "up_rows": 13796,
+        "miss_rate": 0.8377065816178603
+      },
+      "none": {
+        "rows": 786,
+        "up_rows": 385,
+        "miss_rate": 0.8441558441558441
+      }
+    },
+    "verdict": {
+      "delta": -0.013889289611334954,
+      "bar_2se": 0.0314088172721653,
+      "pass": false,
+      "cross_era_stable": true
+    }
+  },
+  "i1_leadlag": {
+    "buckets": {
+      "leader-up": {
+        "rows": 6836,
+        "up_rows": 3055,
+        "miss_rate": 0.8242225859247135
+      },
+      "leader-down": {
+        "rows": 6451,
+        "up_rows": 2876,
+        "miss_rate": 0.7785118219749653
+      },
+      "leader-flat": {
+        "rows": 11257,
+        "up_rows": 5030,
+        "miss_rate": 0.8292246520874752
+      }
+    },
+    "verdict": {
+      "delta": -0.005002066162761665,
+      "bar_2se": 0.017387019036879676,
+      "pass": false
+    },
+    "leaders": {
+      "Automobile and Auto Components": [
+        "M&M.NS"
+      ],
+      "Capital Goods": [
+        "BEL.NS"
+      ],
+      "Construction": [
+        "LT.NS"
+      ],
+      "Construction Materials": [
+        "ULTRACEMCO.NS"
+      ],
+      "Consumer Durables": [
+        "TITAN.NS"
+      ],
+      "Consumer Services": [
+        "ETERNAL.NS"
+      ],
+      "FMCG": [
+        "ITC.NS"
+      ],
+      "Financial Services": [
+        "HDFCBANK.NS",
+        "ICICIBANK.NS",
+        "SBIN.NS"
+      ],
+      "Healthcare": [
+        "SUNPHARMA.NS"
+      ],
+      "Information Technology": [
+        "INFY.NS"
+      ],
+      "Metals & Mining": [
+        "TATASTEEL.NS"
+      ],
+      "Oil Gas & Consumable Fuels": [
+        "RELIANCE.NS"
+      ],
+      "Power": [
+        "NTPC.NS"
+      ],
+      "Services": [
+        "INDIGO.NS"
+      ],
+      "Telecom": [
+        "BHARTIARTL.NS"
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+2026-09-20 22:42:01,272 | INFO | BigQuery IN-actor scan: 0 rows, 164.4 GB billed.
+2026-09-20 22:42:01,472 | INFO | Matched 0 symbol-events across 50 symbols.
+2026-09-21 02:20:31,377 | INFO | BigQuery streaming: 25 pages, 500000 rows scanned.
+2026-09-21 02:26:13,933 | INFO | BigQuery streaming: 50 pages, 1000000 rows scanned.
+2026-09-21 02:31:58,356 | INFO | BigQuery streaming: 75 pages, 1500000 rows scanned.
+2026-09-21 02:37:44,302 | INFO | BigQuery streaming: 100 pages, 2000000 rows scanned.
+2026-09-21 02:43:35,400 | INFO | BigQuery streaming: 125 pages, 2500000 rows scanned.
+2026-09-21 02:49:26,408 | INFO | BigQuery streaming: 150 pages, 3000000 rows scanned.
+2026-09-21 02:55:13,957 | INFO | BigQuery streaming: 175 pages, 3500000 rows scanned.
+2026-09-21 03:01:03,332 | INFO | BigQuery streaming: 200 pages, 4000000 rows scanned.
+2026-09-21 03:06:52,085 | INFO | BigQuery streaming: 225 pages, 4500000 rows scanned.
+2026-09-21 03:12:42,352 | INFO | BigQuery streaming: 250 pages, 5000000 rows scanned.
+2026-09-21 03:18:30,825 | INFO | BigQuery streaming: 275 pages, 5500000 rows scanned.
+2026-09-21 03:24:18,108 | INFO | BigQuery streaming: 300 pages, 6000000 rows scanned.
+2026-09-21 03:30:04,488 | INFO | BigQuery streaming: 325 pages, 6500000 rows scanned.
+2026-09-21 03:35:57,732 | INFO | BigQuery streaming: 350 pages, 7000000 rows scanned.
+2026-09-21 03:41:54,659 | INFO | BigQuery streaming: 375 pages, 7500000 rows scanned.
+2026-09-21 03:47:41,807 | INFO | BigQuery streaming: 400 pages, 8000000 rows scanned.
+2026-09-21 03:53:32,359 | INFO | BigQuery streaming: 425 pages, 8500000 rows scanned.
+2026-09-21 03:59:20,610 | INFO | BigQuery streaming: 450 pages, 9000000 rows scanned.
+2026-09-21 04:05:09,484 | INFO | BigQuery streaming: 475 pages, 9500000 rows scanned.
+2026-09-21 04:10:57,999 | INFO | BigQuery streaming: 500 pages, 10000000 rows scanned.
+2026-09-21 04:16:48,565 | INFO | BigQuery streaming: 525 pages, 10500000 rows scanned.
+2026-09-21 04:22:41,214 | INFO | BigQuery streaming: 550 pages, 11000000 rows scanned.
+2026-09-21 04:28:33,779 | INFO | BigQuery streaming: 575 pages, 11500000 rows scanned.
+2026-09-21 04:31:19,222 | INFO | BigQuery IN-actor scan: 11731844 rows scanned, 164.4 GB billed.
+2026-09-21 04:31:19,410 | INFO | Matched 88798 symbol-events across 50 symbols.

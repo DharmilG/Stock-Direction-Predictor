@@ -1,0 +1,24 @@
+2026-09-15 21:21:52,182 | INFO | flat_band scan:
+ flat_band  n_total  down_share  flat_share  up_share
+      0.25   183165    0.481309    0.052395  0.466295
+      0.50   183165    0.475642    0.063522  0.460836
+      0.75   183165    0.472050    0.070057  0.457893
+      1.00   183165    0.471258    0.071597  0.457145
+2026-09-15 21:21:52,182 | INFO | Selected flat_band=1.00
+2026-09-15 21:21:52,184 | INFO | Cleared 0 processed datasets; labels will rebuild with flat_band=1.00.
+2026-09-15 23:17:47,462 | INFO | flat_band scan:
+ flat_band  n_total  down_share  flat_share  up_share
+      0.25   182915    0.485701    0.040871  0.473428
+      0.50   182915    0.484728    0.042533  0.472739
+      0.75   182915    0.484258    0.043446  0.472296
+      1.00   182915    0.484116    0.043681  0.472203
+2026-09-15 23:17:47,462 | INFO | Selected flat_band=1.00
+2026-09-15 23:17:47,474 | INFO | Cleared 0 processed datasets; labels will rebuild with flat_band=1.00.
+2026-09-15 23:44:50,808 | INFO | flat_band scan:
+ flat_band  n_total  down_share  flat_share  up_share
+      0.25   183165    0.481309    0.052395  0.466295
+      0.50   183165    0.475642    0.063522  0.460836
+      0.75   183165    0.472050    0.070057  0.457893
+      1.00   183165    0.471258    0.071597  0.457145
+2026-09-15 23:44:50,810 | INFO | Selected flat_band=1.00
+2026-09-15 23:44:50,863 | INFO | Cleared 0 processed datasets; labels will rebuild with flat_band=1.00.

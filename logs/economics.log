@@ -1,0 +1,12 @@
+2026-09-20 09:28:51,402 | INFO | V0: sharpe -2.49 net -37.27% trades 3080.
+2026-09-20 09:28:53,690 | INFO | thr65: sharpe -1.90 net -20.19% trades 1186.
+2026-09-20 09:28:56,061 | INFO | thr70: sharpe -0.85 net -4.49% trades 338.
+2026-09-20 09:28:58,639 | INFO | cap10: sharpe -2.26 net -36.35% trades 2020.
+2026-09-20 09:29:00,646 | INFO | cap5: sharpe -1.87 net -32.32% trades 1363.
+2026-09-20 09:41:40,839 | INFO | F&O proxy eligible rows: 9656/37292.
+2026-09-20 09:41:43,320 | INFO | V0: sharpe -2.49 net -37.27% trades 3080.
+2026-09-20 09:41:45,641 | INFO | thr65: sharpe -1.90 net -20.19% trades 1186.
+2026-09-20 09:41:47,664 | INFO | thr70: sharpe -0.85 net -4.49% trades 338.
+2026-09-20 09:41:50,054 | INFO | cap10: sharpe -2.26 net -36.35% trades 2020.
+2026-09-20 09:41:52,183 | INFO | cap5: sharpe -1.87 net -32.32% trades 1363.
+2026-09-20 09:41:53,060 | INFO | fo_proxy: sharpe -0.28 net -4.25% trades 1076.

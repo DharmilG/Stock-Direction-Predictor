@@ -1,0 +1,115 @@
+{
+  "n_test": 37292,
+  "n_scored_ann": 26325,
+  "rows_with_sentiment": 15216,
+  "up_miss_overall": 0.6823012527459479,
+  "up_auc_overall": 0.514012718106137,
+  "slices": {
+    "positive": {
+      "rows": 743,
+      "up_rows": 320,
+      "reliable": true,
+      "up_miss_rate": 0.6875,
+      "up_auc": 0.48642139479905433,
+      "per_era": {
+        "era1": {
+          "rows": 108,
+          "miss_rate": 0.5648148148148148
+        },
+        "era2": {
+          "rows": 58,
+          "miss_rate": 0.8275862068965517
+        },
+        "era3": {
+          "rows": 89,
+          "miss_rate": 0.7303370786516854
+        },
+        "era4": {
+          "rows": 65,
+          "miss_rate": 0.7076923076923077
+        }
+      },
+      "cross_era": false
+    },
+    "negative": {
+      "rows": 1964,
+      "up_rows": 914,
+      "reliable": true,
+      "up_miss_rate": 0.6564551422319475,
+      "up_auc": 0.5137042825883089,
+      "per_era": {
+        "era1": {
+          "rows": 562,
+          "miss_rate": 0.608540925266904
+        },
+        "era2": {
+          "rows": 287,
+          "miss_rate": 0.7665505226480837
+        }
+      },
+      "cross_era": false
+    },
+    "neutral": {
+      "rows": 12509,
+      "up_rows": 5612,
+      "reliable": true,
+      "up_miss_rate": 0.6646471846044191,
+      "up_auc": 0.5132240085791431,
+      "per_era": {
+        "era1": {
+          "rows": 1489,
+          "miss_rate": 0.6171927468099395
+        },
+        "era2": {
+          "rows": 1290,
+          "miss_rate": 0.7170542635658915
+        },
+        "era3": {
+          "rows": 1497,
+          "miss_rate": 0.6346025384101537
+        },
+        "era4": {
+          "rows": 1336,
+          "miss_rate": 0.7005988023952096
+        }
+      },
+      "cross_era": true
+    },
+    "none": {
+      "rows": 22076,
+      "up_rows": 9997,
+      "reliable": true,
+      "up_miss_rate": 0.694408322496749,
+      "up_auc": 0.5154690541610699,
+      "per_era": {
+        "era1": {
+          "rows": 2341,
+          "miss_rate": 0.6501495087569414
+        },
+        "era2": {
+          "rows": 2256,
+          "miss_rate": 0.7189716312056738
+        },
+        "era3": {
+          "rows": 2823,
+          "miss_rate": 0.6684378320935175
+        },
+        "era4": {
+          "rows": 2577,
+          "miss_rate": 0.7415599534342259
+        }
+      },
+      "cross_era": true
+    },
+    "strong": {
+      "rows": 1657,
+      "up_rows": 741,
+      "up_miss_rate": 0.6693657219973009
+    },
+    "weak": {
+      "rows": 13559,
+      "up_rows": 6105,
+      "up_miss_rate": 0.6640458640458641
+    }
+  }
+}

@@ -1,0 +1,4 @@
+2026-09-19 20:11:11,246 | INFO | sent=positive rows=743 up_miss=0.6875 up_auc=0.4864 xera=False
+2026-09-19 20:11:11,256 | INFO | sent=negative rows=1964 up_miss=0.6565 up_auc=0.5137 xera=False
+2026-09-19 20:11:11,270 | INFO | sent=neutral rows=12509 up_miss=0.6646 up_auc=0.5132 xera=True
+2026-09-19 20:11:11,286 | INFO | sent=none rows=22076 up_miss=0.6944 up_auc=0.5155 xera=True

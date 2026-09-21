@@ -1,0 +1,10 @@
+2026-09-19 10:11:25,285 | INFO | UP autopsy: 16843 actual UPs, miss rate 0.841, OvR AUC up=0.5181 down=0.5232.
+2026-09-19 10:11:25,285 | INFO | Worst-20 written to E:\books\Adaniports\stock_direction_platform\results\worst_20.csv.
+2026-09-19 10:40:01,070 | INFO | UP autopsy: 16843 actual UPs, miss rate 0.782, OvR AUC up=0.5144 down=0.5266.
+2026-09-19 10:40:01,071 | INFO | Worst-20 written to E:\books\Adaniports\stock_direction_platform\results\worst_20.csv.
+2026-09-19 10:56:09,334 | INFO | UP autopsy: 16843 actual UPs, miss rate 0.781, OvR AUC up=0.5127 down=0.5267.
+2026-09-19 10:56:09,334 | INFO | Worst-20 written to E:\books\Adaniports\stock_direction_platform\results\worst_20.csv.
+2026-09-19 11:27:29,346 | INFO | UP autopsy: 16843 actual UPs, miss rate 0.834, OvR AUC up=0.5181 down=0.5232.
+2026-09-19 11:27:29,347 | INFO | Worst-20 written to E:\books\Adaniports\stock_direction_platform\results\worst_20.csv.
+2026-09-19 12:32:41,025 | INFO | UP autopsy: 16843 actual UPs, miss rate 0.682, OvR AUC up=0.5140 down=0.5261.
+2026-09-19 12:32:41,026 | INFO | Worst-20 written to E:\books\Adaniports\stock_direction_platform\results\worst_20.csv.

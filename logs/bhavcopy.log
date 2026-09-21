@@ -1,0 +1,104 @@
+2026-09-18 16:02:22,660 | WARNING | bhav 2020-01-01 failed: bhavcopy fetch failed for 2020-01-01: 'SERIES'
+2026-09-18 16:03:06,918 | WARNING | bhav 2020-01-02 failed: bhavcopy fetch failed for 2020-01-02: 'SERIES'
+2026-09-18 16:03:50,687 | WARNING | bhav 2020-01-03 failed: bhavcopy fetch failed for 2020-01-03: 'SERIES'
+2026-09-18 16:04:34,116 | WARNING | bhav 2020-01-06 failed: bhavcopy fetch failed for 2020-01-06: 'SERIES'
+2026-09-18 16:05:17,975 | WARNING | bhav 2020-01-07 failed: bhavcopy fetch failed for 2020-01-07: 'SERIES'
+2026-09-18 16:06:01,671 | WARNING | bhav 2020-01-08 failed: bhavcopy fetch failed for 2020-01-08: 'SERIES'
+2026-09-18 16:06:45,988 | WARNING | bhav 2020-01-09 failed: bhavcopy fetch failed for 2020-01-09: 'SERIES'
+2026-09-18 16:07:30,193 | WARNING | bhav 2020-01-10 failed: bhavcopy fetch failed for 2020-01-10: 'SERIES'
+2026-09-18 16:08:13,764 | WARNING | bhav 2020-01-13 failed: bhavcopy fetch failed for 2020-01-13: 'SERIES'
+2026-09-18 16:08:57,182 | WARNING | bhav 2020-01-14 failed: bhavcopy fetch failed for 2020-01-14: 'SERIES'
+2026-09-18 16:09:40,538 | WARNING | bhav 2020-01-15 failed: bhavcopy fetch failed for 2020-01-15: 'SERIES'
+2026-09-18 16:10:23,909 | WARNING | bhav 2020-01-16 failed: bhavcopy fetch failed for 2020-01-16: 'SERIES'
+2026-09-18 16:11:08,366 | WARNING | bhav 2020-01-17 failed: bhavcopy fetch failed for 2020-01-17: 'SERIES'
+2026-09-18 16:11:52,739 | WARNING | bhav 2020-01-20 failed: bhavcopy fetch failed for 2020-01-20: 'SERIES'
+2026-09-18 16:12:36,624 | WARNING | bhav 2020-01-21 failed: bhavcopy fetch failed for 2020-01-21: 'SERIES'
+2026-09-18 16:13:20,377 | WARNING | bhav 2020-01-22 failed: bhavcopy fetch failed for 2020-01-22: 'SERIES'
+2026-09-18 16:14:04,329 | WARNING | bhav 2020-01-23 failed: bhavcopy fetch failed for 2020-01-23: 'SERIES'
+2026-09-18 16:14:48,108 | WARNING | bhav 2020-01-24 failed: bhavcopy fetch failed for 2020-01-24: 'SERIES'
+2026-09-18 16:15:31,981 | WARNING | bhav 2020-01-27 failed: bhavcopy fetch failed for 2020-01-27: 'SERIES'
+2026-09-18 16:16:15,448 | WARNING | bhav 2020-01-28 failed: bhavcopy fetch failed for 2020-01-28: 'SERIES'
+2026-09-18 16:16:59,276 | WARNING | bhav 2020-01-29 failed: bhavcopy fetch failed for 2020-01-29: 'SERIES'
+2026-09-18 16:17:42,964 | WARNING | bhav 2020-01-30 failed: bhavcopy fetch failed for 2020-01-30: 'SERIES'
+2026-09-18 16:18:26,640 | WARNING | bhav 2020-01-31 failed: bhavcopy fetch failed for 2020-01-31: 'SERIES'
+2026-09-18 16:19:10,755 | WARNING | bhav 2020-02-03 failed: bhavcopy fetch failed for 2020-02-03: 'SERIES'
+2026-09-18 16:19:54,893 | WARNING | bhav 2020-02-04 failed: bhavcopy fetch failed for 2020-02-04: 'SERIES'
+2026-09-18 16:20:38,906 | WARNING | bhav 2020-02-05 failed: bhavcopy fetch failed for 2020-02-05: 'SERIES'
+2026-09-18 16:21:22,807 | WARNING | bhav 2020-02-06 failed: bhavcopy fetch failed for 2020-02-06: 'SERIES'
+2026-09-18 16:22:07,378 | WARNING | bhav 2020-02-07 failed: bhavcopy fetch failed for 2020-02-07: 'SERIES'
+2026-09-18 16:22:55,110 | WARNING | bhav 2020-02-10 failed: bhavcopy fetch failed for 2020-02-10: 'SERIES'
+2026-09-18 16:23:46,351 | WARNING | bhav 2020-02-11 failed: bhavcopy fetch failed for 2020-02-11: 'SERIES'
+2026-09-18 16:24:30,590 | WARNING | bhav 2020-02-12 failed: bhavcopy fetch failed for 2020-02-12: 'SERIES'
+2026-09-18 16:25:15,042 | WARNING | bhav 2020-02-13 failed: bhavcopy fetch failed for 2020-02-13: 'SERIES'
+2026-09-18 16:25:58,641 | WARNING | bhav 2020-02-14 failed: bhavcopy fetch failed for 2020-02-14: 'SERIES'
+2026-09-18 16:26:42,753 | WARNING | bhav 2020-02-17 failed: bhavcopy fetch failed for 2020-02-17: 'SERIES'
+2026-09-18 16:27:26,476 | WARNING | bhav 2020-02-18 failed: bhavcopy fetch failed for 2020-02-18: 'SERIES'
+2026-09-18 16:28:10,044 | WARNING | bhav 2020-02-19 failed: bhavcopy fetch failed for 2020-02-19: 'SERIES'
+2026-09-18 16:28:53,921 | WARNING | bhav 2020-02-20 failed: bhavcopy fetch failed for 2020-02-20: 'SERIES'
+2026-09-18 16:29:37,658 | WARNING | bhav 2020-02-21 failed: bhavcopy fetch failed for 2020-02-21: 'SERIES'
+2026-09-18 16:30:21,267 | WARNING | bhav 2020-02-24 failed: bhavcopy fetch failed for 2020-02-24: 'SERIES'
+2026-09-18 16:31:04,706 | WARNING | bhav 2020-02-25 failed: bhavcopy fetch failed for 2020-02-25: 'SERIES'
+2026-09-18 16:31:48,411 | WARNING | bhav 2020-02-26 failed: bhavcopy fetch failed for 2020-02-26: 'SERIES'
+2026-09-18 16:32:31,971 | WARNING | bhav 2020-02-27 failed: bhavcopy fetch failed for 2020-02-27: 'SERIES'
+2026-09-18 16:33:15,516 | WARNING | bhav 2020-02-28 failed: bhavcopy fetch failed for 2020-02-28: 'SERIES'
+2026-09-18 16:33:59,203 | WARNING | bhav 2020-03-02 failed: bhavcopy fetch failed for 2020-03-02: 'SERIES'
+2026-09-18 16:34:43,027 | WARNING | bhav 2020-03-03 failed: bhavcopy fetch failed for 2020-03-03: 'SERIES'
+2026-09-18 16:35:26,917 | WARNING | bhav 2020-03-04 failed: bhavcopy fetch failed for 2020-03-04: 'SERIES'
+2026-09-18 16:36:10,408 | WARNING | bhav 2020-03-05 failed: bhavcopy fetch failed for 2020-03-05: 'SERIES'
+2026-09-18 16:36:53,853 | WARNING | bhav 2020-03-06 failed: bhavcopy fetch failed for 2020-03-06: 'SERIES'
+2026-09-18 16:37:37,911 | WARNING | bhav 2020-03-09 failed: bhavcopy fetch failed for 2020-03-09: 'SERIES'
+2026-09-18 16:38:21,641 | WARNING | bhav 2020-03-10 failed: bhavcopy fetch failed for 2020-03-10: 'SERIES'
+2026-09-18 16:39:05,187 | WARNING | bhav 2020-03-11 failed: bhavcopy fetch failed for 2020-03-11: 'SERIES'
+2026-09-18 16:39:48,885 | WARNING | bhav 2020-03-12 failed: bhavcopy fetch failed for 2020-03-12: 'SERIES'
+2026-09-18 16:40:32,262 | WARNING | bhav 2020-03-13 failed: bhavcopy fetch failed for 2020-03-13: 'SERIES'
+2026-09-18 16:41:15,600 | WARNING | bhav 2020-03-16 failed: bhavcopy fetch failed for 2020-03-16: 'SERIES'
+2026-09-18 16:41:59,131 | WARNING | bhav 2020-03-17 failed: bhavcopy fetch failed for 2020-03-17: 'SERIES'
+2026-09-18 16:42:43,048 | WARNING | bhav 2020-03-18 failed: bhavcopy fetch failed for 2020-03-18: 'SERIES'
+2026-09-18 16:43:26,463 | WARNING | bhav 2020-03-19 failed: bhavcopy fetch failed for 2020-03-19: 'SERIES'
+2026-09-18 16:44:10,184 | WARNING | bhav 2020-03-20 failed: bhavcopy fetch failed for 2020-03-20: 'SERIES'
+2026-09-18 16:44:54,114 | WARNING | bhav 2020-03-23 failed: bhavcopy fetch failed for 2020-03-23: 'SERIES'
+2026-09-18 16:46:36,096 | WARNING | bhav 2020-01-06 blocked: no SERIES column for 2020-01-06 (likely rate-limited)
+2026-09-18 16:46:40,205 | WARNING | bhav 2020-01-07 blocked: no SERIES column for 2020-01-07 (likely rate-limited)
+2026-09-18 16:46:44,390 | WARNING | bhav 2020-01-08 blocked: no SERIES column for 2020-01-08 (likely rate-limited)
+2026-09-18 16:46:48,603 | WARNING | bhav 2020-01-09 blocked: no SERIES column for 2020-01-09 (likely rate-limited)
+2026-09-18 16:46:52,709 | WARNING | bhav 2020-01-10 blocked: no SERIES column for 2020-01-10 (likely rate-limited)
+2026-09-18 16:46:52,710 | WARNING | Cooling down 180s after 5 consecutive failures; renewing session.
+2026-09-18 16:49:57,268 | INFO | Bhavcopy fetch complete: 0/5 days hit.
+2026-09-18 16:50:23,399 | WARNING | bhav 2020-01-08 blocked: no SERIES column for 2020-01-08 (likely rate-limited)
+2026-09-18 16:50:27,422 | INFO | Bhavcopy fetch complete: 0/1 days hit.
+2026-09-18 16:51:00,331 | INFO | Bhavcopy fetch complete: 5/5 days hit.
+2026-09-18 16:55:24,027 | INFO | bhavcopy progress 2020-03-24 hits=60/60
+2026-09-18 16:59:42,377 | INFO | bhavcopy progress 2020-06-16 hits=119/120
+2026-09-18 17:04:02,355 | INFO | bhavcopy progress 2020-09-08 hits=179/180
+2026-09-18 17:08:22,634 | INFO | bhavcopy progress 2020-12-01 hits=239/240
+2026-09-18 17:10:06,014 | INFO | Bhavcopy fetch complete: 261/262 days hit.
+2026-09-18 17:14:26,809 | INFO | bhavcopy progress 2021-03-25 hits=60/60
+2026-09-18 17:18:42,254 | INFO | bhavcopy progress 2021-06-17 hits=120/120
+2026-09-18 17:23:03,793 | INFO | bhavcopy progress 2021-09-09 hits=180/180
+2026-09-18 17:27:25,947 | INFO | bhavcopy progress 2021-12-02 hits=240/240
+2026-09-18 17:29:02,830 | INFO | Bhavcopy fetch complete: 261/261 days hit.
+2026-09-18 17:33:26,888 | INFO | bhavcopy progress 2022-03-25 hits=60/60
+2026-09-18 17:37:49,874 | INFO | bhavcopy progress 2022-06-17 hits=120/120
+2026-09-18 17:40:31,075 | WARNING | bhav 2022-08-08 blocked: non-CSV response for 2022-08-08 (likely rate-limited)
+2026-09-18 17:42:13,646 | INFO | bhavcopy progress 2022-09-09 hits=178/180
+2026-09-18 17:46:37,765 | INFO | bhavcopy progress 2022-12-02 hits=238/240
+2026-09-18 17:48:10,239 | INFO | Bhavcopy fetch complete: 258/260 days hit.
+2026-09-18 17:52:33,654 | INFO | bhavcopy progress 2023-03-24 hits=60/60
+2026-09-18 17:56:50,985 | INFO | bhavcopy progress 2023-06-16 hits=120/120
+2026-09-18 18:01:15,501 | INFO | bhavcopy progress 2023-09-08 hits=180/180
+2026-09-18 18:05:42,126 | INFO | bhavcopy progress 2023-12-01 hits=240/240
+2026-09-18 18:07:19,071 | INFO | Bhavcopy fetch complete: 260/260 days hit.
+2026-09-18 18:11:49,123 | INFO | bhavcopy progress 2024-03-22 hits=60/60
+2026-09-18 18:16:17,758 | INFO | bhavcopy progress 2024-06-14 hits=120/120
+2026-09-18 18:20:44,611 | INFO | bhavcopy progress 2024-09-06 hits=180/180
+2026-09-18 18:25:15,882 | INFO | bhavcopy progress 2024-11-29 hits=239/240
+2026-09-18 18:27:01,154 | INFO | Bhavcopy fetch complete: 261/262 days hit.
+2026-09-18 18:31:25,233 | INFO | bhavcopy progress 2025-03-25 hits=58/60
+2026-09-18 18:35:51,171 | INFO | bhavcopy progress 2025-06-17 hits=113/120
+2026-09-18 18:40:20,230 | INFO | bhavcopy progress 2025-09-09 hits=171/180
+2026-09-18 18:44:51,518 | INFO | bhavcopy progress 2025-12-02 hits=230/240
+2026-09-18 18:46:32,539 | INFO | Bhavcopy fetch complete: 251/261 days hit.
+2026-09-18 18:51:04,887 | INFO | bhavcopy progress 2026-03-25 hits=60/60
+2026-09-18 18:55:30,684 | INFO | bhavcopy progress 2026-06-17 hits=120/120
+2026-09-18 19:00:00,089 | INFO | bhavcopy progress 2026-09-09 hits=180/180
+2026-09-18 19:00:39,485 | INFO | Bhavcopy fetch complete: 187/187 days hit.

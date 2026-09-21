@@ -1,0 +1,147 @@
+2026-09-15 10:32:49,136 | INFO | Fetching macro data 2010-09-15 -> 2026-09-15
+2026-09-15 10:32:59,050 | INFO | Fetching ^NSEI from 2010-09-15 to 2026-09-15
+2026-09-15 10:32:59,897 | INFO | Data fetch complete.
+2026-09-15 10:32:59,899 | INFO | ========== COMPLETE fetch ==========
+2026-09-15 10:32:59,900 | INFO | ========== START news ==========
+2026-09-15 10:34:44,760 | INFO | Macro data is current; skipping.
+2026-09-15 10:34:44,766 | INFO | ^NSEI is already current through 2026-09-15; skipping.
+2026-09-15 10:34:44,783 | INFO | Data fetch complete.
+2026-09-15 10:34:44,783 | INFO | ========== COMPLETE fetch ==========
+2026-09-15 10:34:44,798 | INFO | news is already complete and current; skipping.
+2026-09-15 10:34:44,799 | INFO | ========== START features ==========
+2026-09-15 10:40:51,277 | INFO | Macro data is current; skipping.
+2026-09-15 10:40:51,355 | INFO | ^NSEI is already current through 2026-09-15; skipping.
+2026-09-15 10:40:51,448 | INFO | Data fetch complete.
+2026-09-15 10:40:51,454 | INFO | ========== COMPLETE fetch ==========
+2026-09-15 10:40:51,517 | INFO | news is already complete and current; skipping.
+2026-09-15 10:40:51,524 | INFO | ========== START features ==========
+2026-09-15 20:28:40,208 | INFO | Macro data is current; skipping.
+2026-09-15 20:28:40,210 | INFO | Fetching RELIANCE.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:28:54,424 | INFO | Fetching BHARTIARTL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:28:56,929 | INFO | Fetching HDFCBANK.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:00,489 | INFO | Fetching ICICIBANK.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:03,795 | INFO | Fetching SBIN.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:08,068 | INFO | Fetching TCS.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:10,861 | INFO | Fetching BAJFINANCE.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:14,309 | INFO | Fetching LT.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:18,116 | INFO | Fetching HINDUNILVR.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:21,049 | INFO | Fetching TITAN.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:25,174 | INFO | Fetching SUNPHARMA.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:28,821 | INFO | Fetching INFY.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:32,878 | INFO | Fetching KOTAKBANK.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:38,641 | INFO | Fetching ADANIENT.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:46,858 | INFO | Fetching ADANIPORTS.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:29:50,430 | INFO | Fetching MARUTI.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:00,928 | INFO | Fetching AXISBANK.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:06,308 | INFO | Fetching M&M.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:18,524 | INFO | Fetching HCLTECH.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:23,492 | INFO | Fetching ITC.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:29,044 | INFO | Fetching ULTRACEMCO.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:32,241 | INFO | Fetching NTPC.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:36,738 | INFO | Fetching BAJAJ-AUTO.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:40,237 | INFO | Fetching ETERNAL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 20:30:50,509 | INFO | Fetching JSWSTEEL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:11:24,024 | INFO | Macro data is current; skipping.
+2026-09-15 21:11:24,099 | INFO | RELIANCE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:27,131 | INFO | BHARTIARTL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:30,633 | INFO | HDFCBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:33,711 | INFO | ICICIBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:36,744 | INFO | SBIN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:39,779 | INFO | TCS.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:42,809 | INFO | BAJFINANCE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:45,851 | INFO | LT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:48,884 | INFO | HINDUNILVR.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:51,924 | INFO | TITAN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:54,955 | INFO | SUNPHARMA.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:11:57,991 | INFO | INFY.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:01,026 | INFO | KOTAKBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:04,078 | INFO | ADANIENT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:07,110 | INFO | ADANIPORTS.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:10,137 | INFO | MARUTI.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:13,168 | INFO | AXISBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:16,203 | INFO | M&M.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:19,237 | INFO | HCLTECH.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:22,272 | INFO | ITC.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:25,300 | INFO | ULTRACEMCO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:28,653 | INFO | NTPC.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:31,683 | INFO | BAJAJ-AUTO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:34,709 | INFO | ETERNAL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:12:37,712 | INFO | Fetching JSWSTEEL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:12:49,504 | INFO | Fetching BAJAJFINSV.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:12:54,168 | INFO | Fetching BEL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:12:58,725 | INFO | Fetching ONGC.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:03,889 | INFO | Fetching COALINDIA.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:08,061 | INFO | Fetching POWERGRID.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:12,936 | INFO | Fetching SHRIRAMFIN.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:17,653 | INFO | Fetching ASIANPAINT.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:23,047 | INFO | Fetching TATASTEEL.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:27,667 | INFO | Fetching GRASIM.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:32,547 | INFO | Fetching HINDALCO.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:39,792 | INFO | Fetching EICHERMOT.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:45,117 | INFO | Fetching INDIGO.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:50,235 | INFO | Fetching SBILIFE.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:13:55,054 | INFO | Fetching WIPRO.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:05,587 | INFO | Fetching JIOFIN.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:10,254 | INFO | Fetching TECHM.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:17,955 | INFO | Fetching TRENT.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:22,840 | INFO | Fetching APOLLOHOSP.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:30,085 | INFO | Fetching HDFCLIFE.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:38,261 | INFO | Fetching TMPV.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:47,095 | INFO | Fetching CIPLA.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:14:56,724 | INFO | Fetching MAXHEALTH.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:15:02,015 | INFO | Fetching TATACONSUM.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:15:06,736 | INFO | Fetching DRREDDY.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:15:14,161 | INFO | Fetching NESTLEIND.NS from 2010-09-15 to 2026-09-15
+2026-09-15 21:15:16,609 | INFO | Data fetch complete.
+2026-09-15 21:15:52,338 | INFO | Fetching macro data 2010-09-15 -> 2026-09-15
+2026-09-15 21:15:59,165 | INFO | RELIANCE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:02,179 | INFO | BHARTIARTL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:05,189 | INFO | HDFCBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:08,200 | INFO | ICICIBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:11,215 | INFO | SBIN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:14,239 | INFO | TCS.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:17,265 | INFO | BAJFINANCE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:20,295 | INFO | LT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:23,316 | INFO | HINDUNILVR.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:26,337 | INFO | TITAN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:29,356 | INFO | SUNPHARMA.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:32,370 | INFO | INFY.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:35,388 | INFO | KOTAKBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:38,405 | INFO | ADANIENT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:41,421 | INFO | ADANIPORTS.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:44,437 | INFO | MARUTI.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:47,453 | INFO | AXISBANK.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:50,469 | INFO | M&M.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:53,486 | INFO | HCLTECH.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:56,496 | INFO | ITC.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:16:59,508 | INFO | ULTRACEMCO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:02,524 | INFO | NTPC.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:05,538 | INFO | BAJAJ-AUTO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:08,548 | INFO | ETERNAL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:11,581 | INFO | JSWSTEEL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:14,612 | INFO | BAJAJFINSV.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:17,640 | INFO | BEL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:20,665 | INFO | ONGC.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:23,704 | INFO | COALINDIA.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:26,732 | INFO | POWERGRID.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:29,767 | INFO | SHRIRAMFIN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:32,805 | INFO | ASIANPAINT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:35,900 | INFO | TATASTEEL.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:38,924 | INFO | GRASIM.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:41,960 | INFO | HINDALCO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:45,004 | INFO | EICHERMOT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:48,040 | INFO | INDIGO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:51,065 | INFO | SBILIFE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:54,169 | INFO | WIPRO.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:17:57,199 | INFO | JIOFIN.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:00,238 | INFO | TECHM.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:03,266 | INFO | TRENT.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:06,300 | INFO | APOLLOHOSP.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:09,335 | INFO | HDFCLIFE.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:12,371 | INFO | TMPV.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:15,401 | INFO | CIPLA.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:18,434 | INFO | MAXHEALTH.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:21,473 | INFO | TATACONSUM.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:24,495 | INFO | DRREDDY.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:27,529 | INFO | NESTLEIND.NS is already current through 2026-09-15; skipping.
+2026-09-15 21:18:27,561 | INFO | Data fetch complete.

@@ -1,0 +1,352 @@
+{
+  "RELIANCE.NS": {
+    "stocks_mtime": 1789961213.4615622,
+    "news_mtime": 1789961220.7725513,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "BHARTIARTL.NS": {
+    "stocks_mtime": 1789961221.109397,
+    "news_mtime": 1789961226.8851714,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "HDFCBANK.NS": {
+    "stocks_mtime": 1789961227.2069693,
+    "news_mtime": 1789961232.4349556,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ICICIBANK.NS": {
+    "stocks_mtime": 1789961232.7660034,
+    "news_mtime": 1789961243.7638357,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "SBIN.NS": {
+    "stocks_mtime": 1789961244.0740714,
+    "news_mtime": 1789961249.9594166,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "TCS.NS": {
+    "stocks_mtime": 1789961250.28007,
+    "news_mtime": 1789961257.1003535,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "BAJFINANCE.NS": {
+    "stocks_mtime": 1789961257.4413002,
+    "news_mtime": 1789961260.6133404,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "LT.NS": {
+    "stocks_mtime": 1789961260.9516563,
+    "news_mtime": 1789961266.6738515,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "HINDUNILVR.NS": {
+    "stocks_mtime": 1789961267.0067616,
+    "news_mtime": 1789961270.480556,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "TITAN.NS": {
+    "stocks_mtime": 1789961270.8154657,
+    "news_mtime": 1789961274.4084072,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "SUNPHARMA.NS": {
+    "stocks_mtime": 1789961274.7393057,
+    "news_mtime": 1789961278.9706702,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "INFY.NS": {
+    "stocks_mtime": 1789961279.387997,
+    "news_mtime": 1789961286.2947824,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "KOTAKBANK.NS": {
+    "stocks_mtime": 1789961286.6490624,
+    "news_mtime": 1789961291.7695448,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ADANIENT.NS": {
+    "stocks_mtime": 1789961292.1191623,
+    "news_mtime": 1789961295.7048955,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ADANIPORTS.NS": {
+    "stocks_mtime": 1789961296.0163963,
+    "news_mtime": 1789961298.9970007,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "MARUTI.NS": {
+    "stocks_mtime": 1789961299.3502343,
+    "news_mtime": 1789961303.925315,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "AXISBANK.NS": {
+    "stocks_mtime": 1789961304.2570193,
+    "news_mtime": 1789961310.934761,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "M&M.NS": {
+    "stocks_mtime": 1789961311.2754843,
+    "news_mtime": 1789961311.87098,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "HCLTECH.NS": {
+    "stocks_mtime": 1789961312.2651448,
+    "news_mtime": 1789961318.4489863,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ITC.NS": {
+    "stocks_mtime": 1789961318.754965,
+    "news_mtime": 1789961322.4371018,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ULTRACEMCO.NS": {
+    "stocks_mtime": 1789961322.7758582,
+    "news_mtime": 1789961327.3824317,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "NTPC.NS": {
+    "stocks_mtime": 1789961327.7619588,
+    "news_mtime": 1789961332.575583,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "BAJAJ-AUTO.NS": {
+    "stocks_mtime": 1789961332.911846,
+    "news_mtime": 1789961335.9367614,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ETERNAL.NS": {
+    "stocks_mtime": 1789961336.15301,
+    "news_mtime": 1789961337.370102,
+    "market_mtime": 1789960888.8258843,
+    "rows": 1275,
+    "news_cols": 21
+  },
+  "JSWSTEEL.NS": {
+    "stocks_mtime": 1789961337.7032835,
+    "news_mtime": 1789961342.7457044,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "BAJAJFINSV.NS": {
+    "stocks_mtime": 1789961343.0965965,
+    "news_mtime": 1789961345.5297368,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "BEL.NS": {
+    "stocks_mtime": 1789961345.9669316,
+    "news_mtime": 1789961348.8931956,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ONGC.NS": {
+    "stocks_mtime": 1789961349.2561553,
+    "news_mtime": 1789961352.6951146,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "COALINDIA.NS": {
+    "stocks_mtime": 1789961353.0138838,
+    "news_mtime": 1789961356.417423,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3915,
+    "news_cols": 21
+  },
+  "POWERGRID.NS": {
+    "stocks_mtime": 1789961356.746402,
+    "news_mtime": 1789961360.2314527,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "SHRIRAMFIN.NS": {
+    "stocks_mtime": 1789961360.5422177,
+    "news_mtime": 1789961373.8095984,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "ASIANPAINT.NS": {
+    "stocks_mtime": 1789961374.5121827,
+    "news_mtime": 1789961381.5929096,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "TATASTEEL.NS": {
+    "stocks_mtime": 1789961382.3599086,
+    "news_mtime": 1789961395.0521014,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "GRASIM.NS": {
+    "stocks_mtime": 1789961395.7169306,
+    "news_mtime": 1789961403.2692173,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "HINDALCO.NS": {
+    "stocks_mtime": 1789961404.0724604,
+    "news_mtime": 1789961412.2209685,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "EICHERMOT.NS": {
+    "stocks_mtime": 1789961413.181326,
+    "news_mtime": 1789961422.281036,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "INDIGO.NS": {
+    "stocks_mtime": 1789961422.9461806,
+    "news_mtime": 1789961426.5504365,
+    "market_mtime": 1789960888.8258843,
+    "rows": 2679,
+    "news_cols": 21
+  },
+  "SBILIFE.NS": {
+    "stocks_mtime": 1789961427.032775,
+    "news_mtime": 1789961431.2252824,
+    "market_mtime": 1789960888.8258843,
+    "rows": 2215,
+    "news_cols": 21
+  },
+  "WIPRO.NS": {
+    "stocks_mtime": 1789961432.0508032,
+    "news_mtime": 1789961444.0219672,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "JIOFIN.NS": {
+    "stocks_mtime": 1789961444.2025855,
+    "news_mtime": 1789961445.3154006,
+    "market_mtime": 1789960888.8258843,
+    "rows": 760,
+    "news_cols": 21
+  },
+  "TECHM.NS": {
+    "stocks_mtime": 1789961445.652769,
+    "news_mtime": 1789961451.468304,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "TRENT.NS": {
+    "stocks_mtime": 1789961452.13241,
+    "news_mtime": 1789961456.7164414,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "APOLLOHOSP.NS": {
+    "stocks_mtime": 1789961457.353611,
+    "news_mtime": 1789961462.5132682,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "HDFCLIFE.NS": {
+    "stocks_mtime": 1789961462.9963348,
+    "news_mtime": 1789961466.800805,
+    "market_mtime": 1789960888.8258843,
+    "rows": 2183,
+    "news_cols": 21
+  },
+  "TMPV.NS": {
+    "stocks_mtime": 1789961467.4565477,
+    "news_mtime": 1789961476.9157815,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "CIPLA.NS": {
+    "stocks_mtime": 1789961477.5253332,
+    "news_mtime": 1789961483.6100595,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3950,
+    "news_cols": 21
+  },
+  "MAXHEALTH.NS": {
+    "stocks_mtime": 1789961484.0177789,
+    "news_mtime": 1789961487.7002852,
+    "market_mtime": 1789960888.8258843,
+    "rows": 1504,
+    "news_cols": 21
+  },
+  "TATACONSUM.NS": {
+    "stocks_mtime": 1789961488.4928799,
+    "news_mtime": 1789961495.413451,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "DRREDDY.NS": {
+    "stocks_mtime": 1789961496.1114762,
+    "news_mtime": 1789961503.3499966,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  },
+  "NESTLEIND.NS": {
+    "stocks_mtime": 1789961504.0929718,
+    "news_mtime": 1789961506.4205391,
+    "market_mtime": 1789960888.8258843,
+    "rows": 3951,
+    "news_cols": 21
+  }
+}

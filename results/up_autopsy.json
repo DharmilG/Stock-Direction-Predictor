@@ -1,0 +1,1088 @@
+{
+  "n_test": 37292,
+  "cells": {
+    "n_actual_up": 16843,
+    "up_to_down": 10846,
+    "up_to_flat": 646,
+    "up_to_up": 5351,
+    "mean_p_up_on_missed": 0.3114169606938711,
+    "mean_conf_on_missed": 0.49382291508340553
+  },
+  "ovr_auc": {
+    "down": 0.5261190427030931,
+    "flat": 0.6234168543588129,
+    "up": 0.514012718106137
+  },
+  "mean_prob_on_actual": {
+    "down": 0.44437437362287935,
+    "flat": 0.2657605855751681,
+    "up": 0.3606910198229605
+  },
+  "up_miss_rate_overall": 0.6823012527459479,
+  "slices": {
+    "sector": [
+      {
+        "bucket": "Capital Goods",
+        "rows": 328,
+        "miss_rate": 0.8048780487804879,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 90,
+            "miss_rate": 0.7555555555555555
+          },
+          "era2": {
+            "rows": 70,
+            "miss_rate": 0.9142857142857143
+          },
+          "era3": {
+            "rows": 88,
+            "miss_rate": 0.7954545454545454
+          },
+          "era4": {
+            "rows": 80,
+            "miss_rate": 0.775
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Construction",
+        "rows": 322,
+        "miss_rate": 0.8012422360248447,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 87,
+            "miss_rate": 0.735632183908046
+          },
+          "era2": {
+            "rows": 74,
+            "miss_rate": 0.8918918918918919
+          },
+          "era3": {
+            "rows": 80,
+            "miss_rate": 0.7625
+          },
+          "era4": {
+            "rows": 81,
+            "miss_rate": 0.8271604938271605
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Consumer Services",
+        "rows": 680,
+        "miss_rate": 0.7514705882352941,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 174,
+            "miss_rate": 0.6609195402298851
+          },
+          "era2": {
+            "rows": 178,
+            "miss_rate": 0.7471910112359551
+          },
+          "era3": {
+            "rows": 163,
+            "miss_rate": 0.754601226993865
+          },
+          "era4": {
+            "rows": 165,
+            "miss_rate": 0.8484848484848485
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Telecom",
+        "rows": 352,
+        "miss_rate": 0.7471590909090909,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 103,
+            "miss_rate": 0.5825242718446602
+          },
+          "era2": {
+            "rows": 89,
+            "miss_rate": 0.7752808988764045
+          },
+          "era3": {
+            "rows": 91,
+            "miss_rate": 0.8131868131868132
+          },
+          "era4": {
+            "rows": 69,
+            "miss_rate": 0.8695652173913043
+          }
+        },
+        "cross_era": false
+      },
+      {
+        "bucket": "Power",
+        "rows": 686,
+        "miss_rate": 0.739067055393586,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 191,
+            "miss_rate": 0.6335078534031413
+          },
+          "era2": {
+            "rows": 154,
+            "miss_rate": 0.8311688311688312
+          },
+          "era3": {
+            "rows": 161,
+            "miss_rate": 0.7515527950310559
+          },
+          "era4": {
+            "rows": 180,
+            "miss_rate": 0.7611111111111111
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Consumer Durables",
+        "rows": 680,
+        "miss_rate": 0.7294117647058823,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 155,
+            "miss_rate": 0.7290322580645161
+          },
+          "era2": {
+            "rows": 165,
+            "miss_rate": 0.793939393939394
+          },
+          "era3": {
+            "rows": 179,
+            "miss_rate": 0.6368715083798883
+          },
+          "era4": {
+            "rows": 181,
+            "miss_rate": 0.7624309392265194
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Automobile and Auto Components",
+        "rows": 1726,
+        "miss_rate": 0.7282734646581692,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 458,
+            "miss_rate": 0.6812227074235808
+          },
+          "era2": {
+            "rows": 433,
+            "miss_rate": 0.7413394919168591
+          },
+          "era3": {
+            "rows": 415,
+            "miss_rate": 0.6939759036144578
+          },
+          "era4": {
+            "rows": 420,
+            "miss_rate": 0.8
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "FMCG",
+        "rows": 1308,
+        "miss_rate": 0.6888379204892966,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 336,
+            "miss_rate": 0.6190476190476191
+          },
+          "era2": {
+            "rows": 329,
+            "miss_rate": 0.756838905775076
+          },
+          "era3": {
+            "rows": 330,
+            "miss_rate": 0.6454545454545455
+          },
+          "era4": {
+            "rows": 313,
+            "miss_rate": 0.7380191693290735
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Healthcare",
+        "rows": 1713,
+        "miss_rate": 0.6695855224751898,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 429,
+            "miss_rate": 0.6177156177156177
+          },
+          "era2": {
+            "rows": 439,
+            "miss_rate": 0.7038724373576309
+          },
+          "era3": {
+            "rows": 425,
+            "miss_rate": 0.6564705882352941
+          },
+          "era4": {
+            "rows": 420,
+            "miss_rate": 0.7
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Information Technology",
+        "rows": 1651,
+        "miss_rate": 0.6680799515445185,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 397,
+            "miss_rate": 0.5869017632241813
+          },
+          "era2": {
+            "rows": 467,
+            "miss_rate": 0.6916488222698073
+          },
+          "era3": {
+            "rows": 379,
+            "miss_rate": 0.712401055408971
+          },
+          "era4": {
+            "rows": 408,
+            "miss_rate": 0.678921568627451
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Financial Services",
+        "rows": 3708,
+        "miss_rate": 0.6658576051779935,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 828,
+            "miss_rate": 0.6364734299516909
+          },
+          "era2": {
+            "rows": 976,
+            "miss_rate": 0.6997950819672131
+          },
+          "era3": {
+            "rows": 977,
+            "miss_rate": 0.5987717502558854
+          },
+          "era4": {
+            "rows": 927,
+            "miss_rate": 0.727076591154261
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Construction Materials",
+        "rows": 690,
+        "miss_rate": 0.6463768115942029,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 171,
+            "miss_rate": 0.5672514619883041
+          },
+          "era2": {
+            "rows": 174,
+            "miss_rate": 0.6781609195402298
+          },
+          "era3": {
+            "rows": 164,
+            "miss_rate": 0.6280487804878049
+          },
+          "era4": {
+            "rows": 181,
+            "miss_rate": 0.7071823204419889
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Services",
+        "rows": 653,
+        "miss_rate": 0.6462480857580398,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 185,
+            "miss_rate": 0.6108108108108108
+          },
+          "era2": {
+            "rows": 124,
+            "miss_rate": 0.6693548387096774
+          },
+          "era3": {
+            "rows": 179,
+            "miss_rate": 0.5921787709497207
+          },
+          "era4": {
+            "rows": 165,
+            "miss_rate": 0.7272727272727273
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Oil Gas & Consumable Fuels",
+        "rows": 1011,
+        "miss_rate": 0.6300692383778437,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 289,
+            "miss_rate": 0.49480968858131485
+          },
+          "era2": {
+            "rows": 218,
+            "miss_rate": 0.7339449541284404
+          },
+          "era3": {
+            "rows": 259,
+            "miss_rate": 0.61003861003861
+          },
+          "era4": {
+            "rows": 245,
+            "miss_rate": 0.7183673469387755
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "Metals & Mining",
+        "rows": 1335,
+        "miss_rate": 0.6074906367041198,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 339,
+            "miss_rate": 0.5899705014749262
+          },
+          "era2": {
+            "rows": 301,
+            "miss_rate": 0.6345514950166113
+          },
+          "era3": {
+            "rows": 319,
+            "miss_rate": 0.5047021943573667
+          },
+          "era4": {
+            "rows": 376,
+            "miss_rate": 0.6888297872340425
+          }
+        },
+        "cross_era": true
+      }
+    ],
+    "group": [
+      {
+        "bucket": "HDFC",
+        "rows": 705,
+        "miss_rate": 0.7574468085106383,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 150,
+            "miss_rate": 0.7733333333333333
+          },
+          "era2": {
+            "rows": 204,
+            "miss_rate": 0.7598039215686274
+          },
+          "era3": {
+            "rows": 193,
+            "miss_rate": 0.6735751295336787
+          },
+          "era4": {
+            "rows": 158,
+            "miss_rate": 0.8417721518987342
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "MAHINDRA",
+        "rows": 718,
+        "miss_rate": 0.713091922005571,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 167,
+            "miss_rate": 0.6646706586826348
+          },
+          "era2": {
+            "rows": 195,
+            "miss_rate": 0.7282051282051282
+          },
+          "era3": {
+            "rows": 169,
+            "miss_rate": 0.7041420118343196
+          },
+          "era4": {
+            "rows": 187,
+            "miss_rate": 0.7486631016042781
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "TATA",
+        "rows": 1949,
+        "miss_rate": 0.7044638276038995,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 515,
+            "miss_rate": 0.683495145631068
+          },
+          "era2": {
+            "rows": 480,
+            "miss_rate": 0.73125
+          },
+          "era3": {
+            "rows": 468,
+            "miss_rate": 0.6581196581196581
+          },
+          "era4": {
+            "rows": 486,
+            "miss_rate": 0.7448559670781894
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "RELIANCE",
+        "rows": 551,
+        "miss_rate": 0.6969147005444646,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 93,
+            "miss_rate": 0.5913978494623656
+          },
+          "era2": {
+            "rows": 133,
+            "miss_rate": 0.7593984962406015
+          },
+          "era3": {
+            "rows": 182,
+            "miss_rate": 0.6538461538461539
+          },
+          "era4": {
+            "rows": 143,
+            "miss_rate": 0.7622377622377622
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "\u2014",
+        "rows": 9553,
+        "miss_rate": 0.689626295404585,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 2440,
+            "miss_rate": 0.6061475409836066
+          },
+          "era2": {
+            "rows": 2401,
+            "miss_rate": 0.736359850062474
+          },
+          "era3": {
+            "rows": 2357,
+            "miss_rate": 0.677131947390751
+          },
+          "era4": {
+            "rows": 2355,
+            "miss_rate": 0.7409766454352441
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "BAJAJ",
+        "rows": 1016,
+        "miss_rate": 0.6633858267716536,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 261,
+            "miss_rate": 0.6819923371647509
+          },
+          "era2": {
+            "rows": 261,
+            "miss_rate": 0.6704980842911877
+          },
+          "era3": {
+            "rows": 247,
+            "miss_rate": 0.562753036437247
+          },
+          "era4": {
+            "rows": 247,
+            "miss_rate": 0.7368421052631579
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "BIRLA",
+        "rows": 1066,
+        "miss_rate": 0.6407129455909943,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 269,
+            "miss_rate": 0.5836431226765799
+          },
+          "era2": {
+            "rows": 254,
+            "miss_rate": 0.6771653543307087
+          },
+          "era3": {
+            "rows": 254,
+            "miss_rate": 0.5905511811023622
+          },
+          "era4": {
+            "rows": 289,
+            "miss_rate": 0.7058823529411765
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "SBI",
+        "rows": 707,
+        "miss_rate": 0.6067892503536068,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 188,
+            "miss_rate": 0.5797872340425532
+          },
+          "era2": {
+            "rows": 159,
+            "miss_rate": 0.6729559748427673
+          },
+          "era3": {
+            "rows": 182,
+            "miss_rate": 0.5769230769230769
+          },
+          "era4": {
+            "rows": 178,
+            "miss_rate": 0.6067415730337079
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "ADANI",
+        "rows": 578,
+        "miss_rate": 0.5449826989619377,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 149,
+            "miss_rate": 0.5503355704697986
+          },
+          "era2": {
+            "rows": 104,
+            "miss_rate": 0.5480769230769231
+          },
+          "era3": {
+            "rows": 157,
+            "miss_rate": 0.3821656050955414
+          },
+          "era4": {
+            "rows": 168,
+            "miss_rate": 0.6904761904761905
+          }
+        },
+        "cross_era": false
+      }
+    ],
+    "regime_bull": [
+      {
+        "bucket": "1.0",
+        "rows": 11959,
+        "miss_rate": 0.6909440588677983,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 4232,
+            "miss_rate": 0.6235822306238186
+          },
+          "era2": {
+            "rows": 2951,
+            "miss_rate": 0.8048119281599457
+          },
+          "era3": {
+            "rows": 3430,
+            "miss_rate": 0.6690962099125365
+          },
+          "era4": {
+            "rows": 1346,
+            "miss_rate": 0.7087667161961367
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "0.0",
+        "rows": 4884,
+        "miss_rate": 0.6611384111384111,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 0,
+            "miss_rate": NaN
+          },
+          "era2": {
+            "rows": 1240,
+            "miss_rate": 0.5266129032258065
+          },
+          "era3": {
+            "rows": 779,
+            "miss_rate": 0.5532734274711169
+          },
+          "era4": {
+            "rows": 2865,
+            "miss_rate": 0.7486910994764397
+          }
+        },
+        "cross_era": true
+      }
+    ]
+  },
+  "quintiles": {
+    "delivery_per": [
+      {
+        "bucket": "q5",
+        "rows": 3272,
+        "miss_rate": 0.8019559902200489,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 746,
+            "miss_rate": 0.7332439678284183
+          },
+          "era2": {
+            "rows": 734,
+            "miss_rate": 0.8160762942779292
+          },
+          "era3": {
+            "rows": 1080,
+            "miss_rate": 0.8
+          },
+          "era4": {
+            "rows": 712,
+            "miss_rate": 0.8623595505617978
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q4",
+        "rows": 3283,
+        "miss_rate": 0.7456594578129759,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 711,
+            "miss_rate": 0.6919831223628692
+          },
+          "era2": {
+            "rows": 766,
+            "miss_rate": 0.8067885117493473
+          },
+          "era3": {
+            "rows": 927,
+            "miss_rate": 0.6699029126213593
+          },
+          "era4": {
+            "rows": 879,
+            "miss_rate": 0.8156996587030717
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q3",
+        "rows": 3272,
+        "miss_rate": 0.69559902200489,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 747,
+            "miss_rate": 0.6599732262382865
+          },
+          "era2": {
+            "rows": 750,
+            "miss_rate": 0.7453333333333333
+          },
+          "era3": {
+            "rows": 818,
+            "miss_rate": 0.6295843520782396
+          },
+          "era4": {
+            "rows": 957,
+            "miss_rate": 0.7408568443051202
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": null,
+        "rows": 454,
+        "miss_rate": 0.6299559471365639,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 182,
+            "miss_rate": 0.6208791208791209
+          },
+          "era2": {
+            "rows": 195,
+            "miss_rate": 0.6307692307692307
+          },
+          "era3": {
+            "rows": 77,
+            "miss_rate": 0.6493506493506493
+          },
+          "era4": {
+            "rows": 0,
+            "miss_rate": NaN
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q2",
+        "rows": 3284,
+        "miss_rate": 0.626979293544458,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 793,
+            "miss_rate": 0.5889029003783102
+          },
+          "era2": {
+            "rows": 865,
+            "miss_rate": 0.6855491329479769
+          },
+          "era3": {
+            "rows": 736,
+            "miss_rate": 0.5407608695652174
+          },
+          "era4": {
+            "rows": 890,
+            "miss_rate": 0.6752808988764045
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q1",
+        "rows": 3278,
+        "miss_rate": 0.548810250152532,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 1053,
+            "miss_rate": 0.5004748338081672
+          },
+          "era2": {
+            "rows": 881,
+            "miss_rate": 0.6083995459704881
+          },
+          "era3": {
+            "rows": 571,
+            "miss_rate": 0.4868651488616462
+          },
+          "era4": {
+            "rows": 773,
+            "miss_rate": 0.592496765847348
+          }
+        },
+        "cross_era": true
+      }
+    ],
+    "turnover_proxy_z20": [
+      {
+        "bucket": "q5",
+        "rows": 3369,
+        "miss_rate": 0.7206886316414366,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 870,
+            "miss_rate": 0.6528735632183909
+          },
+          "era2": {
+            "rows": 852,
+            "miss_rate": 0.7546948356807511
+          },
+          "era3": {
+            "rows": 787,
+            "miss_rate": 0.7128335451080051
+          },
+          "era4": {
+            "rows": 860,
+            "miss_rate": 0.7627906976744186
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q4",
+        "rows": 3368,
+        "miss_rate": 0.711104513064133,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 887,
+            "miss_rate": 0.657271702367531
+          },
+          "era2": {
+            "rows": 830,
+            "miss_rate": 0.7421686746987952
+          },
+          "era3": {
+            "rows": 841,
+            "miss_rate": 0.6979785969084423
+          },
+          "era4": {
+            "rows": 810,
+            "miss_rate": 0.7518518518518519
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q3",
+        "rows": 3369,
+        "miss_rate": 0.6975363609379638,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 817,
+            "miss_rate": 0.6450428396572827
+          },
+          "era2": {
+            "rows": 823,
+            "miss_rate": 0.7569866342648846
+          },
+          "era3": {
+            "rows": 919,
+            "miss_rate": 0.6420021762785637
+          },
+          "era4": {
+            "rows": 810,
+            "miss_rate": 0.7530864197530864
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q2",
+        "rows": 3368,
+        "miss_rate": 0.6719121140142518,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 803,
+            "miss_rate": 0.597758405977584
+          },
+          "era2": {
+            "rows": 817,
+            "miss_rate": 0.7172582619339045
+          },
+          "era3": {
+            "rows": 857,
+            "miss_rate": 0.6382730455075846
+          },
+          "era4": {
+            "rows": 891,
+            "miss_rate": 0.7295173961840629
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q1",
+        "rows": 3369,
+        "miss_rate": 0.6102701098248738,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 855,
+            "miss_rate": 0.5625730994152047
+          },
+          "era2": {
+            "rows": 869,
+            "miss_rate": 0.6444188722669736
+          },
+          "era3": {
+            "rows": 805,
+            "miss_rate": 0.5478260869565217
+          },
+          "era4": {
+            "rows": 840,
+            "miss_rate": 0.6833333333333333
+          }
+        },
+        "cross_era": true
+      }
+    ],
+    "volatility_20": [
+      {
+        "bucket": "q1",
+        "rows": 3369,
+        "miss_rate": 0.7266251113089938,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 859,
+            "miss_rate": 0.5797438882421421
+          },
+          "era2": {
+            "rows": 557,
+            "miss_rate": 0.8078994614003591
+          },
+          "era3": {
+            "rows": 1166,
+            "miss_rate": 0.7101200686106347
+          },
+          "era4": {
+            "rows": 787,
+            "miss_rate": 0.8538754764930114
+          }
+        },
+        "cross_era": false
+      },
+      {
+        "bucket": "q2",
+        "rows": 3368,
+        "miss_rate": 0.713479809976247,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 896,
+            "miss_rate": 0.6763392857142857
+          },
+          "era2": {
+            "rows": 750,
+            "miss_rate": 0.7586666666666667
+          },
+          "era3": {
+            "rows": 885,
+            "miss_rate": 0.6779661016949152
+          },
+          "era4": {
+            "rows": 837,
+            "miss_rate": 0.7502986857825568
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q3",
+        "rows": 3369,
+        "miss_rate": 0.6767586821015138,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 850,
+            "miss_rate": 0.6647058823529411
+          },
+          "era2": {
+            "rows": 920,
+            "miss_rate": 0.6989130434782609
+          },
+          "era3": {
+            "rows": 782,
+            "miss_rate": 0.6074168797953964
+          },
+          "era4": {
+            "rows": 817,
+            "miss_rate": 0.7307221542227662
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q5",
+        "rows": 3369,
+        "miss_rate": 0.6726031463342238,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 739,
+            "miss_rate": 0.6143437077131259
+          },
+          "era2": {
+            "rows": 988,
+            "miss_rate": 0.7226720647773279
+          },
+          "era3": {
+            "rows": 616,
+            "miss_rate": 0.6298701298701299
+          },
+          "era4": {
+            "rows": 1026,
+            "miss_rate": 0.6920077972709552
+          }
+        },
+        "cross_era": true
+      },
+      {
+        "bucket": "q4",
+        "rows": 3368,
+        "miss_rate": 0.6220308788598575,
+        "reliable": true,
+        "per_era": {
+          "era1": {
+            "rows": 888,
+            "miss_rate": 0.581081081081081
+          },
+          "era2": {
+            "rows": 976,
+            "miss_rate": 0.6680327868852459
+          },
+          "era3": {
+            "rows": 760,
+            "miss_rate": 0.5723684210526315
+          },
+          "era4": {
+            "rows": 744,
+            "miss_rate": 0.6612903225806451
+          }
+        },
+        "cross_era": true
+      }
+    ]
+  }
+}

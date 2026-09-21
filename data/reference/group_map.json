@@ -1,0 +1,73 @@
+{
+  "_comment": "Business-group map for NIFTY 50 members with date ranges. Only groups with >=2 members in tier are listed. ACC/Ambuja rule (MASTER_PLAN 5.2): post-Sept-2022 Adani news must NOT fan out to pre-Sept-2022 ACC — same discipline applies here; memberships are point-in-time.",
+  "TATA": {
+    "display": "Tata Group",
+    "aliases": ["tata group", "tata sons"],
+    "members": [
+      {"symbol": "TCS.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TITAN.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TATASTEEL.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TRENT.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TMPV.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TATACONSUM.NS", "from": "2020-02-01", "to": null}
+    ]
+  },
+  "ADANI": {
+    "display": "Adani Group",
+    "aliases": ["adani group", "adani conglomerate", "gautam adani"],
+    "members": [
+      {"symbol": "ADANIENT.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "ADANIPORTS.NS", "from": "2010-01-01", "to": null}
+    ]
+  },
+  "RELIANCE": {
+    "display": "Reliance Group",
+    "aliases": ["reliance", "mukesh ambani"],
+    "members": [
+      {"symbol": "RELIANCE.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "JIOFIN.NS", "from": "2023-08-21", "to": null}
+    ]
+  },
+  "BAJAJ": {
+    "display": "Bajaj Group",
+    "aliases": ["bajaj group"],
+    "members": [
+      {"symbol": "BAJFINANCE.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "BAJAJFINSV.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "BAJAJ-AUTO.NS", "from": "2010-01-01", "to": null}
+    ]
+  },
+  "HDFC": {
+    "display": "HDFC Group",
+    "aliases": ["hdfc group"],
+    "members": [
+      {"symbol": "HDFCBANK.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "HDFCLIFE.NS", "from": "2017-11-17", "to": null}
+    ]
+  },
+  "SBI": {
+    "display": "SBI Group",
+    "aliases": ["sbi group", "state bank group"],
+    "members": [
+      {"symbol": "SBIN.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "SBILIFE.NS", "from": "2017-10-03", "to": null}
+    ]
+  },
+  "BIRLA": {
+    "display": "Aditya Birla Group",
+    "aliases": ["aditya birla", "birla group"],
+    "members": [
+      {"symbol": "GRASIM.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "ULTRACEMCO.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "HINDALCO.NS", "from": "2010-01-01", "to": null}
+    ]
+  },
+  "MAHINDRA": {
+    "display": "Mahindra Group",
+    "aliases": ["mahindra group"],
+    "members": [
+      {"symbol": "M&M.NS", "from": "2010-01-01", "to": null},
+      {"symbol": "TECHM.NS", "from": "2010-01-01", "to": null}
+    ]
+  }
+}

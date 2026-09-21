@@ -1,0 +1,125 @@
+{
+  "V0": {
+    "metrics": {
+      "total_return": -0.37273057756975403,
+      "max_drawdown": -0.3804436476014347,
+      "sharpe": -2.4892614364297527,
+      "trade_count": 3080,
+      "gross_return_sum": 0.1536858137834787,
+      "cost_paid": 0.6141980541707542,
+      "net_return_sum": -0.46051224038727556,
+      "cost_bps_round_trip": 31.5,
+      "segment": "delivery",
+      "overlap_policy": "No overlapping event positions per symbol"
+    },
+    "dm_vs_V0": null
+  },
+  "thr65": {
+    "metrics": {
+      "total_return": -0.20192901369838012,
+      "max_drawdown": -0.2139211660075696,
+      "sharpe": -1.8957204062221167,
+      "trade_count": 1186,
+      "gross_return_sum": 0.04402005331756799,
+      "cost_paid": 0.26722893008772663,
+      "net_return_sum": -0.22320887677015866,
+      "cost_bps_round_trip": 31.5,
+      "segment": "delivery",
+      "overlap_policy": "No overlapping event positions per symbol"
+    },
+    "dm_vs_V0": {
+      "stat": 3.3988588076847175,
+      "p_value": 0.0006766763920247456,
+      "n": 754,
+      "mean_d": 0.00031472594644180017
+    }
+  },
+  "thr70": {
+    "metrics": {
+      "total_return": -0.0448972343035301,
+      "max_drawdown": -0.058373116301789874,
+      "sharpe": -0.846606892540791,
+      "trade_count": 338,
+      "gross_return_sum": 0.02392692769400235,
+      "cost_paid": 0.06938048221388658,
+      "net_return_sum": -0.045453554519884226,
+      "cost_bps_round_trip": 31.5,
+      "segment": "delivery",
+      "overlap_policy": "No overlapping event positions per symbol"
+    },
+    "dm_vs_V0": {
+      "stat": 3.7422311646706166,
+      "p_value": 0.00018239361347268434,
+      "n": 754,
+      "mean_d": 0.0005504757106994616
+    }
+  },
+  "cap10": {
+    "metrics": {
+      "total_return": -0.36345957442975707,
+      "max_drawdown": -0.37291682178187013,
+      "sharpe": -2.2573818005574338,
+      "trade_count": 2020,
+      "gross_return_sum": 0.1711194754441428,
+      "cost_paid": 0.6161619916218426,
+      "net_return_sum": -0.44504251617769974,
+      "cost_bps_round_trip": 31.5,
+      "segment": "delivery",
+      "overlap_policy": "No overlapping event positions per symbol"
+    },
+    "dm_vs_V0": {
+      "stat": 0.648289429918785,
+      "p_value": 0.5167977692828011,
+      "n": 754,
+      "mean_d": 2.0516875609517297e-05
+    }
+  },
+  "cap5": {
+    "metrics": {
+      "total_return": -0.3232214312588001,
+      "max_drawdown": -0.3296978084272094,
+      "sharpe": -1.8748533640526486,
+      "trade_count": 1363,
+      "gross_return_sum": 0.1669323214440791,
+      "cost_paid": 0.5501388761476487,
+      "net_return_sum": -0.38320655470356957,
+      "cost_bps_round_trip": 31.5,
+      "segment": "delivery",
+      "overlap_policy": "No overlapping event positions per symbol"
+    },
+    "dm_vs_V0": {
+      "stat": 1.240792273083555,
+      "p_value": 0.2146824964177675,
+      "n": 754,
+      "mean_d": 0.00010252743459377717
+    }
+  },
+  "fo_proxy": {
+    "metrics": {
+      "total_return": -0.04247554224739103,
+      "max_drawdown": -0.09755444088500365,
+      "sharpe": -0.2849756048853005,
+      "trade_count": 1076,
+      "gross_return_sum": 0.12935765430985496,
+      "cost_paid": 0.16944062667569035,
+      "net_return_sum": -0.04008297236583541,
+      "cost_bps_round_trip": 15.0,
+      "segment": "futures",
+      "overlap_policy": "No overlapping event positions per symbol",
+      "proxy_note": "turnover-quartile proxy; non-authoritative"
+    },
+    "dm_vs_V0": {
+      "stat": 5.55592242688491,
+      "p_value": 2.761495003450157e-08,
+      "n": 754,
+      "mean_d": 0.0005575984987021793
+    }
+  },
+  "_pbo": {
+    "pbo": 0.0,
+    "n_strategies": 6,
+    "partitions": 16,
+    "combos": 500,
+    "median_oos_rank_of_is_best": 1.0
+  }
+}

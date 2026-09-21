@@ -1,0 +1,70 @@
+2026-09-15 10:41:03,635 | INFO | Training matrix: 3350 rows x 116 features | class counts={0: 1680, 1: 114, 2: 1556} | shares={0: 0.5015, 1: 0.034, 2: 0.4645}
+2026-09-15 10:41:06,232 | INFO | Optuna: running 25 remaining trials
+2026-09-15 10:41:42,649 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-15 10:42:17,312 | INFO | Model training complete. Best CV selection score=0.45100
+2026-09-15 10:42:17,325 | INFO | ========== COMPLETE train ==========
+2026-09-15 10:42:17,325 | INFO | ========== START evaluate ==========
+2026-09-15 21:23:34,783 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-15 21:23:35,192 | INFO | Training matrix: 174165 rows x 116 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-15 21:23:36,118 | INFO | Optuna: running 25 remaining trials
+2026-09-15 21:31:44,082 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-15 21:33:05,591 | INFO | Model training complete. Best CV selection score=0.45735
+2026-09-15 23:19:49,105 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-15 23:19:49,848 | INFO | Training matrix: 173915 rows x 116 features | class counts={0: 84153, 1: 7411, 2: 82351} | shares={0: 0.4839, 1: 0.0426, 2: 0.4735}
+2026-09-15 23:19:51,502 | INFO | Optuna: running 25 remaining trials
+2026-09-15 23:28:32,453 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-15 23:29:26,125 | INFO | Model training complete. Best CV selection score=0.46855
+2026-09-16 00:12:03,538 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-16 00:12:04,522 | INFO | Training matrix: 174165 rows x 116 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-16 00:12:06,335 | INFO | Optuna study already has requested number of trials; skipping.
+2026-09-16 00:12:06,466 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-16 00:16:54,539 | INFO | Model training complete. Best CV selection score=0.45735
+2026-09-18 19:11:10,525 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-18 19:11:11,225 | INFO | Training matrix: 63860 rows x 136 features | class counts={0: 30059, 1: 4513, 2: 29288} | shares={0: 0.4707, 1: 0.0707, 2: 0.4586}
+2026-09-18 19:11:12,335 | INFO | Optuna: running 25 remaining trials
+2026-09-18 19:15:57,628 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-18 19:16:42,194 | INFO | Model training complete. Best CV selection score=0.45181
+2026-09-18 19:17:55,054 | INFO | Training matrix: 174165 rows x 136 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-18 19:17:56,092 | INFO | Optuna study already has requested number of trials; skipping.
+2026-09-18 19:17:56,188 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-18 19:17:58,455 | INFO | Model training complete. Best CV selection score=0.45181
+2026-09-18 19:18:48,432 | INFO | Training matrix: 174165 rows x 136 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-18 19:18:49,376 | INFO | Optuna: running 25 remaining trials
+2026-09-18 19:27:02,258 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-18 19:27:58,223 | INFO | Model training complete. Best CV selection score=0.45528
+2026-09-19 10:23:46,284 | INFO | Training matrix: 174165 rows x 136 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-19 10:23:47,661 | INFO | Optuna study already has requested number of trials; skipping.
+2026-09-19 10:23:47,750 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-19 10:23:52,061 | INFO | Generalization check: train acc 0.6395 vs test acc 0.4662 (gap 17.3pp).
+2026-09-19 10:23:55,119 | INFO | Model training complete. Best CV selection score=0.45528
+2026-09-19 10:27:59,278 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-19 10:28:00,119 | INFO | Training matrix: 174165 rows x 137 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-19 10:28:01,188 | INFO | Optuna: running 25 remaining trials
+2026-09-19 10:36:55,168 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-19 10:37:45,371 | INFO | Generalization check: train acc 0.6276 vs test acc 0.4656 (gap 16.2pp).
+2026-09-19 10:37:47,906 | INFO | Model training complete. Best CV selection score=0.45545
+2026-09-19 10:43:49,014 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-19 10:43:49,877 | INFO | Training matrix: 174165 rows x 137 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-19 10:43:51,029 | INFO | Optuna: running 25 remaining trials
+2026-09-19 10:53:02,238 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-19 10:53:57,151 | ERROR | MEMORIZATION FLAG: train acc 0.6872 vs test acc 0.4705 (gap 21.7pp > 20pp) — model may be remembering, not learning.
+2026-09-19 10:53:57,151 | INFO | Generalization check: train acc 0.6872 vs test acc 0.4705 (gap 21.7pp).
+2026-09-19 10:53:59,632 | INFO | Model training complete. Best CV selection score=0.45622
+2026-09-19 11:20:29,182 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-19 11:20:29,967 | INFO | Training matrix: 174165 rows x 136 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-19 11:20:31,050 | INFO | Optuna study already has requested number of trials; skipping.
+2026-09-19 11:20:31,130 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-19 11:21:24,339 | INFO | Generalization check: train acc 0.6395 vs test acc 0.4662 (gap 17.3pp).
+2026-09-19 11:21:27,352 | INFO | Model training complete. Best CV selection score=0.45528
+2026-09-19 12:21:28,735 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-19 12:21:29,351 | INFO | Training matrix: 174165 rows x 145 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-19 12:21:30,160 | INFO | Optuna: running 25 remaining trials
+2026-09-19 12:30:45,217 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-19 12:31:33,407 | INFO | Generalization check: train acc 0.6388 vs test acc 0.4626 (gap 17.6pp).
+2026-09-19 12:31:35,213 | INFO | Model training complete. Best CV selection score=0.45518
+2026-09-20 09:24:22,829 | INFO | Removed incompatible old final-model checkpoint.
+2026-09-20 09:24:23,753 | INFO | Training matrix: 174165 rows x 136 features | class counts={0: 82038, 1: 12308, 2: 79819} | shares={0: 0.471, 1: 0.0707, 2: 0.4583}
+2026-09-20 09:24:24,984 | INFO | Optuna study already has requested number of trials; skipping.
+2026-09-20 09:24:25,084 | INFO | Training final model with resumable LightGBM checkpointing.
+2026-09-20 09:25:15,752 | INFO | Generalization check: train acc 0.6395 vs test acc 0.4662 (gap 17.3pp).
+2026-09-20 09:25:19,092 | INFO | Model training complete. Best CV selection score=0.45528

@@ -1,0 +1,6 @@
+2026-09-19 18:53:30,766 | INFO | group_active: rows=9291 up_miss=0.685 up_auc=0.5163 xera=True
+2026-09-19 18:53:30,767 | INFO | group_quiet: rows=28001 up_miss=0.681 up_auc=0.5133 xera=True
+2026-09-19 18:53:30,767 | INFO | sector_active: rows=26340 up_miss=0.673 up_auc=0.5185 xera=True
+2026-09-19 18:53:30,768 | INFO | sector_quiet: rows=10952 up_miss=0.704 up_auc=0.5026 xera=True
+2026-09-19 18:53:30,768 | INFO | market_high: rows=7486 up_miss=0.686 up_auc=0.5002 xera=True
+2026-09-19 18:53:30,768 | INFO | market_low: rows=29806 up_miss=0.681 up_auc=0.5174 xera=True

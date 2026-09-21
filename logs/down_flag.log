@@ -1,0 +1,6 @@
+2026-09-20 12:09:52,234 | INFO | Calibration: tau_down=0.50 precision=0.4710 coverage=0.780.
+2026-09-20 12:09:52,277 | INFO | Test: DOWN precision 0.4858 recall 0.8035 coverage 0.792 mean_net -0.0008562088947832461 → FAIL.
+2026-09-20 12:11:10,302 | INFO | Calibration: tau_down=0.50 precision=0.4710 coverage=0.780.
+2026-09-20 12:11:10,366 | INFO | Test: DOWN precision 0.4858 recall 0.8035 coverage 0.792 mean_net -0.0008562088947832461 → FAIL.
+2026-09-20 12:11:52,743 | INFO | Calibration: tau_down=0.50 precision=0.4710 coverage=0.780.
+2026-09-20 12:11:52,813 | INFO | Test: DOWN precision 0.4858 recall 0.8035 coverage 0.792 mean_net -0.0008562088947832461 → FAIL.

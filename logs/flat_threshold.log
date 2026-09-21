@@ -1,0 +1,2 @@
+2026-09-19 11:23:36,774 | INFO | Calibration: base acc 0.4516 → tau_flat=0.40 (FLAT F1 0.1441, acc 0.4576).
+2026-09-19 11:23:36,968 | INFO | Test: argmax acc 0.4662 FLAT-F1 0.2069 → tau acc 0.4714 FLAT-F1 0.2052 (DM stat 9.14 p 0.0000).

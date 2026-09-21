@@ -1,0 +1,257 @@
+{
+  "^NSEI": {
+    "path": "data\\raw\\index_NSEI.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3927
+  },
+  "RELIANCE.NS": {
+    "path": "data\\raw\\RELIANCE.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "BHARTIARTL.NS": {
+    "path": "data\\raw\\BHARTIARTL.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "HDFCBANK.NS": {
+    "path": "data\\raw\\HDFCBANK.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ICICIBANK.NS": {
+    "path": "data\\raw\\ICICIBANK.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "SBIN.NS": {
+    "path": "data\\raw\\SBIN.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "TCS.NS": {
+    "path": "data\\raw\\TCS.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "BAJFINANCE.NS": {
+    "path": "data\\raw\\BAJFINANCE.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "LT.NS": {
+    "path": "data\\raw\\LT.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "HINDUNILVR.NS": {
+    "path": "data\\raw\\HINDUNILVR.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "TITAN.NS": {
+    "path": "data\\raw\\TITAN.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "SUNPHARMA.NS": {
+    "path": "data\\raw\\SUNPHARMA.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "INFY.NS": {
+    "path": "data\\raw\\INFY.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "KOTAKBANK.NS": {
+    "path": "data\\raw\\KOTAKBANK.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ADANIENT.NS": {
+    "path": "data\\raw\\ADANIENT.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ADANIPORTS.NS": {
+    "path": "data\\raw\\ADANIPORTS.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "MARUTI.NS": {
+    "path": "data\\raw\\MARUTI.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "AXISBANK.NS": {
+    "path": "data\\raw\\AXISBANK.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "M&M.NS": {
+    "path": "data\\raw\\M&M.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "HCLTECH.NS": {
+    "path": "data\\raw\\HCLTECH.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ITC.NS": {
+    "path": "data\\raw\\ITC.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ULTRACEMCO.NS": {
+    "path": "data\\raw\\ULTRACEMCO.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "NTPC.NS": {
+    "path": "data\\raw\\NTPC.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "BAJAJ-AUTO.NS": {
+    "path": "data\\raw\\BAJAJ-AUTO.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ETERNAL.NS": {
+    "path": "data\\raw\\ETERNAL.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 1275
+  },
+  "JSWSTEEL.NS": {
+    "path": "data\\raw\\JSWSTEEL.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "BAJAJFINSV.NS": {
+    "path": "data\\raw\\BAJAJFINSV.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "BEL.NS": {
+    "path": "data\\raw\\BEL.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ONGC.NS": {
+    "path": "data\\raw\\ONGC.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "COALINDIA.NS": {
+    "path": "data\\raw\\COALINDIA.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3915
+  },
+  "POWERGRID.NS": {
+    "path": "data\\raw\\POWERGRID.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "SHRIRAMFIN.NS": {
+    "path": "data\\raw\\SHRIRAMFIN.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "ASIANPAINT.NS": {
+    "path": "data\\raw\\ASIANPAINT.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "TATASTEEL.NS": {
+    "path": "data\\raw\\TATASTEEL.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "GRASIM.NS": {
+    "path": "data\\raw\\GRASIM.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "HINDALCO.NS": {
+    "path": "data\\raw\\HINDALCO.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "EICHERMOT.NS": {
+    "path": "data\\raw\\EICHERMOT.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "INDIGO.NS": {
+    "path": "data\\raw\\INDIGO.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 2679
+  },
+  "SBILIFE.NS": {
+    "path": "data\\raw\\SBILIFE.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 2215
+  },
+  "WIPRO.NS": {
+    "path": "data\\raw\\WIPRO.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "JIOFIN.NS": {
+    "path": "data\\raw\\JIOFIN.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 760
+  },
+  "TECHM.NS": {
+    "path": "data\\raw\\TECHM.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "TRENT.NS": {
+    "path": "data\\raw\\TRENT.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "APOLLOHOSP.NS": {
+    "path": "data\\raw\\APOLLOHOSP.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "HDFCLIFE.NS": {
+    "path": "data\\raw\\HDFCLIFE.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 2183
+  },
+  "TMPV.NS": {
+    "path": "data\\raw\\TMPV.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "CIPLA.NS": {
+    "path": "data\\raw\\CIPLA.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3950
+  },
+  "MAXHEALTH.NS": {
+    "path": "data\\raw\\MAXHEALTH.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 1504
+  },
+  "TATACONSUM.NS": {
+    "path": "data\\raw\\TATACONSUM.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "DRREDDY.NS": {
+    "path": "data\\raw\\DRREDDY.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  },
+  "NESTLEIND.NS": {
+    "path": "data\\raw\\NESTLEIND.NS.parquet",
+    "last_date": "2026-09-15",
+    "rows": 3951
+  }
+}

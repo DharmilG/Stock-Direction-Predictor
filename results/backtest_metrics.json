@@ -1,0 +1,12 @@
+{
+  "total_return": -0.37273057756975403,
+  "max_drawdown": -0.3804436476014347,
+  "sharpe": -2.4892614364297527,
+  "trade_count": 3080,
+  "gross_return_sum": 0.1536858137834787,
+  "cost_paid": 0.6141980541707542,
+  "net_return_sum": -0.46051224038727556,
+  "cost_bps_round_trip": 31.5,
+  "segment": "delivery",
+  "overlap_policy": "No overlapping event positions per symbol"
+}
