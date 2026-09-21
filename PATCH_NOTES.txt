@@ -1,0 +1,27 @@
+FINAL PATCH NOTES - 2026-09-15
+
+Fixed the pandas 2.x feature-engineering crash:
+ValueError: The truth value of a DataFrame is ambiguous.
+
+Root cause:
+The previous feature pipeline stored a whole news DataFrame inside pandas DataFrame.attrs.
+Pandas can compare attrs during pd.concat/finalization; comparing DataFrames produces the
+ambiguous-truth-value error.
+
+Fixes:
+1. Removed DataFrame metadata from pandas attrs entirely.
+2. build_features_for_symbol now receives symbol/news_frame explicitly.
+3. ATR calculation now creates plain Series from numeric arrays before pd.concat.
+4. Added empty-news feature columns so the feature schema remains stable without news.
+5. Added defensive attrs clearing at other major concat boundaries.
+6. Feature freshness now checks both raw market data and news file modification times.
+7. Added regression tests reproducing the old DataFrame.attrs condition.
+8. All project tests pass in the available local verification environment.
+
+Verification:
+- Python compileall: PASS
+- Pytest: 6 passed
+
+Note:
+A real live 16-year market/news run depends on the external providers and credentials configured
+for the user's machine. Those providers are intentionally not mocked in production execution.

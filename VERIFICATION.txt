@@ -1,0 +1,25 @@
+Final verification pass
+=======================
+
+Static validation:
+- Python compileall: PASS
+- pytest: PASS
+
+Runtime-resume validation:
+- LightGBM checkpoint callback saved an atomic booster checkpoint every iteration in a synthetic crash test.
+- Simulated crash at iteration 5 left checkpoint at iteration 5.
+- Restart resumed from checkpoint and completed iteration 12.
+
+Model/evaluation fixes:
+- Current scikit-learn LogisticRegression API used (no obsolete multi_class argument).
+- MLflow defaults to database-backed SQLite instead of legacy filesystem FileStore.
+- Optuna pruning defaults to NopPruner for stable walk-forward research; MedianPruner can be enabled explicitly.
+- Class-balanced sample weights are supported for multiclass LightGBM.
+- Evaluation reports 3-class accuracy AND directional accuracy/coverage separately.
+- Majority and prediction class distributions are recorded.
+- Rolling plot is labeled as 3-class accuracy rather than directional accuracy.
+- News + FinBERT + calendar/regime features are integrated through a point-in-time shifted aggregation layer.
+
+External-service limitation:
+- This environment cannot honestly validate a live 16-year market/news backfill with licensed provider credentials.
+- The project therefore includes provider adapters and offline/synthetic tests; live data acquisition must be validated with the user's configured provider/API keys.
