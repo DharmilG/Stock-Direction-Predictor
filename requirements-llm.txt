@@ -1,0 +1,22 @@
+# Track-Q LLM requirements — Phase 0 (2026-09-22)
+# Split env: Windows inference + WSL2-Ubuntu training. Never mix.
+
+# ---- Windows inference side (stock_direction_platform/.venv) ----
+# ollama Python client (model served by Ollama app, weights on C:)
+ollama
+
+# ---- WSL2 Ubuntu 26.04 training side (~/Adaniports/.venv, Python 3.14) ----
+# Pinned to what actually installed clean (unsloth OK, torch CUDA True)
+torch==2.12.1
+torchvision==0.27.1
+unsloth==2026.9.7
+unsloth_zoo==2026.9.6
+trl==0.24.0
+peft==0.21.0
+transformers==5.5.0
+tokenizers==0.22.2
+datasets==4.3.0
+accelerate==1.15.0
+bitsandbytes==0.50.2
+torchao==0.18.0
+numpy==2.5.2
