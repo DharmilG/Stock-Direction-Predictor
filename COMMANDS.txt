@@ -69,3 +69,71 @@ Copy config/universe_history.json.example to a real universe-history JSON/adapte
 ------------------------------
 .venv\Scripts\python.exe -m pip install -r requirements-optional.txt
 Then provide timestamped article text through a licensed/news adapter and enable sentiment in configuration.
+
+11) Track Q - Qwen reasoning rater (GPU, resumable)
+---------------------------------------------------
+python -m stockml.data.q0_d1 --build-pool
+python -m stockml.data.q0_d1 --pilot 30
+python -m stockml.data.q0_d1 --full
+
+# Zero-touch (recommended): run this ONCE. One UAC prompt at most; it registers
+# the highest-privileges scheduled task "StockML_Q0_Supervisor" (auto-start at
+# logon, no time limit, auto-restart, ignore duplicate start), stops the current
+# manual supervisor, starts the task, and verifies the heartbeat. After that
+# there are no more UAC prompts. Keep the session logged in/locked and the
+# laptop plugged in so the task can start at logon.
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_q0_task.ps1
+
+# Inspect the setup plan without changing anything (no admin needed):
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_q0_task.ps1 -DryRun
+
+# Read-only status (no admin): task state, heartbeats, ledger, temp, clocks.
+powershell -NoProfile -ExecutionPolicy Bypass -File .\q0_status.ps1
+
+# Manual supervisor (fallback only): self-elevates (one UAC prompt), sets
+# nvidia-smi -lgc 0,1400, watches for 89C, rests/restarts automatically,
+# resets clocks on exit. Single-instance; stops any stale supervisor first.
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q0_overnight.ps1
+
+# Test only the clock cap (sets it, waits 5s, resets it, exits).
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q0_overnight.ps1 -TestClocks
+
+# If the supervisor was force-closed, reset the cap manually (or reboot):
+nvidia-smi -rgc
+
+Ledger/checkpoint rules: never delete data/llm/qwen_rating_ledger.parquet,
+data/llm/pool_c.parquet, or results/traces/. The ledger resumes per case.
+Thermal: 80C watch, 84C prepare, 85C alarm, 87C hard stop (20-min unloaded
+rest; 4 stops in a rolling hour -> 30-min cooldown), 15-min unloaded break
+after every 60 min of actual GPU work (result.seconds, not wall clock),
+5-second telemetry in logs/gpu_5s.csv.
+
+12) Track Q - phase pipeline (post-Q0, CODE READY - UNTESTED)
+------------------------------------------------------------
+# Status only (safe, read-only):
+powershell -NoProfile -ExecutionPolicy Bypass -File .\q_pipeline_status.ps1
+
+# Phase-by-phase after Q0 passes (do not run while Q0 is live):
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase3
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase6_probe
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase4
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase5
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase6_train
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase7
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_q_pipeline.ps1 -Phase phase8
+
+# Direct module equivalents:
+python -m stockml.qpipeline --phase phase3
+python -m stockml.qpipeline --phase phase6_probe
+python -m stockml.qpipeline --phase phase4
+python -m stockml.qpipeline --phase phase5
+python -m stockml.qpipeline --phase phase6_train
+python -m stockml.qpipeline --phase phase7
+python -m stockml.qpipeline --phase phase8
+
+# Phase 6 in WSL2 (training side only):
+~/Adaniports/.venv/bin/python -m stockml.qpipeline --phase phase6_train
+
+Observability: logs/q0_supervisor.json (supervisor), logs/q0_heartbeat.json
+(runner: phase, ledger/rated/judged, harness-fail rate, ETA, thermal state),
+logs/q0_supervisor_events.log, logs/q0_ALERT.txt, logs/q0_DONE.txt.
