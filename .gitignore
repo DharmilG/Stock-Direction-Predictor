@@ -20,3 +20,8 @@ artifacts/*.db
 
 # Kept deliberately: logs/, checkpoints/ (optuna.db + booster checkpoints),
 # results/*.json + *.csv (metrics, ledgers, reports), configs, docs, code.
+
+# Local agent/IDE state and pasted chat transcripts — never part of the build.
+.qoder/
+.lyzo/
+session-*.md

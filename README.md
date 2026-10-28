@@ -103,7 +103,29 @@ After data/model artifacts exist:
 .venv/Scripts/python.exe -m uvicorn stockml.api.server:app --host 127.0.0.1 --port 8000
 ```
 
-Then use `/health`, `/predictions`, or `/predictions/{symbol}`.
+The legacy routes `/health`, `/predictions` and `/predictions/{symbol}` are still
+there; `/predictions` runs inference. The dashboard uses the read-only
+`/dashboard/*` routes instead (overview, predictions, metrics, backtest,
+monitoring, stock history, `data-health`, Q0 status), which only read artifacts
+and never fetch, retrain or predict.
+
+## Dashboard
+
+```bash
+cd stock-direction-dashboard
+npm install
+npm run dev        # http://localhost:5173, proxies /dashboard and /health to :8000
+```
+
+- Integration guide: `stock-direction-dashboard/docs/INTEGRATION_GUIDE.md`
+- Stale data, gaps and backfills: `DOCS/DATA_FRESHNESS_AND_BACKFILL.md`
+
+Refresh data without touching the model:
+
+```powershell
+.\refresh_data.ps1                 # heal holes, fetch, rebuild features, predict
+.\refresh_data.ps1 -Retrain        # the same, then train -> evaluate -> backtest
+```
 
 ## Research methodology covered
 

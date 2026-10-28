@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.vite/
+.env
+.env.local
+.DS_Store
+*.log
+# Snapshot JSON exported from results/ + artifacts/ — reproducible, and superseded
+# by the live /dashboard/* API plus the inline demo fixture in src/lib/demo.js.
+src/data/

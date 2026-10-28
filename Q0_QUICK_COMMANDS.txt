@@ -1,0 +1,10 @@
+Q0-D1 quick commands - run from E:\books\Adaniports\stock_direction_platform
+
+# One-time zero-touch handover: registers/starts the scheduled task (one UAC prompt only).
+powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_q0_task.ps1
+
+# Direct Python run: rates Pool C in this window only (no supervisor, clock cap, or 89C guard).
+.venv\Scripts\python.exe -m stockml.data.q0_d1 --full
+
+# Reset GPU frequency to driver default after force-closing the supervisor (only when nothing is running).
+nvidia-smi -rgc

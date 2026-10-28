@@ -19,10 +19,18 @@ from .decision_date import decision_dates
 
 
 def _empty_like(index: pd.DatetimeIndex, cols: list[str]) -> pd.DataFrame:
+    # B-07: means/shocks/z-scores stay NaN (LightGBM native missing);
+    # counts/coverage/availability flags are TRUE zeros.
+    _NAN_SUFFIXES = ("_sent_mean", "_sent_shock", "_count_z20", "_tone_mean")
     out = pd.DataFrame(index=index)
     out.index.name = "timestamp"
     for c in cols:
-        out[c] = 0.0 if not (c.endswith("_available") or "days_since" in c) else (0.0 if c.endswith("_available") else float("nan"))
+        if c.endswith("_available"):
+            out[c] = 0.0
+        elif "days_since" in c or c.endswith(_NAN_SUFFIXES):
+            out[c] = float("nan")
+        else:
+            out[c] = 0.0
     return out
 
 
