@@ -399,7 +399,8 @@ def test_objective_logs_per_fold_diagnostics(tmp_path):
     settings = SimpleNamespace(n_splits=2, purge_days=1, embargo_days=1,
                                class_weighting=False, random_seed=42,
                                num_boost_round=20, early_stopping_rounds=5,
-                               optuna_pruner="none")
+                               optuna_pruner="none", optuna_trials=1,
+                               paths=SimpleNamespace(logs=tmp_path / "logs"))
     study = optuna.create_study(direction="maximize")
     factory = objective_factory(X, y, events, settings, tmp_path)
     # Drive the trial through study.optimize for proper user-attr plumbing.

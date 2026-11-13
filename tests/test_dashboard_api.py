@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from types import SimpleNamespace
 
 import pandas as pd
 import pytest
@@ -17,14 +16,16 @@ from fastapi.testclient import TestClient
 
 from stockml.api import dashboard as dashboard_module
 from stockml.api import dashboard_q0 as q0_module
+from stockml.api import models as models_module
 from stockml.api.dashboard_support import data_health
 from stockml.api.server import app
-from stockml.config import Paths, load_settings
+from stockml.config import Paths, Settings, load_settings
 
 ENVELOPE_KEYS = {"data", "as_of", "generated_at", "source", "warnings"}
 
 READ_ONLY_ROUTES = (
     "/dashboard/health",
+    "/dashboard/models",
     "/dashboard/symbols",
     "/dashboard/overview",
     "/dashboard/predictions",
@@ -36,7 +37,13 @@ READ_ONLY_ROUTES = (
     "/dashboard/monitoring",
     "/dashboard/data-health",
     "/dashboard/activity",
+    "/dashboard/model/report",
+    "/dashboard/model/live",
+    "/dashboard/model/cases",
     "/dashboard/q0/status",
+    "/dashboard/q0/timeline",
+    "/dashboard/q0/analytics",
+    "/dashboard/q0/cases",
 )
 
 
@@ -61,12 +68,17 @@ def _local_paths(root):
 
 
 def _stub_settings(root):
+    """A real ``Settings`` under ``root``, small enough to boot an empty workspace.
+
+    It has to be the configured dataclass rather than a namespace: the registry
+    derives v2's settings with ``dataclasses.replace``, which a stand-in cannot
+    survive.
+    """
     paths = _local_paths(root)
     paths.ensure()
     for extra in (root / "data" / "reference", root / "data" / "llm", paths.artifacts / "models"):
         extra.mkdir(parents=True, exist_ok=True)
-    return SimpleNamespace(
-        paths=paths,
+    return Settings(
         symbols=["AAA.NS", "BBB.NS"],
         universe_tier="test",
         triple_barrier_horizon=5,
@@ -80,7 +92,29 @@ def _stub_settings(root):
         commission_bps=2.0,
         slippage_bps=5.0,
         other_cost_bps=3.0,
+        paths=paths,
     )
+
+
+def _scope_to(stub, monkeypatch):
+    """Point every settings seam at ``stub``.
+
+    Model-owned routes no longer read ``load_settings()`` directly: they resolve
+    their paths through :func:`stockml.api.models.registry`, which caches. Both
+    the settings import and the cache therefore have to be redirected, or a test
+    would silently keep reading the real artefact tree.
+    """
+    for module in (dashboard_module, q0_module, models_module):
+        monkeypatch.setattr(module, "load_settings", lambda: stub)
+    models_module.registry.cache_clear()
+
+
+@pytest.fixture(autouse=True)
+def _fresh_registry():
+    """Keep one test's stubbed registry from leaking into the next."""
+    models_module.registry.cache_clear()
+    yield
+    models_module.registry.cache_clear()
 
 
 @pytest.fixture()
@@ -127,16 +161,41 @@ def test_unknown_symbol_and_path_traversal_are_rejected(client):
 # --------------------------------------------------------------------------- #
 def test_missing_artifacts_return_warnings_not_errors(tmp_path, monkeypatch):
     stub = _stub_settings(tmp_path)
-    monkeypatch.setattr(dashboard_module, "load_settings", lambda: stub)
-    monkeypatch.setattr(q0_module, "load_settings", lambda: stub)
+    _scope_to(stub, monkeypatch)
     local = TestClient(app)
 
-    for route in ("/dashboard/metrics", "/dashboard/predictions", "/dashboard/backtest", "/dashboard/monitoring", "/dashboard/shap"):
+    # Artifact-backed routes answer "absent" as data: null plus a warning.
+    for route in (
+        "/dashboard/metrics",
+        "/dashboard/predictions",
+        "/dashboard/backtest",
+        "/dashboard/monitoring",
+        "/dashboard/shap",
+        "/dashboard/model/report",
+        "/dashboard/model/cases",
+        "/dashboard/q0/timeline",
+        "/dashboard/q0/analytics",
+        "/dashboard/q0/cases",
+    ):
         response = local.get(route)
         assert response.status_code == 200, route
         body = response.json()
+        assert set(body) == ENVELOPE_KEYS, route
         assert body["data"] is None, route
         assert body["warnings"], route
+
+    # /model/live is the exception: an empty telemetry log is still a valid answer
+    # ("no run is training"), so it returns a shaped payload the UI can render
+    # instead of null. The warning is what tells the operator why it is empty.
+    live = local.get("/dashboard/model/live")
+    assert live.status_code == 200
+    live_body = live.json()
+    assert set(live_body) == ENVELOPE_KEYS
+    assert live_body["data"]["training"] is False
+    assert live_body["data"]["heartbeat"] is None
+    assert live_body["data"]["curve"] == []
+    assert live_body["data"]["folds"] == []
+    assert live_body["warnings"]
 
     # The Q0 ledger is a parquet, not an optional artifact: a missing file is 404.
     assert local.get("/dashboard/q0/ledger-summary").status_code == 404
@@ -146,13 +205,37 @@ def test_missing_artifacts_return_warnings_not_errors(tmp_path, monkeypatch):
     assert status.json()["data"]["runtime"]["status"] == "stale"
 
 
+def test_case_ids_cannot_walk_out_of_the_trace_directory(tmp_path, monkeypatch):
+    stub = _stub_settings(tmp_path)
+    _scope_to(stub, monkeypatch)
+    local = TestClient(app)
+
+    for case_id in ("..%2F..%2Fetc%2Fpasswd", "a%2Fb", "C%3A%5CWindows"):
+        response = local.get(f"/dashboard/q0/case/{case_id}")
+        assert response.status_code == 404, case_id
+
+
+def test_explain_reports_a_missing_artifact_and_rejects_unknown_symbols(tmp_path, monkeypatch):
+    stub = _stub_settings(tmp_path)
+    _scope_to(stub, monkeypatch)
+    local = TestClient(app)
+
+    missing = local.get("/dashboard/explain/AAA.NS")
+    assert missing.status_code == 200
+    body = missing.json()
+    assert body["data"] is None
+    assert body["warnings"]
+
+    assert local.get("/dashboard/explain/NOPE.NS").status_code == 404
+
+
 def test_malformed_artifacts_do_not_raise(tmp_path, monkeypatch):
     stub = _stub_settings(tmp_path)
     (tmp_path / "results").mkdir(parents=True, exist_ok=True)
     (tmp_path / "results" / "metrics.json").write_text("{not json", encoding="utf-8")
     (tmp_path / "results" / "monitoring.json").write_text("[]", encoding="utf-8")
     (tmp_path / "artifacts" / "model_metadata.json").write_text("null", encoding="utf-8")
-    monkeypatch.setattr(dashboard_module, "load_settings", lambda: stub)
+    _scope_to(stub, monkeypatch)
     local = TestClient(app)
 
     assert local.get("/dashboard/metrics").status_code == 200
@@ -277,7 +360,7 @@ def test_label_horizon_is_not_reported_as_a_gap(tmp_path):
 def test_stock_route_is_bounded_by_the_universe(tmp_path, monkeypatch):
     stub = _stub_settings(tmp_path)
     _write_parquet(stub.paths.data_raw / "AAA.NS.parquet", pd.bdate_range("2026-09-01", "2026-09-10"))
-    monkeypatch.setattr(dashboard_module, "load_settings", lambda: stub)
+    _scope_to(stub, monkeypatch)
     local = TestClient(app)
 
     ok = local.get("/dashboard/stock/AAA.NS")

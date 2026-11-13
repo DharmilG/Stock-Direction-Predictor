@@ -192,7 +192,8 @@ def test_monitor_aborts_at_87(monkeypatch):
     from stockml.data import q0_d1 as q
 
     temps = iter([86.0, 87.0])
-    monkeypatch.setattr(q, "gpu_temp_c", lambda: next(temps, 55.0))
+    # The monitor reads one batched sample per tick, not a temperature-only call.
+    monkeypatch.setattr(q, "gpu_sample", lambda: {"temp_c": next(temps, 55.0)})
     monkeypatch.setattr(q, "_append_gpu_sample", lambda *args: None)
     unloaded: list[int] = []
     monkeypatch.setattr(q, "unload_model", lambda logger: unloaded.append(1) or True)
