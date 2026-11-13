@@ -2,30 +2,38 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { FlaskConical } from 'lucide-react';
 import { AppShell } from './components/AppShell';
 import { DashboardProvider, useDashboard } from './state/DashboardProvider';
-import { NAV_SECTIONS, ROUTES } from './lib/constants';
+import { ModelProvider } from './state/ModelProvider';
+import { LEGACY_ROUTES, NAV_SECTIONS, ROUTES } from './lib/constants';
 import Overview from './pages/Overview';
 import Predictions from './pages/Predictions';
 import StockAnalysis from './pages/StockAnalysis';
+import ModelDiagnostics from './pages/ModelDiagnostics';
 import ModelEvaluation from './pages/ModelEvaluation';
 import Backtesting from './pages/Backtesting';
 import Q0Research from './pages/Q0Research';
 import DataIntegration from './pages/DataIntegration';
+import ModelCompare from './pages/ModelCompare';
 
 const PAGES = {
   overview: Overview,
   predictions: Predictions,
   stock: StockAnalysis,
+  model: ModelDiagnostics,
   evaluation: ModelEvaluation,
   backtesting: Backtesting,
   q0: Q0Research,
   data: DataIntegration,
+  compare: ModelCompare,
 };
 
 const TITLES = Object.fromEntries(NAV_SECTIONS.flatMap((section) => section.items.map((item) => [item.id, item.label])));
 
 function readRoute() {
   const raw = window.location.hash.replace(/^#\/?/, '').trim();
-  return ROUTES.includes(raw) ? raw : 'overview';
+  if (!ROUTES.includes(raw)) return 'overview';
+  // `v2` was a page of its own before the model selector; the comparison page
+  // replaced it, so a bookmarked link lands there instead of a 404-shaped blank.
+  return LEGACY_ROUTES[raw] ?? raw;
 }
 
 function DemoBanner() {
@@ -54,12 +62,13 @@ function Router() {
   }, []);
 
   const navigate = useCallback((next) => {
-    if (!ROUTES.includes(next)) return;
-    if (readRoute() === next) {
-      setRoute(next);
+    const target = LEGACY_ROUTES[next] ?? next;
+    if (!ROUTES.includes(target)) return;
+    if (readRoute() === target) {
+      setRoute(target);
       return;
     }
-    window.location.hash = next;
+    window.location.hash = target;
   }, []);
 
   useEffect(() => {
@@ -80,7 +89,9 @@ function Router() {
 export default function App() {
   return (
     <DashboardProvider>
-      <Router />
+      <ModelProvider>
+        <Router />
+      </ModelProvider>
     </DashboardProvider>
   );
 }

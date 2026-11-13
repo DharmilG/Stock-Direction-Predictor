@@ -14,6 +14,7 @@ Browser (React 19 + Vite 7 + Tailwind 4)
 Vite dev server (5173) ──proxy /dashboard, /health──► FastAPI (127.0.0.1:8000)
    │                                                    │
    │                                                    ├── src/stockml/api/dashboard.py      read-only artifact router
+   │                                                    ├── src/stockml/api/dashboard_model.py model behaviour, live training, explanations
    │                                                    ├── src/stockml/api/dashboard_q0.py   Q0 telemetry + ledger
    │                                                    └── src/stockml/api/dashboard_support.py  artifact IO, freshness
    │                                                    ▼
@@ -76,6 +77,14 @@ Every route below is a `GET` and answers with the same envelope.
 | `/dashboard/activity` | `limit` 1–50 (12) | state files under `artifacts/state/` |
 | `/dashboard/q0/status` | – | heartbeat, supervisor, `gpu_5s.csv`, setup, phases |
 | `/dashboard/q0/ledger-summary` | – | Q0 rating ledger (404 when absent) |
+| `/dashboard/q0/timeline` | `window` (`30m\|2h\|all`), `step` 5–300 (5) | `logs/q0_resource_5s.csv` (or legacy `gpu_5s.csv`), `q0_history.jsonl`, ledger, `psi_history.jsonl` |
+| `/dashboard/q0/analytics` | – | Q0 rating ledger + `results/traces/*.json` |
+| `/dashboard/q0/cases` | `limit` 1–500, `offset`, `symbol`, `vote`, `outcome` | ledger + cached trace metadata |
+| `/dashboard/q0/case/{case_id}` | – | one trace file (404 for an unsafe or unknown id) |
+| `/dashboard/model/report` | – | `results/model_report.json`, `predictions_splits.parquet` |
+| `/dashboard/model/live` | – | `logs/train_heartbeat.json`, `checkpoints/train_curve.jsonl`, fold diagnostics |
+| `/dashboard/model/cases` | `split`, `predicted`, `actual`, `symbol`, `correct`, `limit` 1–500, `offset` | `results/predictions_splits.parquet` |
+| `/dashboard/explain/{symbol}` | `date`, `split` | `explanations_serving.parquet`, else `explanations_splits.parquet` |
 
 `/health`, `/predictions` and `/predictions/{symbol}` are legacy routes kept for
 backwards compatibility. The first is read-only and used by the shell; the other
@@ -98,6 +107,10 @@ two run inference and are never called by the dashboard.
 - A missing or malformed artifact yields `data: null` plus a warning and HTTP
   200 — the UI renders an empty state instead of an error page. Only the Q0
   ledger returns 404, because that file is the product of the run itself.
+- One route answers a *shaped* payload instead of `null`: `/dashboard/model/live`
+  returns `training: false` with empty `curve`/`folds`, because "no run is
+  training" is a valid answer the Live tab can render. Its warnings say why it is
+  empty.
 - `as_of` is the *data* date, `generated_at` is the moment of the read. They are
   different questions and the UI shows both.
 
@@ -134,6 +147,9 @@ pauses while `document.hidden`.
 | Resource | Interval |
 | --- | --- |
 | `/dashboard/q0/status` | 5 s |
+| `/dashboard/q0/timeline` | 5 s while the Live tab is open |
+| `/dashboard/model/live` | 5 s while `training` is true (`POLL_INTERVALS.modelLive`), else 60 s |
+| `/dashboard/model/report` | 60 s |
 | `/dashboard/health`, `/dashboard/data-health` | 60 s |
 | `/dashboard/symbols` | once per session |
 | everything else | on mount, on filter change, or on **Refresh** |
@@ -149,6 +165,14 @@ fails to reach the API *and* the user has enabled demo mode from the sidebar. It
 never overrides a reachable API, and every payload it produces carries
 `source.kind: "demo"` plus a warning, which the shell renders as a banner. Treat
 it as a UI preview, not as evidence about the model.
+
+Every loader needs a matching branch, including the newer ones
+(`/dashboard/model/report`, `/model/live`, `/model/cases`,
+`/dashboard/explain/{symbol}`, `/dashboard/q0/timeline`, `/q0/analytics`,
+`/q0/cases`, `/q0/case/{id}`). The Q0 snapshot is generated from mixes chosen to
+reproduce the *measured* relationships — a rater at roughly chance, FinBERT below
+Qwen, a gate that never passes, a non-zero harness-failure rate — so the preview
+cannot flatter the system.
 
 ## 7. Refreshing data
 
@@ -195,7 +219,7 @@ surface, since anyone who can reach the port could start a GPU job.
 ## 9. Tests
 
 ```powershell
-.venv\Scripts\python.exe -m pytest tests\test_dashboard_api.py tests\test_refresh.py -q
+.venv\Scripts\python.exe -m pytest tests\test_dashboard_api.py tests\test_model_diagnostics.py tests\test_q0_analytics.py tests\test_refresh.py -q
 cd stock-direction-dashboard; npm run lint; npm run build
 ```
 
@@ -203,8 +227,13 @@ cd stock-direction-dashboard; npm run lint; npm run build
 `results/latest_predictions.csv` is never rewritten by a read, that unknown
 symbols and `..` traversal are rejected, that missing/malformed artifacts
 degrade to warnings, and that `data-health` reports gap, holes and the label
-horizon correctly. `tests/test_refresh.py` pins the refresh order: no retraining
-by default, optional sources cannot abort a run, dry-run executes nothing.
+horizon correctly. `tests/test_model_diagnostics.py` and
+`tests/test_q0_analytics.py` pin the two analysis modules without FastAPI in the
+way. `tests/test_refresh.py` pins the refresh order: no retraining by default,
+optional sources cannot abort a run, dry-run executes nothing.
+
+Method and limits: [`DOCS/MODEL_OBSERVABILITY.md`](../../DOCS/MODEL_OBSERVABILITY.md),
+[`DOCS/TRACK_Q_TELEMETRY.md`](../../DOCS/TRACK_Q_TELEMETRY.md).
 
 ## 10. Troubleshooting
 
@@ -215,5 +244,10 @@ by default, optional sources cannot abort a run, dry-run executes nothing.
 | `data: null` with a warning | The artifact genuinely does not exist yet; run the pipeline stage named in `source.artifacts`. |
 | Gap grows every day | `refresh_data.ps1` was not run; see the backfill matrix before assuming it can be repaired. |
 | Q0 page says STALE | `logs/q0_heartbeat.json` is older than its budget; the supervisor is not running. |
+| Q0 Live tab says "Utilisation was not recorded" | Only `logs/gpu_5s.csv` exists; the superset `logs/q0_resource_5s.csv` arrives with the next Q0 run. The absence is reported, not filled. |
+| `#/model` Behaviour tab is empty | `results/model_report.json` does not exist yet: run `python -m stockml.main model-report`. |
+| `#/model` Live tab says no run is instrumented | `logs/train_heartbeat.json` is only written by a training run started after this instrumentation; start one with `python -m stockml.main train`. |
+| Case drawer shows ledger fields only | `results/traces/` has no file for that case id; nothing is reconstructed. |
+| The report banner says "different runs" | `consistency.max_abs_diff` or `dataset_signature` disagrees with `results/metrics.json`; re-run `evaluate` then `model-report` so both describe the same booster and window. |
 | CORS error in the console | Either use the proxy (blank `VITE_API_BASE_URL`) or add the origin to `DASHBOARD_ALLOWED_ORIGINS`. |
 | Dates off by one day | A component is calling `new Date()` on a session date; use `src/lib/dates.js`. |

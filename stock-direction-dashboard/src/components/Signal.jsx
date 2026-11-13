@@ -47,7 +47,7 @@ export function ProbabilityBar({ pDown, pFlat, pUp, height = 8 }) {
           <div key={band.key} title={`${band.label} ${pct(band.share)}`} style={{ width: `${band.share * 100}%`, background: band.fill }} />
         ))}
       </div>
-      <div className="mt-1 flex justify-between text-[.625rem] text-[var(--ink-faint)]">
+      <div className="mt-1.5 flex justify-between text-[.8125rem] text-[var(--ink-3)]">
         <span className="mono">D {pct(down)}</span>
         <span className="mono">F {pct(flat)}</span>
         <span className="mono">U {pct(up)}</span>
@@ -62,7 +62,7 @@ export function AgreementMark({ predicted, actual }) {
   return (
     <span className="inline-flex items-center gap-1.5" title={same ? 'Prediction matched the realised label' : 'Prediction missed the realised label'}>
       <SignalBadge signal={predicted} size="sm" />
-      <span className="text-[.625rem] text-[var(--ink-faint)]">{same ? '=' : '≠'}</span>
+      <span className="text-[.8125rem] text-[var(--ink-3)]">{same ? '=' : '≠'}</span>
       <SignalBadge signal={actual} size="sm" />
     </span>
   );

@@ -27,7 +27,8 @@ export function useResource(loader, { key = '', enabled = true, pollMs = 0 } = {
     const controller = new AbortController();
     abortRef.current = controller;
 
-    const promise = (async () => {
+    let promise;
+    promise = (async () => {
       if (!quiet) {
         setState((previous) => ({ ...previous, loading: previous.data == null, error: null }));
       }
@@ -46,7 +47,10 @@ export function useResource(loader, { key = '', enabled = true, pollMs = 0 } = {
         if (error?.name === 'AbortError') return;
         setState((previous) => ({ ...previous, error, loading: false }));
       } finally {
-        inFlight.current = null;
+        // Only clear the slot this call owns. The cleanup below also clears it,
+        // so a request aborted by an unmount can never hold the single-flight
+        // guard shut and leave the next mount waiting for a poll tick.
+        if (inFlight.current === promise) inFlight.current = null;
       }
     })();
 
@@ -78,6 +82,10 @@ export function useResource(loader, { key = '', enabled = true, pollMs = 0 } = {
     return () => {
       alive.current = false;
       abortRef.current?.abort();
+      // Release the slot: the abort settles asynchronously, and StrictMode's
+      // remount starts immediately. Without this the remount returns the
+      // already-aborted promise and the panel stays empty until the next poll.
+      inFlight.current = null;
       cleanups.forEach((fn) => fn());
     };
   }, [key, enabled, pollMs, run]);

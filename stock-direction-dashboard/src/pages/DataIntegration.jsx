@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Check, Copy, RefreshCw, Server, Terminal } from 'lucide-react';
+import { Check, Copy, RefreshCw } from 'lucide-react';
 import { API_BASE } from '../lib/api';
 import { RUNBOOK } from '../lib/constants';
 import { formatDate, formatInstant, humanDuration } from '../lib/dates';
@@ -16,6 +16,7 @@ import {
   PageHeader,
   Panel,
   ProgressBar,
+  Section,
   SourceTag,
   Stat,
   StatGrid,
@@ -103,105 +104,135 @@ export default function DataIntegration() {
 
       {dataHealth && (
         <>
-          <StatGrid columns={4}>
-            <Stat
-              label="Expected session"
-              value={formatDate(dataHealth.expected_session)}
-              hint={dataHealth.expected_session_estimated ? 'Weekday estimate — the stored calendar lags' : 'From the stored trading calendar'}
-              footnote={`Calendar last: ${formatDate(dataHealth.calendar?.last)}`}
-            />
-            <Stat
-              label="Gap"
-              value={int(dataHealth.gap?.gap_sessions_estimate)}
-              hint="Weekday sessions since the feature panel ended"
-              footnote="NSE holidays are not modelled in this estimate"
-            />
-            <Stat
-              label="Internal holes"
-              value={int(holes?.total_holes)}
-              hint={`${int(holes?.symbols_with_holes)} symbol(s) missing a session inside their own coverage`}
-              footnote={holes?.repair_command}
-            />
-            <Stat
-              label="Stale steps"
-              value={int(dataHealth.summary?.stale_steps?.length)}
-              hint={`${int(dataHealth.summary?.missing_steps?.length)} missing · ${int(dataHealth.summary?.actionable?.length)} actionable`}
-              footnote={dataHealth.summary?.fixable_command ?? 'Nothing actionable'}
-            />
-          </StatGrid>
-
-          <Panel className="mt-4" eyebrow="Refresh" title="Pipeline run state" actions={<RefreshCw size={14} className="text-[var(--ink-faint)]" />}>
-            {refreshRun?.available ? (
-              <>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge tone={refreshRun.running ? 'badge-alert' : refreshRun.state === 'complete' ? 'badge-solid' : 'badge-dashed'}>
-                    {refreshRun.running ? 'running' : refreshRun.state ?? 'unknown'}
-                  </Badge>
-                  <span className="mono text-[.7rem] text-[var(--ink-3)]">
-                    {refreshRun.retrain ? 'refresh + retrain' : 'data + predict only'}
-                  </span>
-                  {refreshRun.current_step && <Badge tone="badge-ghost">now: {refreshRun.current_step}</Badge>}
-                </div>
-                <div className="mt-3">
-                  <ProgressBar
-                    label="Steps"
-                    value={refreshRun.step_index ?? 0}
-                    max={refreshRun.step_total ?? 0}
-                    detail={`${refreshRun.heartbeat_age_seconds != null ? `heartbeat ${humanDuration(refreshRun.heartbeat_age_seconds)} old` : ''} ${
-                      refreshRun.duration_seconds ? `· last run ${humanDuration(refreshRun.duration_seconds)}` : ''
-                    }`}
-                  />
-                </div>
-                <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
-                  {(refreshRun.steps ?? []).map((step) => (
-                    <li key={step.name} className="flex items-center justify-between gap-2 border-t border-[var(--line)] pt-1.5">
-                      <span className="mono truncate text-[.7rem] text-[var(--ink-2)]">{step.label ?? step.name}</span>
-                      <span className="flex shrink-0 items-center gap-1.5">
-                        {step.duration_seconds != null && <span className="text-[.625rem] text-[var(--ink-faint)]">{humanDuration(step.duration_seconds)}</span>}
-                        <Badge
-                          tone={
-                            step.status === 'complete'
-                              ? 'badge-ghost'
-                              : step.status === 'running'
-                                ? 'badge-alert'
-                                : step.status === 'failed'
-                                  ? 'badge-alert'
-                                  : 'badge-dashed'
-                          }
-                        >
-                          {step.status}
-                        </Badge>
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                {refreshRun.failures?.length > 0 && (
-                  <div className="mt-3">
-                    <Callout tone="warn" title={`${refreshRun.failures.length} step failure(s)`}>
-                      {refreshRun.failures.map((failure) => `${failure.step}: ${failure.error}`).join(' · ')}
-                    </Callout>
-                  </div>
-                )}
-              </>
-            ) : (
-              <Empty
-                title="No refresh has run yet"
-                detail="artifacts/state/refresh.json appears the first time you run the refresh pipeline. It is the only way the dashboard can show step-level progress."
+          <Section eyebrow="Headline" title="How current is the data">
+            <StatGrid columns={4}>
+              <Stat
+                label="Expected session"
+                value={formatDate(dataHealth.expected_session)}
+                info={{
+                  what: 'The trading date the pipeline should have reached by now.',
+                  reads: `${dataHealth.expected_session_estimated ? 'A weekday estimate, because the stored calendar lags.' : 'Taken from the stored trading calendar.'} That calendar currently ends ${formatDate(dataHealth.calendar?.last)}.`,
+                  ideal: 'Equal to the newest date in the feature panel, so downstream steps have something current to read.',
+                }}
               />
-            )}
-          </Panel>
+              <Stat
+                label="Gap"
+                value={int(dataHealth.gap?.gap_sessions_estimate)}
+                info={{
+                  what: 'How many sessions the feature panel sits behind the expected session.',
+                  reads: 'Counted in weekdays since the last feature row. NSE holidays are not modelled, so the estimate can overstate the gap by a day or two.',
+                  ideal: 'Zero. Anything above zero means the model is serving on stale features.',
+                }}
+              />
+              <Stat
+                label="Internal holes"
+                value={int(holes?.total_holes)}
+                info={{
+                  what: 'Sessions missing from the middle of a symbol\'s own history.',
+                  reads: `${int(holes?.symbols_with_holes)} symbol(s) have at least one missing session between their first and last bar.`,
+                  ideal: 'Zero. A hole is a gap, not a zero return, and it distorts every rolling window that spans it.',
+                  when: `${holes?.repair_command ?? 'The repair command'} re-downloads a short window per affected symbol.`,
+                }}
+              />
+              <Stat
+                label="Stale steps"
+                value={int(dataHealth.summary?.stale_steps?.length)}
+                info={{
+                  what: 'Pipeline steps that have not written an artifact for the expected session.',
+                  reads: `${int(dataHealth.summary?.missing_steps?.length)} missing and ${int(dataHealth.summary?.actionable?.length)} actionable.`,
+                  ideal: 'Zero. One or two stale steps usually clear on the next refresh.',
+                  when: dataHealth.summary?.fixable_command ?? 'Nothing is actionable right now.',
+                }}
+              />
+            </StatGrid>
+          </Section>
 
-          <Panel
-            className="mt-4"
-            eyebrow="Freshness"
-            title="Every pipeline step"
-            flush
-            actions={
-              <Button size="sm" variant={onlyProblems ? 'primary' : 'quiet'} aria-pressed={onlyProblems} onClick={() => setOnlyProblems((value) => !value)}>
-                Only problems
-              </Button>
-            }
-          >
+          <Section eyebrow="Pipeline" title="Refresh and step status">
+            <Panel
+              title="Pipeline run state"
+              info={{
+                what: 'Progress of the refresh that is running, or of the last one that finished.',
+                reads: 'artifacts/state/refresh.json, which records each step and how long it took. Written only by the refresh pipeline.',
+                ideal: 'Every step complete, with the heartbeat seconds old while a run is in flight.',
+                when: 'A failed step lists its error. Fix the first failure: later steps usually failed because it did.',
+              }}
+            >
+              {refreshRun?.available ? (
+                <>
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <Badge tone={refreshRun.running ? 'badge-alert' : refreshRun.state === 'complete' ? 'badge-solid' : 'badge-dashed'}>
+                      {refreshRun.running ? 'running' : refreshRun.state ?? 'unknown'}
+                    </Badge>
+                    <span className="mono text-[.8125rem] text-[var(--ink-3)]">
+                      {refreshRun.retrain ? 'refresh + retrain' : 'data + predict only'}
+                    </span>
+                    {refreshRun.current_step && <Badge tone="badge-ghost">now: {refreshRun.current_step}</Badge>}
+                  </div>
+                  <div className="mt-4">
+                    <ProgressBar
+                      label="Steps"
+                      value={refreshRun.step_index ?? 0}
+                      max={refreshRun.step_total ?? 0}
+                      detail={`${refreshRun.heartbeat_age_seconds != null ? `heartbeat ${humanDuration(refreshRun.heartbeat_age_seconds)} old` : ''} ${
+                        refreshRun.duration_seconds ? `· last run ${humanDuration(refreshRun.duration_seconds)}` : ''
+                      }`}
+                    />
+                  </div>
+                  <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                    {(refreshRun.steps ?? []).map((step) => (
+                      <li key={step.name} className="flex items-center justify-between gap-3 border-t border-[var(--line)] pt-2">
+                        <span className="mono truncate text-[.8125rem] text-[var(--ink-2)]">{step.label ?? step.name}</span>
+                        <span className="flex shrink-0 items-center gap-2">
+                          {step.duration_seconds != null && <span className="text-[.75rem] text-[var(--ink-3)]">{humanDuration(step.duration_seconds)}</span>}
+                          <Badge
+                            tone={
+                              step.status === 'complete'
+                                ? 'badge-ghost'
+                                : step.status === 'running'
+                                  ? 'badge-alert'
+                                  : step.status === 'failed'
+                                    ? 'badge-alert'
+                                    : 'badge-dashed'
+                            }
+                          >
+                            {step.status}
+                          </Badge>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {refreshRun.failures?.length > 0 && (
+                    <div className="mt-4">
+                      <Callout tone="warn" title={`${refreshRun.failures.length} step failure(s)`}>
+                        {refreshRun.failures.map((failure) => `${failure.step}: ${failure.error}`).join(' · ')}
+                      </Callout>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Empty
+                  title="No refresh has run yet"
+                  detail="artifacts/state/refresh.json appears the first time you run the refresh pipeline. It is the only way the dashboard can show step-level progress."
+                />
+              )}
+            </Panel>
+
+            <Panel
+              className="mt-6"
+              title="Every pipeline step"
+              info={{
+                what: 'One row per artifact the pipeline writes, with its date and how far behind it is.',
+                reads: `Data as of is the session the artifact covers; expected is the session it should cover; backfill says whether a repair is possible at all. Labels trail features by ${dataHealth.label_horizon_sessions} sessions (the triple-barrier horizon), so the label row is expected at ${formatDate(dataHealth.label_expected_session)} rather than ${formatDate(dataHealth.expected_session)}. Lag is counted in weekdays: NSE holidays are not modelled.`,
+                ideal: 'Every row fresh, with an empty lag column.',
+                when: 'Model steps are judged by artifact age rather than session lag, because a retrain can be a week old and still be correct.',
+              }}
+              flush
+              actions={
+                <Button size="sm" variant={onlyProblems ? 'primary' : 'quiet'} aria-pressed={onlyProblems} onClick={() => setOnlyProblems((value) => !value)}>
+                  Only problems
+                </Button>
+              }
+            >
             <Table
               columns={[
                 { key: 'label', header: 'Step', strong: true },
@@ -227,17 +258,27 @@ export default function DataIntegration() {
                   header: 'Backfill',
                   render: (row) => <Badge tone={row.backfillable ? 'badge-ghost' : 'badge-dashed'}>{row.backfillable ? 'yes' : 'forward-only'}</Badge>,
                 },
-                { key: 'command', header: 'Repair command', render: (row) => <code className="mono text-[.65rem] text-[var(--ink-3)]">{row.command ?? '—'}</code> },
-                { key: 'note', header: 'Note', render: (row) => <span className="whitespace-normal text-[.7rem] text-[var(--ink-3)]">{row.note ?? '—'}</span> },
+                { key: 'command', header: 'Repair command', render: (row) => <code className="mono text-[.75rem] text-[var(--ink-3)]">{row.command ?? '—'}</code> },
+                { key: 'note', header: 'Note', render: (row) => <span className="whitespace-normal text-[.8125rem] text-[var(--ink-3)]">{row.note ?? '—'}</span> },
               ]}
               rows={shownSteps}
               rowKey={(row) => row.step}
               empty={<div className="p-4"><Empty title="Nothing to fix" detail="Every artifact reaches its expected session." /></div>}
             />
-          </Panel>
+            </Panel>
+          </Section>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <Panel eyebrow="Coverage" title="Rows and spans per dataset" flush>
+          <Section eyebrow="Coverage" title="What is on disk and what agrees">
+            <div className="grid gap-6 lg:grid-cols-2">
+            <Panel
+              title="Rows and spans per dataset"
+              info={{
+                what: 'How much data each dataset holds, over what span, and how many symbols are behind.',
+                reads: 'File and row counts over data/processed plus the first and last date in each dataset.',
+                ideal: 'Last dates agreeing with the expected session, and zero symbols behind.',
+              }}
+              flush
+            >
               <Table
                 dense
                 columns={[
@@ -254,23 +295,42 @@ export default function DataIntegration() {
               />
             </Panel>
 
-            <Panel eyebrow="Integrity" title="Cross-artifact checks">
-              <ul className="space-y-2">
+            <Panel
+              title="Cross-artifact checks"
+              info={{
+                what: 'Agreement tests between artifacts that must describe the same window.',
+                reads: 'For example, whether the predictions file and the metrics file score the same rows, or whether a feature panel matches its raw source.',
+                ideal: 'Every check ok. These tests exist to catch a half-finished pipeline run.',
+                when: 'An error-severity check names both artifacts it compared; re-running the producing step is usually enough.',
+              }}
+            >
+              <ul className="space-y-3">
                 {(dataHealth.checks ?? []).map((check) => (
-                  <li key={check.id} className="flex items-start gap-2 border-t border-[var(--line)] pt-2 first:border-t-0 first:pt-0">
+                  <li key={check.id} className="flex items-start gap-2.5 border-t border-[var(--line)] pt-3 first:border-t-0 first:pt-0">
                     <Badge tone={check.ok ? 'badge-ghost' : check.severity === 'error' ? 'badge-alert' : 'badge-dashed'}>{check.ok ? 'ok' : check.severity}</Badge>
                     <div className="min-w-0">
-                      <p className="mono text-[.7rem] font-semibold text-[var(--ink-2)]">{check.id}</p>
-                      <p className="muted text-[.75rem]">{check.detail}</p>
+                      <p className="mono text-[.8125rem] font-semibold text-[var(--ink-2)]">{check.id}</p>
+                      <p className="muted text-[.875rem]">{check.detail}</p>
                     </div>
                   </li>
                 ))}
                 {!dataHealth.checks?.length && <Empty title="No checks recorded" />}
               </ul>
             </Panel>
-          </div>
+            </div>
+          </Section>
 
-          <Panel className="mt-4" eyebrow="Holes" title="Sessions missing inside a symbol's own coverage" flush>
+          <Section eyebrow="Holes" title="Sessions missing from the middle of a series">
+          <Panel
+            title="Sessions missing inside a symbol's own coverage"
+            info={{
+              what: 'Sessions where a symbol has no bar, even though it has bars before and after.',
+              reads: 'Each symbol\'s first and last bar are taken as its coverage, then every calendar session in between is checked for a row.',
+              ideal: 'An empty table. A hole is a data gap, not a zero return.',
+              when: 'Appending from the last date can never repair a hole in the middle: the pipeline thinks the symbol is current. Use the repair command it prints.',
+            }}
+            flush
+          >
             {holes?.available && holes.detail?.length ? (
               <>
                 <Table
@@ -283,20 +343,17 @@ export default function DataIntegration() {
                     {
                       key: 'missing_dates',
                       header: 'Dates (first 10)',
-                      render: (row) => <span className="mono whitespace-normal text-[.65rem] text-[var(--ink-3)]">{row.missing_dates?.join(', ')}</span>,
+                      render: (row) => <span className="mono whitespace-normal text-[.75rem] text-[var(--ink-3)]">{row.missing_dates?.join(', ')}</span>,
                     },
                   ]}
                   rows={holes.detail}
                   rowKey={(row) => row.symbol}
                 />
-                <div className="border-t border-[var(--line)] p-3">
-                  <Callout tone="warn" title="Why this matters">
-                    <span>
-                      Appending from <code className="mono">last_date + 1</code> can never repair a hole in the middle of a series: the pipeline thinks
-                      the symbol is current. <code className="mono">{holes.repair_command}</code> re-downloads a short window per affected symbol and
-                      merges on the timestamp, which is safe because prices are idempotent per day.
-                    </span>
-                  </Callout>
+                <div className="border-t border-[var(--line)] p-4">
+                  <p className="text-[.875rem] text-[var(--ink-2)]">
+                    Repair with <code className="mono">{holes.repair_command}</code>, which re-downloads a short window per affected symbol and
+                    merges on the timestamp.
+                  </p>
                 </div>
               </>
             ) : (
@@ -308,27 +365,45 @@ export default function DataIntegration() {
               </div>
             )}
           </Panel>
+          </Section>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-3">
-            <Panel className="lg:col-span-2" eyebrow="Runbook" title="Commands that close the gap" actions={<Terminal size={14} className="text-[var(--ink-faint)]" />}>
-              <ul className="space-y-3">
+          <Section eyebrow="Runbook" title="Commands that close the gap">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <Panel
+              className="lg:col-span-2"
+              title="Commands that close the gap"
+              info={{
+                what: 'The commands that repair the problems above, in the order they should be run.',
+                reads: 'Each entry prints the exact command and what it does. Copy puts it on the clipboard unchanged.',
+                ideal: 'You rarely need this panel; when you do, the first entry is usually enough.',
+              }}
+            >
+              <ul className="space-y-4">
                 {RUNBOOK.map((entry) => (
-                  <li key={entry.title} className="border-t border-[var(--line)] pt-3 first:border-t-0 first:pt-0">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-[.8125rem] font-semibold text-[var(--ink)]">{entry.title}</p>
+                  <li key={entry.title} className="border-t border-[var(--line)] pt-4 first:border-t-0 first:pt-0">
+                    <div className="flex flex-wrap items-center justify-between gap-2.5">
+                      <p className="text-[.9375rem] font-semibold text-[var(--ink)]">{entry.title}</p>
                       <CopyButton value={entry.command} />
                     </div>
-                    <code className="mono mt-1 block break-all rounded-md border border-[var(--line)] bg-[var(--surface-sunken)] px-2 py-1.5 text-[.7rem] text-[var(--ink-2)]">
+                    <code className="mono mt-2 block break-all rounded-md border border-[var(--line)] bg-[var(--surface-sunken)] px-3 py-2 text-[.8125rem] text-[var(--ink-2)]">
                       {entry.command}
                     </code>
-                    <p className="muted mt-1 text-[.75rem]">{entry.detail}</p>
+                    <p className="muted mt-2 text-[.875rem]">{entry.detail}</p>
                   </li>
                 ))}
               </ul>
             </Panel>
 
-            <div className="space-y-4">
-              <Panel eyebrow="Training" title="What runs when you train">
+            <div className="space-y-6">
+              <Panel
+                title="What runs when you train"
+                info={{
+                  what: 'The booster training state and what training does and does not do.',
+                  reads: 'Rounds recorded against the configured total, when the checkpoint was last touched, and how the run was detected.',
+                  ideal: 'Round count equal to the configured total with a recent checkpoint.',
+                  when: 'Training never refreshes data by itself: it fits on whatever features already exist.',
+                }}
+              >
                 <KeyValue
                   columns={1}
                   items={[
@@ -344,15 +419,21 @@ export default function DataIntegration() {
                     { label: 'QLoRA', value: training?.qwen_qlora?.available ? 'instrumented' : 'not instrumented' },
                   ]}
                 />
-                <div className="mt-3">
-                  <Callout tone="info" title="Training does not refresh data by itself">
-                    <span className="mono">python -m stockml.main train</span> trains on whatever features already exist. Use{' '}
-                    <span className="mono">.\refresh_data.ps1 -Retrain</span> so fetch → features → labels complete before the model is fitted.
-                  </Callout>
-                </div>
+                <p className="mt-4 text-[.875rem] text-[var(--ink-2)]">
+                  <span className="mono">python -m stockml.main train</span> fits on whatever features already exist. Use{' '}
+                  <span className="mono">.\refresh_data.ps1 -Retrain</span> so fetch → features → labels complete first.
+                </p>
               </Panel>
 
-              <Panel eyebrow="Live" title="Q0 runtime" actions={<Server size={14} className="text-[var(--ink-faint)]" />}>
+              <Panel
+                title="Q0 runtime"
+                info={{
+                  what: 'The background Q0 research runner, as it last reported.',
+                  reads: 'Status and phase from its heartbeat file, how stale that heartbeat is, and the gate verdict it last wrote.',
+                  ideal: 'Heartbeat seconds old and a phase that is advancing. A gate either passes or names the condition it failed.',
+                  when: 'A heartbeat hours old means the runner stopped without saying so; the gate verdict then refers to an older run.',
+                }}
+              >
                 <KeyValue
                   columns={1}
                   items={[
@@ -366,23 +447,32 @@ export default function DataIntegration() {
             </div>
           </div>
 
-          <Panel className="mt-4" eyebrow="Integration" title="Read-only endpoints" flush>
+          <Panel
+            className="mt-6"
+            title="Read-only endpoints"
+            info={{
+              what: 'Every route the dashboard reads from, and what each one returns.',
+              reads: `Base URL ${API_BASE || 'the same origin through the Vite proxy'}. Every response uses the same envelope, so freshness and warnings travel with the data.`,
+              ideal: 'GET only, artifacts served from an allowlist, no path traversal, and a malformed file degrading to a warning instead of an error.',
+              when: 'A route missing here cannot be reached by the client at all. The legacy mutating GET /predictions is deliberately absent.',
+            }}
+            flush
+          >
             <Table
               dense
               columns={[
                 { key: 'path', header: 'Route', strong: true, mono: true },
-                { key: 'note', header: 'Returns', render: (row) => <span className="whitespace-normal text-[.75rem] text-[var(--ink-3)]">{row.note}</span> },
+                { key: 'note', header: 'Returns', render: (row) => <span className="whitespace-normal text-[.875rem] text-[var(--ink-3)]">{row.note}</span> },
               ]}
               rows={ENDPOINTS}
               rowKey={(row) => row.path}
             />
-            <div className="border-t border-[var(--line)] p-3">
-              <p className="muted text-[.75rem]">
-                Base URL <span className="mono">{API_BASE || 'same origin (Vite proxy)'}</span>. Every response uses the same envelope:{' '}
-                <span className="mono">{'{ data, as_of, generated_at, source: { kind, artifacts }, warnings }'}</span>. There is no POST, PUT or DELETE
-                route, and the legacy mutating <span className="mono">GET /predictions</span> is intentionally absent from the client.
+            <div className="border-t border-[var(--line)] p-4">
+              <p className="muted text-[.875rem]">
+                Envelope:{' '}
+                <span className="mono">{'{ data, as_of, generated_at, source: { kind, artifacts }, warnings }'}</span>
               </p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
+              <div className="mt-3 flex flex-wrap gap-1.5">
                 <Badge tone="badge-ghost">GET only</Badge>
                 <Badge tone="badge-ghost">artifact allowlist</Badge>
                 <Badge tone="badge-ghost">no path traversal</Badge>
@@ -390,55 +480,63 @@ export default function DataIntegration() {
               </div>
             </div>
           </Panel>
+          </Section>
 
-          <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <Panel eyebrow="Honesty" title="What cannot be backfilled">
-              <ul className="muted space-y-2">
-                <li>
-                  <strong className="text-[var(--ink)]">RSS headlines</strong> are one snapshot per day. A day not polled is gone.
-                </li>
-                <li>
-                  <strong className="text-[var(--ink)]">Bulk / block deals</strong> come from an NSE endpoint with no history.
-                </li>
-                <li>
-                  <strong className="text-[var(--ink)]">News</strong> is capped at 25 AlphaVantage requests per day and GDELT DOC only covers a rolling
-                  window, so a long gap needs several runs.
-                </li>
-                <li>
-                  <strong className="text-[var(--ink)]">GDELT BigQuery</strong> is backfillable but scans ~164 GB; check the quota state first.
-                </li>
-              </ul>
-              <p className="mt-3 text-[.6875rem] text-[var(--ink-faint)]">
-                Forward-only sources are marked as such in the table above and never counted as repairs the dashboard could trigger.
-              </p>
-            </Panel>
+          <Section eyebrow="Caveats" title="What cannot be repaired, and what is behind">
+            <div className="grid gap-6 lg:grid-cols-2">
+              <Panel
+                title="What cannot be backfilled"
+                info={{
+                  what: 'Sources where a missed session is gone for good, not merely late.',
+                  reads: 'These rows never appear as repairs the dashboard could trigger. Forward-only sources are marked as such in the step table.',
+                  ideal: 'An empty history of missed sessions. Once a day is unpolled for one of these, no command brings it back.',
+                }}
+              >
+                <ul className="muted space-y-3">
+                  <li>
+                    <strong className="text-[var(--ink)]">RSS headlines</strong> are one snapshot per day. A day not polled is gone.
+                  </li>
+                  <li>
+                    <strong className="text-[var(--ink)]">Bulk / block deals</strong> come from an NSE endpoint with no history.
+                  </li>
+                  <li>
+                    <strong className="text-[var(--ink)]">News</strong> is capped at 25 AlphaVantage requests per day and GDELT DOC only covers a rolling
+                    window, so a long gap needs several runs.
+                  </li>
+                  <li>
+                    <strong className="text-[var(--ink)]">GDELT BigQuery</strong> is backfillable but scans ~164 GB; check the quota state first.
+                  </li>
+                </ul>
+              </Panel>
 
-            <Panel eyebrow="Coverage detail" title="Behind per dataset">
-              <ul className="space-y-2">
-                {coverage
-                  .filter(([, value]) => value.symbols_behind > 0)
-                  .map(([name, value]) => (
-                    <li key={name} className="border-t border-[var(--line)] pt-2 first:border-t-0 first:pt-0">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[.8125rem] font-semibold text-[var(--ink)]">{titleize(name)}</span>
-                        <Badge tone="badge-alert">{value.symbols_behind} behind</Badge>
-                      </div>
-                      <p className="mono mt-1 break-words text-[.65rem] text-[var(--ink-3)]">{value.behind?.join(', ')}</p>
-                      <p className="text-[.6875rem] text-[var(--ink-faint)]">
-                        last {formatDate(value.last)} · min {formatDate(value.last_min)}
-                      </p>
-                    </li>
-                  ))}
-                {!coverage.some(([, value]) => value.symbols_behind > 0) && <Empty title="Every dataset is current" />}
-              </ul>
-            </Panel>
-          </div>
-
-          <p className="mt-4 text-[.6875rem] leading-relaxed text-[var(--ink-faint)]">
-            Labels intentionally trail features by {dataHealth.label_horizon_sessions} sessions (the triple-barrier horizon), so the label expected
-            session is {formatDate(dataHealth.label_expected_session)} rather than {formatDate(dataHealth.expected_session)}. Lag counts are weekday
-            estimates: NSE holidays are not modelled by the dashboard, and the stored calendar is itself an artifact that can lag.
-          </p>
+              <Panel
+                title="Behind per dataset"
+                info={{
+                  what: 'Which datasets still have symbols short of the expected session.',
+                  reads: 'Each entry names the dataset, how many symbols are behind, and the newest and oldest last-date among them.',
+                  ideal: 'Nothing listed. Every dataset current means the feature panel can be rebuilt without forward-filling.',
+                }}
+              >
+                <ul className="space-y-3">
+                  {coverage
+                    .filter(([, value]) => value.symbols_behind > 0)
+                    .map(([name, value]) => (
+                      <li key={name} className="border-t border-[var(--line)] pt-3 first:border-t-0 first:pt-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[.9375rem] font-semibold text-[var(--ink)]">{titleize(name)}</span>
+                          <Badge tone="badge-alert">{value.symbols_behind} behind</Badge>
+                        </div>
+                        <p className="mono mt-1.5 break-words text-[.8125rem] text-[var(--ink-3)]">{value.behind?.join(', ')}</p>
+                        <p className="mt-1 text-[.8125rem] text-[var(--ink-3)]">
+                          last {formatDate(value.last)} · oldest {formatDate(value.last_min)}
+                        </p>
+                      </li>
+                    ))}
+                  {!coverage.some(([, value]) => value.symbols_behind > 0) && <Empty title="Every dataset is current" />}
+                </ul>
+              </Panel>
+            </div>
+          </Section>
         </>
       )}
     </>

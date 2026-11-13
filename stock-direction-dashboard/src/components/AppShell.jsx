@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Activity, AlertTriangle, Database, FileJson, Layers, RefreshCw, Sparkles } from 'lucide-react';
+import { Activity, Database, FileJson, Layers, RefreshCw, Sparkles } from 'lucide-react';
 import { NAV_SECTIONS, STATUS_LABEL } from '../lib/constants';
-import { formatInstant, humanAge } from '../lib/dates';
+import { humanAge } from '../lib/dates';
 import { useDashboard } from '../state/DashboardProvider';
-import { Badge, Button, ErrorNote, IconButton } from './ui';
+import { useModel } from '../state/ModelProvider';
+import { Badge, Button, ErrorNote } from './ui';
 
 const SECTION_ICONS = {
   Research: Activity,
@@ -11,14 +12,76 @@ const SECTION_ICONS = {
   'LLM & data': Database,
 };
 
-function ConnectionChip({ connection }) {
+function ConnectionChip({ connection, detail }) {
   const tone =
     connection === 'live' ? 'badge-solid' : connection === 'stale' ? 'badge-alert' : connection === 'connecting' ? 'badge-dashed' : 'badge-alert';
   return (
-    <span className={`badge ${tone}`} title="Derived from GET /dashboard/health and the freshness of the latest artifacts">
+    <span
+      className={`badge ${tone}`}
+      title={detail ? `Derived from GET /dashboard/health\n${detail}` : 'Derived from GET /dashboard/health and the freshness of the latest artifacts'}
+    >
       <span aria-hidden="true">{connection === 'live' ? '●' : connection === 'stale' ? '◐' : '○'}</span>
       {STATUS_LABEL[connection] ?? connection}
     </span>
+  );
+}
+
+/**
+ * Which model the pages describe, plus the way into the comparison.
+ *
+ * Everything model-scoped hangs off this one control, so it lives in the shell
+ * rather than on a page: the choice survives navigation and a reload. A model
+ * whose core artefacts are missing stays visible but disabled — hiding it would
+ * make an unbuilt model look like an unplanned one — and its tooltip names the
+ * command that would build it.
+ */
+function ModelSwitcher({ route, onNavigate }) {
+  const { modelId, setModel, models, stagesCommand, loading } = useModel();
+
+  if (!models.length) {
+    return (
+      <span className="mono text-[.875rem] text-[var(--ink-3)]" title={loading ? 'Reading GET /dashboard/models' : 'No model registry available'}>
+        {loading ? 'model …' : 'no models'}
+      </span>
+    );
+  }
+
+  const selected = models.find((model) => model.id === modelId);
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <div className="segment" role="group" aria-label="Model">
+        {models.map((model) => (
+          <Button
+            key={model.id}
+            variant="secondary"
+            aria-pressed={route !== 'compare' && model.id === modelId}
+            disabled={!model.ready}
+            title={
+              model.ready
+                ? `${model.label} · ${model.root}`
+                : `${model.label} is not built yet: missing ${model.missing.join(', ')}. Run \`${stagesCommand}\`.`
+            }
+            onClick={() => setModel(model.id)}
+          >
+            {model.label}
+          </Button>
+        ))}
+        <Button
+          variant="secondary"
+          aria-pressed={route === 'compare'}
+          title="Both models side by side: scorecard, confusion matrices, segments, flips and why"
+          onClick={() => onNavigate('compare')}
+        >
+          Compare
+        </Button>
+      </div>
+      {selected && !selected.servable && (
+        <Badge tone="badge-dashed" title="Research model. It is measured here next to the incumbent and is never served; nothing on this dashboard promotes it.">
+          not served
+        </Badge>
+      )}
+    </div>
   );
 }
 
@@ -31,10 +94,7 @@ function Sidebar({ route, onNavigate }) {
           <span className="flex h-8 w-8 items-center justify-center rounded-md border border-[var(--ink)] bg-[var(--ink)] text-white">
             <Sparkles size={16} strokeWidth={2.25} />
           </span>
-          <div className="min-w-0">
-            <p className="truncate text-[.8125rem] font-semibold leading-tight text-[var(--ink)]">Stock Direction</p>
-            <p className="truncate text-[.6875rem] text-[var(--ink-3)]">Research dashboard</p>
-          </div>
+          <p className="truncate text-[.9375rem] font-semibold leading-tight text-[var(--ink)]">Stock Direction</p>
         </div>
         <div className="mt-3 flex flex-wrap items-center gap-1.5">
           <ConnectionChip connection={connection} />
@@ -48,9 +108,9 @@ function Sidebar({ route, onNavigate }) {
         {NAV_SECTIONS.map((section) => {
           const Icon = SECTION_ICONS[section.label] ?? FileJson;
           return (
-            <div key={section.label} className="mb-3">
+            <div key={section.label} className="mb-4">
               <p className="eyebrow flex items-center gap-1.5 px-2 py-1">
-                <Icon size={11} strokeWidth={2.5} />
+                <Icon size={12} strokeWidth={2.5} />
                 {section.label}
               </p>
               <div className="space-y-0.5">
@@ -76,10 +136,11 @@ function Sidebar({ route, onNavigate }) {
       </nav>
 
       <div className="border-t border-[var(--line)] px-4 py-3">
-        <p className="eyebrow">Universe tier</p>
-        <p className="mono mt-1 truncate text-[.7rem] text-[var(--ink-2)]">{universeTier ?? 'not recorded'}</p>
-        <p className="mt-2 text-[.625rem] leading-relaxed text-[var(--ink-faint)]">
-          Version {health?.version ?? '—'} · read-only API
+        <p
+          className="mono truncate text-[.875rem] text-[var(--ink-3)]"
+          title={`Universe tier · API version ${health?.version ?? '—'} · read-only`}
+        >
+          {universeTier ?? 'no tier recorded'}
         </p>
       </div>
     </aside>
@@ -114,6 +175,10 @@ export function AppShell({ route, onNavigate, children }) {
   const gap = dataHealth?.gap?.gap_sessions_estimate ?? 0;
   const holes = dataHealth?.holes?.total_holes ?? 0;
 
+  const staleDetail = [staleSteps.length ? `${staleSteps.length} stale step(s)` : '', gap ? `gap ${gap} session(s)` : '', holes ? `${holes} hole(s)` : '']
+    .filter(Boolean)
+    .join(' · ');
+
   const handleRefresh = () => {
     setBusy(true);
     refreshAll();
@@ -126,27 +191,19 @@ export function AppShell({ route, onNavigate, children }) {
         <header className="topbar">
           <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 sm:px-6">
             <div className="flex flex-wrap items-center gap-2">
-              <ConnectionChip connection={connection} />
-              {connection !== 'live' && (staleSteps.length > 0 || gap > 0) && (
-                <span className="hidden items-center gap-1.5 text-[.6875rem] text-[var(--ink-3)] sm:inline-flex">
-                  <AlertTriangle size={12} strokeWidth={2.5} />
-                  {staleSteps.length} stale step(s) · gap {gap} session(s){holes ? ` · ${holes} hole(s)` : ''}
-                </span>
-              )}
+              <ModelSwitcher route={route} onNavigate={onNavigate} />
+              <span className="hidden h-5 w-px bg-[var(--line)] sm:block" aria-hidden="true" />
+              <ConnectionChip connection={connection} detail={connection !== 'live' ? staleDetail : undefined} />
+              <span className="hidden text-[.875rem] text-[var(--ink-3)] md:inline">
+                {healthUpdatedAt ? `checked ${humanAge((Date.now() - healthUpdatedAt) / 1000)}` : 'not checked yet'}
+              </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="hidden text-[.6875rem] text-[var(--ink-3)] md:inline">
-                {healthUpdatedAt ? `checked ${humanAge((Date.now() - healthUpdatedAt) / 1000)}` : 'not checked yet'}
-              </span>
               <DemoSwitch />
-              <IconButton label="Refresh dashboard data" icon={RefreshCw} onClick={handleRefresh} disabled={busy} />
               <Button size="sm" variant="primary" icon={RefreshCw} onClick={handleRefresh} disabled={busy}>
-                Refresh
+                {busy ? 'Refreshing' : 'Refresh'}
               </Button>
-              {healthUpdatedAt && (
-                <span className="hidden text-[.625rem] text-[var(--ink-faint)] xl:inline">{formatInstant(new Date(healthUpdatedAt))}</span>
-              )}
             </div>
           </div>
         </header>

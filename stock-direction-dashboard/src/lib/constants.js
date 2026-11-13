@@ -1,4 +1,8 @@
-export const ROUTES = ['overview', 'predictions', 'stock', 'evaluation', 'backtesting', 'q0', 'data'];
+// `v2` is kept recognised for one release: it was its own page before the model
+// selector existed, and old links are redirected to `compare`.
+export const ROUTES = ['overview', 'predictions', 'stock', 'model', 'evaluation', 'backtesting', 'q0', 'data', 'compare', 'v2'];
+
+export const LEGACY_ROUTES = { v2: 'compare' };
 
 export const NAV_SECTIONS = [
   {
@@ -12,8 +16,10 @@ export const NAV_SECTIONS = [
   {
     label: 'Model',
     items: [
+      { id: 'model', label: 'Model behaviour', hint: 'Why it predicts what it predicts' },
       { id: 'evaluation', label: 'Model evaluation', hint: 'Test metrics and calibration' },
       { id: 'backtesting', label: 'Backtesting', hint: 'Net event backtest' },
+      { id: 'compare', label: 'Model comparison', hint: 'v1 vs v2, where each wins and why' },
     ],
   },
   {
@@ -25,6 +31,12 @@ export const NAV_SECTIONS = [
   },
 ];
 
+/**
+ * Pages whose numbers come from one model's artefacts. The header selector is
+ * live on these and inert everywhere else, rather than silently ignored.
+ */
+export const MODEL_SCOPED_ROUTES = ['predictions', 'stock', 'model', 'evaluation', 'backtesting'];
+
 /** Grayscale encodings: intensity plus a directional icon, never color. */
 export const SIGNAL_META = {
   UP: { label: 'UP', tone: 'badge-solid', description: 'Predicted up move beyond the flat band' },
@@ -35,6 +47,18 @@ export const SIGNAL_META = {
 export const POLL_INTERVALS = {
   q0: 5000,
   artifacts: 60000,
+  modelLive: 5000,
+};
+
+/**
+ * Hypothesis verdicts. A glyph carries the verdict so the state survives a
+ * grayscale screen and a printed page; the badge tone only reinforces it.
+ */
+export const VERDICT_META = {
+  SUPPORTED: { glyph: '●', tone: 'badge-solid', label: 'Supported' },
+  REJECTED: { glyph: '○', tone: 'badge-ghost', label: 'Rejected' },
+  INCONCLUSIVE: { glyph: '◐', tone: 'badge-dashed', label: 'Inconclusive' },
+  INFO: { glyph: '◇', tone: 'badge-ghost', label: 'Context' },
 };
 
 export const FRESHNESS_TONE = {
