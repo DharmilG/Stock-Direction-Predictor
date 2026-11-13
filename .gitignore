@@ -15,6 +15,10 @@ __pycache__/
 *.png
 mlruns/
 artifacts/hf_cache/
+
+# v2 workspace: a duplicated dataset plus derived boosters and reports, all rebuilt by
+# `python -m stockml.v2.train`. Never commit it.
+v2/
 artifacts/mlflow/
 artifacts/*.db
 

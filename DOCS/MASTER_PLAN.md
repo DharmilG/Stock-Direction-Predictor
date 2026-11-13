@@ -941,6 +941,25 @@ Every full run must end with exactly this, so the headline number can never be r
 
 The `EDGE OVER MAJORITY` line with an explicit ✓/✗ is the single most important line in the entire system.
 
+### 12.3 Model behaviour observability (built)
+
+The console block above says *how much* the model gets right. It cannot say *why*,
+and it is specific to a DOWN-dominated run. The dashboard therefore gained a
+`#/model` section driven by a new `model-report` stage:
+
+| Piece | Source | Status |
+|---|---|---|
+| Behaviour Plate (distribution, confusion, class profile, conviction, signed drivers) per split | `results/model_report.json` | ✅ built |
+| Symmetric mode (`collapsed_prior` / `tilted` / `balanced_undiscriminating` / `balanced_discriminating` / `mild_bias`) + `starved:*` flags | `src/stockml/api/model_diagnostics.py` | ✅ built |
+| Six auditable hypotheses with SUPPORTED / REJECTED / INCONCLUSIVE / INFO | same | ✅ built |
+| Per-row waterfall (sampled splits and serving rows) | `explanations_splits.parquet`, `explanations_serving.parquet` | ✅ built |
+| Live training progress (heartbeat, learning curve, fold dots) — progress only, never a score | `logs/train_heartbeat.json`, `checkpoints/train_curve.jsonl` | ✅ built |
+| Q0 Live / Analytics / Cases telemetry tabs | `logs/q0_resource_5s.csv`, `logs/q0_history.jsonl`, ledger, traces | ✅ built |
+
+None of it mutates the model: `model-report` re-scores the existing booster, the
+training instrumentation is write-only, and no dashboard route trains or changes
+τ. Method and limits: `DOCS/MODEL_OBSERVABILITY.md`, `DOCS/TRACK_Q_TELEMETRY.md`.
+
 ---
 
 ## 13. Bootstrap Scripts & One-Command Run
@@ -1121,6 +1140,113 @@ Legend: ✅ done · 🟡 partial · ❌ not started · 🐛 bug
 | F-23 | `flat_band` ablation runner | P0 | B-02 | ✅ DONE (2026-09-15, `flat_band=1.0`, FLAT F1 0.214) |
 | F-24 | DuckDB warehouse views over parquet | P2 | — |
 | F-25 | Remove US macro, add Bank Nifty / India VIX / midcap | P1 | B-10 | ✅ DONE (2026-09-15, parquet verified clean) |
+| F-26 | Fix the label, then rebuild the directional model (v2 now exists as a separate standing research model, see §14.2.1) | P0 | B-02 | ❌ PARKED for promotion — v2 is built and readable at `#/compare`, but the label audit in §14.2.1 comes first; do not retrain against the current label |
+
+### 14.2.1 STANDING — v2 directional experiment (rebuilt 2026-10-29)
+
+**What it is.** A byte-for-byte isolated second model, kept as a standing research model rather than a
+one-off: `src/stockml/v2/` (workspace provisioning, decision policy, training, stages), its own copy of the
+dataset under `v2/`, its own booster, calibration and report, plus the incumbent's downstream stages
+replayed against the v2 workspace (`python -m stockml.v2.stages all`: evaluate, backtest, monitor, report,
+predict, explain). The dashboard reaches it through `?model=v2` on the ordinary routes, the
+`/dashboard/compare/*` pair analytics and the `#/compare` page — the `/dashboard/v2/*` experiment record is
+now that page's bottom half rather than the only way to see the model. The incumbent booster and everything
+under `artifacts/`, `results/` and `checkpoints/` are opened read-only throughout — `workspace.read_only()`
+snapshots every file's size and mtime on entry and raises if any of them changed on exit.
+
+**The question it answered.** Does a class-weighted three-class LightGBM, with a policy that may
+abstain, beat the deployed booster on *direction*? **No — not established.**
+
+Method (original measurement, 2026-10-29): 5-variant matrix (row filter × class weighting × prior adjustment)
+scored on one shared
+39,523-row test population (2023-08-10 → 2026-10-21), incumbent scored read-only on the identical
+rows. Only 1 of 5 variants was feasible (`strict_weighted`); without class weighting the model could
+not recall 15% of UP rows at any threshold, and prior adjustment collapsed coverage to 8.9%.
+
+| Metric | Incumbent | v2 |
+|---|---|---|
+| Directional MCC | 0.0044 | 0.0337 |
+| Directional balance | 0.5017 | 0.5163 |
+| UP recall | 16.9% | 37.9% |
+| 3-class accuracy / MCC | 47.57% / 0.0191 | 48.88% / 0.0339 |
+| Log loss | 0.9962 | 0.9050 |
+| Directional accuracy (all rows) | 48.97% | 49.71% |
+| Balanced recall (3-class) | 0.3699 | 0.3552 (worse) |
+| FLAT AUC | 0.5971 | 0.5515 (worse) |
+| Calibration error | 0.0434 | 0.0586 (worse) |
+
+**Why it does not count as better.** 39,523 rows are only **791 independent dates** (50 correlated
+names per day). Re-tested with date-clustered errors: log loss t = −22.6 and 3-class accuracy t = 2.45
+(both real, the latter passes 2×SE), but directional accuracy +0.76 pp has t = 1.34 with a
+date-bootstrap CI of −0.40 → +1.89 pp — **inside noise**. The naive row-level SE (0.29 pp) is 1.96×
+too optimistic. v2 repaired the decision distribution (82/18 → 63/37) and improved the probabilities;
+it did not improve direction.
+
+**Root cause found during the audit — this is why retraining is the wrong next move.**
+- 55.2% of labels resolve on the **first** session after entry; mean hold is **0.8 of 5 sessions**,
+  because the barrier is 1.0 × *daily* σ tested against intraday high/low. The "5-day" label is a
+  one-day intraday path label.
+- FLAT (5.2% of rows) is not flat: realized returns span −38.9% … +21.0%, std 2.02% against 0.75%
+  (DOWN) and 0.78% (UP). It is the "both barriers touched in one session → exit at close" bucket, so
+  its sign is random. That is also why it is the only class with ranking skill (AUC 0.60).
+- Because barriers scale with σ, mean σ is identical across the classes (0.282 / 0.286 / 0.284):
+  volatility — the one genuinely predictable property — is normalised out of the target by design.
+- Economics: a called row's median move is 1.6% against 31.5 bps round trip → **breakeven accuracy
+  59.8%**. At 52% the system loses ≈25 bps per trade. Accuracy is not the binding constraint; the
+  size of the captured move is.
+
+**Do this instead, in order.** 1) Label audit, no training (`artifacts/label_grid.json` already holds
+the scan: h=5 at mult 1.5 gives 42/15/43 with ±2.35% medians versus 47/5/46 and ±1.6% at mult 1.0).
+2) Stop labelling both-touched days FLAT — exclude them. 3) Cross-sectional label ("does this name
+beat the median NSE-50 stock over the horizon") to remove the market factor. 4) Keep a dispersion head
+and use it for sizing/abstention instead of forcing FLAT into the direction head. 5) Feature diet,
+190 → ~40 by purged-CV ablation at 2×SE. 6) Rolling 4–5 year training window, retrained every 5
+sessions. 7) Report hit-rate against coverage and trade only the top 10–20%.
+
+**Acceptance rule from now on.** Date-clustered paired bootstrap at 2×SE is the only test for
+"better". Row-level standard errors overstate confidence by ~2×.
+
+**Rebuilt on 2026-10-29, standing.** Rebuilt from this section's design, not from `git revert` — v2 was
+never committed. Same label, same 5-variant matrix, same decision policy. `python -m stockml.v2.train`
+provisions `v2/`, fits the matrix, scores the incumbent on the identical rows and writes the report; it
+runs no Optuna search and writes no MLflow record, so the result stays config-comparable to the deployed
+booster. Variant selection ranks on the decision score and breaks near-ties within 0.002 on
+*calibration-slice* log loss, so a design cannot win on a thousandth of balanced accuracy while
+destroying its probabilities. The walk-forward folds score v2 only: the deployed booster is never refit
+and its training window ends before the block, so an incumbent fold score would be in-sample (≈its 63.9%
+training accuracy) and is deliberately not published as a comparator. The measured table above is the
+original measurement and is **not** rewritten to match later runs: the current run's own figures live in
+`v2/artifacts/v2_report.json`, which is the experiment record `#/compare` shows. **v2 remains a second research
+model, not a promotable one** — the label is still the blocker, so the recommendations above stay open
+and promotion stays parked.
+
+**The rebuild does not reproduce the table above, and the table is left as measured.** On the longer
+panel now on disk (37,579 test rows over 755 dates, test window ending later than the original) the same
+`strict_weighted` variant lands at directional accuracy 47.54% → 48.93% (+1.39 pp) with a date-clustered
+t of 5.04 and a CI of +1.31 → +2.87 pp, so the directional gain is *outside* noise here where the original
+found +0.76 pp inside it. Log loss moves 0.9971 → 0.9512 (t = −15.9) rather than the larger 0.9050 gain
+recorded above, 3-class MCC falls 0.0173 → 0.0086 instead of rising, and UP recall reaches 27.3% against
+the recorded 37.9%. Three of the four "worse" rows still point the same way (balanced recall, FLAT AUC
+0.6006 → 0.5755, calibration error 0.0439 → 0.0479). The promotion answer is unchanged and does not depend
+on any of this: **AUC(UP) is 0.5103 against a 0.55 floor**, so the candidate fails a gate regardless of how
+the directional point estimate moved. Treat the table as the original measurement on the original panel
+and `v2/artifacts/v2_report.json` as the current one.
+
+**The paired comparison (2026-10-29, `/dashboard/compare/summary`).** With v2 completed into a twin, the
+question "which is better" is answerable on 35,248 rows both snapshots label the same way (726 shared test
+dates; 3,507 rows discarded — 3,228 scored by one side only plus 868 the two label builds disagree on, both
+counted rather than silently dropped). The answer is still split, and the split is the finding:
+
+- **v2 wins** on UP recall (+11.89 pp) and log loss (−0.0402).
+- **v1 wins** on balanced accuracy (+0.0387), MCC (+0.0188), DOWN recall (+0.0802) and FLAT recall (+0.1547).
+- **Inside noise**: accuracy over all rows (+0.82 pp, CI −0.05 → +1.59) and ECE (+0.82, CI −0.15 → +1.95).
+
+McNemar on the 7,391 discordant rows gives p = 0.000807, so the two models do not agree on *which* rows they
+get right — but the disagreement is a trade, not a gain: 3,551 rows only v1 got right against 3,840 only v2
+did. The flips are the explanation. On the 1,079 rows v1 called FLAT and v2 called DOWN, v2 hit 41.5% against
+v1's 17.5%; on the 465 it called UP, 44.1% against 15.3% — v2's FLAT class is largely empty (τ_flat = 1.01),
+which buys direction and costs FLAT recall. That is precisely the trade the 0.55 AUC(UP) gate refuses to
+accept, and it is why v2 is measured here and never served.
 
 ### 14.3 ALREADY DONE
 
@@ -1147,6 +1273,11 @@ Legend: ✅ done · 🟡 partial · ❌ not started · 🐛 bug
 ✅ FastAPI inference endpoints
 ✅ News/FinBERT infrastructure (code complete, data empty per B-12)
 ✅ 8 result graphs
+✅ Read-only dashboard API (`/dashboard/*`) with one envelope; no route trains, fetches or predicts
+✅ Model behaviour report: five-panel plate per split, symmetric mode taxonomy, six auditable hypotheses
+✅ Live training telemetry (heartbeat, learning curve, fold dots) — write-only, model untouched
+✅ Per-row Tree SHAP waterfalls for sampled splits and serving rows
+✅ Q0 Live / Analytics / Cases telemetry from the files the run already writes
 
 ### 14.4 Recommended execution order
 

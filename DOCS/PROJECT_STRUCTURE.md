@@ -25,14 +25,16 @@ stock_direction_platform/
 |   |-- api/                       FastAPI inference endpoint
 |   |-- risk/                      Position sizing
 |   |-- registry/                  MLflow model logging
+|   |-- v2/                        Isolated second model: workspace, policy, training
 |   |-- utils/                     Hashing, I/O, logging, state
-|
-|-- tests/                         Unit tests (49)
+
+|-- tests/                         Unit tests (core, dashboard API, diagnostics, Q0, refresh, v2 policy)
 |-- DOCS/                          Project documentation
 |-- artifacts/                     Model files, state snapshots, freezes
 |-- checkpoints/                   Optuna DB, booster checkpoints, fold diagnostics
 |-- results/                       Metrics, predictions, ledgers, plots
 |-- logs/                          One log per pipeline step
+|-- v2/                            v2 workspace (excluded from git): copied data, its own booster, report, logs
 |-- data/                          Excluded from git, rebuilt via pipeline
 |   |-- raw/                       Parquet cache (yfinance, bhavcopy, news)
 |   |-- processed/                 Joined dataset
@@ -185,6 +187,7 @@ Split parameters:
 |------|---------|
 | `metrics.py` | Accuracy, AUC, F1, precision, recall computation. |
 | `evaluate.py` | Fold-level evaluation: per-class metrics, confusion matrix. |
+| `paired.py` | Date-clustered paired comparison: `clustered_delta()` resamples dates rather than rows (50 names share one day's move) and `mcnemar()` tests the discordant pairs. Shared by `v2/train.py` and `api/compare.py`. |
 | `final_report.py` | Aggregate statistics across folds. |
 | `dm.py` | Diebold-Mariano test with Newey-West correction. |
 | `economics.py` | G3 cost-aware variants: threshold sweep, PBO calculation. |
@@ -195,6 +198,7 @@ Split parameters:
 | `label_grid.py` | I0-D1a 12-cell grid: horizon x multiplier ablation. |
 | `i01_d1.py` | Earnings proximity + lead-lag analysis. |
 | `flat_threshold.py` | tau_flat sweep: FLAT threshold optimization. |
+| `model_report.py` | Behaviour report: five-panel plate per split, mode, hypotheses, τ sweep, signed SHAP, explanations sample. Never trains. |
 | `flat_band_ablation.py` | B-02 flat band width study. |
 | `down_flag.py` | DOWN-risk flag reformulation experiment. |
 | `ablation.py` | Generic ablation runner for feature studies. |
@@ -230,12 +234,22 @@ Cost model (delivery segment):
 | File | Purpose |
 |------|---------|
 | `predict.py` | Batch prediction: loads trained model, runs on latest features, outputs predictions.parquet. |
+| `explain.py` | Per-row Tree SHAP waterfall for the latest serving row of each symbol → `results/explanations_serving.parquet`. Not part of `refresh`. |
 
 ### 4.12 api/
 
 | File | Purpose |
 |------|---------|
-| `server.py` | FastAPI endpoint: `/predict` route loads model, runs prediction, returns JSON. |
+| `server.py` | FastAPI app: mounts the routers, CORS allowlist, optional `dist/` static mount. |
+| `models.py` | The model registry: `v1` (served incumbent) and `v2` (research twin, `servable=False`). `model_context(model)` gives a route the selected settings and paths, `GET /dashboard/models` reports each model's readiness, and `registry_warnings()` flags the pair when the incumbent was refit after v2 copied its dataset signature. |
+| `compare.py` | `/dashboard/compare/*`: summary, segments, pairing, attribution. Joins the two `predictions.parquet` frames on `(timestamp, symbol)` and computes every paired delta on the rows both snapshots label the same way, so neither model is scored on the other's truth. |
+| `dashboard.py` | Read-only artifact router: models, overview, predictions, metrics, model metadata, shap, backtest, monitoring, stock history. Every model-owned artefact is resolved through `models.model_context(model)`, so `?model=v2` is the only switch. |
+| `dashboard_model.py` | `/dashboard/model/*` (report, live, cases) and `/dashboard/explain/{symbol}`. |
+| `dashboard_q0.py` | `/dashboard/q0/*`: status, ledger summary, timeline, analytics, cases, case trace. |
+| `dashboard_v2.py` | `/dashboard/v2/*`: summary, experiments, diagnostics, reasons, cases. Reads `v2/artifacts/v2_report.json` only; carries a `METRIC_CONTRACT` naming each metric's denominator. Since the model selector exists it is the *experiment record* feed — the comparison page's bottom half — and no longer the only way to see v2. |
+| `dashboard_support.py` | Shared artifact IO: `json_file`, `frame_file`, `file_meta`, `age_seconds`, `json_safe`, envelope helpers. |
+| `model_diagnostics.py` | FastAPI-free analysis: `distribution`, `confusion`, `class_profile`, `conviction`, `margins`, `threshold_sweep`, `rolling`, `mode_of`, `plate`, `hypotheses`, `driver_rows`, `waterfall`. |
+| `q0_analytics.py` | FastAPI-free analysis: `analytics`, `timeline`, `case_rows`, `case_detail`, `safe_case_id`. |
 
 ### 4.13 risk/
 
@@ -258,15 +272,41 @@ Cost model (delivery segment):
 | `logging.py` | Structured logging setup. |
 | `state.py` | Pipeline state JSON read/write (resume support). |
 
+### 4.16 v2/ -- Isolated Second Model
+
+A second LightGBM that never touches the incumbent tree. It reads `artifacts/best_params.json`
+read-only (no Optuna, no MLflow write), writes only under `v2/`, and is explicitly non-promotable: the
+comparison page reports the gates that fail. Design and measured history: `DOCS/MASTER_PLAN.md` §14.2.1.
+
+| File | Purpose |
+|------|---------|
+| `workspace.py` | `paths_v2()` builds a private `Paths` via `dataclasses.replace`; `provision()` copies `data/processed`, `data/features/**`, `data/reference` into `v2/data/` skipping unchanged files (`data/raw` is never copied); `read_only()` snapshots `artifacts/`, `results/`, `checkpoints/` and raises if any file changed on exit. |
+| `policy.py` | The decision rule, kept out of the trainer: ordered branches `flat_rule → low_confidence → margin → direction`, `ABSTAIN = -1`, a 245-point threshold grid, a per-class recall floor, and `direction_only()` which reports both the all-rows and movers-only denominators. Feasibility failures are recorded, never raised. |
+| `train.py` | `python -m stockml.v2.train`. Fits the 5-variant matrix (row filter × class weighting × prior adjustment), scores every variant and the incumbent on one shared test population, runs the date-clustered paired bootstrap, purged walk-forward folds, and writes `v2/artifacts/v2_report.json` + `v2/results/*`. |
+| `stages.py` | `python -m stockml.v2.stages <evaluate\|backtest\|monitor\|report\|predict\|explain\|all>`. Points the incumbent's own stage implementations at `settings_v2()` so v2 produces the same artefact schema as v1 — SHAP, backtest, drift, a latest-date call and serving explanations — instead of a report only. `evaluate` is v2's own: it applies the real `policy.Policy` and records an `ABSTAIN` as `predicted_label = -1`. Every stage runs inside `read_only()`. |
+| `__init__.py` | Package marker. |
+
+The page that reads it is `stock-direction-dashboard/src/pages/ModelCompare.jsx` (`#/compare`, with
+`#/v2` redirected). Its top half consumes `/dashboard/compare/*` — the paired scorecard, segment table,
+agreement 2×2, flip matrix and two SHAP orderings — and its bottom half is the experiment record from
+`/dashboard/v2/*`. It computes no metric of its own.
+
 ---
 
 ## 5. tests/
 
 | File | Purpose |
 |------|---------|
-| `test_core.py` | 49 unit tests covering: config loading, feature engineering, labeling, validation splits, metrics, economics, touch ledger, diagnostics. |
+| `test_core.py` | Feature engineering, labeling, validation splits, metrics, economics, touch ledger, diagnostics, per-fold diagnostics. |
+| `test_dashboard_api.py` | Envelope on every route, read-only guarantee (no artifact rewritten), traversal rejection, missing/malformed artifacts degrade to warnings, `data-health` gaps. |
+| `test_model_diagnostics.py` | Plate numbers, `separation`, all five modes, hypothesis verdicts, waterfall additivity. |
+| `test_q0_analytics.py` | Funnel, vote×label, calibration/ECE, disagreement, latency from traces, case filters, path safety, resource series fields, progress rows. |
+| `test_refresh.py` | Refresh order: no retraining by default, optional sources cannot abort a run, dry-run executes nothing. |
+| `test_v2_policy.py` | v2 decision policy, no artefacts needed: abstain on low confidence, branch precedence, both accuracy denominators, the recall floor yielding `feasible=False` instead of raising, selection ranking, and vectorised/scalar agreement. |
+| `test_model_selector.py` | The registry and the paired comparison: v2's flat band comes from its own selection, an unknown id 404s, the comparability warning fires only when the incumbent moved, `clustered_delta`/`mcnemar` behave on known inputs, `_axes` reproduces `metrics.json` (point estimate and a bootstrap batch), and the paired join accounts for every row (`paired + mismatch == overlap`, `discarded == a_only + b_only + mismatch`). |
+| `test_qwen_guards.py` | Q0 thermal guard, gate and vote guards (GPU sampled via monkeypatch). |
 
-Run with: `python -m pytest tests/test_core.py -v`
+Run with: `python -m pytest tests -q`
 
 ---
 
@@ -296,6 +336,7 @@ Run with: `python -m pytest tests/test_core.py -v`
 | `lightgbm_final_checkpoint.txt` | Last LightGBM booster (resume training). |
 | `lightgbm_final_checkpoint.txt.json` | Checkpoint metadata. |
 | `trials/fold_diagnostics.jsonl` | Per-fold per-class recall + top-15 gain importances. |
+| `train_curve.jsonl` | Per-iteration train vs calibration loss/accuracy, appended by the training callback (observability only). |
 
 ---
 
@@ -317,7 +358,12 @@ Run with: `python -m pytest tests/test_core.py -v`
 | `latest_predictions.csv` | Most recent predictions per symbol. |
 | `predictions.parquet` | Full prediction dataset. |
 | `confidence_accuracy.csv` | Confidence vs actual accuracy calibration. |
-| `shap_feature_importance.csv` | SHAP feature importance rankings. |
+| `shap_feature_importance.csv` | SHAP feature importance rankings (all-class mean \|SHAP\|). |
+| `shap_by_class.csv` | Signed mean SHAP per class — the source of plate panel E. |
+| `model_report.json` | Behaviour report: plates per split, mode, hypotheses, τ sweep, folds, importance, consistency. |
+| `predictions_splits.parquet` | The same booster scored on train / calibration / test (does not replace `predictions.parquet`). |
+| `explanations_splits.parquet` | Sampled per-row SHAP contributions per class, with base values. |
+| `explanations_serving.parquet` | Serving-row waterfalls, written by `explain`. |
 | `worst_20.csv` | 20 worst predictions for debugging. |
 | `*.png` | Plots (excluded from git): calibration, confusion matrix, equity curve, drawdown, SHAP summary. |
 
@@ -355,6 +401,15 @@ One log file per pipeline step, named `<step>.log`. Stdout captures in `<step>.o
 | `u3_d1.log` | Sentiment-content diagnosis |
 | `i01_d1.log` | Earnings proximity |
 | `label_grid.log` | Label grid ablation |
+| `report.log` | Behaviour report (`model-report`) |
+| `explain.log` | Serving explanations (`explain`) |
+
+The v2 experiment logs to its own workspace, not here: `v2/logs/v2_train.log`.
+
+Telemetry files that live in `logs/` are not step logs: `train_heartbeat.json`
+(current training progress), `gpu_5s.csv` (temperature), `q0_resource_5s.csv`
+(the superset GPU sample), `q0_history.jsonl` (throttled Q0 heartbeats),
+`q0_heartbeat.json` (current Q0 case). See `DOCS/TRACK_Q_TELEMETRY.md`.
 
 ---
 
@@ -372,11 +427,31 @@ Rebuilt via pipeline. Not versioned.
 
 ---
 
+## 10.1 v2/ (Excluded from Git)
+
+The isolated workspace for the second model. `python -m stockml.v2.train` creates it and
+`python -m stockml.v2.stages all` fills in the twin stages; nothing else writes here, and nothing here is
+read by the serving path. Copied from `data/` by `workspace.provision()` (size+mtime skipping), which
+never copies `data/raw/`.
+
+| Path | Contents |
+|------|----------|
+| `data/processed/`, `data/features/`, `data/reference/` | Private copy of the dataset the trainer fits on. |
+| `artifacts/v2_report.json` | The whole measurement: protocol, population, every variant, head-to-head, gates, significance, diagnostics, folds. This is the file `/dashboard/v2/*` serves. |
+| `artifacts/v2_booster.txt`, `artifacts/v2_calibration.json`, `artifacts/v2_selection.json` | The selected variant's booster, its temperature, and how it was chosen — including `policy.tau_flat`, which the registry applies when it scores v2. |
+| `results/v2_predictions.parquet`, `v2_folds.json`, `v2_metrics.json` | Per-row paired calls (what the comparison page's cases table pages through), fold table, metrics. |
+| `results/predictions.parquet`, `metrics.json`, `shap_feature_importance.csv`, `backtest_*.json`, `monitoring.json`, `model_report.json`, `latest_predictions.csv` | The twin stages' output, in the incumbent's own schema. `results/predictions.parquet` is what `/dashboard/compare/*` joins against v1's. |
+| `logs/v2_train.log`, `logs/v2_stages.log` | Run logs. |
+
+---
+
 ## 11. DOCS/
 
 | File | Purpose |
 |------|---------|
 | `MASTER_PLAN.md` | Living project plan: architecture, decisions, task tracker (1242 lines). |
+| `MODEL_OBSERVABILITY.md` | Behaviour Plate, mode taxonomy, hypotheses, `model-report` artifacts, live training telemetry, per-case explanations, retrain policy. |
+| `TRACK_Q_TELEMETRY.md` | Q0 telemetry files, the absent-never-zero rule, timeline/analytics/cases payloads. |
 | `TRACK_I_INFORMATION.md` | Track I governance: news/information sources, read-only diagnosis rules. |
 | `PROJECT_STRUCTURE.md` | This file. |
 

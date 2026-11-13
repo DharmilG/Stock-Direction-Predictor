@@ -137,3 +137,31 @@ python -m stockml.qpipeline --phase phase8
 Observability: logs/q0_supervisor.json (supervisor), logs/q0_heartbeat.json
 (runner: phase, ledger/rated/judged, harness-fail rate, ETA, thermal state),
 logs/q0_supervisor_events.log, logs/q0_ALERT.txt, logs/q0_DONE.txt.
+
+13) v2 - the research twin (never promoted)
+------------------------------------------------------------------
+python -m stockml.v2.train                    # provision v2/, fit the matrix, write the report
+python -m stockml.v2.train --force            # re-copy v2/data from data/ (size+mtime skipping otherwise)
+python -m stockml.v2.train --variants strict_weighted,native_unweighted
+python -m stockml.v2.train --no-folds         # skip the purged walk-forward fold fits
+python -m stockml.v2.train --rounds 120       # override the booster rounds
+
+python -m stockml.v2.stages all               # evaluate -> backtest -> monitor -> report -> predict -> explain
+python -m stockml.v2.stages evaluate          # one stage; its own policy, ABSTAIN recorded as label -1
+python -m stockml.v2.stages report --force    # rebuild a stage that already exists
+
+Reads artifacts/best_params.json read-only (no Optuna, no MLflow write) and opens the
+incumbent booster read-only. Every stage runs inside v2/workspace.read_only(), which raises
+if anything under artifacts/, results/ or checkpoints/ moved. Run the stages while the API is
+up, then open #/compare in the dashboard:
+
+  /dashboard/models              both models, readiness, and the command that would build a missing one
+  /dashboard/compare/summary     paired scorecard: per-axis delta, date-clustered CI, winner
+  /dashboard/compare/segments    the same delta inside ?by=class|symbol|month|confidence|agreement|volatility
+  /dashboard/compare/pairing     agreement 2x2, McNemar p, and the flip matrix with hit rates
+  /dashboard/compare/attribution SHAP orderings and rank correlation
+  /dashboard/v2/*                the experiment record (v2_report.json) shown at the bottom of the page
+
+Every other /dashboard/* route takes ?model=v1|v2 and reads that model's own artefacts.
+v2 is not promotable by design - the gates on the page are the whole decision - and the
+label work in DOCS/MASTER_PLAN.md section 14.2.1 is still the blocker.
