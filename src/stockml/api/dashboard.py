@@ -32,6 +32,7 @@ from .dashboard_support import (
     to_iso,
     training_status,
 )
+from .models import DEFAULT_MODEL, describe, model_context, registry, registry_warnings
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
@@ -73,8 +74,26 @@ def _envelope(data: Any, artifacts: list[str], *, as_of: Any = None, warnings: l
     }
 
 
-def _paths(settings: Settings):
-    return settings.paths
+# --------------------------------------------------------------------------- #
+# Model registry
+# --------------------------------------------------------------------------- #
+@router.get("/models")
+def dashboard_models() -> dict[str, Any]:
+    """Which models the header can offer, and how complete each one is.
+
+    The page uses ``ready`` to disable a model that has not been built yet, and
+    ``missing`` to say which artefact is absent rather than showing a blank page.
+    """
+    specs = registry()
+    return _envelope(
+        {
+            "default": DEFAULT_MODEL,
+            "models": [describe(spec) for spec in specs.values()],
+            "stages_command": "python -m stockml.v2.stages all",
+        },
+        [],
+        warnings=registry_warnings(),
+    )
 
 
 def _safe_name(symbol: str) -> str:
@@ -106,7 +125,7 @@ def _missing(what: str, artifacts: list[str]) -> dict[str, Any]:
 @router.get("/health")
 def dashboard_health() -> dict[str, Any]:
     settings = load_settings()
-    paths = _paths(settings)
+    paths = settings.paths
     artifacts = artifact_paths(paths)
     return _envelope(
         {
@@ -145,7 +164,7 @@ def dashboard_symbols() -> dict[str, Any]:
 @router.get("/overview")
 def dashboard_overview() -> dict[str, Any]:
     settings = load_settings()
-    paths = _paths(settings)
+    paths = settings.paths
     artifacts = artifact_paths(paths)
 
     metadata = json_file(artifacts["model_metadata"])
@@ -255,9 +274,11 @@ def dashboard_overview() -> dict[str, Any]:
 # Predictions
 # --------------------------------------------------------------------------- #
 @router.get("/predictions")
-def dashboard_predictions(limit: int = Query(default=100, ge=1, le=500)) -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_predictions(
+    limit: int = Query(default=100, ge=1, le=500),
+    model: str = Query(default=DEFAULT_MODEL),
+) -> dict[str, Any]:
+    settings, paths = model_context(model)
     frame = predictions_frame(paths)
     if frame is None:
         return _missing("results/latest_predictions.csv", ["results/latest_predictions.csv"])
@@ -306,9 +327,8 @@ def dashboard_predictions(limit: int = Query(default=100, ge=1, le=500)) -> dict
 # Evaluation
 # --------------------------------------------------------------------------- #
 @router.get("/metrics")
-def dashboard_metrics() -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_metrics(model: str = Query(default=DEFAULT_MODEL)) -> dict[str, Any]:
+    settings, paths = model_context(model)
     artifacts = artifact_paths(paths)
     metrics = json_file(artifacts["metrics"])
     if not metrics:
@@ -351,9 +371,8 @@ def dashboard_metrics() -> dict[str, Any]:
 
 
 @router.get("/model-metadata")
-def dashboard_model_metadata() -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_model_metadata(model: str = Query(default=DEFAULT_MODEL)) -> dict[str, Any]:
+    settings, paths = model_context(model)
     artifacts = artifact_paths(paths)
     metadata = json_file(artifacts["model_metadata"])
     if not metadata:
@@ -379,9 +398,11 @@ def dashboard_model_metadata() -> dict[str, Any]:
 
 
 @router.get("/shap")
-def dashboard_shap(limit: int = Query(default=25, ge=1, le=200)) -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_shap(
+    limit: int = Query(default=25, ge=1, le=200),
+    model: str = Query(default=DEFAULT_MODEL),
+) -> dict[str, Any]:
+    settings, paths = model_context(model)
     path = artifact_paths(paths)["shap"]
     frame = csv_file(path)
     if frame is None or frame.empty:
@@ -415,9 +436,8 @@ def _backtest_frame(paths) -> pd.DataFrame | None:
 
 
 @router.get("/backtest")
-def dashboard_backtest() -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_backtest(model: str = Query(default=DEFAULT_MODEL)) -> dict[str, Any]:
+    settings, paths = model_context(model)
     artifacts = artifact_paths(paths)
     metrics = json_file(artifacts["backtest_metrics"])
     frame = _backtest_frame(paths)
@@ -481,9 +501,9 @@ def dashboard_backtest_trades(
     symbol: str | None = Query(default=None),
     outcome: str = Query(default="all", pattern="^(all|winners|losers)$"),
     limit: int = Query(default=100, ge=1, le=1000),
+    model: str = Query(default=DEFAULT_MODEL),
 ) -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+    settings, paths = model_context(model)
     frame = _backtest_frame(paths)
     if frame is None:
         return _missing("results/backtest_timeseries.parquet", ["results/backtest_timeseries.parquet"])
@@ -493,6 +513,22 @@ def dashboard_backtest_trades(
         frame = frame[frame["net_return"] > 0]
     elif outcome == "losers":
         frame = frame[frame["net_return"] < 0]
+
+    # Counted before the `limit` cut: a footer that only counted the rows on
+    # screen would call a 200-of-3000 sample a hit rate. This is the whole
+    # filtered population, and `returned` says how much of it the table shows.
+    total = int(len(frame))
+    correct = frame["correct"] if "correct" in frame.columns else None
+    hits = int(pd.Series(correct).fillna(False).astype(bool).sum()) if correct is not None else 0
+    misses = total - hits
+    summary = {
+        "total": total,
+        "hits": hits,
+        "misses": misses,
+        "hit_rate": hits / total if total else None,
+        "miss_rate": misses / total if total else None,
+    }
+
     frame = frame.sort_values("_exit", ascending=False).head(limit)
 
     columns = [
@@ -520,7 +556,12 @@ def dashboard_backtest_trades(
                 record[column] = None if pd.isna(value) else value
         rows.append(record)
     return _envelope(
-        {"rows": rows, "count": len(rows), "filter": {"symbol": symbol, "outcome": outcome}},
+        {
+            "rows": rows,
+            "count": len(rows),
+            "summary": {**summary, "returned": len(rows)},
+            "filter": {"symbol": symbol, "outcome": outcome},
+        },
         ["results/backtest_timeseries.parquet"],
     )
 
@@ -529,9 +570,8 @@ def dashboard_backtest_trades(
 # Monitoring
 # --------------------------------------------------------------------------- #
 @router.get("/monitoring")
-def dashboard_monitoring() -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_monitoring(model: str = Query(default=DEFAULT_MODEL)) -> dict[str, Any]:
+    settings, paths = model_context(model)
     monitoring = json_file(artifact_paths(paths)["monitoring"])
     if not monitoring:
         return _missing("results/monitoring.json", ["results/monitoring.json"])
@@ -584,9 +624,12 @@ def dashboard_monitoring() -> dict[str, Any]:
 # Stock detail
 # --------------------------------------------------------------------------- #
 @router.get("/stock/{symbol}")
-def dashboard_stock(symbol: str, points: int = Query(default=180, ge=20, le=1000)) -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_stock(
+    symbol: str,
+    points: int = Query(default=180, ge=20, le=1000),
+    model: str = Query(default=DEFAULT_MODEL),
+) -> dict[str, Any]:
+    settings, paths = model_context(model)
     safe = _require_symbol(symbol, settings)
 
     raw_path = _inside(paths.data_raw, f"{safe}.parquet")
@@ -666,9 +709,12 @@ def dashboard_stock(symbol: str, points: int = Query(default=180, ge=20, le=1000
 
 
 @router.get("/stock/{symbol}/predictions")
-def dashboard_stock_predictions(symbol: str, points: int = Query(default=120, ge=10, le=1000)) -> dict[str, Any]:
-    settings = load_settings()
-    paths = _paths(settings)
+def dashboard_stock_predictions(
+    symbol: str,
+    points: int = Query(default=120, ge=10, le=1000),
+    model: str = Query(default=DEFAULT_MODEL),
+) -> dict[str, Any]:
+    settings, paths = model_context(model)
     _require_symbol(symbol, settings)
 
     history = frame_file(artifact_paths(paths)["prediction_history"])
@@ -682,7 +728,7 @@ def dashboard_stock_predictions(symbol: str, points: int = Query(default=120, ge
     if frame.empty:
         raise HTTPException(status_code=404, detail=f"No evaluation history for {symbol}")
 
-    label_map = {0: "DOWN", 1: "FLAT", 2: "UP"}
+    label_map = {0: "DOWN", 1: "FLAT", 2: "UP", -1: "ABSTAIN"}
     rows = [
         {
             "date": to_iso(row["timestamp"]),
@@ -717,7 +763,7 @@ def dashboard_stock_predictions(symbol: str, points: int = Query(default=120, ge
 @router.get("/data-health")
 def dashboard_data_health() -> dict[str, Any]:
     settings = load_settings()
-    paths = _paths(settings)
+    paths = settings.paths
     health = data_health(paths, settings)
     warnings: list[str] = []
     if health["summary"]["stale_steps"]:
@@ -751,7 +797,7 @@ def dashboard_data_health() -> dict[str, Any]:
 def dashboard_activity(limit: int = Query(default=12, ge=1, le=50)) -> dict[str, Any]:
     """Most recent mtimes across the artifact set — a cheap 'what changed' feed."""
     settings = load_settings()
-    paths = _paths(settings)
+    paths = settings.paths
     candidates = [
         paths.results / "latest_predictions.csv",
         paths.results / "metrics.json",

@@ -65,7 +65,23 @@ PROACTIVE_WORK_MINUTES = 60
 PROACTIVE_REST_MINUTES = 15
 SOFT_BREATHER_SECONDS = 30
 THERMAL_SAMPLE_LOG = "gpu_5s.csv"
+RESOURCE_SAMPLE_LOG = "q0_resource_5s.csv"
+HISTORY_LOG = "q0_history.jsonl"
+HISTORY_EVERY_SECONDS = 30.0
 _GPU_SAMPLE_LOCK = threading.Lock()
+_LAST_HISTORY_TS = [0.0]
+
+# One batched query: eight fields, one nvidia-smi process. Asking for the same
+# numbers in separate invocations costs ~200 ms each on Windows, and the guard
+# runs every 5 s.
+_GPU_QUERY = (
+    "temperature.gpu,utilization.gpu,memory.used,memory.total,"
+    "power.draw,fan.speed,clocks.sm,clocks.max.sm"
+)
+RESOURCE_FIELDS = (
+    "temp_c", "util_pct", "mem_used_mb", "mem_total_mb",
+    "power_w", "fan_pct", "clock_sm_mhz", "clock_max_sm_mhz",
+)
 
 
 @dataclass
@@ -115,6 +131,50 @@ def gpu_temp_c() -> float | None:
     return _parse_temp(out.stdout)
 
 
+def _parse_row(output: str) -> list[str]:
+    """First data row of a ``--format=csv,noheader`` query, split into fields."""
+    for line in (output or "").splitlines():
+        if line.strip():
+            return [part.strip() for part in line.split(",")]
+    return []
+
+
+def _to_float(value: str) -> float | None:
+    """nvidia-smi prints ``[N/A]`` for fields a card does not expose."""
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def gpu_sample() -> dict[str, float | None] | None:
+    """Every GPU field the Q0 charts plot, from a single nvidia-smi call.
+
+    ``None`` means the query itself failed (no nvidia-smi, driver error) and no
+    series should be drawn at all. A ``None`` *value* inside the dict means the
+    card answered but does not report that field — e.g. ``fan.speed`` on a
+    passively cooled or laptop part — which must be shown as a gap, never as 0.
+    """
+    exe = shutil.which("nvidia-smi")
+    if exe is None:
+        return None
+    try:
+        out = subprocess.run(
+            [exe, f"--query-gpu={_GPU_QUERY}", "--format=csv,noheader,nounits"],
+            capture_output=True, text=True, timeout=30,
+        )
+    except Exception:
+        return None
+    if out.returncode != 0:
+        return None
+    row = _parse_row(out.stdout)
+    if not row:
+        return None
+    values = [_to_float(part) for part in row[: len(RESOURCE_FIELDS)]]
+    values += [None] * (len(RESOURCE_FIELDS) - len(values))
+    return dict(zip(RESOURCE_FIELDS, values))
+
+
 def _track_temp(state: ThermalState, temp: float | None) -> None:
     if temp is None:
         return
@@ -136,6 +196,47 @@ def _append_gpu_sample(path: Path, case_id: str, temp: float) -> None:
             if new_file:
                 fh.write("timestamp,case_id,temp_c\n")
             fh.write(f"{datetime.now().isoformat(timespec='seconds')},{case_id},{temp:g}\n")
+
+
+def _append_resource_sample(path: Path, case_id: str, sample: dict[str, float | None]) -> None:
+    """Superset of ``gpu_5s.csv``: one row per sample, empty cell = not reported.
+
+    ``gpu_5s.csv`` keeps being written unchanged so existing readers and old runs
+    stay valid; this file exists for the charts that need more than temperature.
+    """
+    stamp = datetime.now().isoformat(timespec="seconds")
+    cells = [stamp, case_id]
+    for name in RESOURCE_FIELDS:
+        value = sample.get(name)
+        cells.append("" if value is None else f"{value:g}")
+    with _GPU_SAMPLE_LOCK:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        new_file = not path.exists()
+        with path.open("a", encoding="utf-8") as fh:
+            if new_file:
+                fh.write("timestamp,case_id," + ",".join(RESOURCE_FIELDS) + "\n")
+            fh.write(",".join(cells) + "\n")
+
+
+def _append_history(path: Path, payload: dict) -> None:
+    """Append a throttled heartbeat row so the run has a history, not only a now.
+
+    The heartbeat file is overwritten in place (one snapshot); without this the
+    timeline could only ever show the latest value. Rows are whole heartbeats,
+    because the interesting patterns are co-movements (temperature vs throughput)
+    that a per-field log would not preserve.
+    """
+    now = time.monotonic()
+    with _GPU_SAMPLE_LOCK:
+        if now - _LAST_HISTORY_TS[0] < HISTORY_EVERY_SECONDS:
+            return
+        _LAST_HISTORY_TS[0] = now
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with path.open("a", encoding="utf-8") as fh:
+                fh.write(json.dumps(payload, default=str) + "\n")
+        except OSError:
+            pass
 
 
 def _write_heartbeat(path: Path, **fields) -> None:
@@ -301,20 +402,25 @@ def thermal_gate_before_case(logger, state: ThermalState, case_id: str) -> float
 
 
 class ThermalMonitor(threading.Thread):
-    """Samples GPU temperature every 5s while a case is in flight.
+    """Samples the GPU every 5s while a case is in flight.
 
-    At >=87C it sets ``abort_event`` and unloads the model.  ``rate_case``
-    sees the event and returns without retrying, so the case is discarded and
-    re-rated after cooldown.  This keeps the die from reaching 90C.
+    One batched nvidia-smi query per tick feeds both logs: ``gpu_5s.csv`` (the
+    original temperature-only file, unchanged) and ``q0_resource_5s.csv`` (the
+    superset the Q0 charts read). At >=87C it sets ``abort_event`` and unloads
+    the model.  ``rate_case`` sees the event and returns without retrying, so the
+    case is discarded and re-rated after cooldown.  This keeps the die from
+    reaching 90C.
     """
 
     def __init__(self, logger, case_id: str, sample_path: Path,
                  interval: int = GPU_MONITOR_INTERVAL_SECONDS,
-                 abort_c: int = GPU_ABORT_C):
+                 abort_c: int = GPU_ABORT_C,
+                 resource_path: Path | None = None):
         super().__init__(daemon=True, name=f"thermal-{case_id[:24]}")
         self.logger = logger
         self.case_id = case_id
         self.sample_path = sample_path
+        self.resource_path = resource_path
         self.interval = interval
         self.abort_c = abort_c
         self.stop_event = threading.Event()
@@ -325,7 +431,15 @@ class ThermalMonitor(threading.Thread):
 
     def run(self) -> None:
         while not self.stop_event.is_set():
-            temp = gpu_temp_c()
+            sample = gpu_sample()
+            temp = sample.get("temp_c") if sample else None
+            if sample is not None and self.resource_path is not None:
+                try:
+                    _append_resource_sample(self.resource_path, self.case_id, sample)
+                except Exception:  # logging must never kill the monitor
+                    pass
+            # An unsupported temperature field means no thermal verdict either
+            # way: keep sampling, do not abort.
             if temp is not None:
                 self.last_temp_c = temp
                 if self.max_temp_c is None or temp > self.max_temp_c:
@@ -466,6 +580,8 @@ def run_gate(limit: int | None = None) -> dict:
     logger.info("Q0-D1: %d todo (%d done).", len(todo), len(done))
     trace_dir = paths.results / "traces"
     sample_path = paths.logs / THERMAL_SAMPLE_LOG
+    resource_path = paths.logs / RESOURCE_SAMPLE_LOG
+    history_path = paths.logs / HISTORY_LOG
     heartbeat_path = paths.logs / "q0_heartbeat.json"
     state = ThermalState()
     run_started_at = datetime.now(timezone.utc).isoformat()
@@ -510,6 +626,8 @@ def run_gate(limit: int | None = None) -> dict:
         }
         base.update(fields)
         _write_heartbeat(heartbeat_path, **base)
+        # The heartbeat is a snapshot; the history is what the timeline plots.
+        _append_history(history_path, {"timestamp": datetime.now(timezone.utc).isoformat(), **base})
 
     hb(phase="starting", current_case=None)
 
@@ -524,7 +642,7 @@ def run_gate(limit: int | None = None) -> dict:
                else f"5-day trend: {row['trend_5d']:.2%}, NO_NEWS FinBERT prior")
         prompt, _ = build_prompt(row["symbol"], row["sector"] or "unknown", ctx, row["text"])
 
-        monitor = ThermalMonitor(logger, case_id, sample_path)
+        monitor = ThermalMonitor(logger, case_id, sample_path, resource_path=resource_path)
         monitor.start()
         try:
             result = rate_case(row["symbol"], row["sector"] or "unknown", ctx,

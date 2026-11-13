@@ -11,9 +11,10 @@ from __future__ import annotations
 from typing import Any
 
 import pandas as pd
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 
 from ..config import load_settings
+from . import q0_analytics as analytics_core
 from .dashboard_support import (
     age_seconds,
     artifact_paths,
@@ -437,3 +438,108 @@ def q0_ledger_summary() -> dict[str, Any]:
         ["data/llm/qwen_rating_ledger.parquet"],
         as_of=file_meta(artifact_paths(paths)["q0_ledger"])["modified_at"],
     )
+
+
+# --------------------------------------------------------------------------- #
+# Live timeline / analytics / case browser
+#
+# Everything below is derived from the files the run writes — the ledger, the
+# trace JSONs, the resource CSVs and the heartbeat history. A missing file is
+# reported as ``data: null`` plus a warning (200); it is never smoothed over with
+# a synthetic series, because a fake utilisation line is worse than no line.
+# --------------------------------------------------------------------------- #
+TIMELINE_ARTIFACTS = [
+    "logs/q0_resource_5s.csv",
+    "logs/gpu_5s.csv",
+    "logs/q0_history.jsonl",
+    "logs/q0_heartbeat.json",
+    "data/llm/qwen_rating_ledger.parquet",
+    "artifacts/state/psi_history.jsonl",
+]
+CASES_ARTIFACTS = ["data/llm/qwen_rating_ledger.parquet", "results/traces/*.json"]
+
+
+@router.get("/timeline")
+def q0_timeline(
+    window: str = Query("2h", pattern="^(30m|2h|all)$"),
+    step: int = Query(5, ge=5, le=300),
+) -> dict[str, Any]:
+    settings = load_settings()
+    paths = settings.paths
+    payload = analytics_core.timeline(paths, _ledger_frame(paths), window=window, step=step)
+    warnings = list(payload.pop("warnings", []))
+    if not payload["resource"]["available"] and not payload["history"]["available"] and not payload["progress"]["available"]:
+        return _envelope(None, TIMELINE_ARTIFACTS, warnings=warnings + ["No Q0 telemetry has been written yet."])
+    return _envelope(
+        payload,
+        TIMELINE_ARTIFACTS,
+        as_of=file_meta(paths.logs / "q0_history.jsonl")["modified_at"] or file_meta(artifact_paths(paths)["q0_gpu"])["modified_at"],
+        warnings=warnings,
+    )
+
+
+@router.get("/analytics")
+def q0_analytics() -> dict[str, Any]:
+    settings = load_settings()
+    paths = settings.paths
+    frame = _ledger_frame(paths)
+    if frame is None:
+        return _envelope(
+            None,
+            CASES_ARTIFACTS,
+            warnings=["data/llm/qwen_rating_ledger.parquet is missing; there is nothing to analyse yet."],
+        )
+    payload = analytics_core.analytics(paths, frame)
+    warnings = []
+    if not payload["latency"]["available"]:
+        warnings.append("No trace files were readable, so latency is absent rather than estimated.")
+    if payload["calibration"]["ece"] is None:
+        warnings.append("Calibration needs both qwen_conf and vote_matches_label; one of them is missing.")
+    return _envelope(
+        payload,
+        CASES_ARTIFACTS,
+        as_of=file_meta(artifact_paths(paths)["q0_ledger"])["modified_at"],
+        warnings=warnings,
+    )
+
+
+@router.get("/cases")
+def q0_cases(
+    limit: int = Query(50, ge=1, le=500),
+    offset: int = Query(0, ge=0),
+    symbol: str = Query("", max_length=40),
+    vote: str = Query("all", pattern="^(all|UP|DOWN|FLAT)$"),
+    outcome: str = Query("all", pattern="^(all|match|mismatch)$"),
+) -> dict[str, Any]:
+    settings = load_settings()
+    paths = settings.paths
+    frame = _ledger_frame(paths)
+    if frame is None:
+        return _envelope(
+            None,
+            CASES_ARTIFACTS,
+            warnings=["data/llm/qwen_rating_ledger.parquet is missing; the case browser has no source."],
+        )
+    payload = analytics_core.case_rows(frame, limit=limit, offset=offset, symbol=symbol, vote=vote, outcome=outcome)
+    warnings = [] if payload["total"] else ["No cases match those filters."]
+    return _envelope(
+        payload,
+        CASES_ARTIFACTS,
+        as_of=file_meta(artifact_paths(paths)["q0_ledger"])["modified_at"],
+        warnings=warnings,
+    )
+
+
+@router.get("/case/{case_id}")
+def q0_case(case_id: str) -> dict[str, Any]:
+    settings = load_settings()
+    paths = settings.paths
+    # Path safety is checked before the ledger is even read: an id carrying a
+    # separator is a traversal attempt, not a missing case, so it is a 404 here.
+    if not analytics_core.safe_case_id(case_id):
+        raise HTTPException(status_code=404, detail="Unknown case id")
+    payload = analytics_core.case_detail(paths, _ledger_frame(paths), case_id)
+    if payload is None:
+        raise HTTPException(status_code=404, detail=f"No ledger row or trace for {case_id}")
+    warnings = [] if payload["trace_available"] else ["The trace file for this case is missing; only ledger fields are shown."]
+    return _envelope(payload, CASES_ARTIFACTS, warnings=warnings)

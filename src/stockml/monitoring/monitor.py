@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 
 import pandas as pd
 
-from ..config import load_settings
+from ..config import Settings, load_settings
 from ..utils.io import atomic_write_json
 from ..utils.logging import setup_logging
 from ..utils.state import update_state
@@ -23,6 +24,7 @@ LEVEL_COLUMNS = frozenset({
 })
 
 TOP_SHAP_ALERT_CAP = 20
+PSI_HISTORY_TOP = 15
 
 
 # Deterministic calendar columns carry zero drift information: a 20-session
@@ -73,8 +75,39 @@ def _top_shap_features(paths, limit: int = TOP_SHAP_ALERT_CAP) -> list[str] | No
         return None
 
 
-def run_monitor() -> None:
-    settings = load_settings()
+def _append_psi_history(path, quality: dict, psi: dict[str, float]) -> None:
+    """Append one row per run so drift can be plotted as a trend, not a snapshot.
+
+    Only the leading features are stored: the full matrix is ~190 columns per run
+    and the dashboard never plots more than the leaders. A write failure must not
+    fail the monitoring run — the PSI trend is observability, not an artifact.
+    """
+    ranked = sorted(psi.items(), key=lambda item: item[1], reverse=True)[:PSI_HISTORY_TOP]
+    row = {
+        "latest_data": quality["latest_data"],
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "rows": quality["rows"],
+        "missing_rate": quality["missing_rate"],
+        "threshold": quality["threshold"],
+        "alerts": len(quality["alerts"]),
+        "feature_count": len(psi),
+        "top": [{"feature": str(name), "psi": round(float(score), 4)} for name, score in ranked],
+    }
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row) + "\n")
+    except OSError:
+        pass
+
+
+def run_monitor(settings: Settings | None = None) -> None:
+    """Drift report over the feature store.
+
+    ``settings`` selects the workspace; the v2 stages pass their own so drift is
+    measured against the v2 booster's own SHAP ranking.
+    """
+    settings = settings or load_settings()
     paths = settings.paths
     logger = setup_logging(paths.logs / "monitor.log")
     datasets = []
@@ -114,6 +147,7 @@ def run_monitor() -> None:
         "threshold": settings.drift_psi_threshold,
     }
     atomic_write_json(paths.results / "monitoring.json", quality)
+    _append_psi_history(paths.state / "psi_history.jsonl", quality, psi)
     logger.info("Monitoring complete. %d drift alerts.", len(alerts))
     update_state(paths.state, "monitor", status="complete", output=str(paths.results / "monitoring.json"))
 

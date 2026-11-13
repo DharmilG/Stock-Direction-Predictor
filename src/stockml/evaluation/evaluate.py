@@ -31,7 +31,11 @@ def run_evaluation() -> None:
     model = lgb.Booster(model_file=str(model_path))
 
     df = load_training_frame(settings)
-    X, y, _, feature_cols = prepare_xy(df)
+    # Pin the matrix to the feature list the booster was fitted on: the store
+    # can gain columns between training runs, and evaluating a 136-feature
+    # model on 178 columns is a shape error, not a new measurement.
+    trained_features = (read_json(paths.artifacts / "model_metadata.json", {}) or {}).get("feature_columns") or None
+    X, y, _, feature_cols = prepare_xy(df, columns=trained_features)
     _, _, test_mask, _, test_start = three_way_date_split(_timestamps(X.index))
     X_test, y_test = X.loc[test_mask], y.loc[test_mask]
     raw_proba = model.predict(X_test)

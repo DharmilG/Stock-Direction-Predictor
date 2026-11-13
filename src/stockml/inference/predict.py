@@ -6,7 +6,7 @@ import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
-from ..config import load_settings
+from ..config import Settings, load_settings
 from ..models.lightgbm_train import prepare_xy
 from ..evaluation.flat_threshold import apply_flat_threshold
 from ..evaluation.metrics import apply_temperature
@@ -23,8 +23,14 @@ def _load_latest_features(settings, symbol: str) -> pd.DataFrame:
     return pd.read_parquet(path).sort_index().tail(1)
 
 
-def run_prediction() -> pd.DataFrame:
-    settings = load_settings()
+def run_prediction(settings: Settings | None = None) -> pd.DataFrame:
+    """Latest-date call for every configured symbol.
+
+    ``settings`` selects the workspace. The v2 registry passes v2 settings with
+    its own flat threshold, so the serving row reflects the policy that model
+    was actually selected under rather than the incumbent's band.
+    """
+    settings = settings or load_settings()
     logger = setup_logging(settings.paths.logs / "predict.log")
     model_path = settings.paths.artifacts / "models" / "lightgbm_final.txt"
     metadata_path = settings.paths.artifacts / "model_metadata.json"

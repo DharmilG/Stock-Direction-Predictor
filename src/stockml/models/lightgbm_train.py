@@ -4,6 +4,8 @@ import argparse
 import json
 import math
 import os
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -64,8 +66,17 @@ def load_training_frame(settings) -> pd.DataFrame:
     return panel
 
 
-def prepare_xy(df: pd.DataFrame):
+def prepare_xy(df: pd.DataFrame, columns: list[str] | None = None):
+    """Build the training matrix.
+
+    ``columns`` pins the matrix to a known feature list (the one recorded in
+    ``model_metadata.json``). Reporting stages must use it: the feature store
+    can grow after a model was fitted, and scoring a 136-feature booster on a
+    178-feature matrix is an error, not a new measurement.
+    """
     feature_cols = [c for c in df.columns if c not in DROP_COLUMNS and c != "symbol"]
+    if columns:
+        feature_cols = [c for c in columns if c in df.columns]
     X = df[feature_cols].copy()
     X = X.select_dtypes(include=[np.number]).replace([np.inf, -np.inf], np.nan)
     strict_cols = [c for c in X.columns if c not in NAN_OK_COLUMNS]
@@ -104,8 +115,147 @@ def _selection_score(y_true, pred) -> float:
     return float(0.5 * bal + 0.5 * mcc_norm)
 
 
+# --------------------------------------------------------------------------- #
+# Live training observability
+#
+# Everything below is write-only telemetry for the dashboard. No value written
+# here is ever read back into the fit — not into ``num_boost_round``, not into
+# the params, not into pruning. A half-written booster is never scored for
+# quality: only the metrics of the run in progress are recorded, and they are
+# reported as progress, never as performance.
+# --------------------------------------------------------------------------- #
+CURVE_EVERY = 10
+HEARTBEAT_EVERY_SECONDS = 2.0
+CURVE_SAMPLE_ROWS = 4000
+
+
+class TrainingHeartbeat:
+    """Atomic, throttled progress file (``logs/train_heartbeat.json``)."""
+
+    def __init__(self, path: Path, min_interval: float = HEARTBEAT_EVERY_SECONDS, **base: Any):
+        self.path = Path(path)
+        self.min_interval = float(min_interval)
+        self.base = {k: v for k, v in base.items() if v is not None}
+        self.started = time.monotonic()
+        self._last = -1e9
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+    def beat(self, *, force: bool = False, **fields: Any) -> None:
+        now = time.monotonic()
+        if not force and now - self._last < self.min_interval:
+            return
+        self._last = now
+        elapsed = now - self.started
+        payload = {**self.base, **{k: v for k, v in fields.items() if v is not None}}
+        done, total = payload.get("iteration"), payload.get("num_boost_round")
+        payload["elapsed_s"] = round(elapsed, 1)
+        if isinstance(done, (int, float)) and isinstance(total, (int, float)) and total and done:
+            payload["eta_s"] = round(elapsed * max(0.0, total - done) / done, 1)
+            payload["progress"] = round(min(1.0, float(done) / total), 4)
+        payload["updated_at"] = datetime.now(timezone.utc).isoformat()
+        try:
+            tmp = self.path.with_suffix(self.path.suffix + ".tmp")
+            tmp.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+            os.replace(tmp, self.path)
+        except OSError:
+            pass  # telemetry must never break training
+
+
+class HeartbeatCallback:
+    """Advance the heartbeat's iteration counter and nothing else."""
+
+    def __init__(self, heartbeat: TrainingHeartbeat):
+        self.heartbeat = heartbeat
+
+    def __call__(self, env: lgb.callback.CallbackEnv) -> None:
+        # ``env.iteration`` is absolute (it already includes resumed rounds).
+        self.heartbeat.beat(iteration=int(env.iteration) + 1)
+
+
+def _accuracy_feval(preds, eval_data):
+    """Report accuracy alongside the built-in loss. A metric, never a stopping rule."""
+    label = np.asarray(eval_data.get_label())
+    matrix = np.asarray(preds)
+    if matrix.ndim == 1:
+        matrix = matrix.reshape(-1, 1)
+    if matrix.shape[0] != len(label):
+        matrix = matrix.reshape(len(label), -1)
+    predicted = np.argmax(matrix, axis=1)
+    return ("accuracy", float((predicted == label).mean()) if len(label) else float("nan"), True)
+
+
+class CurveRecorder:
+    """Append one JSONL row per evaluated split every ``every`` rounds."""
+
+    def __init__(self, path: Path, run: str, every: int = CURVE_EVERY, rows: dict[str, int] | None = None):
+        self.path = Path(path)
+        self.run = run
+        self.every = max(1, int(every))
+        self.rows = dict(rows or {})
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    def _parse(item) -> tuple[str, str, float]:
+        if hasattr(item, "dataset_name"):
+            return str(item.dataset_name), str(item.metric_name), float(item.metric_value)
+        return str(item[0]), str(item[1]), float(item[2])
+
+    def __call__(self, env: lgb.callback.CallbackEnv) -> None:
+        iteration = int(env.iteration) + 1
+        if iteration % self.every:
+            return
+        try:
+            collected: dict[str, dict[str, float]] = {}
+            for item in env.evaluation_result_list or []:
+                name, metric, value = self._parse(item)
+                collected.setdefault(name, {})[metric] = value
+            lines = []
+            for name, metrics in collected.items():
+                row = {
+                    "run": self.run,
+                    "iteration": iteration,
+                    "split": name,
+                    "multi_logloss": metrics.get("multi_logloss"),
+                    "accuracy": metrics.get("accuracy"),
+                }
+                if name in self.rows:
+                    row["rows"] = self.rows[name]
+                lines.append(json.dumps(row))
+            if lines:
+                with open(self.path, "a", encoding="utf-8") as fh:
+                    fh.write("\n".join(lines) + "\n")
+        except Exception:
+            pass  # telemetry must never break training
+
+
+def _curve_sample(X: pd.DataFrame, y: pd.Series, seed: int):
+    """Bounded sample used only as a "train" evaluation set for the live curve.
+
+    The full training matrix is never re-scored per iteration — that would
+    double the cost of training to draw a line.
+    """
+    if len(X) <= CURVE_SAMPLE_ROWS:
+        return X, y
+    picked = X.sample(n=CURVE_SAMPLE_ROWS, random_state=seed).index
+    return X.loc[picked], y.loc[picked]
+
+
+def _study_best(trial) -> float | None:
+    try:
+        return float(trial.study.best_value)
+    except (ValueError, RuntimeError):
+        return None
+
+
 def objective_factory(X: pd.DataFrame, y: pd.Series, events: pd.Series, settings, trial_dir: Path):
     folds = _folds(X, events, settings)
+    heartbeat = TrainingHeartbeat(
+        settings.paths.logs / "train_heartbeat.json",
+        status="optuna",
+        trial_total=int(settings.optuna_trials),
+        fold_total=len(folds),
+        num_boost_round=int(min(settings.num_boost_round, 500)),
+    )
 
     def objective(trial: optuna.Trial) -> float:
         params: dict[str, Any] = {
@@ -132,6 +282,7 @@ def objective_factory(X: pd.DataFrame, y: pd.Series, events: pd.Series, settings
         scores = []
         for fold in folds:
             train_idx, valid_idx = fold.train_idx, fold.valid_idx
+            heartbeat.beat(force=True, trial=int(trial.number), fold=int(fold.fold_id), best_value=_study_best(trial))
             w_train = _sample_weights(y.iloc[train_idx], settings.class_weighting)
             w_valid = _sample_weights(y.iloc[valid_idx], settings.class_weighting)
             dtrain = lgb.Dataset(X.iloc[train_idx], label=y.iloc[train_idx], weight=w_train, free_raw_data=False)
@@ -141,7 +292,10 @@ def objective_factory(X: pd.DataFrame, y: pd.Series, events: pd.Series, settings
                 dtrain,
                 num_boost_round=min(settings.num_boost_round, 500),
                 valid_sets=[dvalid],
-                callbacks=[lgb.early_stopping(min(settings.early_stopping_rounds, 50), verbose=False)],
+                callbacks=[
+                    lgb.early_stopping(min(settings.early_stopping_rounds, 50), verbose=False),
+                    HeartbeatCallback(heartbeat),
+                ],
             )
             proba = booster.predict(X.iloc[valid_idx], num_iteration=booster.best_iteration)
             pred = np.argmax(proba, axis=1)
@@ -205,7 +359,25 @@ class CheckpointCallback:
             self._atomic_save(env.model, iteration)
 
 
-def train_with_resume(X, y, params, settings, checkpoint_path: Path, final_path: Path, context_path: Path):
+def train_with_resume(
+    X,
+    y,
+    params,
+    settings,
+    checkpoint_path: Path,
+    final_path: Path,
+    context_path: Path,
+    X_cal=None,
+    y_cal=None,
+    run_id: str | None = None,
+):
+    """Fit (or resume) the single final booster.
+
+    ``X_cal``/``y_cal`` are watched, never consulted: the calibration split is
+    attached as a LightGBM validation set so its loss can be recorded per
+    iteration, but there is no early-stopping callback here, so it cannot
+    change ``num_boost_round``, the params, or the resulting model.
+    """
     dtrain = lgb.Dataset(X, label=y, weight=_sample_weights(y, settings.class_weighting), free_raw_data=False)
     params_hash = stable_hash(params)
     meta_path = checkpoint_path.with_suffix(checkpoint_path.suffix + ".json")
@@ -244,6 +416,24 @@ def train_with_resume(X, y, params, settings, checkpoint_path: Path, final_path:
     if remaining == 0:
         booster = lgb.Booster(model_file=str(existing))
     else:
+        heartbeat = TrainingHeartbeat(
+            settings.paths.logs / "train_heartbeat.json",
+            status="final_fit",
+            num_boost_round=int(settings.num_boost_round),
+            start_round=int(completed_rounds),
+        )
+        heartbeat.beat(force=True, iteration=int(completed_rounds))
+        # Watched sets: the curve is drawn from these and nothing else. The
+        # "train" row is a bounded sample so that a live line does not cost a
+        # second full pass over the training matrix on every iteration.
+        sample_x, sample_y = _curve_sample(X, y, settings.random_seed)
+        valid_sets = [lgb.Dataset(sample_x, label=sample_y, reference=dtrain, free_raw_data=False)]
+        valid_names = ["train"]
+        curve_rows = {"train": int(len(sample_x))}
+        if X_cal is not None and y_cal is not None and len(X_cal):
+            valid_sets.append(lgb.Dataset(X_cal, label=y_cal, reference=dtrain, free_raw_data=False))
+            valid_names.append("calibration")
+            curve_rows["calibration"] = int(len(X_cal))
         checkpoint_metadata = {
             "dataset_signature": json.loads(context_path.read_text(encoding="utf-8")).get("dataset_signature"),
             "params_hash": params_hash,
@@ -254,10 +444,24 @@ def train_with_resume(X, y, params, settings, checkpoint_path: Path, final_path:
             dtrain,
             num_boost_round=remaining,
             init_model=str(existing) if existing else None,
+            valid_sets=valid_sets,
+            valid_names=valid_names,
+            feval=_accuracy_feval,
             callbacks=[
                 CheckpointCallback(checkpoint_path, settings.checkpoint_every_rounds, checkpoint_metadata),
+                # Both callbacks read ``env.iteration``, which is already absolute
+                # when ``init_model`` resumes: adding completed_rounds here would
+                # count the resumed rounds twice.
+                HeartbeatCallback(heartbeat),
+                CurveRecorder(
+                    settings.paths.checkpoints / "train_curve.jsonl",
+                    run=run_id or "final",
+                    every=CURVE_EVERY,
+                    rows=curve_rows,
+                ),
             ],
         )
+        heartbeat.beat(force=True, iteration=int(booster.current_iteration()))
 
     tmp_final = final_path.with_suffix(final_path.suffix + ".tmp")
     booster.save_model(str(tmp_final))
@@ -390,7 +594,10 @@ def run_training() -> None:
         final_path.unlink()
     final_path.parent.mkdir(parents=True, exist_ok=True)
     logger.info("Training final model with resumable LightGBM checkpointing.")
-    model = train_with_resume(X_train, y_train, best_params, settings, checkpoint_path, final_path, context_path)
+    model = train_with_resume(
+        X_train, y_train, best_params, settings, checkpoint_path, final_path, context_path,
+        X_cal=X_cal, y_cal=y_cal, run_id=dataset_signature[:12],
+    )
     # Anti-memorization tripwire (hard user rule): high accuracy from
     # remembering is failure, not success. 95% means the model memorized.
     # Log + metadata only — never blocks the pipeline, but a flagged model
@@ -411,9 +618,17 @@ def run_training() -> None:
     except Exception as exc:
         logger.warning("Generalization check skipped: %s", exc)
     if len(X_cal) >= 20 and y_cal.nunique() == 3:
+        TrainingHeartbeat(
+            paths.logs / "train_heartbeat.json", status="calibration",
+            num_boost_round=int(settings.num_boost_round),
+        ).beat(force=True, iteration=int(model.current_iteration()))
         save_temperature_calibrator(model, X_cal, y_cal, paths.artifacts / "calibration.json")
     else:
         atomic_write_json(paths.artifacts / "calibration.json", {"temperature": 1.0, "method": "identity"})
+    TrainingHeartbeat(
+        paths.logs / "train_heartbeat.json", status="done",
+        num_boost_round=int(settings.num_boost_round),
+    ).beat(force=True, iteration=int(model.current_iteration()))
 
     metadata = {
         "feature_columns": feature_cols,

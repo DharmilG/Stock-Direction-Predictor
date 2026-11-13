@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from ..config import load_settings
+from ..config import Settings, load_settings
 from ..risk.portfolio import confidence_position_size, enforce_gross_exposure
 from ..utils.io import atomic_write_json, atomic_write_parquet
 from ..utils.logging import setup_logging
@@ -113,8 +113,15 @@ def _event_backtest(pred: pd.DataFrame, settings) -> tuple[pd.DataFrame, dict]:
     return p, {"metrics": metrics, "equity": equity, "drawdown": drawdown}
 
 
-def run_backtest() -> None:
-    settings = load_settings()
+def run_backtest(settings: Settings | None = None) -> None:
+    """Event backtest over ``results/predictions.parquet``.
+
+    ``settings`` selects the workspace: the default is the incumbent tree, and
+    the v2 stages pass their own so the same code scores a second model without
+    a second implementation.
+    """
+    incumbent_tree = settings is None
+    settings = settings or load_settings()
     paths = settings.paths
     logger = setup_logging(paths.logs / "backtest.log")
     pred_path = paths.results / "predictions.parquet"
@@ -147,8 +154,10 @@ def run_backtest() -> None:
     logger.info("Backtest net return %.2f%%, max drawdown %.2f%%", out["metrics"]["total_return"] * 100, out["metrics"]["max_drawdown"] * 100)
     update_state(paths.state, "backtest", status="complete", metrics=str(paths.results / "backtest_metrics.json"))
     # F-22: full pipeline ends with the complete §12.2 block (now with economics).
-    from ..evaluation.final_report import print_final_report as _print_final
-    _print_final()
+    # The block reads the incumbent's artefacts, so a v2 run must not print it.
+    if incumbent_tree:
+        from ..evaluation.final_report import print_final_report as _print_final
+        _print_final()
 
 
 if __name__ == "__main__":

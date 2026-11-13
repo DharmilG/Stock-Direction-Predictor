@@ -10,8 +10,12 @@ from fastapi.staticfiles import StaticFiles
 
 from ..config import load_settings
 from ..inference.predict import run_prediction
+from .compare import router as compare_router
 from .dashboard import router as dashboard_router
+from .dashboard_model import explain_router as dashboard_model_explain_router
+from .dashboard_model import router as dashboard_model_router
 from .dashboard_q0 import router as dashboard_q0_router
+from .dashboard_v2 import router as dashboard_v2_router
 
 app = FastAPI(title="Stock Direction ML API", version="1.1.0")
 
@@ -33,6 +37,10 @@ app.add_middleware(
 
 app.include_router(dashboard_router)
 app.include_router(dashboard_q0_router)
+app.include_router(dashboard_v2_router)
+app.include_router(dashboard_model_router)
+app.include_router(dashboard_model_explain_router)
+app.include_router(compare_router)
 
 
 @app.get("/health")

@@ -32,6 +32,7 @@ from .news_fetch import run_news_fetch
 from .rss import run_rss_fetch
 from .trading_calendar import run_build_calendar
 from ..evaluation.evaluate import run_evaluation
+from ..evaluation.model_report import run_model_report
 from ..features.cross_sectional import run_cross_sectional
 from ..features.feature_engineering import run_feature_engineering
 from ..inference.predict import run_prediction
@@ -113,6 +114,9 @@ def build_steps(options: RefreshOptions) -> list[Step]:
         ])
     steps.extend([
         Step("monitor", "Drift monitoring", run_monitor),
+        # Behaviour report: read-only diagnosis for the dashboard. Optional —
+        # it is a reporting step and must never abort a refresh.
+        Step("model-report", "Model behaviour report", run_model_report, optional=True),
         Step("predict", "Latest predictions", run_prediction),
     ])
     return steps
