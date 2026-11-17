@@ -104,11 +104,12 @@ def main() -> None:
     # ---- vLLM generation ---------------------------------------------------
     from vllm import LLM, SamplingParams
 
-    # T4 has 16 GB: 8B in bf16 won't fit. Use 4-bit (matches Ollama's Q4_K_M
-    # reference and leaves room for the KV cache).
+    # T4 has 16 GB: 8B in bf16 won't fit. Use the official pre-quantized AWQ
+    # build (4-bit, like Ollama's Q4_K_M) — supported by current vLLM and a
+    # closer parity match than bitsandbytes.
     llm = LLM(
-        model="Qwen/Qwen3-8B", max_model_len=2048,
-        quantization="bitsandbytes", dtype="float16",
+        model="Qwen/Qwen3-8B-AWQ", max_model_len=2048,
+        quantization="awq", dtype="float16",
         gpu_memory_utilization=0.85,
     )
     sp = SamplingParams(temperature=0.6, top_p=0.95, max_tokens=1024, seed=42)
