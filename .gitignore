@@ -37,7 +37,10 @@ session-*.md
 /results/traces/
 /artifacts/state/q0_d1.json
 /logs/q0_*.json
+/logs/q0_*.jsonl
 /logs/q0_*.log
 /logs/q0_*.txt
 /logs/q0_*.csv
 /logs/gpu_5s.csv
+/results/q0_d1.json.bak_*
+/data/llm/*.parquet.bak_*
