@@ -8,6 +8,84 @@ see `LICENSE`).
 **This lane never feeds the tabular LightGBM model.** Its output is a separate
 research signal exposed through the dashboard's Chart Vision page.
 
+## Architecture (how the parts fit together)
+
+The picture below shows the whole path, from raw prices and generated chart
+images on the left, to the answer shown in the dashboard on the right. Each box
+is a real piece of code in this folder. Read it left to right, like a story.
+
+```mermaid
+flowchart LR
+    subgraph DATA["1. Data layer - make the pictures and the labels"]
+        P["Platform OHLCV parquet<br/>real prices from this project"]
+        R["Random price series<br/>made by math"]
+        GENOWN["make_own_dataset.py<br/>draws real 60-candle charts"]
+        GENSYN["generator.py<br/>draws ideal pattern charts"]
+        LABELS["labels.csv + real_labels.csv<br/>the correct answer for each picture"]
+        P --> GENOWN
+        R --> GENSYN
+        GENOWN --> LABELS
+        GENSYN --> LABELS
+    end
+
+    subgraph LOAD["2. Dataset layer - hand pictures to the model"]
+        DS["dataset.py<br/>ChartDataset (synthetic)<br/>RealChartDataset (real)"]
+        LABELS --> DS
+    end
+
+    subgraph MODEL["3. Model layer - the brain"]
+        BACKBONE["backbone.py<br/>frozen ResNet18<br/>turns image into 512 numbers"]
+        PH["heads.py - PatternHead<br/>6 chart patterns"]
+        DH["heads.py - DirectionHead<br/>UP / FLAT / DOWN"]
+        CS["chartsense.py<br/>ChartSenseModel joins them"]
+        BACKBONE --> CS
+        PH --> CS
+        DH --> CS
+    end
+
+    subgraph TRAIN["4. Training layer - learn from examples"]
+        S1["train.py Stage 1<br/>learn patterns on synthetic charts"]
+        S2["train.py Stage 2<br/>learn direction on real charts<br/>(freeze backbone + pattern head)"]
+        CKPT["best_model.pth<br/>the saved trained brain"]
+        S1 --> S2 --> CKPT
+    end
+
+    subgraph SAFE["5. Fault layer - never lose work"]
+        LEDGER["Ledger + atomic writes<br/>progress saved safely"]
+        FP["Fingerprints + locks<br/>refuse to resume if code changed"]
+    end
+
+    subgraph SERVE["6. Serving layer - answer questions"]
+        ADAPT["adapter.py<br/>analyze_chart() + get_status()"]
+        INF["api/inference.py<br/>load model, softmax to probabilities"]
+        API["api/cv.py<br/>/cv/health, /cv/training,<br/>/cv/evaluation, /cv/analyze"]
+        GC["gradcam.py<br/>heatmap: where it looked"]
+        CKPT --> INF --> ADAPT
+        ADAPT --> API
+        ADAPT --> GC
+    end
+
+    subgraph UI["7. Dashboard layer - what you see"]
+        PAGE["Cv.jsx + cvApi.js<br/>Chart Vision page (#/cv)<br/>upload + heatmap"]
+        API --> PAGE
+    end
+
+    DS --> S1
+    CKPT -.->|"loaded at serving time"| INF
+    SAFE -.->|"protects"| TRAIN
+    DATA -.->|"labels"| TRAIN
+```
+
+In words: we make chart **pictures** and their **correct answers** (1), wrap them
+so the model can read them (2), pass them through a **brain** that reads the
+picture and guesses both the pattern and the direction (3), **train** that brain
+in two steps (4), keep everything **safe from crashes** (5), **serve** answers
+through a small web API with a heat map (6), and finally **show** it all in the
+dashboard (7).
+
+The tabular LightGBM model and the Track Q language model are **not** in this
+picture on purpose. This lane is separate research.
+
 ## What it does
 
 1. **Stage 1 — synthetic patterns.** `mplfinance` renders 3,000 idealized
@@ -71,14 +149,23 @@ Run from the repo root with `.\CV\run_cv.ps1 <args>`, or from `CV/` with
 .\CV\run_cv.ps1 generate-own --resume --limit 3000 --symbols ADANIPORTS.NS
 .\CV\run_cv.ps1 generate-all --resume
 .\CV\run_cv.ps1 validate
-.\CV\run_cv.ps1 train --stage 1 --epochs 3 --resume
-.\CV\run_cv.ps1 train --stage 2 --epochs 5 --resume
-.\CV\run_cv.ps1 train-all --resume
+.\CV\run_cv.ps1 audit-labels --sample 60
+.\CV\run_cv.ps1 train --stage 1 --epochs 10 --resume
+.\CV\run_cv.ps1 train --stage 2 --epochs 10 --lr 0.0001 --reinit-head --label-smoothing 0.05 --resume
 .\CV\run_cv.ps1 evaluate
+.\CV\run_cv.ps1 evaluate --no-resume
 ```
 
-**No command is executed as part of integration.** Data generation and training
-are started only when explicitly requested.
+Stage 1 defaults to `lr=1e-3`, stage 2 to `lr=1e-4`. Extra stage-2 options:
+`--reinit-head` (drop the pattern-derived direction prior), `--unfreeze-layer4`
+(fine-tune the last ResNet block at `lr/10`), `--label-smoothing` (default 0).
+All are part of the checkpoint fingerprint, so a changed option requires
+`--no-resume`. `audit-labels` verifies each image ends at T while its label
+window starts at T+1.
+
+Stage 2 uses a chronological 80/20 split; `evaluate` scores only the future
+20% holdout. A checkpoint trained with an older random split will produce
+optimistic holdout numbers until it is retrained with `--no-resume`.
 
 ## Fault tolerance and resume
 
