@@ -112,7 +112,10 @@ def main() -> None:
         quantization="awq", dtype="float16",
         gpu_memory_utilization=0.85,
     )
-    sp = SamplingParams(temperature=0.6, top_p=0.95, max_tokens=1024, seed=42)
+    # Ollama silently left-truncates prompts to num_ctx=2048; mirror that here
+    # so both backends see identical inputs for long articles.
+    sp = SamplingParams(temperature=0.6, top_p=0.95, max_tokens=1024, seed=42,
+                        truncate_prompt_tokens=2048)
     try:
         outs = llm.chat(
             [{"role": "user", "content": p} for p in prompts], sp,
