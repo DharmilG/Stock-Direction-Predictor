@@ -11,6 +11,7 @@ from fastapi.staticfiles import StaticFiles
 from ..config import load_settings
 from ..inference.predict import run_prediction
 from .compare import router as compare_router
+from .cv import router as cv_router
 from .dashboard import router as dashboard_router
 from .dashboard_model import explain_router as dashboard_model_explain_router
 from .dashboard_model import router as dashboard_model_router
@@ -31,7 +32,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in os.getenv("DASHBOARD_ALLOWED_ORIGINS", ",".join(_DEFAULT_ORIGINS)).split(",") if o.strip()],
     allow_credentials=False,
-    allow_methods=["GET", "OPTIONS"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -41,6 +42,7 @@ app.include_router(dashboard_v2_router)
 app.include_router(dashboard_model_router)
 app.include_router(dashboard_model_explain_router)
 app.include_router(compare_router)
+app.include_router(cv_router)
 
 
 @app.get("/health")

@@ -17,6 +17,7 @@ export default defineConfig({
     proxy: {
       '/dashboard': { target: API_TARGET, changeOrigin: true },
       '/health': { target: API_TARGET, changeOrigin: true },
+      '/cv': { target: API_TARGET, changeOrigin: true },
     },
   },
   preview: {
@@ -24,6 +25,7 @@ export default defineConfig({
     proxy: {
       '/dashboard': { target: API_TARGET, changeOrigin: true },
       '/health': { target: API_TARGET, changeOrigin: true },
+      '/cv': { target: API_TARGET, changeOrigin: true },
     },
   },
 });

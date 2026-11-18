@@ -13,6 +13,7 @@ import Backtesting from './pages/Backtesting';
 import Q0Research from './pages/Q0Research';
 import DataIntegration from './pages/DataIntegration';
 import ModelCompare from './pages/ModelCompare';
+import Cv from './pages/Cv';
 
 const PAGES = {
   overview: Overview,
@@ -24,6 +25,7 @@ const PAGES = {
   q0: Q0Research,
   data: DataIntegration,
   compare: ModelCompare,
+  cv: Cv,
 };
 
 const TITLES = Object.fromEntries(NAV_SECTIONS.flatMap((section) => section.items.map((item) => [item.id, item.label])));

@@ -1,6 +1,6 @@
 // `v2` is kept recognised for one release: it was its own page before the model
 // selector existed, and old links are redirected to `compare`.
-export const ROUTES = ['overview', 'predictions', 'stock', 'model', 'evaluation', 'backtesting', 'q0', 'data', 'compare', 'v2'];
+export const ROUTES = ['overview', 'predictions', 'stock', 'model', 'evaluation', 'backtesting', 'q0', 'data', 'compare', 'v2', 'cv'];
 
 export const LEGACY_ROUTES = { v2: 'compare' };
 
@@ -29,6 +29,10 @@ export const NAV_SECTIONS = [
       { id: 'data', label: 'Data & integration', hint: 'Freshness, gaps, endpoints' },
     ],
   },
+  {
+    label: 'Computer vision',
+    items: [{ id: 'cv', label: 'Chart Vision', hint: 'Upload a chart, read pattern and direction' }],
+  },
 ];
 
 /**
@@ -45,6 +49,7 @@ export const SIGNAL_META = {
 };
 
 export const POLL_INTERVALS = {
+  cv: 5000,
   q0: 5000,
   artifacts: 60000,
   modelLive: 5000,
@@ -100,6 +105,16 @@ export const RUNBOOK = [
   {
     title: 'Run the dashboard',
     command: 'npm run dev',
-    detail: 'From stock-direction-dashboard/. Proxies /dashboard and /health to port 8000.',
+    detail: 'From stock-direction-dashboard/. Proxies /dashboard, /health and /cv to port 8000.',
+  },
+  {
+    title: 'Generate CV images (resumable)',
+    command: 'cd CV && python -m chartsense.cli generate-all --resume',
+    detail: 'Writes synthetic and own-data chart images to CV/data/. Safe to re-run; skips completed images.',
+  },
+  {
+    title: 'Train the CV model (resumable)',
+    command: 'cd CV && python -m chartsense.cli train-all --resume',
+    detail: 'Stage 1 then stage 2. Checkpoints every epoch; re-running resumes from the last one.',
   },
 ];

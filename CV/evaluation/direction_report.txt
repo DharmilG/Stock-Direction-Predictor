@@ -1,0 +1,11 @@
+Direction Prediction Report
+============================================================
+              precision    recall  f1-score   support
+
+     neutral       1.00      0.83      0.91       500
+     bullish       0.96      1.00      0.98      1000
+     bearish       0.97      1.00      0.99      1500
+
+    accuracy                           0.97      3000
+   macro avg       0.98      0.94      0.96      3000
+weighted avg       0.97      0.97      0.97      3000

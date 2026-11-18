@@ -1,0 +1,16 @@
+# CV-only dependency overlay for this project's .venv.
+#
+# PREREQUISITE — install from the PyTorch CPU index first:
+#   .venv\Scripts\python.exe -m pip install --index-url https://download.pytorch.org/whl/cpu "torchvision==0.29.2+cpu"
+#
+# Then install this file from PyPI:
+#   .venv\Scripts\python.exe -m pip install -r CV/requirements-cv.txt
+#
+# torchvision is intentionally NOT listed here: the "+cpu" wheel does not exist
+# on PyPI. Installing grad-cam first would otherwise pull a CUDA torchvision.
+# The main requirements.txt already provides torch, numpy, pandas,
+# scikit-learn, matplotlib, FastAPI, yfinance, Pillow and python-multipart.
+mplfinance==0.12.10b0
+grad-cam==1.5.7
+opencv-python-headless==4.12.0.88
+python-multipart>=0.0.20,<1

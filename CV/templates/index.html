@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChartSense - Pattern Detection</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:    #0a0e17;
+      --bg-panel:   #0f1420;
+      --bg-card:    #141b2d;
+      --bg-hover:   #1a2340;
+      --border:     #1e2d4a;
+      --border-hi:  #2a3f6a;
+      --accent:     #1d6fa4;
+      --accent-glow:#1d6fa455;
+      --green:      #00c48c;
+      --green-dim:  #00c48c22;
+      --red:        #f0534a;
+      --red-dim:    #f0534a22;
+      --text-hi:    #e8edf5;
+      --text-mid:   #8b9ab5;
+      --text-lo:    #4a5a78;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg-base);
+      color: var(--text-hi);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      height: 56px;
+      background: var(--bg-panel);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-hi);
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #1d6fa4, #00c48c);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo span { color: var(--accent); }
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-mid);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    /* LAYOUT */
+    main {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+    /* PANEL */
+    .panel {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+    .panel-body { padding: 18px; }
+
+    /* UPLOAD ZONE */
+    #drop-zone {
+      border: 2px dashed var(--border-hi);
+      border-radius: 10px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    #drop-zone:hover, #drop-zone.drag-over {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+    #drop-zone.has-image { border-style: solid; border-color: var(--border-hi); }
+    #file-input { display: none; }
+    .upload-icon { color: var(--text-lo); }
+    .upload-text { color: var(--text-mid); font-size: 13px; text-align: center; }
+    .upload-text strong { color: var(--text-hi); display: block; font-size: 14px; margin-bottom: 4px; }
+    .upload-hint { font-size: 11px; color: var(--text-lo); }
+
+    #preview-img {
+      width: 100%;
+      object-fit: contain;
+      max-height: 280px;
+      display: none;
+      border-radius: 8px;
+    }
+    #drop-zone.has-image .upload-icon,
+    #drop-zone.has-image .upload-text,
+    #drop-zone.has-image .upload-hint { display: none; }
+    #drop-zone.has-image #preview-img { display: block; }
+
+    .img-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--text-hi);
+    }
+    #drop-zone.has-image:hover .img-overlay { display: flex; }
+
+    /* ACTIONS */
+    .actions { margin-top: 14px; display: flex; gap: 10px; }
+    .btn {
+      flex: 1;
+      padding: 11px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: opacity .15s, transform .1s;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; }
+    .btn-primary { background: linear-gradient(135deg, #1d6fa4, #1559a0); color: #fff; }
+    .btn-primary:hover:not(:disabled) { opacity: .9; }
+    .btn-ghost { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-mid); }
+    .btn-ghost:hover:not(:disabled) { border-color: var(--border-hi); color: var(--text-hi); }
+
+    /* SPINNER */
+    .spinner {
+      width: 15px; height: 15px;
+      border: 2px solid rgba(255,255,255,.25);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+    .spinner.active { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* STATUS */
+    #status-msg {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: none;
+    }
+    #status-msg.error { display:block; background:var(--red-dim); border:1px solid var(--red); color:var(--red); }
+    #status-msg.info  { display:block; background:var(--accent-glow); border:1px solid var(--accent); color:#7bbfe8; }
+
+    /* LEGEND */
+    .legend-list { display: flex; flex-direction: column; gap: 4px; }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 11px;
+    }
+    .legend-name { color: var(--text-mid); font-family: var(--mono); }
+    .legend-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 10px; }
+    .tag-bull { background: var(--green-dim); color: var(--green); }
+    .tag-bear { background: var(--red-dim);   color: var(--red);   }
+    .tag-none { background: var(--bg-hover);  color: var(--text-mid); }
+
+    /* RIGHT COLUMN */
+    #results-col { display: flex; flex-direction: column; gap: 20px; }
+
+    /* PLACEHOLDER */
+    #placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--text-lo);
+      min-height: 380px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    #placeholder svg { opacity: .3; }
+    #placeholder p { font-size: 13px; }
+
+    /* LOADING */
+    #loading-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 380px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .loading-ring {
+      width: 52px; height: 52px;
+      border: 3px solid var(--border-hi);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+    }
+    .loading-text { color: var(--text-mid); font-size: 13px; }
+    .loading-sub  { color: var(--text-lo);  font-size: 11px; }
+
+    /* RESULT STATE */
+    #result-state { display: none; flex-direction: column; gap: 20px; }
+
+    /* HERO CARD */
+    .result-hero {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .result-icon {
+      width: 56px; height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .result-icon.bull { background: var(--green-dim); }
+    .result-icon.bear { background: var(--red-dim); }
+    .result-icon.none { background: var(--bg-hover); }
+    .result-info { flex: 1; min-width: 0; }
+    .result-pattern {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-hi);
+      text-transform: capitalize;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .result-direction {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .result-direction.bull { background: var(--green-dim); color: var(--green); }
+    .result-direction.bear { background: var(--red-dim);   color: var(--red);   }
+    .result-direction.none { background: var(--bg-hover);  color: var(--text-mid); }
+    .result-conf { margin-top: 6px; font-size: 11px; color: var(--text-lo); }
+    .result-conf strong { color: var(--text-mid); }
+
+    /* CONFIDENCE DIAL */
+    .conf-dial { width: 64px; height: 64px; flex-shrink: 0; }
+    .conf-dial circle { transition: stroke-dashoffset .7s cubic-bezier(.4,0,.2,1); }
+
+    /* SCORE BARS */
+    .scores-panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .score-row:last-child { border-bottom: none; }
+    .score-row.top-match { background: var(--bg-hover); }
+    .score-name { width: 160px; font-size: 12px; color: var(--text-mid); font-family: var(--mono); flex-shrink: 0; }
+    .score-name.active { color: var(--text-hi); font-weight: 600; }
+    .score-bar-wrap { flex: 1; background: var(--bg-card); border-radius: 4px; height: 6px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 4px; transition: width .65s cubic-bezier(.4,0,.2,1); width: 0; }
+    .score-pct { width: 42px; text-align: right; font-size: 12px; font-family: var(--mono); color: var(--text-mid); }
+    .score-pct.active { color: var(--text-hi); }
+
+    /* HEATMAP GRID */
+    .heatmap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 700px) { .heatmap-grid { grid-template-columns: 1fr; } }
+    .img-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .img-card-header { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--text-lo); }
+    .img-card img { width: 100%; display: block; object-fit: contain; background: #000; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 24px; color: var(--text-lo); font-size: 11px; border-top: 1px solid var(--border); margin-top: 8px; }
+
+    /* TOOLTIP */
+    [data-tip] { position: relative; }
+    [data-tip]::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e2d4a;
+      border: 1px solid var(--border-hi);
+      color: var(--text-hi);
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+      z-index: 200;
+    }
+    [data-tip]:hover::after { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+    </div>
+    Chart<span>Sense</span>
+  </div>
+  <div class="header-badge">
+    <div class="dot"></div>
+    CV Pattern Engine v1.0
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+
+  <!-- LEFT: upload + legend -->
+  <div style="display:flex;flex-direction:column;gap:20px;">
+
+    <!-- Upload panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/>
+          <line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        Upload Chart
+      </div>
+      <div class="panel-body">
+
+        <div id="drop-zone" role="button" tabindex="0" aria-label="Upload chart image">
+          <div class="upload-icon">
+            <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+              <path d="m7 15 3-3 2 2 3-4 3 5"/>
+            </svg>
+          </div>
+          <div class="upload-text">
+            <strong>Drop your chart image here</strong>
+            or click to browse
+          </div>
+          <div class="upload-hint">PNG &nbsp;·&nbsp; JPG &nbsp;·&nbsp; WEBP &nbsp;·&nbsp; up to 10 MB</div>
+          <img id="preview-img" alt="Uploaded chart preview" />
+          <div class="img-overlay">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            Replace image
+          </div>
+        </div>
+        <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp" />
+
+        <div class="actions">
+          <button class="btn btn-primary" id="analyze-btn" disabled>
+            <svg id="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <div class="spinner" id="btn-spinner"></div>
+            <span id="btn-label">Analyze Pattern</span>
+          </button>
+          <button class="btn btn-ghost" id="clear-btn" disabled>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/>
+              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+            </svg>
+            Clear
+          </button>
+        </div>
+
+        <div id="status-msg"></div>
+      </div>
+    </div>
+
+    <!-- Pattern legend -->
+    <div class="panel">
+      <div class="panel-header">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        Pattern Reference
+      </div>
+      <div class="panel-body">
+        <div class="legend-list">
+          <div class="legend-item"><span class="legend-name">head_and_shoulders</span><span class="legend-tag tag-bear">Bearish Reversal</span></div>
+          <div class="legend-item"><span class="legend-name">double_top</span><span class="legend-tag tag-bear">Bearish Reversal</span></div>
+          <div class="legend-item"><span class="legend-name">double_bottom</span><span class="legend-tag tag-bull">Bullish Reversal</span></div>
+          <div class="legend-item"><span class="legend-name">bull_flag</span><span class="legend-tag tag-bull">Bullish Continuation</span></div>
+          <div class="legend-item"><span class="legend-name">descending_triangle</span><span class="legend-tag tag-bear">Bearish Continuation</span></div>
+          <div class="legend-item"><span class="legend-name">random</span><span class="legend-tag tag-none">No Pattern</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left -->
+
+  <!-- RIGHT: results -->
+  <div id="results-col">
+
+    <!-- Placeholder -->
+    <div id="placeholder">
+      <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M3 9h18M9 21V9"/>
+        <path d="m7 15 3-3 2 2 3-4 3 5"/>
+      </svg>
+      <p>Upload a chart image and click Analyze Pattern</p>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading-state">
+      <div class="loading-ring"></div>
+      <div class="loading-text">Analyzing chart...</div>
+      <div class="loading-sub">Running GradCAM inference · ResNet18 backbone</div>
+    </div>
+
+    <!-- Results -->
+    <div id="result-state">
+
+      <!-- Hero -->
+      <div class="result-hero">
+        <div class="result-icon" id="res-icon"></div>
+        <div class="result-info">
+          <div class="result-pattern" id="res-pattern">-</div>
+          <div class="result-direction" id="res-direction">-</div>
+          <div class="result-conf">
+            Pattern confidence: <strong id="res-pat-conf">—</strong>
+            &nbsp;·&nbsp;
+            Direction confidence: <strong id="res-dir-conf">—</strong>
+          </div>
+        </div>
+        <!-- Confidence dial -->
+        <svg class="conf-dial" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="#1e2d4a" stroke-width="5"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="#1d6fa4" stroke-width="5"
+            stroke-dasharray="163.4" stroke-dashoffset="163.4"
+            stroke-linecap="round"
+            transform="rotate(-90 32 32)"
+            id="dial-arc"/>
+          <text x="32" y="36" text-anchor="middle" fill="#e8edf5"
+            font-size="13" font-weight="700"
+            font-family="Segoe UI, sans-serif"
+            id="dial-text">0%</text>
+        </svg>
+      </div>
+
+      <!-- Score bars -->
+      <div class="scores-panel">
+        <div class="panel-header" style="padding:10px 18px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6"  y1="20" x2="6"  y2="14"/>
+          </svg>
+          All Pattern Scores
+        </div>
+        <div id="score-list"></div>
+      </div>
+
+      <!-- Images side by side -->
+      <div class="heatmap-grid">
+        <div class="img-card">
+          <div class="img-card-header">Original Upload</div>
+          <img id="original-img" alt="Original uploaded chart" />
+        </div>
+        <div class="img-card">
+          <div class="img-card-header">GradCAM Attention Map</div>
+          <img id="gradcam-img" alt="GradCAM heatmap" />
+        </div>
+      </div>
+
+    </div><!-- /result-state -->
+
+  </div><!-- /right col -->
+
+</main>
+
+<footer>ChartSense &nbsp;·&nbsp; Computer Vision Pattern Detection &nbsp;·&nbsp; ResNet18 + GradCAM</footer>
+
+<script>
+  // refs
+  const dropZone   = document.getElementById('drop-zone');
+  const fileInput  = document.getElementById('file-input');
+  const previewImg = document.getElementById('preview-img');
+  const analyzeBtn = document.getElementById('analyze-btn');
+  const clearBtn   = document.getElementById('clear-btn');
+  const btnSpinner = document.getElementById('btn-spinner');
+  const btnIcon    = document.getElementById('btn-icon');
+  const btnLabel   = document.getElementById('btn-label');
+  const statusMsg  = document.getElementById('status-msg');
+
+  const placeholder  = document.getElementById('placeholder');
+  const loadingState = document.getElementById('loading-state');
+  const resultState  = document.getElementById('result-state');
+
+  const resIcon    = document.getElementById('res-icon');
+  const resPattern = document.getElementById('res-pattern');
+  const resDir     = document.getElementById('res-direction');
+  const resPatConf = document.getElementById('res-pat-conf');
+  const resDirConf = document.getElementById('res-dir-conf');
+  const dialArc    = document.getElementById('dial-arc');
+  const dialText   = document.getElementById('dial-text');
+  const scoreList  = document.getElementById('score-list');
+  const origImg    = document.getElementById('original-img');
+  const heatImg    = document.getElementById('gradcam-img');
+
+  const API_URL = 'http://127.0.0.1:8000/predict';
+  const CIRC    = 2 * Math.PI * 26; // 163.36
+
+  let selectedFile    = null;
+  let originalDataURL = null;
+
+  // ── color maps ──────────────────────────────
+  const BAR_COLOR = {
+    bull_flag:            '#00c48c',
+    double_bottom:        '#00c48c',
+    head_and_shoulders:   '#f0534a',
+    double_top:           '#f0534a',
+    descending_triangle:  '#f0534a',
+    random:               '#4a5a78',
+  };
+  const DIR_CLASS = { bullish: 'bull', bearish: 'bear', neutral: 'none' };
+  const DIR_ICON  = { bullish: '^', bearish: 'v', neutral: '-' };
+  const RES_ICON  = { bull: 'UP', bear: 'DN', none: '--' };
+
+  const TIPS = {
+    head_and_shoulders:  'Bearish reversal — three peaks, middle is highest',
+    double_top:          'Bearish reversal — two peaks at similar price level',
+    double_bottom:       'Bullish reversal — two troughs at similar price level',
+    bull_flag:           'Bullish continuation — consolidation after sharp rally',
+    descending_triangle: 'Bearish continuation — lower highs with flat support',
+    random:              'No recognizable chart pattern detected',
+  };
+
+  function pct(v)  { return (v * 100).toFixed(1) + '%'; }
+  function fmt(s)  { return s.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); }
+
+  // ── drag & drop ─────────────────────────────
+  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+  });
+  dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', ()  => dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const f = e.dataTransfer.files[0];
+    if (f) loadFile(f);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) {
+      showStatus('Please upload a valid image file (PNG, JPG, WEBP).', 'error');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      showStatus('Image exceeds the 10 MB limit.', 'error');
+      return;
+    }
+    selectedFile = file;
+    clearStatus();
+    const reader = new FileReader();
+    reader.onload = e => {
+      originalDataURL = e.target.result;
+      previewImg.src  = originalDataURL;
+      origImg.src     = originalDataURL;
+      dropZone.classList.add('has-image');
+      analyzeBtn.disabled = false;
+      clearBtn.disabled   = false;
+      showView('placeholder');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // ── clear ────────────────────────────────────
+  clearBtn.addEventListener('click', resetAll);
+  function resetAll() {
+    selectedFile = null; originalDataURL = null;
+    fileInput.value = ''; previewImg.src = '';
+    dropZone.classList.remove('has-image');
+    analyzeBtn.disabled = true; clearBtn.disabled = true;
+    clearStatus(); showView('placeholder'); setBtnLoading(false);
+  }
+
+  // ── analyse ──────────────────────────────────
+  analyzeBtn.addEventListener('click', runAnalysis);
+
+  async function runAnalysis() {
+    if (!selectedFile) return;
+    setBtnLoading(true);
+    clearStatus();
+    showView('loading');
+
+    const body = new FormData();
+    body.append('file', selectedFile);
+
+    try {
+      const resp = await fetch(API_URL, { method: 'POST', body });
+      if (!resp.ok) {
+        const txt = await resp.text().catch(() => '');
+        throw new Error(`Server error ${resp.status}${txt ? ': ' + txt : ''}`);
+      }
+      renderResults(await resp.json());
+    } catch (err) {
+      showView('placeholder');
+      if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError') || err.message.includes('fetch')) {
+        showStatus(
+          'Cannot reach API at ' + API_URL +
+          '. Make sure the FastAPI server is running (uvicorn main:app --reload).',
+          'error'
+        );
+      } else {
+        showStatus('Error: ' + err.message, 'error');
+      }
+    } finally {
+      setBtnLoading(false);
+    }
+  }
+
+  // ── render ───────────────────────────────────
+  function renderResults(data) {
+    const p   = data.prediction;
+    const dir = (p.direction || 'neutral').toLowerCase();
+    const cls = DIR_CLASS[dir] || 'none';
+
+    // hero
+    resIcon.textContent  = RES_ICON[cls] || '--';
+    resIcon.className    = 'result-icon ' + cls;
+    resPattern.textContent = fmt(p.pattern);
+    resDir.textContent   = DIR_ICON[dir] + '  ' + (p.direction || 'Neutral');
+    resDir.className     = 'result-direction ' + cls;
+    resPatConf.textContent = pct(p.pattern_confidence);
+    resDirConf.textContent = pct(p.direction_confidence);
+
+    // dial
+    const dialColor = cls === 'bull' ? '#00c48c' : cls === 'bear' ? '#f0534a' : '#1d6fa4';
+    dialArc.style.strokeDashoffset = CIRC * (1 - p.pattern_confidence);
+    dialArc.style.stroke = dialColor;
+    dialText.textContent = Math.round(p.pattern_confidence * 100) + '%';
+
+    // score bars
+    const scores = p.all_pattern_scores || {};
+    const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+    scoreList.innerHTML = '';
+    sorted.forEach(([name, val]) => {
+      const isTop = name === p.pattern;
+      const color = BAR_COLOR[name] || '#1d6fa4';
+      const row = document.createElement('div');
+      row.className = 'score-row' + (isTop ? ' top-match' : '');
+      row.innerHTML =
+        `<div class="score-name${isTop ? ' active' : ''}" data-tip="${TIPS[name] || name}">${name}</div>` +
+        `<div class="score-bar-wrap"><div class="score-bar-fill" style="background:${color}" data-w="${val * 100}"></div></div>` +
+        `<div class="score-pct${isTop ? ' active' : ''}">${pct(val)}</div>`;
+      scoreList.appendChild(row);
+    });
+
+    // images
+    heatImg.src = 'data:image/png;base64,' + data.gradcam_image;
+
+    showView('result');
+
+    // animate bars
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.score-bar-fill').forEach(el => {
+        el.style.width = el.dataset.w + '%';
+      });
+    });
+  }
+
+  // ── helpers ──────────────────────────────────
+  function showView(which) {
+    placeholder.style.display  = which === 'placeholder' ? 'flex'  : 'none';
+    loadingState.style.display = which === 'loading'     ? 'flex'  : 'none';
+    resultState.style.display  = which === 'result'      ? 'flex'  : 'none';
+  }
+
+  function setBtnLoading(on) {
+    analyzeBtn.disabled       = on || !selectedFile;
+    btnSpinner.classList.toggle('active', on);
+    btnIcon.style.display     = on ? 'none' : '';
+    btnLabel.textContent      = on ? 'Analyzing...' : 'Analyze Pattern';
+  }
+
+  function showStatus(msg, type = 'error') {
+    statusMsg.textContent = msg;
+    statusMsg.className   = type;
+  }
+  function clearStatus() {
+    statusMsg.textContent = '';
+    statusMsg.className   = '';
+  }
+
+  showView('placeholder');
+</script>
+</body>
+</html>

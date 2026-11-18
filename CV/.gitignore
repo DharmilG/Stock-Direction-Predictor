@@ -1,0 +1,9 @@
+data/
+models/
+artifacts/
+__pycache__/
+*.pyc
+*.pth
+*.pt
+*.tmp
+*.part

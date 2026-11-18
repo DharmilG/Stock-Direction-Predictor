@@ -1,0 +1,14 @@
+Pattern Classification Report
+============================================================
+                     precision    recall  f1-score   support
+
+             random       1.00      0.67      0.80       500
+ head_and_shoulders       0.94      1.00      0.97       500
+         double_top       0.93      1.00      0.96       500
+      double_bottom       0.89      1.00      0.94       500
+          bull_flag       0.93      1.00      0.97       500
+descending_triangle       1.00      0.99      0.99       500
+
+           accuracy                           0.94      3000
+          macro avg       0.95      0.94      0.94      3000
+       weighted avg       0.95      0.94      0.94      3000

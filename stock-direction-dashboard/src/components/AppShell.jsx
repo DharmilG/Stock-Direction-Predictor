@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Activity, Database, FileJson, Layers, RefreshCw, Sparkles } from 'lucide-react';
+import { Activity, Database, FileJson, Image as ImageIcon, Layers, RefreshCw, Sparkles } from 'lucide-react';
 import { NAV_SECTIONS, STATUS_LABEL } from '../lib/constants';
 import { humanAge } from '../lib/dates';
 import { useDashboard } from '../state/DashboardProvider';
@@ -10,6 +10,7 @@ const SECTION_ICONS = {
   Research: Activity,
   Model: Layers,
   'LLM & data': Database,
+  'Computer vision': ImageIcon,
 };
 
 function ConnectionChip({ connection, detail }) {
