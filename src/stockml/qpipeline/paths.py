@@ -78,6 +78,8 @@ P3_SCRIPTS = P3 / "scripts"
 
 Q3_LEDGER = P3_DATA / "q3_thinking_cap_ledger.jsonl"
 Q3_RESULTS = P3_RESULTS / "q3_thinking_cap.json"
+# Q3_ aliases matching the names used by q3_thinking_cap.py
+Q3_TRACES = P3_TRACES
 Q3_HEARTBEAT = P3_LOGS / "q3_heartbeat.json"
 Q3_GPU = P3_LOGS / "q3_gpu_5s.csv"
 Q3_MAIN_LOG = P3_LOGS / "q3_thinking_cap.log"
