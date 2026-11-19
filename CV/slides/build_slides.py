@@ -1,5 +1,8 @@
-"""Build the 7-slide black-and-white Chart Vision review deck."""
+"""Build the Chart Vision review deck (overwrites Chart_Vision_Review.pptx).
 
+Plain words, short lines, real numbers from CV/evaluation reports.
+CV lane only - no code, no viva content (that lives in SLIDE_GLOSSARY.md).
+"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -28,7 +31,8 @@ prs.slide_height = Inches(7.5)
 BLANK = prs.slide_layouts[6]
 
 
-def add_text(slide, text, left, top, width, height, size=14, *, bold=False, color=BLACK, font=FONT, align=PP_ALIGN.LEFT):
+def add_text(slide, text, left, top, width, height, size=14, *, bold=False,
+             color=BLACK, font=FONT, align=PP_ALIGN.LEFT):
     box = slide.shapes.add_textbox(Inches(left), Inches(top), Inches(width), Inches(height))
     frame = box.text_frame
     frame.clear()
@@ -48,18 +52,45 @@ def add_text(slide, text, left, top, width, height, size=14, *, bold=False, colo
     return box
 
 
+def add_bullets(slide, items, left, top, width, height, *, size=14, gap=6,
+                color=BLACK, marker="—"):
+    """Short one-idea lines, like a tweet thread. One paragraph per line."""
+    box = slide.shapes.add_textbox(Inches(left), Inches(top), Inches(width), Inches(height))
+    frame = box.text_frame
+    frame.clear()
+    frame.word_wrap = True
+    frame.margin_left = 0
+    frame.margin_right = 0
+    frame.margin_top = 0
+    frame.margin_bottom = 0
+    for i, line in enumerate(items):
+        p = frame.paragraphs[0] if i == 0 else frame.add_paragraph()
+        p.space_after = Pt(gap)
+        p.line_spacing = 1.05
+        run = p.add_run()
+        run.text = f"{marker}  {line}"
+        run.font.name = FONT
+        run.font.size = Pt(size)
+        run.font.color.rgb = color
+    return box
+
+
 def add_rule(slide, left, top, width, *, color=BLACK, height=0.015):
-    shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height))
+    shape = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height)
+    )
     shape.fill.solid()
     shape.fill.fore_color.rgb = color
     shape.line.fill.background()
     return shape
 
 
-def base(number: int, kicker: str, headline: str, subtitle: str, footnote: str = ""):
+def base(number: int, total: int, kicker: str, headline: str, subtitle: str, footnote: str = ""):
     slide = prs.slides.add_slide(BLANK)
-    add_text(slide, f"{number:02d} / 07", 0.6, 0.24, 1.6, 0.3, 9, color=GRAY, font=MONO)
-    add_text(slide, "CHART VISION · CV LANE", 9.6, 0.24, 3.1, 0.3, 9, color=GRAY, font=MONO, align=PP_ALIGN.RIGHT)
+    add_text(slide, f"{number:02d} / {total:02d}", 0.6, 0.24, 1.6, 0.3, 9,
+             color=GRAY, font=MONO)
+    add_text(slide, "CHART VISION · CV LANE", 9.6, 0.24, 3.1, 0.3, 9,
+             color=GRAY, font=MONO, align=PP_ALIGN.RIGHT)
     add_rule(slide, 0.6, 0.62, 12.13)
     add_text(slide, kicker, 0.6, 0.82, 12.1, 0.35, 12, bold=True)
     add_text(slide, headline, 0.6, 1.18, 12.1, 0.9, 30, bold=True)
@@ -70,8 +101,10 @@ def base(number: int, kicker: str, headline: str, subtitle: str, footnote: str =
     return slide
 
 
-def add_table(slide, rows: list[list[str]], left, top, width, height, col_widths=None, font_size=10.5):
-    table = slide.shapes.add_table(len(rows), len(rows[0]), Inches(left), Inches(top), Inches(width), Inches(height)).table
+def add_table(slide, rows, left, top, width, height, col_widths=None, font_size=10.5):
+    table = slide.shapes.add_table(
+        len(rows), len(rows[0]), Inches(left), Inches(top), Inches(width), Inches(height)
+    ).table
     if col_widths:
         for index, value in enumerate(col_widths):
             table.columns[index].width = Inches(value)
@@ -98,7 +131,7 @@ def add_table(slide, rows: list[list[str]], left, top, width, height, col_widths
     return table
 
 
-def add_image_fit(slide, path: Path, left, top, width, height):
+def add_image_fit(slide, path, left, top, width, height):
     with Image.open(path) as image:
         ratio = image.width / image.height
     box_ratio = width / height
@@ -108,11 +141,14 @@ def add_image_fit(slide, path: Path, left, top, width, height):
         h, w = height, height * ratio
     x = left + (width - w) / 2
     y = top + (height - h) / 2
-    return slide.shapes.add_picture(str(path), Inches(x), Inches(y), width=Inches(w), height=Inches(h))
+    return slide.shapes.add_picture(str(path), Inches(x), Inches(y),
+                                    width=Inches(w), height=Inches(h))
 
 
 def add_box(slide, text, left, top, width, height, *, size=10.5, fill=WHITE):
-    shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height))
+    shape = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height)
+    )
     shape.fill.solid()
     shape.fill.fore_color.rgb = fill
     shape.line.color.rgb = BLACK
@@ -136,134 +172,190 @@ def arrow(slide, left, top, width=0.4, height=0.4):
     add_text(slide, "→", left, top, width, height, 20, bold=True, align=PP_ALIGN.CENTER)
 
 
-# --- 01 cover ---------------------------------------------------------------
+TOTAL = 9
+
+# ---------------------------------------------------------------- 01 cover
 slide = base(
-    1,
+    1, TOTAL,
     "COMPUTER VISION · RESEARCH LANE",
     "Can a model read a candlestick chart?",
-    "Images in. Pattern + direction out. Isolated from the tabular model.",
-    "7 slides · black and white · research lane only",
+    "A picture goes in. A shape and a direction come out. Kept separate from the main model.",
+    "Real reports: CV/evaluation/ · cv_metrics.json · pattern_report.txt",
 )
 add_image_fit(slide, ASSETS / "chart_input.png", 9.0, 2.8, 3.8, 3.6)
-add_text(slide, "3,100", 0.9, 3.1, 3.0, 0.8, 44, bold=True)
-add_text(slide, "REAL CHART IMAGES", 0.9, 3.85, 3.2, 0.3, 10, color=GRAY, font=MONO)
-add_text(slide, "6", 0.9, 4.5, 3.0, 0.8, 44, bold=True)
-add_text(slide, "PATTERN CLASSES", 0.9, 5.25, 3.2, 0.3, 10, color=GRAY, font=MONO)
-add_text(slide, "224 × 224", 4.2, 4.5, 3.6, 0.8, 32, bold=True)
-add_text(slide, "MODEL INPUT", 4.2, 5.25, 3.0, 0.3, 10, color=GRAY, font=MONO)
+add_text(slide, "3,100", 0.9, 3.05, 3.0, 0.8, 44, bold=True)
+add_text(slide, "REAL CHART IMAGES", 0.9, 3.8, 3.2, 0.3, 10, color=GRAY, font=MONO)
+add_text(slide, "50", 0.9, 4.45, 3.0, 0.8, 44, bold=True)
+add_text(slide, "NSE SYMBOLS", 0.9, 5.2, 3.2, 0.3, 10, color=GRAY, font=MONO)
+add_text(slide, "224 x 224", 4.2, 4.55, 3.9, 0.7, 30, bold=True)
+add_text(slide, "WHAT THE MODEL SEES", 4.2, 5.25, 3.4, 0.3, 10, color=GRAY, font=MONO)
 
-# --- 02 question ------------------------------------------------------------
+# ---------------------------------------------------------------- 02 why
 slide = base(
-    2,
+    2, TOTAL,
     "01 · THE QUESTION",
-    "Price alone doesn't explain moves.",
-    "But traders read shapes first. We test the image.",
-    "INPUT  →  FROZEN RESNET18  →  ATTENTION MAP",
+    "Prices are numbers. A chart is a picture.",
+    "A table already reads the numbers. Here we test the picture.",
+    "The model never sees news or prices after the decision day.",
 )
-add_image_fit(slide, ASSETS / "chart_input.png", 0.9, 2.9, 5.4, 3.4)
-add_image_fit(slide, ASSETS / "gradcam_gray.png", 7.0, 2.9, 5.4, 3.4)
-add_text(slide, "INPUT", 0.9, 6.45, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
-add_text(slide, "ATTENTION", 7.0, 6.45, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
+add_image_fit(slide, ASSETS / "chart_input.png", 0.9, 2.85, 5.4, 3.4)
+add_bullets(slide, [
+    "Traders look at the shape first.",
+    "A double top looks like a double top.",
+    "That shape is hard to see in a table row.",
+    "So we let the model look at the drawing.",
+    "Nothing here changes the main prediction model.",
+], 7.0, 2.95, 5.5, 3.2, size=14, gap=9)
+add_text(slide, "ONE CHART, TWO VIEWS", 0.9, 6.45, 5.4, 0.3, 10,
+         bold=True, color=GRAY, font=MONO)
 
-# --- 03 data table ----------------------------------------------------------
+# ---------------------------------------------------------------- 03 data
 slide = base(
-    3,
-    "02 · DATA",
-    "Two datasets. One label language.",
-    "Textbook patterns teach shape. Real bars teach direction.",
-    "50 symbols · flat band 1.0 · image ends at T, label uses T+1…T+5",
+    3, TOTAL,
+    "02 · DATA WE CAPTURED",
+    "Two sets. One label language.",
+    "Made-up charts teach the shape. Real charts teach the direction.",
+    "Real labels come from this project's own triple-barrier rule.",
 )
 add_table(
     slide,
     [
-        ["DATASET", "IMAGES", "LABELS", "SPLIT"],
-        ["Synthetic patterns", "120", "pattern + textbook direction", "random 80/20"],
-        ["Own NSE OHLCV", "3,100", "triple barrier · 5 sessions", "chronological 80/20"],
+        ["SET", "IMAGES", "LABELS", "SPLIT"],
+        ["Synthetic patterns", "120", "shape + textbook direction", "random 80 / 20"],
+        ["Real NSE charts", "3,100", "triple barrier · 5 sessions", "by date, 80 / 20"],
     ],
-    0.9, 3.15, 11.5, 2.2,
+    0.9, 3.1, 11.5, 2.0,
     col_widths=[3.0, 1.6, 4.4, 2.5],
     font_size=11,
 )
+add_bullets(slide, [
+    "50 symbols, 2010-12-13 to 2026-10-21.",
+    "Barriers: 1 sigma up, 1 sigma down, flat band 0.25.",
+    "6 shapes: random, head-shoulders, double top, double bottom, bull flag, triangle.",
+], 0.9, 5.35, 11.5, 1.3, size=12, gap=5)
 
-# --- 04 architecture diagram only ------------------------------------------
+# ---------------------------------------------------------------- 04 features
 slide = base(
-    4,
-    "03 · ARCHITECTURE",
-    "One backbone. Two heads.",
-    "Diagram below — explanation on the next slide.",
+    4, TOTAL,
+    "03 · WHAT ONE IMAGE HOLDS",
+    "60 candles in one small picture.",
+    "The picture ends on day T. The answer uses T+1 to T+5.",
+    "No future day is ever drawn into the picture.",
 )
-add_box(slide, "CHART PNG\n224 × 224", 0.8, 3.0, 2.2, 0.85)
-arrow(slide, 3.05, 3.2)
-add_box(slide, "FROZEN RESNET18\n512-d features", 3.5, 3.0, 2.8, 0.85)
-arrow(slide, 6.35, 3.2)
-add_box(slide, "PATTERN HEAD\n6 classes", 6.8, 2.45, 2.5, 0.8)
-add_box(slide, "DIRECTION HEAD\n3 classes", 6.8, 3.55, 2.5, 0.8)
-arrow(slide, 9.35, 2.6)
-add_box(slide, "GRADCAM\nlayer4 gradients", 9.8, 2.45, 2.6, 0.8)
-add_text(slide, "STAGE 2", 0.9, 4.85, 1.6, 0.3, 9, bold=True, color=GRAY, font=MONO)
-add_box(slide, "REAL CHARTS +\nTRIPLE-BARRIER LABELS", 1.0, 5.25, 3.6, 0.8)
-arrow(slide, 4.65, 5.45)
-add_box(slide, "DIRECTION HEAD\nFINE-TUNE", 5.1, 5.25, 3.0, 0.8)
-arrow(slide, 8.15, 5.45)
-add_box(slide, "SERVING CHECKPOINT", 8.6, 5.25, 3.4, 0.8)
-
-# --- 05 explanation of the diagram -----------------------------------------
-slide = base(
-    5,
-    "04 · HOW IT LEARNS",
-    "Two stages. One frozen backbone.",
-    "The diagram, explained.",
-    "Backbone never updated · LR 1e-3 → 1e-4 · label smoothing 0.05 · class-weighted direction loss",
-)
+add_box(slide, "60 CANDLES\nOPEN · HIGH\nLOW · CLOSE\nVOLUME", 0.9, 3.0, 3.0, 2.3, size=13)
+arrow(slide, 4.05, 3.85)
+add_box(slide, "224 x 224\nRGB IMAGE", 4.55, 3.0, 2.6, 2.3, size=13)
+arrow(slide, 7.3, 3.85)
+add_box(slide, "ONE LABEL\nUP / FLAT / DOWN", 7.85, 3.0, 3.0, 2.3, size=13)
+add_text(slide, "REAL LABEL COUNTS", 0.9, 5.6, 3.0, 0.3, 10, bold=True, color=GRAY, font=MONO)
 add_table(
     slide,
-    [
-        ["STAGE", "INPUT", "TRAINABLE", "OUTCOME"],
-        ["1 · pattern", "120 synthetic charts", "both heads", "95.8% pattern accuracy"],
-        ["2 · direction", "3,100 real charts", "direction head only", "serving checkpoint"],
-    ],
-    0.9, 3.15, 11.5, 2.2,
-    col_widths=[2.2, 3.2, 3.0, 3.1],
+    [["UP", "FLAT", "DOWN"], ["1,486", "166", "1,448"]],
+    0.9, 5.95, 11.5, 0.75,
+    col_widths=[3.83, 3.83, 3.84],
     font_size=11,
 )
 
-# --- 06 results -------------------------------------------------------------
+# ---------------------------------------------------------------- 05 resnet
 slide = base(
-    6,
-    "05 · RESULTS",
-    "Shape is learned. Direction is not.",
-    "Chronological holdout · n = 676",
-    "Holdout is optimistic — checkpoint trained before the split fix",
+    5, TOTAL,
+    "04 · ARCHITECTURE · READER",
+    "ResNet18 reads the picture.",
+    "It is already trained on ordinary photos. We do not change it.",
+    "Frozen = the reader stays the same; only the answer part learns.",
+)
+stages = [
+    ("INPUT", "224x224x3"),
+    ("CONV1", "64"),
+    ("LAYER1", "64"),
+    ("LAYER2", "128"),
+    ("LAYER3", "256"),
+    ("LAYER4", "512"),
+    ("OUTPUT", "512 numbers"),
+]
+x = 0.7
+for name, dim in stages:
+    add_box(slide, f"{name}\n{dim}", x, 3.0, 1.62, 1.15, size=10.5)
+    x += 1.72
+add_bullets(slide, [
+    "Each block is a small set of filters that finds edges, then shapes.",
+    "Skip connections let information pass straight through. Easy to train.",
+    "ImageNet = a big photo library the reader learned from before.",
+    "We keep the 512 numbers. We throw away its old photo answer.",
+], 0.9, 4.55, 11.6, 2.1, size=13, gap=7)
+
+# ---------------------------------------------------------------- 06 heads
+slide = base(
+    6, TOTAL,
+    "05 · ARCHITECTURE · ANSWERS",
+    "Two heads. Two questions.",
+    "Head = a small add-on that turns the 512 numbers into one answer.",
+    "512 numbers -> 256 hidden values -> 6 shapes or 3 directions.",
+)
+add_box(slide, "512 NUMBERS\nFROM READER", 0.9, 3.15, 2.9, 1.5, size=12)
+arrow(slide, 3.95, 3.6)
+add_box(slide, "PATTERN HEAD\n6 SHAPES", 4.45, 2.7, 3.3, 1.1, size=12)
+add_box(slide, "DIRECTION HEAD\nUP · FLAT · DOWN", 4.45, 4.0, 3.3, 1.1, size=12)
+add_bullets(slide, [
+    "Stage 1 learns shapes on made-up charts.",
+    "Stage 2 freezes the reader and learns direction on real charts.",
+    "Dropout drops some values while learning, so it cannot memorise.",
+    "Class weights make the rare FLAT case count more.",
+], 8.1, 2.75, 4.4, 3.2, size=12, gap=8)
+add_text(slide, "LEARNING RATE: 1e-3 THEN 1e-4", 0.9, 5.15, 3.4, 0.3,
+         9, bold=True, color=GRAY, font=MONO)
+
+# ---------------------------------------------------------------- 07 gradcam
+slide = base(
+    7, TOTAL,
+    "06 · EXPLAINABILITY",
+    "See where the model looked.",
+    "GradCAM paints the part of the chart that drove the answer.",
+    "A heat map on the last ResNet block, shown on the same picture.",
+)
+add_image_fit(slide, ASSETS / "chart_input.png", 0.9, 2.9, 5.4, 3.4)
+add_image_fit(slide, ASSETS / "gradcam_gray.png", 7.0, 2.9, 5.4, 3.4)
+add_text(slide, "INPUT CHART", 0.9, 6.4, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
+add_text(slide, "WHERE IT LOOKED", 7.0, 6.4, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
+
+# ---------------------------------------------------------------- 08 results
+slide = base(
+    8, TOTAL,
+    "07 · RESULTS",
+    "It learned the shape. Not the future.",
+    "Chronological holdout · 676 real charts the model never saw.",
+    "Holdout number is optimistic: the checkpoint was trained before the split fix.",
 )
 add_table(
     slide,
     [
-        ["METRIC", "VALUE"],
-        ["Pattern accuracy", "95.8%"],
+        ["WHAT", "NUMBER"],
+        ["Shape accuracy", "94% (synthetic)"],
         ["Direction accuracy", "47.2%"],
-        ["AUC (one-vs-rest)", "0.564"],
+        ["AUC (one vs rest)", "0.564"],
         ["Macro F1", "0.356"],
-        ["Random baseline", "33.3%"],
+        ["Random guess", "33.3%"],
     ],
     0.9, 3.0, 5.5, 3.4,
     col_widths=[3.5, 2.0],
     font_size=11,
 )
 add_image_fit(slide, ASSETS / "confusion_gray.png", 7.0, 2.9, 5.2, 3.5)
-add_text(slide, "CONFUSION MATRIX", 7.0, 6.45, 5.2, 0.3, 9, bold=True, color=GRAY, font=MONO)
+add_text(slide, "CONFUSION MATRIX", 7.0, 6.45, 5.2, 0.3, 9,
+         bold=True, color=GRAY, font=MONO)
 
-# --- 07 verdict -------------------------------------------------------------
+# ---------------------------------------------------------------- 09 verdict
 slide = base(
-    7,
-    "06 · VERDICT",
+    9, TOTAL,
+    "08 · VERDICT",
     "Use it to see, not to trade.",
-    "GradCAM lands on the pattern, not on the future.",
-    "KEPT ISOLATED — never feeds LightGBM   |   NEXT — clean retrain, then decide",
+    "The heat map lands on the pattern, not on tomorrow.",
+    "Kept isolated - never feeds the main model. Next: clean retrain, then decide.",
 )
-add_image_fit(slide, ASSETS / "chart_input.png", 1.0, 2.85, 5.2, 3.0)
-add_image_fit(slide, ASSETS / "gradcam_gray.png", 7.1, 2.85, 5.2, 3.0)
-add_text(slide, "CHART", 1.0, 5.95, 5.2, 0.3, 9, bold=True, color=GRAY, font=MONO)
-add_text(slide, "ATTENTION", 7.1, 5.95, 5.2, 0.3, 9, bold=True, color=GRAY, font=MONO)
+add_image_fit(slide, ASSETS / "chart_input.png", 1.0, 2.9, 5.2, 3.0)
+add_image_fit(slide, ASSETS / "gradcam_gray.png", 7.1, 2.9, 5.2, 3.0)
+add_text(slide, "CHART", 1.0, 6.0, 5.2, 0.3, 9, bold=True, color=GRAY, font=MONO)
+add_text(slide, "ATTENTION", 7.1, 6.0, 5.2, 0.3, 9, bold=True, color=GRAY, font=MONO)
 
 prs.save(OUT)
 print("wrote", OUT, "slides", len(prs.slides))
