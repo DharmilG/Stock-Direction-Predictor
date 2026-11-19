@@ -1,0 +1,23 @@
+{
+ "case_id": "AXISBANK.NS_2017-10-12_34eed62f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.77%, volume shock (z): -0.76, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Cessation. Axis Bank Limited has informed the Exchange regarding Cessation of Mr V. R. Kaundinya as Independent Director of the company w.e.f. October 11, 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the cessation of an Independent Director at Axis Bank. Looking at the categories, \"management\" seems relevant here because it's about a director leaving. So step 1 is management.\n\nNext, the base rate. I remember that director changes can have mixed effects. Sometimes it's a good move if the director was problematic, but sometimes it might signal instability. On the NSE, I think the usual precedent is mixed because it depends on the context. So step 2 is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 4.77% and volume shock. The FinBERT prior is 0.00. The news is about a director leaving. Since the volume shock is negative, maybe the market hasn't fully priced in this news yet. But the prior sentiment was neutral. So the move might not be fully priced, so step 3 is not overbought or oversold, so maybe not a fade or bounce. But since it's a management change, maybe the market hasn't reacted yet, so positioning is neutral.\n\nCommit: Since the event is management, base rate is mixed, and positioning is neutral, the vote might be FLAT. But wait, the confidence needs to be low. Since it's a single event without strong indicators, confidence around 0.3. But the user said if noise, vote FLAT with confidence at most 0.3. So maybe FLAT with 0.3 confidence. But the steps: 1 is management, 2 mixed, 3 neutral positioning, so trace steps 1,2,3,4. Wait, the steps are 1,2,3,4. So the trace would include all four steps. But the vote is FLAT. However, the sentiment should be FLAT, which is 0. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 31.6,
+ "attempts": 1
+}

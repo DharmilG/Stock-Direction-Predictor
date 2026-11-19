@@ -1,0 +1,21 @@
+{
+ "case_id": "ADANIENT.NS_2022-02-10_8ae7e6b6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIENT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.96%, volume shock (z): 0.05, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Acquisition. Intimation for acquisition of 10% stake in Unyde Systems Private Limited\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about an acquisition intimation for a 10% stake in another company. That sounds like a merger or acquisition (M&A) related news. So according to the checklist, MNA (merger, acquisition, or takeover) is the category here. Since it's an intimation, maybe it's a rumor or a preliminary indication, not a confirmed deal yet.\n\nNext, the base rate. I remember that on NSE, M&A news can go either way. Sometimes it's positive if the acquiring company is strong, but sometimes it's uncertain. The base rate is usually mixed because the outcome isn't certain until the deal is finalized. So I should note that the historical precedent is mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 1.96% which is positive. The volume shock (z) is 0.05, which might indicate some volume changes, but not a huge spike. FinBERT prior is 0.00, so no strong sentiment from previous news. The event is an acquisition intimation, which is a positive signal but not confirmed. Since the trend is up and the news is positive, but not yet priced in, maybe it's a fade candidate if overbought. However, the volume shock is low, so maybe not overbought. The positioning might suggest that the move isn't fully priced in yet, so there's potential for a move.\n\nCommitting the vote. Since it's an MNA event with mixed historical outcomes, but the current trend is positive and the news is positive, but not confirmed. The confidence should be moderate. A single-source rumor would be up to 0.4. Since it's an intimation, maybe a confirmed filing isn't there, so confidence around 0.4. The sentiment should be positive, so vote UP. The steps that matter are 1 (classification as MNA), 2 (mixed base rate), 3 (positioning not fully priced in), and 4 (committing based on those steps). So the trace steps would be 1,2,3,4. The confidence is 0.4, sentiment 0.8, vote UP.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 125.1,
+ "attempts": 2
+}

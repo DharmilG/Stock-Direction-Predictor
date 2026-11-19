@@ -18,7 +18,7 @@ Policy: strict JSON schema + validator, 3 retries then ``HARNESS_FAIL``
 (logged, never silently accepted), 120s per-call timeout,
 concurrency <= 2 (single GPU server — higher values do not help),
 TRUNCATED (>1500 tokens) / NO_NEWS flagging, per-call trace logging
-to ``results/traces/``.
+to ``track_q/phase_0/traces/``.
 """
 
 import json

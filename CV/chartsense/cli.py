@@ -208,10 +208,10 @@ def _cmd_train_all(args) -> int:
     return _cmd_train(args)
 
 
-def _cmd_evaluate(_args) -> int:
+def _cmd_evaluate(args) -> int:
     from .training import evaluate
 
-    _print(evaluate())
+    _print(evaluate(resume=not args.no_resume))
     return 0
 
 
@@ -281,7 +281,9 @@ def build_parser() -> argparse.ArgumentParser:
     train_all.add_argument("--label-smoothing", type=float, default=0.0)
     train_all.set_defaults(func=_cmd_train_all)
 
-    sub.add_parser("evaluate", help="evaluate the serving checkpoint").set_defaults(func=_cmd_evaluate)
+    evaluate_parser = sub.add_parser("evaluate", help="evaluate the serving checkpoint")
+    evaluate_parser.add_argument("--no-resume", action="store_true", help="recompute even if cached")
+    evaluate_parser.set_defaults(func=_cmd_evaluate)
     return parser
 
 

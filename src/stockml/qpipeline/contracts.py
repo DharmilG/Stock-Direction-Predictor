@@ -13,8 +13,10 @@ from ..config import ROOT
 
 
 Q_TRACK_CONFIG_PATH = ROOT / "config" / "q_track.yaml"
-Q_TRACK_STATE_PATH = ROOT / "artifacts" / "state" / "q_track_state.json"
-Q0_RESULTS_PATH = ROOT / "results" / "q0_d1.json"
+from .paths import PHASE_REGISTRY, Q0_VERDICT_FILE, Q3_LEDGER, Q3_RESULTS, P3_TRACES
+
+Q_TRACK_STATE_PATH = PHASE_REGISTRY
+Q0_RESULTS_PATH = Q0_VERDICT_FILE
 
 PHASES = ("phase3", "phase6_probe", "phase4", "phase5", "phase6_train", "phase7", "phase8")
 
@@ -36,7 +38,7 @@ def resolve_path(value: str) -> Path:
 
 
 def q0_gate_ok() -> bool:
-    """True only when results/q0_d1.json reports complete=true and pass=true."""
+    """True only when track_q/phase_0/verdict/q0_d1.json reports complete=true and pass=true."""
     if not Q0_RESULTS_PATH.exists():
         return False
     try:
@@ -78,14 +80,14 @@ def phase_artifacts() -> dict[str, dict[str, str]]:
     p8 = cfg.get("phase8", {})
     return {
         "phase3": {
-            "ledger": str(resolve_path(p3.get("ledger_path", "data/llm/q3_thinking_cap_ledger.parquet"))),
-            "results": str(resolve_path(p3.get("results_path", "results/q3_thinking_cap.json"))),
-            "trace_dir": str(resolve_path(p3.get("trace_dir", "results/traces_q3"))),
+            "ledger": str(resolve_path(p3.get("ledger_path", str(Q3_LEDGER)))),
+            "results": str(resolve_path(p3.get("results_path", str(Q3_RESULTS)))),
+            "trace_dir": str(resolve_path(p3.get("trace_dir", str(P3_TRACES)))),
         },
         "phase4": {
             "pool_a": str(resolve_path(star.get("pool_a_path", "data/llm/pool_a.parquet"))),
             "candidates": str(resolve_path(star.get("candidates_path", "data/llm/star_candidates.jsonl"))),
-            "trace_dir": str(resolve_path(star.get("trace_dir", "results/traces_star"))),
+            "trace_dir": str(resolve_path(star.get("trace_dir", "track_q/phase_4/traces"))),
         },
         "phase5": {
             "kept": str(resolve_path(star.get("kept_path", "data/llm/star_kept.jsonl"))),
@@ -104,7 +106,7 @@ def phase_artifacts() -> dict[str, dict[str, str]]:
         "phase7": {
             "ledger": str(resolve_path(nightly.get("ledger_path", "data/llm/qwen_nightly_ledger.parquet"))),
             "results": str(resolve_path(nightly.get("results_path", "results/qwen_nightly.json"))),
-            "trace_dir": str(resolve_path(nightly.get("trace_dir", "results/traces_q7"))),
+            "trace_dir": str(resolve_path(nightly.get("trace_dir", "track_q/phase_7/traces"))),
         },
         "phase8": {
             "results": str(resolve_path(p8.get("results_path", "results/q8_ablation.json"))),

@@ -1,0 +1,23 @@
+{
+ "case_id": "CIPLA.NS_2020-01-29_10cbafe7",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: CIPLA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.13%, volume shock (z): -0.37, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of ESOP/ESPS. Cipla Limited has informed the Exchange regarding allotment of  5829 Equity Shares under ESOP\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of ESOP/ESPS shares by Cipla Limited. ESOPs are employee stock option plans, so this is a capital action. The event type here is capital_action. \n\nNext, the base rate. I remember that on the NSE, capital actions like ESOP allotments usually don't have a strong historical precedent. Sometimes they might be neutral or even slightly positive if it's about employee retention, but since it's an allotment, it's more about distributing shares. I think the usual effect is mixed because it doesn't directly impact earnings or operations. So the base rate is mixed.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -2.13%, volume shock is -0.37, and FinBERT prior is 0.00. The negative trend and volume shock suggest the stock might be oversold. However, the event is a capital action, which isn't necessarily bad news. Since the market is already down, maybe there's a bounce potential. But the FinBERT prior is neutral, so not a strong indicator. The move might not be fully priced in yet, but the context is a bit mixed.\n\nCommitting the vote. Since it's a capital action with mixed historical impact, and the current context shows some oversold indicators, but not enough to be a strong signal. The confidence should be low. Maybe a FLAT vote with confidence around 0.3. But wait, the user said if it's noise, vote FLAT. Is this event considered noise? Capital actions can be noise if they don't affect fundamentals. So I think it's noise, leading to FLAT with confidence up to 0.3. But the steps need to be cited. So step 1 is classification as capital_action, step 2 base rate mixed, step 3 positioning as maybe not fully priced in (oversold but neutral news), so step 4 commit FLAT with confidence 0.3. Wait, but the instruction says if noise, vote FLAT with confidence at most 0.3. So since it's a capital action which is noise, then FLAT with confidence 0.3. The sentiment should be FLAT, so 0.0. Let me check again. The event is capital action, which is noise. So vote FLAT, confidence 0.3. Sentiment is 0.0. The trace steps are 1,2,3,4. So the final answer should have sentiment 0.0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.9,
+ "attempts": 1
+}

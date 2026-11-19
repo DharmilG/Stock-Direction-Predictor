@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2022-09-09_f90f4b8a",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.10%, volume shock (z): 2.50, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Newspaper Advertisements. State Bank Of India has informed the Exchange about Newspaper Advertisements\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about State Bank Of India informing the Exchange about Newspaper Advertisements. The possible categories are earnings_result, earnings_guidance, order_win, mna, regulatory, rating_change, management, capital_action, debt_credit, litigation, expansion, macro_policy, short_seller, noise. \n\nNewspaper advertisements don't seem related to earnings, guidance, orders, M&A, regulatory changes, ratings, management decisions, capital actions, debt, litigation, expansion, macro policies, or short sellers. It's just a disclosure about ads. So maybe it's noise? But I need to check if there's any other possible category. Maybe regulatory? If they're required to disclose ads, but the event itself isn't a regulatory change. It's more of a routine disclosure. So likely noise.\n\nNext, the base rate. If it's noise, the historical precedent would be mixed or usually neutral. But since the instruction says if noise, vote FLAT with confidence up to 0.3. \n\nPositioning: The PRE-T context mentions 5-day trend of 3.10% up, volume shock z of 2.50, and FinBERT prior of 0.00. The event is about newspaper ads, which isn't directly related to the stock's movement. Since it's noise, the move isn't priced in. So positioning would be neutral.\n\nCommit: Since it's noise, vote FLAT with confidence up to 0.3. The steps that matter are 1 (classifying as noise), 2 (base rate as mixed), and 3 (positioning as not priced in). So the trace steps would be 1,2,3,4. Confidence is 0.3. Sentiment should be FLAT, so 0.0. The vote is FLAT.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 103.2,
+ "attempts": 2
+}

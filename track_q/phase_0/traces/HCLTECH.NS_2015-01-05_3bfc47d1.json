@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2015-01-05_3bfc47d1",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.11%, volume shock (z): -0.82, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Annual General Meeting Updates. HCL Technologies Limited has submitted to the Exchange a copy of the Minutes of the Annual General Meeting (AGM) of the Company held on December 4, 2014\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Annual General Meeting updates, specifically the submission of the AGM minutes from December 2014. The options include things like earnings results, management, or maybe regulatory. Since it's about the AGM minutes, which is a corporate governance event, the closest category would be 'management'. \n\nNext, the base rate. I need to recall historical precedent for management-related events on the NSE. Usually, such filings might not have a strong directional impact unless there's significant information. But since it's just minutes from a past meeting, maybe it's not a big deal. The base rate might be mixed, but I'm not sure. Wait, the user said not to invent statistics, so I have to rely on known patterns. Management events can sometimes be neutral or have mixed impacts. Maybe the base rate is usually mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -0.11%, volume shock z of -0.82, and FinBERT prior of 0.00. The event is about past AGM minutes, so there's no new info here. Since the news is about historical data, it's unlikely to affect current prices. The market might have already priced in any potential implications from the AGM, but since it's old, maybe it's not relevant. So the move doesn't look priced in, but since the news is old, perhaps it's noise. Wait, the instruction says if noise, vote FLAT with confidence up to 0.3. But the event is a management filing, which might not be noise. However, the news is about past events, so maybe it's not new information. \n\nCommit: If it's noise, then FLAT. But if it's a management event with mixed base rate and no new info, maybe FLAT. Confidence would be low. The trace steps would be 1 (classified as management), 2 (base rate mixed), 3 (not priced in because it's old info), and 4 (vote FLAT with confidence 0.3). But wait, the user said if noise, vote FLAT. Is this event considered noise? Since it's about past minutes, maybe yes. So the sentiment would be neutral, vote FLAT, confidence 0.3. Let me check again. The steps: 1. management, 2. base rate mixed, 3. not priced in because it's old, so maybe it's noise. So vote FLAT, confidence 0.3. The JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.4,
+ "attempts": 1
+}

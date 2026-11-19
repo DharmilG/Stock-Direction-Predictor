@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDALCO.NS_2022-06-08_d824670d",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDALCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.74%, volume shock (z): -0.98, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Loss of share certificate. This has with reference to our letters dated  from 10TH May,2022, 11th May 2022, 16th May, 2022 and 19th May, 2022.Pursuant to Regulation 39(3) of Listing Regulations, the Company has received information pertaining to issue of Duplicate Share Certificates.The Company has completed the required formalities for issuing duplicate share certificates to the shareholdersThe above is for your information and record\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.1,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates and issuing duplicates. The company received information about duplicate share certificates and completed the formalities. Looking at the event types, this seems related to a capital action because it's about share certificates, which are part of shareholder matters. So, I'll classify it as capital_action.\n\nNext, the base rate. I need to recall the historical precedent for capital actions on the NSE. From what I know, capital actions like issuing new shares or handling share certificates can have mixed effects. Sometimes it's neutral, but if it's about resolving issues like lost certificates, it might be seen as positive because it's addressing a problem. However, without specific stats, I have to go with mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -1.74%, volume shock of -0.98, and FinBERT prior of 0.00. The negative trend and volume shock suggest the stock might be oversold. The news is about resolving a certificate issue, which isn't bad news. Since the market is oversold and the news is neutral or positive, it might be a bounce candidate. But the FinBERT prior is 0, so maybe the market hasn't priced in this yet.\n\nCommitting: The event is a capital action, which has mixed historical impact. The current positioning is oversold with neutral news, so maybe a bounce. But since the news isn't strongly positive, confidence should be low. The confidence can't be over 0.8. Since it's a confirmed filing but not a strong positive, maybe 0.5. The sentiment should be slightly positive since the vote is UP. So, the JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.1, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 39.6,
+ "attempts": 1
+}

@@ -56,15 +56,24 @@ def test_cv_training_endpoint_returns_stage_history():
     assert isinstance(stages["train_stage2"]["history"], list)
 
 
-def test_cv_evaluation_endpoint_without_artifacts_reports_not_ready():
+def test_cv_evaluation_endpoint_without_artifacts_reports_not_ready(tmp_path, monkeypatch):
+    import stockml.api.cv as cv_module
+
+    monkeypatch.setattr(cv_module, "_cv_root", lambda: tmp_path)
     client = TestClient(app)
     response = client.get("/cv/evaluation")
     assert response.status_code == 200
     assert response.json()["data"]["ready"] is False
 
 
-def test_analyze_without_checkpoint_returns_503():
+def test_analyze_without_checkpoint_returns_503(tmp_path, monkeypatch):
     pytest.importorskip("multipart", reason="python-multipart is installed with the CV overlay")
+    from stockml.api.cv import _cv_modules
+
+    adapter = _cv_modules()
+    monkeypatch.setattr(adapter, "BEST_MODEL_PATH", tmp_path / "missing.pth")
+    inference_module = __import__("chartsense.api.inference", fromlist=["BEST_MODEL_PATH"])
+    monkeypatch.setattr(inference_module, "BEST_MODEL_PATH", tmp_path / "missing.pth")
     client = TestClient(app)
     response = client.post("/cv/analyze", files={"file": ("chart.png", _png_bytes(), "image/png")})
     assert response.status_code == 503

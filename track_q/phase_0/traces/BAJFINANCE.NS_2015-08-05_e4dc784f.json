@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJFINANCE.NS_2015-08-05_e4dc784f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJFINANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.25%, volume shock (z): -0.44, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Annual General Meeting Updates. Bajaj Finance Limited has submitted to the Exchange a copy of the minutes of the Annual General Meeting of the Company held on July 22, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Annual General Meeting updates, specifically submitting the minutes from July 2015. The possible categories are earnings_result, earnings_guidance, etc. Since it's about submitting minutes from a past meeting, it's not new information. So maybe it's a 'management' event because it relates to corporate governance or filings.\n\nNext, the base rate. For NSE, past filings or AGM updates usually don't have a strong historical precedent. They might be neutral, so the base rate is mixed. \n\nPositioning: The PRE-T context has a 5-day trend of 2.25% positive, but the volume shock is negative. The FinBERT prior is 0.00. Since the news is about old minutes, there's no new info. The trend is up, but the event isn't impactful. So the move isn't priced in, but since it's old news, maybe it's already reflected. Wait, the event is a filing, not new info. So the positioning might be that it's not new, so no clear direction. But the trend is up, but the event is noise. \n\nCommit: Since it's a filing of past minutes, it's noise. So vote FLAT with confidence up to 0.3. But the base rate is mixed. Wait, step 1 says if noise, vote FLAT. So confidence should be low. The trace steps would include 1 (noise), 2 (mixed), 3 (not priced in?), and 4. But the user says if noise, vote FLAT with confidence at most 0.3. So the answer should be FLAT with confidence 0.3. The sentiment would be 0.0 because it's neutral. Let me check again. The event is a filing, which is noise. So steps: 1. noise, 2. mixed, 3. not priced in (since it's old), 4. commit FLAT. Sentiment is 0.0. Confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.5,
+ "attempts": 1
+}

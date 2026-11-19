@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2019-10-01_48bdafe0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.99%, volume shock (z): -0.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  ESOP/ESOS/ESPS. Wipro Limited has informed the Exchange regarding Grant of 70000  Options\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro Limited granting 70,000 options. The event type here is related to ESOPs, which fall under capital actions. So, the classification should be capital_action.\n\nNext, the base rate. I remember that on the NSE, capital actions like stock option grants are usually seen as positive because they can indicate confidence in the company's future. However, sometimes they might not have a significant impact. But generally, the precedent is usually-up.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -2.99%, which is a drop. The volume shock is -0.18, and FinBERT prior is 0.00. The news about options might be a positive development, but since the stock has been down, maybe the market hasn't priced in this news yet. However, the volume shock is slightly negative, which might suggest some selling pressure. But the options grant could be a positive signal. Since the trend is down but the news is positive, maybe it's a bounce candidate. Wait, the positioning step says if overbought with good news, fade; oversold with bad news, bounce. Here, the stock is down (oversold?), but the news is positive. So maybe the market is oversold, and good news could lead to a bounce. But I need to check if the move is priced in. The PRE-T context doesn't mention any prior positive news, so maybe the options grant is new info. So the positioning might be that the move isn't fully priced in, so a bounce is possible.\n\nCommitting the vote. Since the event is a capital action (positive), base rate usually-up, and positioning suggests maybe a bounce (if oversold), the vote would be UP. Confidence: since it's a confirmed filing (the options grant is a filing), and the positioning is that it's not fully priced in, maybe confidence is 0.6. But the instructions say confidence up to 0.8 for confirmed filing plus supporting positioning. So 0.6 seems reasonable. The sentiment should be positive, so +0.6. The trace steps would be 1,2,3,4. Let me double-check. The event is capital_action, base rate usually-up, positioning is oversold (since 5-day trend is down) with positive news, so maybe a bounce (UP). Confidence 0.6. Yes, that fits.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.5,
+ "attempts": 1
+}

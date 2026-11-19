@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2014-10-17_361469c7",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -8.86%, volume shock (z): 8.76, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Dividend. Tata Consultancy Services Limited has informed the Exchange that the Board of Directors of the Company at its meeting held on October 16, 2014 have declared a Second Interim Dividend of Rs. 5 per Equity Share of Re. 1 each of the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a dividend declaration by Tata Consultancy Services. Dividends are a type of capital action, so that's step 1. Next, the base rate for capital actions on NSE\u2014usually, dividends are positive news, so the base rate is usually-up. Now, looking at the pre-t context: the 5-day trend is -8.86%, which is negative, and there's a volume shock. The FinBERT prior is 0.00, which might indicate neutral sentiment. Since the dividend is a positive event but the stock has been down, maybe the move is already priced in? Wait, the volume shock could mean there's some reaction. But the dividend is a regular occurrence, so maybe the market already anticipated it. If the stock is oversold and the news is positive, it might be a bounce. But the 5-day trend is negative, so maybe the market is already factoring in the dividend. So positioning might be that the news is priced in. Then, committing: since it's a capital action with positive base rate, but the stock is down, maybe the vote is UP with confidence around 0.6. Let me check the steps again. Classification as capital_action, base rate usually-up, positioning is priced in (since the stock is down but the news is positive, maybe the market is already reacting, so the move is priced in, leading to a fade? Wait, overbought plus good news is fade, oversold plus bad news is bounce. Here, the stock is down (oversold?), but the news is positive. So maybe it's a bounce candidate. But the volume shock might indicate some selling. Hmm. Maybe the positioning is that the move is not fully priced in. Wait, the pre-t context says the 5-day trend is -8.86%, which is a significant drop. So the stock is oversold. If the news is positive (dividend), then it's a bounce candidate. So the positioning would be that the move is not priced in, leading to a potential upward move. Therefore, vote UP with confidence around 0.6. But the FinBERT prior is 0, which might suggest neutral. But the dividend is a positive event. So the steps would be: classify as capital_action, base rate usually-up, positioning is oversold with positive news (bounce), so commit UP with confidence 0.6. Let me structure that into the JSON.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 48.6,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "NTPC.NS_2016-01-29_29e2fd4d",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: NTPC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 7.11%, volume shock (z): 1.89, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. NTPC Limited has informed the Exchange that Board has accorded investment approval for Telangana Super Thermal Power Project, Phase-1 (2x800 MW) at current estimated cost of Rs. 10,598.98 crore. PPAs have been signed with Southern Power Distribution Company of Telangana Limited and Northern Power Distribution Company of Telangana Limited. The Commercial Operation Date (CoD) of first unit is envisaged in 52 months and second unit at an interval of 6 months thereafter\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about NTPC Limited getting approval for a thermal power project in Telangana. They've signed PPAs and mentioned the CoD for the units. This seems like a project expansion, so the category would be 'expansion'. \n\nNext, the base rate. I remember that expansion projects in the power sector on NSE usually have mixed outcomes. Sometimes they're positive because they signal growth, but sometimes they might face delays or cost overruns. So the historical precedent is probably mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 7.11% and a volume shock of 1.89. The FinBERT prior is 0.00. The news is about a new project with signed PPAs, which is positive. But since the volume shock is moderate, maybe the market hasn't fully priced in this news yet. The previous trend is positive, but the volume suggests some uncertainty. So the move might not be fully priced in, leaning towards a potential upward move.\n\nCommitting the vote. Since it's an expansion with mixed historical performance but positive news, and the volume isn't extremely high, I'd lean towards a moderate confidence in an upward move. Confidence around 0.6 seems reasonable. The sentiment should be positive, aligning with the UP vote.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 39.2,
+ "attempts": 1
+}

@@ -1,0 +1,187 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261020012248
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\run_q0_overnight.ps1 -NoElevate -DryRun
+Process ID: 12772
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:22:48 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: False | clock cap: 1400 MHz | emergency: 89 C
+Dry run: would start E:\books\Adaniports\stock_direction_platform\.venv\Scripts\python.exe -m stockml.data.q0_d1 --full
+PS>TerminatingError(ollama.exe): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: [?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25h"
+**********************
+Windows PowerShell transcript end
+End time: 20261020012248
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20261020012758
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\run_q0_overnight.ps1 -NoElevate -DryRun
+Process ID: 47436
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:27:58 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: False | clock cap: 1400 MHz | emergency: 89 C
+Dry run: would start E:\books\Adaniports\stock_direction_platform\.venv\Scripts\python.exe -m stockml.data.q0_d1 --full
+PS>TerminatingError(ollama.exe): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: [?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25h"
+**********************
+Windows PowerShell transcript end
+End time: 20261020012758
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20261020012808
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -TestClocks
+Process ID: 8324
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:28:08 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: True | clock cap: 1400 MHz | emergency: 89 C
+GPU clock cap applied: 0..1400 MHz
+GPU clock cap reset to driver default.
+PS>TerminatingError(ollama.exe): "The running command stopped because the preference variable "ErrorActionPreference" or common parameter is set to Stop: [?2026h[?25l[1G[K[?25h[?2026l[?25l[2K[1G[?25h"
+GPU clock cap reset to driver default.
+**********************
+Windows PowerShell transcript end
+End time: 20261020012813
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20261020012835
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -TestClocks
+Process ID: 38392
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:28:35 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: True | clock cap: 1400 MHz | emergency: 89 C
+GPU clock cap applied: 0..1400 MHz
+GPU clock cap reset to driver default.
+**********************
+Windows PowerShell transcript end
+End time: 20261020012841
+**********************
+**********************
+Windows PowerShell transcript start
+Start time: 20261020012907
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1
+Process ID: 49040
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:29:07 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: True | clock cap: 1400 MHz | emergency: 89 C
+GPU clock cap applied: 0..1400 MHz
+**********************
+Windows PowerShell transcript start
+Start time: 20261020013411
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1
+Process ID: 404
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+=== Q0-D1 supervisor 2026-10-20T01:34:11 ===
+Repo: E:\books\Adaniports\stock_direction_platform
+Admin: True | clock cap: 1400 MHz | emergency: 89 C
+GPU clock cap applied: 0..1400 MHz
+**********************
+Windows PowerShell transcript start
+Start time: 20261117114948
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1
+Process ID: 44060
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-11-17T11:49:48.9292132+05:30 | === Q0-D1 supervisor start ===
+2026-11-17T11:49:48.9399211+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-11-17T11:49:48.9429274+05:30 | Admin: True | scheduled: False | clock cap: 1400 MHz | emergency: 89 C
+2026-11-17T11:49:49.3931372+05:30 | Killing stale Q0 worker PID 17816.
+2026-11-17T11:49:51.6492834+05:30 | Removed 1 stale Q0 worker(s) before starting.
+2026-11-17T11:49:51.9420099+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-11-17T11:49:52.0330465+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-11-17T11:49:52.1790827+05:30 | Started Python child PID 44488.
+2026-11-17T11:57:56.1681940+05:30 | Python exited code= after 484s.
+2026-11-17T11:57:56.3193589+05:30 | All Pool C cases rated; supervisor complete.
+2026-11-17T11:57:57.2960103+05:30 | GPU clock cap reset to driver default.
+**********************
+Windows PowerShell transcript end
+End time: 20261117115757
+**********************

@@ -1,0 +1,23 @@
+{
+ "case_id": "ONGC.NS_2018-08-23_4202fa32",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ONGC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.40%, volume shock (z): 0.27, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  News Clarification. The Exchange had sought clarification from the Company with respect to news item captioned \"Oil Minister Dharmendra Pradhan said Vedanta wins 41 blocks under OALP-1, 2 blocks won by ONGC\" . The response from the Company is attached\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Exchange seeking clarification on a news item regarding Vedanta winning oil blocks under OALP-1 and ONGC winning some blocks. The company responded, but the key point here is that it's a clarification request. So, the event isn't about earnings, orders, M&A, or regulatory changes. It's more about the company providing information in response to a query. Since the Exchange is asking for clarification, this seems like a regulatory or informational event. But the options given don't have a 'clarification' category. Looking at the list, 'regulatory' might be the closest, but the company's response is just clarifying, not a regulatory action. Alternatively, maybe 'management' since it's a company response. However, the main point is that there's no new information, just clarification. So maybe this is 'noise' because it's just a clarification without new data. If it's noise, the vote should be FLAT with confidence up to 0.3.\n\nNext, the base rate. If this is noise, then historically, noise events usually don't move the market, so the base rate would be mixed or neutral. But since the user said not to invent stats, I have to rely on the fact that noise typically doesn't have a strong direction.\n\nPositioning: The pre-t context mentions a 5-day trend of 3.40% up, volume shock z of 0.27, and FinBERT prior of 0.00. The volume shock is low, so maybe the market isn't overbought. Since the news is just clarification, there's no new info, so the move isn't priced in. Therefore, the positioning isn't overbought or oversold. So the positioning step might indicate that there's no strong signal here.\n\nCommit: Since it's noise, the vote is FLAT. Confidence should be low, maybe 0.2. The trace steps would be 1 (noise), 2 (base rate mixed), 3 (no pricing), and 4 (commit based on steps 1-3). The sentiment should be FLAT, so 0.0. Wait, the instructions say sentiment sign must agree with vote. FLAT would have sentiment 0.0. But the user says if confidence is below 0.2, vote FLAT. So confidence 0.2, sentiment 0.0. But the example in the problem might have different numbers. Let me check again. The user says if noise, vote FLAT with confidence at most 0.3. So confidence could be 0.2. The sentiment should be 0.0. So the final JSON would have sentiment 0.0, vote FLAT, confidence 0.2, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 232.2,
+ "attempts": 3
+}

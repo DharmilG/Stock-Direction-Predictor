@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2021-05-31_5df137ea",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.99%, volume shock (z): -0.69, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. State Bank Of India has informed the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions an Analysts/Institutional Investor Meet/Con. Call Updates. The State Bank Of India informed the Exchange about these updates. So, this seems like a management-related event because it's about communication with analysts and investors. Management updates can influence sentiment, but they don't necessarily indicate a specific directional move. \n\nNext, the base rate. On the NSE, management communications are usually mixed. Sometimes they can be positive if the updates are favorable, but often they don't have a clear direction. So the historical precedent is probably mixed.\n\nNow, positioning. The pre-t context has a 5-day trend of 2.99%, which is positive. The volume shock is -0.69, which might indicate some negative volume, but the FinBERT prior is 0.00, suggesting no strong sentiment from text. The event here is a management update, but there's no specific positive or negative news mentioned. The previous trend is up, but the event isn't clearly priced in. Since the news is about updates, which might not be new, maybe the market has already priced in some of this. But without specific details, it's hard to say. However, since the trend is positive, but the event isn't clearly positive or negative, maybe it's a flat.\n\nCommitting, the vote would be FLAT with low confidence because the event is management-related, which is mixed historically, and there's no clear positive or negative signal. The confidence should be low, maybe 0.3. The steps would be 1 (classified as management), 2 (mixed base rate), 3 (not clearly priced in), and 4 (committing based on that).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 29.9,
+ "attempts": 1
+}

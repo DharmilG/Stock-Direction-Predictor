@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIENT.NS_2018-10-31_7158ad56",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIENT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.46%, volume shock (z): 0.79, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Financial Result Updates. Adani Enterprises Limited has submitted to the Exchange, the financial results for the period ended September 30, 2018\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions Adani Enterprises submitting financial results for September 30, 2018. That sounds like an earnings report, so the event is an earnings_result. \n\nNext, the base rate. On the NSE, earnings reports usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the company's performance. Since the user says not to invent stats, I'll stick with mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 1.46% and volume shock z of 0.79. The FinBERT prior is 0.00. The financial results are for 2018, which is a few years ago. Since the data is pre-t, and there's no recent news, the move might not be priced in. But the volume shock is moderate, maybe indicating some interest. However, without recent performance data, it's hard to tell if it's overbought or oversold. So maybe the positioning isn't clear.\n\nCommit: Since it's an earnings result, but the date is old, and there's no recent context, the confidence should be low. Maybe 0.4? But the user said confirmed filing plus supporting positioning up to 0.8. Here, the filing is confirmed, but no recent positioning. So maybe 0.4. The sentiment should be neutral since the base rate is mixed. So vote FLAT with confidence 0.4. Wait, but the instruction says if noise, vote FLAT with confidence at most 0.3. But this is an earnings result, which isn't noise. Hmm. Maybe the confidence is 0.4. The sentiment would be 0.0 since it's neutral. But the vote is FLAT because the base rate is mixed and positioning isn't clear. Wait, the trace steps need to be cited. So steps 1,2,3,4. Let me check again.\n\nWait, the user said if noise, vote FLAT. But this is an earnings result, which is a valid event. So not noise. So the vote isn't FLAT. But the base rate is mixed. So maybe the sentiment is neutral, vote FLAT? Or maybe the vote is UP or DOWN based on the base rate. Wait, the base rate is mixed, so the vote could be FLAT. But the user says to use the base rate's historical precedent. If mixed, then the vote is FLAT. So combining all, the sentiment is 0.0, vote FLAT, confidence 0.4. But the confidence can't be more than 0.3 if it's noise. But this isn't noise. So maybe confidence 0.4. But I'm a bit confused here. Let me structure it properly.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.8,
+ "attempts": 1
+}

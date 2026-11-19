@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2016-04-04_7bbc2bac",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.60%, volume shock (z): 0.37, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. HCL Technologies Limited has informed the Exchange regarding a press release dated April 01, 2016 titled \"HCL Technologies Signs Definitive Agreement to Acquire the Business of Geometric Limited\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about HCL Technologies acquiring Geometric Limited. That sounds like a merger or acquisition, so the event type should be MNA (merger and acquisition). \n\nNext, the base rate. I remember that MNA events on the NSE usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the terms and market conditions. So the base rate is mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 3.60% and a volume shock z-score of 0.37. The FinBERT prior is 0.00. The 5-day trend is positive, but the volume shock is low. Since the news is about an acquisition, which is a positive event, but the volume isn't indicating a strong reaction. The FinBERT prior is neutral. So the move might not be fully priced in yet. Since the trend is positive but volume isn't high, maybe there's some room for the price to move up.\n\nCommitting the vote. Since it's an MNA, which is a positive event, and the base rate is mixed, but the positioning isn't overbought. The confidence should be moderate. The event is confirmed by a press release, so it's a solid source. Confidence around 0.6 seems reasonable. Sentiment should be positive, so the vote is UP. Trace steps 1, 2, 3, 4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 105.5,
+ "attempts": 2
+}

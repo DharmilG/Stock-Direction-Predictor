@@ -1,0 +1,23 @@
+{
+ "case_id": "AXISBANK.NS_2022-11-24_364d567f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.37%, volume shock (z): -0.93, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  General updates. Axis Bank Limited has informed the Exchange about Disclosure under regulation 30 read with para A of part A of Schedule III of the SEBI (Listing Obligations & Disclosure Requirements) Regulations, 2015, as amended.This is to inform you that Axis Bank Limited (the \"Bank\") has entered into an agreement on November 23, 2022 in relation to an initial investment in the seed equity capital of the proposed Joint Venture (JV) of Indian Oil Corporation Limited (IOCL) and Chennai Petroleum Corporation Limited (CPCL) (\"Target entity\") (to be incorporated)\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Axis Bank entering an agreement for an initial investment in a joint venture. That sounds like a capital action since it's about investing in another entity. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on NSE usually have mixed outcomes. Sometimes it's positive if the investment is strategic, but sometimes it might not move the market much. So the base rate is mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 2.37% and a volume shock of -0.93. The FinBERT prior is 0.00. The positive trend might suggest the market is already up, so if the news is good, it might be priced in. But since the volume shock is negative, maybe there's some selling pressure. However, the news is about a strategic investment, which could be positive. But since the trend is up, maybe the market is already factoring in some of this, making it a fade candidate. But the volume shock is negative, which might indicate some uncertainty. So positioning might be neutral, but the news is positive, so maybe it's already priced in.\n\nCommitting, the event is capital action, base rate mixed, positioning might be neutral but the news is positive. Confidence would be moderate, maybe 0.6. Sentiment should be positive, so vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 27.8,
+ "attempts": 1
+}

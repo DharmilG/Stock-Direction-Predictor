@@ -1,0 +1,23 @@
+{
+ "case_id": "HDFCBANK.NS_2015-12-23_ff6915b4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HDFCBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.64%, volume shock (z): -0.94, FinBERT prior: 0.84\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. HDFC Bank Limited has informed the Exchange that the Bank has allotted on December 23 ,2015, 2093200 equity shares to the employees of the Bank pursuant to exercise of options under its Employees Stock Options Schemes (ESOS).The paid up share capital of the Bank will accordingly increase from Rs. 5045986434 equity shares of Rs 2/- each to Rs. 5050172834 equity shares of Rs 2/- each\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about HDFC Bank allotting shares to employees via ESOS. That sounds like a capital action since it's about issuing shares and increasing paid-up capital. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on the NSE can go either way. Sometimes issuing shares might be seen as diluting existing shares, which could be negative. But sometimes it's part of a company's normal operations. I think the historical precedent is mixed, so step 2 would be mixed.\n\nNow positioning. The pre-t context has a 5-day trend of 0.64% positive, volume shock z of -0.94, and FinBERT prior of 0.84. The volume shock being negative might indicate some selling pressure, but the trend is slightly up. The FinBERT prior is positive, suggesting positive sentiment. However, the event is a capital action, which might not be priced in yet. Since the trend is up but volume is down, maybe the market hasn't fully reacted. So step 3: the move might not be fully priced in. \n\nCommitting. Since it's a capital action with mixed historical impact, and the current positioning isn't clear, but the FinBERT is positive. However, without more info, maybe the sentiment is neutral. But the vote might be FLAT because the event is a capital action which is often mixed, and the positioning isn't strongly positive or negative. Wait, but the user said if it's noise, vote FLAT. Is this a noise event? Capital actions can be significant, so maybe not noise. But the confidence should be low. Let me check the confidence levels. Since it's a confirmed filing but not sure about the market reaction, maybe confidence around 0.4. But the steps: step 1 is capital_action, step 2 mixed, step 3 not priced in. So the vote might be FLAT with confidence 0.4. But the FinBERT prior is 0.84, which is positive. Hmm. Maybe the sentiment is positive but the vote is FLAT because the event is a capital action which is mixed. I think the answer should be FLAT with confidence 0.4, but I need to make sure. Let me structure the JSON accordingly.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.2,
+ "attempts": 1
+}

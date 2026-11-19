@@ -1,0 +1,21 @@
+{
+ "case_id": "BHARTIARTL.NS_2022-09-28_f241b356",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BHARTIARTL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.40%, volume shock (z): -0.33, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  General updates. We are enclosing herewith an announcement as received from and issued by Bharti Telecom Limited, Promoter of the Company.The announcement made by Singtel can also be accessed at:https://links.sgx.com/FileOpen/864-sgx.ashx?App=Announcement&FileID=732510\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The user provided a news item about Bharti Artl, but the content is just a general update mentioning an announcement from Bharti Telecom Limited and a link to Singtel's announcement. There's no specific information about earnings, guidance, orders, mergers, regulatory actions, ratings, management changes, capital actions, debt, litigation, expansion, macro policies, short sellers, or noise. The article seems to be a routine update without any clear event type. Since it's just a general update and no specific event is mentioned, it might fall under 'noise' as per the checklist. \n\nNext, the base rate. If it's noise, the historical precedent on NSE would likely be mixed or not significant. But since the user says not to invent stats, I have to rely on existing knowledge. Noise events usually don't have a strong historical impact, so the base rate might be mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of -2.40%, volume shock z of -0.33, and FinBERT prior of 0.00. The event is a general update, so there's no clear pricing in. Since it's noise, maybe the market hasn't reacted yet, so it's not overbought or oversold. But the volume shock is slightly negative, which might indicate some selling pressure. However, without specific news, it's hard to say if it's priced in.\n\nCommit: Since the event is noise, the vote should be FLAT with confidence up to 0.3. The trace steps would include classifying as noise, base rate being mixed, positioning not priced in, and committing to FLAT. The sentiment should be neutral, so 0.0. The confidence is 0.3 as per the rules. Let me make sure I didn't miss any steps. The user said if it's noise, vote FLAT with confidence at most 0.3. Yep, that fits. The steps 1,2,3,4 are all executed. The JSON should have sentiment 0.0, vote FLAT, confidence 0.3, and trace steps [1,2,3,4].\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 39.5,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "TATACONSUM.NS_2015-05-28_fcd0b4b9",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATACONSUM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.19%, volume shock (z): 5.32, FinBERT prior: 0.91\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Global Beverages Limited has informed the Exchange regarding a press release dated May 28, 2015, titled \"Tata Global Beverages announces steady growth in revenues for FY 2014-15\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Tata Global Beverages about their FY 2014-15 results. Since it's about their financial performance, this should be an earnings_result. \n\nNext, the base rate. On the NSE, earnings results are usually positive, but sometimes they can be mixed. However, the base rate here is usually-up because positive earnings often lead to price increases. \n\nNow, positioning. The pre-t context shows a 5-day trend of -1.19%, which is a decline. The volume shock is high at 5.32, and FinBERT prior is 0.91. The news is about past results, not future guidance. Since the trend is down and the news is about past performance, maybe the market has already priced in some of this. But since it's a press release from 2015, the current context might not reflect recent movements. Wait, but the user says to use only the pre-t context. The pre-t context's FinBERT prior is 0.91, which is positive. But the 5-day trend is negative. So the move might not be fully priced in. However, since the news is about past results, maybe the market already reacted to it. But the current volume shock suggests some volatility. \n\nCommitting: The event is earnings_result, base rate usually-up, positioning might be mixed. The confidence should be moderate. Since it's a confirmed filing but the positioning isn't clearly overbought or oversold, maybe confidence around 0.5. The sentiment should be positive since the vote is up. But need to check if the news is positive. The press release mentions steady growth, which is positive. So the sentiment is positive, vote up, confidence 0.5. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 31.7,
+ "attempts": 1
+}

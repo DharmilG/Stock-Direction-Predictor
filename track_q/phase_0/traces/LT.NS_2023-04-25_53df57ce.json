@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2023-04-25_53df57ce",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.41%, volume shock (z): -0.79, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Issue of Securities. Larsen & Toubro Limited has informed the Exchange about issue of Securities\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about the issuance of securities by Larsen & Toubro Limited. Looking at the possible categories, \"capital_action\" seems relevant because issuing securities is a capital action. The other options like earnings or orders don't fit here. So step 1 is classified as capital_action.\n\nNext, the base rate. I remember that on the NSE, capital actions like issuing securities can have mixed effects. Sometimes it's seen as positive for raising capital, but it might also signal financial pressure. However, without specific historical data, I have to rely on general knowledge. Typically, such actions are mixed, so the base rate is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 1.41% and a volume shock of -0.79. The FinBERT prior is 0.00. The news is about issuing securities, which might not be a positive or negative signal. Since the volume shock is negative, maybe there's some selling pressure. But the prior sentiment is neutral. The move doesn't look clearly priced in either direction. So step 3 is neutral, meaning no strong fade or bounce.\n\nCommit: Since the event is capital action with mixed base rate and neutral positioning, the sentiment should be FLAT. Confidence is low, maybe 0.2. But wait, the instructions say if noise, vote FLAT with confidence up to 0.3. Since this is a capital action, not noise, but the positioning is neutral. However, the base rate is mixed. So the vote is FLAT with confidence 0.3. Steps 1, 2, 3, and 4 are all considered. But the user said to cite steps carried weight. Maybe steps 1 and 2 are key here. But the trace steps need to include all steps executed. So the final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 32.6,
+ "attempts": 1
+}

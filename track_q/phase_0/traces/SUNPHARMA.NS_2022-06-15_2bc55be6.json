@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2022-06-15_2bc55be6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.94%, volume shock (z): -0.41, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Related Party Transaction. Sun Pharmaceutical Industries Limited has informed the Exchange about related party transaction for the period ended March 2022\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a related party transaction, which falls under the 'mna' category (mergers, acquisitions, or related party deals). So step 1 is done.\n\nNext, the base rate. I remember that related party transactions on the NSE can have mixed outcomes. Sometimes they're positive if they're strategic, but sometimes they might raise concerns about conflicts of interest. So the base rate is probably mixed. \n\nNow, positioning. The pre-t context mentions a 5-day trend of -2.94%, volume shock, and FinBERT prior of 0.00. The news is about a transaction that's already disclosed, so maybe the market has already priced in some of this. Since the trend is negative, but it's a related party transaction which could be neutral or slightly positive. However, without additional positive factors, it might not be a strong move. So the move might not be fully priced in, but not sure.\n\nCommitting the vote. Since it's a related party transaction, and the base rate is mixed, but the pre-t context shows a negative trend. If the transaction is neutral, maybe the sentiment is FLAT. But the user said if noise, vote FLAT. However, related party transactions aren't noise. So maybe the sentiment is neutral. Wait, the instructions say if noise, vote FLAT. But this is a confirmed filing, so not noise. So maybe the vote is FLAT with confidence up to 0.3. But the confidence can't be more than 0.3. However, the user says if noise, vote FLAT. Since this is not noise, maybe the confidence is higher. Wait, the steps: if it's not noise, then proceed. But the base rate is mixed, and positioning is maybe not fully priced. So the sentiment might be neutral. But the vote is FLAT? Or maybe the sentiment is 0.0, vote FLAT. But the confidence can't be more than 0.3. So the final answer would be FLAT with confidence 0.3. But I need to check the steps again. Step 3 says if overbought with good news, fade; oversold with bad news, bounce. The pre-t context has a negative 5-day trend, so maybe oversold. But the news is a related party transaction, which is neutral. So maybe the positioning is not clearly priced in. But the base rate is mixed. So the vote is FLAT. Confidence at 0.3. So the JSON would have sentiment 0.0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.6,
+ "attempts": 1
+}

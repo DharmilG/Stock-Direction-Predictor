@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2020-05-12_8f6cc54e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.87%, volume shock (z): -0.56, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Consultancy Services Limited has informed the Exchange regarding a press release dated May 12, 2020, titled \"TCS iON Launches Remote Internships Product to Connect Students with Industry Mentors\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about TCS launching a remote internships product. The PRE-T context mentions a 5-day trend of 0.87%, volume shock, and FinBERT prior. The event here is a new product launch, which falls under expansion. So step 1 is expansion.\n\nNext, the base rate for expansion events on NSE. I remember that product launches are usually positive, so the base rate is usually-up. That's step 2.\n\nFor positioning, the PRE-T context shows a positive 5-day trend and a volume shock of -0.56. The FinBERT prior is 0.00. Since the trend is up and the volume shock is negative, maybe the market hasn't fully priced in the positive news. But I need to check if the product launch is significant enough. The article is a press release about a new product, which could be seen as positive. However, the volume shock might indicate some negative sentiment. But since the 5-day trend is up, maybe the market is already reacting. Wait, the volume shock is -0.56, which might mean lower volume, but the trend is positive. So maybe the news is already partially priced in. But since it's a new product, maybe there's more to come. So positioning might be neutral, but the base rate is up, so maybe the move is not fully priced in. \n\nCommitting, since it's an expansion, base rate is up, and the positioning isn't clearly overbought or oversold. The confidence should be moderate. Maybe 0.6. So the vote is UP with confidence 0.6. Sentiment should be positive. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 100.6,
+ "attempts": 2
+}

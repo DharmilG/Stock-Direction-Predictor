@@ -1,0 +1,23 @@
+{
+ "case_id": "COALINDIA.NS_2017-08-18_8b41f726",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: COALINDIA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.84%, volume shock (z): -0.34, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. Coal India Limited has informed the Exchange regarding Notice of Annual General Meeting to be held on September 14, 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a shareholders meeting notice for the Annual General Meeting in 2017. The options are things like earnings results, M&A, regulatory, etc. Since it's just a notice about a meeting, not related to earnings, guidance, or any specific financial action, it seems like a regulatory or management event. But looking at the checklist, the possible categories include management. So I'll go with management.\n\nNext, the base rate. Historical precedent for management events on NSE. I remember that management announcements can be mixed. Sometimes they might not impact prices much, or if there's a change in leadership, it could be positive or negative. But since this is just a notice of a meeting, not a specific decision, the usual effect might be mixed. So base rate is mixed.\n\nPositioning: The pre-t context has a 5-day trend of 1.84% positive, volume shock z of -0.34, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the trend is positive. However, the event is just a meeting notice, so there's no new info. The move might already be priced in because the meeting is just a routine event. Since the trend is positive but the volume is slightly negative, maybe it's not overbought. So the positioning isn't clearly in a fade or bounce scenario. Maybe the news isn't significant enough to affect the price, so it's not priced in. But I need to check if the meeting could have any implications. If it's just a notice, maybe the market already anticipated it, so the move is priced in. But without any specific details, it's hard to say. The FinBERT prior is 0.00, so no sentiment from the text. So positioning might be neutral, leading to a flat vote.\n\nCommitting: Since the event is management, base rate is mixed, and positioning is neutral, the vote would be FLAT with low confidence. Confidence can't be more than 0.3. So the final answer would be FLAT with confidence 0.2, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 35.0,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2022-09-22_c059b8ef",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.85%, volume shock (z): -0.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. State Bank Of India has informed the Exchange about press release dated 21-Sep-2022 titled PRESS RELEASE FOR TODAY TIER 2 BOND ISSUANCE\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news item about State Bank Of India's Tier 2 Bond Issuance and determine a 5-day directional signal.\n\nFirst, I need to classify the event. The press release is about a bond issuance, which falls under capital_action. That's step 1. \n\nNext, the base rate. I remember that bond issuances on NSE usually are neutral or mixed. Sometimes they can be seen as negative because it's a debt increase, but sometimes they're necessary for capital structure. But I think the historical precedent is mixed. So step 2 says mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -0.85%, volume shock z of -0.18, and FinBERT prior of 0.00. The bond issuance might be a capital action, but the market already had a negative trend. Since the news is about a bond issue, which could be seen as negative (increasing debt), but maybe it's a routine action. The volume shock is slightly negative, but FinBERT is neutral. So the move might not be fully priced in. But since the trend is down, and the news is a capital action, which is mixed, maybe it's a fade candidate if overbought, but here the trend is down, so maybe the market already priced in some of this? Not sure. Maybe the positioning is that it's not fully priced in, but the sentiment is neutral. \n\nCommitting: Since the event is capital_action with mixed historical precedent, and the positioning isn't clearly overbought or oversold, but the trend is down. The sentiment might be neutral. So vote FLAT with low confidence. But the user said if noise, vote FLAT with confidence up to 0.3. But this isn't noise, it's a capital action. However, the base rate is mixed. So maybe the vote is FLAT with confidence 0.3. But the steps: 1 is capital_action, 2 mixed, 3 not priced in (since the trend is down and maybe the news is a routine action), so maybe the confidence is 0.4? Wait, the instructions say confidence must be proportionate. Since it's a confirmed filing (bond issuance is a filing) but the positioning isn't clear. Maybe confidence 0.4. But the user said single-source rumour at most 0.4, confirmed filing plus supporting positioning up to 0.8. Here, it's a confirmed filing (press release), but the positioning isn't strong. So maybe 0.4. \n\nBut the sentiment needs to align with vote. If vote is FLAT, sentiment is near 0. So the final answer would be FLAT with confidence 0.4, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.9,
+ "attempts": 1
+}

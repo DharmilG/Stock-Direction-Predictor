@@ -15,6 +15,8 @@ import numpy as np
 import pandas as pd
 
 from ..config import load_settings
+from ..qpipeline.paths import Q3_LEDGER, Q3_RESULTS, Q3_TRACES, Q3_HEARTBEAT, Q3_GPU, Q3_MAIN_LOG
+from ..qpipeline.fio import atomic_append_jsonl, read_jsonl_safe, file_fingerprint, write_text_atomic
 from ..data.q0_d1 import (
     LABEL_TO_VOTE,
     ThermalMonitor,
@@ -46,15 +48,13 @@ def _sample_pool(pool: pd.DataFrame, n: int, seed: int) -> pd.DataFrame:
 
 
 def _append_ledger_row(path: Path, row: dict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+    # Durable append (flush + fsync): a crash can never lose a completed pair.
+    atomic_append_jsonl(path, row)
 
 
 def _load_ledger(path: Path) -> pd.DataFrame:
-    if not path.exists():
-        return pd.DataFrame()
-    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    # Defensive read: a truncated line from a crash is quarantined, not fatal.
+    rows = read_jsonl_safe(path, quarantine_dir=path.parent / "quarantine")
     return pd.DataFrame(rows)
 
 
@@ -112,14 +112,48 @@ def run_phase3(
 
     settings = load_settings()
     paths = settings.paths
-    logger = setup_logging(paths.logs / "q3_thinking_cap.log")
+    logger = setup_logging(Q3_MAIN_LOG)
     pool = _sample_pool(_load_pool(), n, seed)
     if limit:
         pool = pool.head(int(limit))
     ledger_path = Path(_budget_ledger_path())
     trace_dir = Path(_trace_dir())
-    sample_path = paths.logs / "q3_gpu_5s.csv"
-    heartbeat_path = paths.logs / "q3_heartbeat.json"
+    sample_path = Q3_GPU
+    heartbeat_path = Q3_HEARTBEAT
+
+    # Config fingerprint: refuse to resume with a different configuration.
+    fp = file_fingerprint([Q3_LEDGER]) if Q3_LEDGER.exists() else ""
+    config_fp = dict_fingerprint({"n": n, "seed": seed, "budgets": budgets})
+    manifest_path = Q3_RESULTS.parent / "q3_manifest.json"
+    if manifest_path.exists():
+        try:
+            prior = json.loads(manifest_path.read_text(encoding="utf-8"))
+            if prior.get("config_fingerprint") and prior["config_fingerprint"] != config_fp:
+                raise RuntimeError(
+                    "Phase 3 config changed since the last run. Use --no-resume "
+                    "(delete the ledger) or restore the original config."
+                )
+        except json.JSONDecodeError:
+            pass
+    write_text_atomic(manifest_path, json.dumps(
+        {"config_fingerprint": config_fp, "n": n, "seed": seed, "budgets": budgets}, indent=2))
+
+    run_started_at = datetime.now(timezone.utc).isoformat()
+    attempted = 0
+
+    def hb(**fields) -> None:
+        payload = {
+            "updated_at": datetime.now(timezone.utc).isoformat(),
+            "phase": "phase3", "n_target": n, "budgets": budgets,
+            "attempted": attempted, "ledger_rows": int(len(_load_ledger(ledger_path))),
+            "harness_fail_rate": 0.0,
+        }
+        payload.update(fields)
+        try:
+            write_text_atomic(heartbeat_path, json.dumps(payload, indent=2, default=str))
+        except Exception:
+            pass
+    hb(status="starting")
     state = ThermalState()
     existing = _load_ledger(ledger_path)
     done: set[tuple[str, int]] = set()
@@ -129,8 +163,6 @@ def run_phase3(
             for row in existing.itertuples(index=False)
         }
 
-    run_started_at = datetime.now(timezone.utc).isoformat()
-    attempted = 0
     for _, row in pool.iterrows():
         case_id = str(row["case_id"])
         ctx = (
@@ -202,6 +234,10 @@ def run_phase3(
             }
             _append_ledger_row(ledger_path, ledger_row)
             done.add((case_id, budget))
+            ledger_df = _load_ledger(ledger_path)
+            hb(status="running", current_case=case_id, current_budget=budget,
+               harness_fail_rate=float(ledger_df["harness_fail"].astype(bool).mean()) if len(ledger_df) else 0.0,
+               last_case_id=case_id, last_budget=budget)
             logger.info("Phase3 checkpoint: case=%s budget=%d vote=%s", case_id, budget, result.vote)
 
     ledger = _load_ledger(ledger_path)
@@ -260,6 +296,9 @@ def run_phase3(
         "updated_at": datetime.now(timezone.utc).isoformat(),
     }
     atomic_write_json(Path(_results_path()), report)
+    hb(status="verdict", complete=True, pass_=bool(report["pass"]),
+       winner_budget=winner, harness_fail_rate=report["harness_fail_rate"])
+    write_text_atomic(Q3_DONE, json.dumps(report, indent=2, default=str))
     q_state.set_phase_status("phase3", "passed" if report["pass"] else "failed", result=report)
     logger.info("Phase3 winner budget=%s report=%s", winner, _results_path())
     return report

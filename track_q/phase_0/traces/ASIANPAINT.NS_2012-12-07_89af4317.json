@@ -1,0 +1,23 @@
+{
+ "case_id": "ASIANPAINT.NS_2012-12-07_89af4317",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ASIANPAINT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.41%, volume shock (z): -0.86, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. Sudhanva Investments and Trading Company Pvt. Ltd. has submitted to the Exchange vide letter dated December 06, 2012 a copy of Disclosure pursuant to Regulation 31(1) and 31(2) of SEBI (Substantial Acquisition of Shares and Takeovers) Regulations, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI Takeover Regulations, specifically about Sudhanva Investments submitting a disclosure notice. That sounds like a regulatory filing. So the event type is regulatory.\n\nNext, the base rate. I remember that regulatory filings on the NSE can have mixed effects. Sometimes they might signal positive changes, other times negative. But generally, they don't have a strong historical trend. So the base rate is probably mixed.\n\nPositioning: The PRE-T context shows a 5-day trend of -0.41%, volume shock of -0.86, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. But the event is a regulatory disclosure, which might not directly impact the stock's direction unless it's related to a takeover or significant ownership change. Since the article is about a disclosure under takeover regulations, maybe it's a potential takeover. However, the PRE-T context doesn't mention anything about the company's performance or other factors. The volume shock is negative, but without more info, it's hard to say if the move is priced in. The event is a disclosure, which might not be a direct positive or negative. So maybe the positioning isn't clear, so the move isn't necessarily priced in.\n\nCommit: Since the event is regulatory, and the base rate is mixed, and the positioning isn't clear, the vote might be FLAT. Confidence should be low, maybe around 0.3. But the user said if it's noise, vote FLAT with confidence up to 0.3. Since the event is a regulatory filing, but without more info, it's noise. So the vote is FLAT with confidence 0.3. The trace steps would be 1 (classified as regulatory), 2 (mixed base rate), 3 (positioning not clear), and 4 (commit based on steps 1-3).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 33.0,
+ "attempts": 1
+}

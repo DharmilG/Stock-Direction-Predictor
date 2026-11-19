@@ -1,0 +1,23 @@
+{
+ "case_id": "AXISBANK.NS_2015-06-30_9c76815b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.16%, volume shock (z): -0.67, FinBERT prior: 0.82\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. Axis Bank Limited has informed the Exchange that the Bank has allotted 3,47,050 equity shares of Rs 2/- each on June 29, 2015, pursuant to exercise of options under its ESOP Scheme.  The paid up share capital of the Bank will accordingly increase from Rs 474,98,98,624 (237,49,49,312 equity shares of Rs 2/- each) to Rs 475,05,92,724 (237,52,96,362 equity shares of Rs 2/- each)\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Axis Bank allotting equity shares through their ESOP Scheme. That sounds like a capital action since it's about issuing shares and increasing paid-up capital. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on the NSE can go either way. Sometimes issuing shares might be seen as diluting existing shares, which could be negative, but if it's part of a scheme like ESOPs, it might be viewed as positive for employee retention. But I'm not sure if there's a clear historical precedent here. Maybe it's mixed?\n\nPositioning: The pre-t context mentions a 5-day trend of -2.16%, volume shock z of -0.67, and FinBERT prior of 0.82. The FinBERT prior is positive, indicating positive sentiment. However, the 5-day trend is negative, and volume shock is negative. The event is about issuing shares, which might not be priced in yet. Since the market is down and volume is low, maybe this news isn't fully reflected. But since it's a capital action, which can be neutral or mixed, I need to check if the move is priced in. The negative trend and volume might suggest that the market hasn't reacted yet, so the news could be a bounce candidate if it's positive. But since it's a capital action, maybe the market is already factoring it in? Not sure.\n\nCommit: If the event is capital_action, and the base rate is mixed, but the positioning shows the market is down and volume is low, maybe the sentiment is slightly positive. The confidence should be moderate. Let me check the confidence levels. Since it's a confirmed filing (allotment of shares) but the positioning is mixed, maybe confidence around 0.5. The sentiment would be positive, so vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 130.9,
+ "attempts": 2
+}

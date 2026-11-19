@@ -1,0 +1,23 @@
+{
+ "case_id": "AXISBANK.NS_2016-03-03_9810375b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 10.30%, volume shock (z): -0.06, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Axis Bank Limited has informed the Exchange regarding the schedule of Investor conference held on March 02, 2016\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Axis Bank holding an investor conference on March 2, 2016. The options are things like earnings results, guidance, M&A, regulatory, etc. Since the article just mentions an investor conference schedule update, it doesn't seem like earnings results or guidance. It's not an M&A event either. The bank is informing the exchange about a conference, which might be a regulatory or management event. But the main point here is that it's a routine update about a scheduled event, not a significant decision. So maybe it's a 'management' event.\n\nNext, the base rate. What's the historical precedent for such events on NSE? If it's a management event like announcing a conference, usually, these are just informational and don't directly impact stock prices. Unless there's something big announced, which there isn't here. So the base rate might be mixed or neutral. But since it's a management update without any new info, maybe it's usually neutral or mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 10.30% up, volume shock z of -0.06, and FinBERT prior of 0.00. The volume shock is slightly negative, but the trend is positive. The FinBERT prior is neutral. The event is just an update about a conference, which might not be priced in. Since the trend is up, but the news is neutral, maybe the market hasn't reacted yet. So the positioning might be that the move isn't fully priced in. However, since it's a management event without new info, maybe it's considered noise. If it's noise, then the vote should be FLAT with confidence up to 0.3.\n\nCommit: If it's noise, then vote FLAT. But need to check if the event is indeed noise. The classification was management, but if there's no new info, then it's noise. The base rate for management events might be mixed. However, since the news is just an update about a scheduled conference, which is routine, it's likely noise. So vote FLAT with confidence 0.2. The trace steps would be 1 (noise), 2 (mixed), 3 (not priced in), and 4 (commit based on noise).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.8,
+ "attempts": 1
+}

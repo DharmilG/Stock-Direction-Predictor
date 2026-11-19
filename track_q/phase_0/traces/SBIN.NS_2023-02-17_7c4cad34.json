@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2023-02-17_7c4cad34",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.99%, volume shock (z): -0.56, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. State Bank Of India has informed the Exchange about Details of Analyst / Investor Meet\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about State Bank Of India informing the Exchange about details of an Analyst/Investor Meet. The possible categories are earnings_result, earnings_guidance, order_win, mna, regulatory, rating_change, management, capital_action, debt_credit, litigation, expansion, macro_policy, short_seller, or noise. \n\nThe event here seems to be related to a meeting with analysts and investors. The key point is that the bank is providing details about this meet. Since there's no mention of earnings results, guidance, mergers, acquisitions, regulatory changes, or other specific events, the closest category might be 'management' because it's about communication with stakeholders. However, the article doesn't mention any specific news or decisions from the meet. It's just a notification about the meet's details. \n\nNext, checking if it's noise. Noise events are those that don't have significant impact. Since the article is just about informing the exchange about the meet, there's no clear positive or negative news. So, it might be classified as noise. If noise, the vote should be FLAT with confidence up to 0.3.\n\nFor the base rate, if this is noise, historically such events usually don't move the market, so the base rate would be mixed or neutral. But since the instruction says not to invent stats, I need to rely on known precedents. If the event is noise, the base rate might be mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of -3.99%, volume shock z of -0.56, and FinBERT prior of 0.00. The event is about a meet, which might not be priced in. Since the trend is negative and volume is down, but the news is neutral, there's no clear overbought or oversold condition. So, the positioning might not indicate a fade or bounce.\n\nCommitting: If classified as noise, vote FLAT with confidence up to 0.3. The steps would be 1 (noise), 2 (mixed base rate), 3 (not priced in), and 4 (FLAT vote). The sentiment should be neutral, so 0.0. The JSON would reflect FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 113.1,
+ "attempts": 2
+}

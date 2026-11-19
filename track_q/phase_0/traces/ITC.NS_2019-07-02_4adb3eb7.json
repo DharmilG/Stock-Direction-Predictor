@@ -1,0 +1,23 @@
+{
+ "case_id": "ITC.NS_2019-07-02_4adb3eb7",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ITC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.67%, volume shock (z): -0.22, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. ITC Limited has informed the Exchange regarding 'Details of Dematerialisation and Rematerialisation of Shares effected in June 2019 pursuant to Regulation 74(5) of SEBI (Depositories and Participants) Regulations, 2018.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about ITC Limited providing details on dematerialisation and rematerialisation of shares from June 2019 under SEBI regulations. This seems like a regulatory filing. So, the event type is regulatory.\n\nNext, the base rate. Historical precedent for regulatory filings on NSE\u2014usually, these are informational and don't directly impact stock prices unless there's something negative or significant. Since this is just a routine filing about share transactions, the usual effect is neutral. But I should check if there's any pattern. Wait, the user said not to invent stats, so I have to rely on general knowledge. Regulatory filings are often seen as neutral or mixed, but sometimes they can be positive if they indicate compliance or transparency. However, without specific data, the base rate is probably mixed.\n\nPositioning: The PRE-T context has a 5-day trend of -1.67%, volume shock z of -0.22, and FinBERT prior of 0.00. The volume shock is slightly negative, but not a big deal. The FinBERT prior is neutral. The event itself is a regulatory filing, which might not be priced in. Since the trend is down but the news is neutral, maybe the market hasn't reacted yet. So, the move might not be priced in, but it's not a clear fade or bounce candidate.\n\nCommit: Since the event is regulatory, and the base rate is mixed, and the positioning isn't strongly positive or negative, the sentiment should be neutral. The vote would be FLAT with low confidence. Confidence can't be more than 0.3 as per the noise category. So, the final answer is FLAT with confidence 0.2, citing steps 1, 2, 3, 4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.8,
+ "attempts": 1
+}

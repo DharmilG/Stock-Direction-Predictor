@@ -1,0 +1,23 @@
+{
+ "case_id": "ONGC.NS_2013-11-14_a44f544a",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ONGC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.79%, volume shock (z): -0.54, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Results Update, Quarter  ended 30-SEP-2013 (Standalone). Oil & Natural Gas Corporation Limited has informed the Exchange regarding the standalone Results for the quarter ended on 30-SEP-2013 as follows: Net Sales of Rs. 2231198 lacs for the quarter ending on 30-SEP-2013 against Rs. 1921831 lacs and Rs. 1978818 lacs for the quarters ending on 30-JUN-2013 and 30-SEP-2012 respectively. Net Profit / (Loss) of Rs. 606386 lacs for the quarter ending on 30-SEP-2013 against Rs. 401598 lacs and Rs. 589657 lacs for the quarters ending on 30-JUN-2013 and 30-SEP-2012 respectively\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about ONGC's quarterly results, so that's an earnings_result. Next, the base rate for earnings results on NSE\u2014usually, good earnings are positive, but I should check if there's a historical trend. Since the user says not to invent stats, I'll stick with the general knowledge that earnings reports can go either way, but often positive results are up. \n\nNow, the PRE-T context mentions a 5-day trend of -4.79%, which is negative, and a volume shock of -0.54. The FinBERT prior is 0.00. So the market was down before this news. The actual results show higher net sales and a higher net profit compared to the previous quarters. Wait, the net profit for Q3 2013 is Rs. 606,386 lacs, which is higher than Q2 2013 (401,598) and Q3 2012 (589,657). So this is a positive earnings report. \n\nBut the market was already down, so is the news priced in? The positioning step: if the market was down and the news is good, maybe the move is not fully priced. However, the volume shock is negative, which might indicate selling pressure. But the earnings are better than the previous quarter. So maybe the positive news could lead to a rebound. However, since the 5-day trend is down, maybe the market is oversold, and the good news could be a bounce. \n\nCommitting: the event is earnings_result, base rate usually up, but the market was down. The news is positive, so the sentiment should be positive. But since the market was down, maybe the confidence is moderate. The confidence can't be 1.0, so maybe 0.6. The trace steps would be 1,2,3,4. So the vote is UP with confidence 0.6.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 35.1,
+ "attempts": 1
+}

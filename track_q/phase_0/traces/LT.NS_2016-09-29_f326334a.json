@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2016-09-29_f326334a",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.16%, volume shock (z): 1.27, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Larsen & Toubro Limited has informed the Exchange regarding a press release dated September 29, 2016, titled \"L&T Construction Wins Orders Valued Rs 2046 Crores\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Larsen & Toubro winning a big order worth Rs 2046 Crores. That sounds like an order win, so step 1 would be order_win. \n\nNext, the base rate. I remember that order wins usually have a positive impact on stock prices. But I should check if there's historical data. Wait, the user said not to invent statistics, so I have to rely on general knowledge. On NSE, order wins are typically positive, so the base rate is usually-up.\n\nPositioning: The pre-t context mentions a 5-day trend of -4.16%, which is a decline. The volume shock is 1.27, which might indicate some volatility. FinBERT prior is 0.00, so no strong sentiment from that. The news is about a significant order win, which is positive. Since the stock has been down, maybe this news isn't fully priced in. But the volume shock might mean there's some reaction already. However, the order win is a positive event, so if the stock is down, the news could be a bounce. But the user mentioned that if the move looks priced in, like overbought with good news, it's a fade. Here, the stock is down, so maybe it's oversold, and the news could be a bounce. But I need to check if the news is already reflected. Since the volume shock is 1.27, which is a bit high, maybe there's some reaction. But without seeing the price movement, I have to assume the news isn't fully priced in. So positioning might lean towards a bounce, but the confidence is moderate.\n\nCommitting: Since it's an order win, base rate is positive, and the stock was down, the vote would be UP with confidence around 0.6. The steps that matter are 1, 2, and 3. So the JSON would have sentiment positive, vote UP, confidence 0.6, and trace steps 1,2,3,4. Wait, step 4 is commit, so trace steps should include all four steps. Let me make sure the confidence is within 0.8. Since it's a confirmed filing (the press release) and the positioning is a bounce, maybe 0.6 is okay. Alright, that should be it.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 39.7,
+ "attempts": 1
+}

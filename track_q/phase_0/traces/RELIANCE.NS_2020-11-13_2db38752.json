@@ -1,0 +1,23 @@
+{
+ "case_id": "RELIANCE.NS_2020-11-13_2db38752",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: RELIANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.61%, volume shock (z): 0.08, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Reliance Industries Limited has informed the Exchange regarding 'Investment in Breakthrough Energy Ventures II, L.P. '\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Reliance Industries investing in Breakthrough Energy Ventures II, L.P. That sounds like a capital action since they're making an investment. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on NSE can go either way. Sometimes companies invest in new ventures which might be positive, but it's not always the case. So the historical precedent is probably mixed. That's step 2.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of -1.61%, volume shock z of 0.08, and FinBERT prior of 0.00. The volume shock is low, and the prior sentiment is neutral. The news is a new investment, which might not be priced in yet. Since the trend is slightly down but not overbought, and the news is positive, maybe it's a bounce candidate? Wait, the positioning step says if overbought with good news, fade; oversold with bad news, bounce. Here, the trend is down but not sure if oversold. The volume shock is 0.08, which is low, so maybe not overbought. So maybe the move isn't priced in, so the sentiment might be positive. \n\nCommitting: The event is capital action, base rate is mixed, positioning isn't clearly overbought or oversold. The news is a positive investment, so maybe the vote is UP with moderate confidence. But since it's a single-source filing, confidence should be under 0.8. Let's say 0.6. The sentiment should be positive, so 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 28.9,
+ "attempts": 1
+}

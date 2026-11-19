@@ -1,0 +1,23 @@
+{
+ "case_id": "HDFCLIFE.NS_2019-04-09_a43fdaac",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HDFCLIFE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.39%, volume shock (z): -0.51, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disc. under Reg.30 of SEBI (SAST) Reg.2011. The Promoter has submitted to the Exchange a copy of Annual Disclosure under Regulation 30(1) and 30(2) of SEBI (Substantial Acquisition of Shares and Takeovers), Regulations, 2011 as on March 31, 2019\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a regulatory disclosure under SEBI regulations. The key terms here are \"Disc. under Reg.30\" and mentions of SEBI (SAST) Regulations 2011. The promoter submitted annual disclosure documents. So this seems like a regulatory filing. The options include regulatory as a category. So step 1 classification is regulatory.\n\nNext, the base rate. What's the historical precedent for regulatory filings on NSE? Typically, regulatory disclosures can have mixed effects. Sometimes they might signal compliance or transparency, which could be positive, but other times they might relate to issues that could be negative. However, since this is a standard disclosure under SEBI regulations, it's probably a routine filing. The base rate here is likely mixed because the impact isn't clear without more context. But maybe in the past, such filings don't significantly move the stock unless there's something negative. So I'll note that the base rate is mixed.\n\nPositioning: Using the PRE-T CONTEXT. The 5-day trend is 0.39% positive. Volume shock (z) is -0.51, which might indicate lower volume, possibly a lack of interest. FinBERT prior is 0.00, suggesting no strong sentiment from financial texts beforehand. The event itself is a regulatory filing, which might not carry new information. Since the move looks priced in (as there's no new info), and the prior trend is slightly positive, but the volume is low. The positioning might suggest that the market hasn't reacted yet, so maybe it's a flat. But the user's instruction says if it's noise, vote FLAT with confidence up to 0.3. Since this is a regulatory filing without new info, it's noise. So step 3 would indicate FLAT with confidence up to 0.3.\n\nCommit: Since it's noise, the vote is FLAT, confidence 0.3. The steps that carried weight are 1 (classification as regulatory), 2 (base rate mixed), 3 (positioning as priced in, hence noise). So the trace steps are 1,2,3,4. The sentiment should be FLAT, so 0.0. The JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.6,
+ "attempts": 1
+}

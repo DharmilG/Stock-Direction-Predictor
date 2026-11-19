@@ -1,0 +1,23 @@
+{
+ "case_id": "DRREDDY.NS_2017-08-09_55680ddc",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: DRREDDY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -13.88%, volume shock (z): 0.82, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Dr. Reddy's Laboratories Limited has informed the Exchange regarding a press release dated August 09, 2017, titled \"Form 6-K for the quarter ended June 30, 2017, filed with United States Securities Exchange Commission\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Dr. Reddy's Laboratories filing a Form 6-K with the SEC, which is a regulatory filing. So the event type here is regulatory. \n\nNext, the base rate for regulatory events on the NSE. From what I know, regulatory filings can go either way. Sometimes they're positive, like compliance news, but other times they might be neutral or even negative if there's some issue. But since the article just mentions a standard filing without any specific details, the historical precedent is probably mixed.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -13.88%, which is a significant drop. The volume shock is 0.82, which might indicate some volatility. The FinBERT prior is 0.00, so no strong sentiment from that. The filing itself is a regulatory action, but without any new info, it's hard to say if the market has already priced this in. Since the stock is down and there's no clear positive or negative news, maybe the move isn't fully priced in. But since it's a regulatory filing without specific details, it's hard to tell if it's a bounce or fade.\n\nCommitting the vote. Since the event is regulatory and the base rate is mixed, and there's no clear positive or negative signal, the sentiment might be neutral. But the stock is down, so maybe there's a potential for a bounce if the filing is seen as positive. However, without more info, it's safer to go FLAT with low confidence. But wait, the user said if it's noise, vote FLAT with confidence at most 0.3. Since this is a regulatory filing but not a significant event, maybe it's noise. So confidence would be 0.3 or less. But the steps say to stop if it's noise. So the answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 32.7,
+ "attempts": 1
+}

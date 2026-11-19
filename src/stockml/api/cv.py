@@ -112,6 +112,9 @@ def cv_training() -> dict[str, Any]:
     for name in ("train_stage1", "train_stage2"):
         state = _read_json(root / "artifacts" / "state" / f"{name}.json")
         history = _read_jsonl(root / "artifacts" / "metrics" / f"{name}.jsonl")
+        active_fp = state.get("fingerprint")
+        if active_fp:
+            history = [row for row in history if row.get("fingerprint") in (None, active_fp)]
         stages[name] = {
             "status": state.get("status", "not-started"),
             "epoch": state.get("epoch"),

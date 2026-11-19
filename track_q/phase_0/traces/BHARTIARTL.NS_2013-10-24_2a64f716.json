@@ -1,0 +1,23 @@
+{
+ "case_id": "BHARTIARTL.NS_2013-10-24_2a64f716",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BHARTIARTL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.29%, volume shock (z): -0.71, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Amalgamation/Merger. Bharti Airtel Limited has informed the Exchange vide letter dated October 23, 2013 that subject to the requisite approvals (including approvals of the relevant High Courts, if any), the Board of Directors of Bharti Airtel Limited (the Company) has approved the Scheme of Amalgamation of Airtel Broadband Services Private Limited (formerly known as Wireless Business Services Private Limited) a wholly owned subsidiary with the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a merger or amalgamation of a subsidiary with Bharti Airtel. The key terms here are \"Amalgamation/Merger\" and the approval of a Scheme of Amalgamation. From the checklist, the event types include MNA (Mergers and Acquisitions), so that's probably the classification here.\n\nNext, the base rate. I remember that M&A news on the NSE usually has mixed outcomes. Sometimes it's positive if the merger is seen as growth, but sometimes it's negative if there are integration risks or regulatory hurdles. Since the article mentions \"subject to requisite approvals,\" there's uncertainty, which might lead to a mixed historical precedent.\n\nPositioning: The PRE-T context has a 5-day trend of 0.29% positive, volume shock negative, and FinBERT prior neutral. The news is about a merger that's already approved by the Board, but approvals from High Courts are pending. The volume shock suggests some negative sentiment, but the news itself is positive. However, since the approvals are not yet confirmed, the market might not have fully priced in the positive impact yet. The 5-day trend is slightly up, but the volume shock is negative. Maybe the move isn't fully priced in yet, so there's potential for a move.\n\nCommit: Since the merger is approved but pending court approvals, it's a confirmed filing but with some uncertainty. The confidence should be moderate. The base rate is mixed, but the news is positive. The positioning isn't fully priced in, so the sentiment should be positive. Confidence around 0.6 seems reasonable. The vote would be UP.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 34.6,
+ "attempts": 1
+}

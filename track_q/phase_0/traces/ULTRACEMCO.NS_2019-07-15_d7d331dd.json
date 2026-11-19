@@ -1,0 +1,23 @@
+{
+ "case_id": "ULTRACEMCO.NS_2019-07-15_d7d331dd",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ULTRACEMCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.66%, volume shock (z): -0.65, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. UltraTech Cement Limited has informed the Exchange regarding 'Certificate under Regulation 74(5) of the SEBI (Depository and Participants Regulations), 2018 for the quarter ended 30th June, 2019.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about UltraTech Cement Limited informing the Exchange about a certificate under Regulation 74(5) of the SEBI regulations for a specific quarter. This seems like a regulatory filing. The options include regulatory, so that's step 1.\n\nNext, the base rate. Regulatory filings on the NSE\u2014usually, they don't directly impact stock prices unless there's something negative or positive. But since this is just a routine filing, maybe the historical precedent is mixed? Or maybe usually neutral? Wait, the user said not to invent stats. If I don't have specific data, maybe it's considered mixed. But I should check if there's any standard. Hmm, maybe regulatory filings are usually neutral, but sometimes they can signal issues. But without specific stats, I might have to go with mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 4.66% up, volume shock z of -0.65, and FinBERT prior 0.00. The event is a regulatory filing, which might not be priced in. Since the trend is positive, but the news is a routine filing, maybe the market hasn't reacted yet. So the move might not be priced in. But how does that affect the vote? If the news is neutral but the market is already up, maybe it's a fade candidate? Wait, the positioning step says if overbought with good news, fade. Here, the trend is up, but the news is regulatory, which is neutral. So maybe the positioning is that the move isn't priced in, so the vote could be flat? Or maybe the confidence is low.\n\nCommit: Since the event is regulatory, base rate is mixed, positioning isn't priced in. So the vote might be FLAT with low confidence. But the confidence can't exceed 0.3 if it's noise. Wait, the user said if noise, vote FLAT with confidence at most 0.3. Is this regulatory filing considered noise? If it's a routine filing, maybe yes. So vote FLAT, confidence 0.3. But the steps need to be cited. Let me check again.\n\nStep 1: regulatory. Step 2: base rate is mixed. Step 3: positioning is not priced in. Step 4: commit FLAT with confidence 0.3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, trace steps 1,2,3,4. Wait, the sentiment should align with the vote. FLAT would have sentiment near 0. So that's okay. But the confidence is 0.3. That seems right. I think that's the way to go.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 43.5,
+ "attempts": 1
+}

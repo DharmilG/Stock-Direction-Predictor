@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2019-06-12_b16fd83d",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.45%, volume shock (z): -0.23, FinBERT prior: 0.79\nARTICLE TEXT (full, un-summarized):\n  Updates. Wipro Limited has informed the Exchange regarding 'Wipro positioned as a Leader in Gartner's Magic Quadrant for Managed Workplace Services, North America'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro being positioned as a leader in Gartner's Magic Quadrant for Managed Workplace Services. That sounds like a positive recognition, so maybe an order_win or expansion. The options include order_win, which fits here since it's about winning a significant contract or recognition.\n\nNext, the base rate. I remember that NSE usually sees positive news about being a leader in industry reports as a good sign. But I'm not sure if it's usually up or mixed. Maybe it's usually up because such recognitions can boost stock prices.\n\nPositioning: The pre-t context mentions a 5-day trend of 1.45% and volume shock. The FinBERT prior is 0.79, which is positive. The news is about a leadership position, which is positive. Since the trend is positive and the news is good, maybe the move is already priced in? Wait, the volume shock is negative, but the FinBERT is positive. Maybe the market hasn't fully reacted yet? Or is it already priced in because the trend is up?\n\nCommit: If the event is order_win, and the base rate is usually up, but the positioning is mixed (positive news but maybe volume shock suggests some uncertainty). However, the FinBERT prior is positive. Maybe the confidence is around 0.6. So the vote would be UP with confidence 0.6. Trace steps 1,2,3,4. Sentiment should be positive, so 0.8. Wait, the confidence can't be 1.0. Since it's a confirmed filing (the news is official) and supporting positioning (FinBERT prior), maybe confidence up to 0.8. Let me check the steps again. \n\nWait, the user said if noise, vote FLAT. But this is an order_win, which is not noise. So steps 1: order_win. Base rate: usually up. Positioning: the pre-t context has a positive FinBERT but volume shock. Maybe the move isn't fully priced in because the volume shock is negative. So the positioning is neutral? Or maybe the positive news is already reflected in the trend. Hmm. Maybe the confidence is 0.6. So the vote is UP, confidence 0.6. Sentiment 0.8. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.5,
+ "attempts": 1
+}

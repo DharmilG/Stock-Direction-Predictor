@@ -1,0 +1,21 @@
+{
+ "case_id": "MARUTI.NS_2020-01-15_d951c1be",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: MARUTI.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 6.36%, volume shock (z): -0.17, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Maruti Suzuki India Limited has informed the Exchange regarding 'Newspaper Notice'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions Maruti Suzuki India Limited informing the Exchange about a 'Newspaper Notice'. The PRE-T CONTEXT includes a 5-day trend of 6.36% and some volume and FinBERT data. The event here seems to be a regulatory notice, so I'd classify it under 'regulatory'.\n\nNext, the base rate for regulatory events on NSE. From what I remember, regulatory announcements can go either way. Sometimes they might be positive, like compliance news, but other times they could be negative, like investigations. Since the base rate is usually mixed, I'll note that.\n\nPositioning: The PRE-T context shows a positive 5-day trend. If the regulatory notice is neutral or positive, maybe the market has already priced in some of that. But since the notice isn't clearly positive or negative, maybe it's not priced in yet. Wait, the user said to use only the PRE-T context. The 5-day trend is up, but the event is a regulatory notice. If the notice is something like a compliance filing, maybe it's positive, but without more info, it's hard. The volume shock is negative, but that's from the PRE-T data. Maybe the market hasn't fully priced in the regulatory move yet.\n\nCommit: Since the event is regulatory, which has a mixed base rate. The PRE-T context shows a positive trend but the notice might not be significant. If it's a routine notice, maybe the sentiment is neutral. But the user wants a vote. If the base rate is mixed, and the positioning isn't clearly overbought or oversold, maybe the vote is FLAT with low confidence. But the instruction says if noise, vote FLAT. Is this a noise event? The article is about a newspaper notice, which might be a regulatory filing. If it's a standard filing, maybe it's noise. So vote FLAT, confidence 0.3. But the user said if noise, vote FLAT with confidence at most 0.3. So that's the case here. So the sentiment would be 0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 51.6,
+ "attempts": 1
+}

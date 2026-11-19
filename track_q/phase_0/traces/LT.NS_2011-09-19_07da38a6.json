@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2011-09-19_07da38a6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.12%, volume shock (z): 0.55, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Larsen & Toubro Limited has informed the Exchange regarding a press release dated September 19,  2011, titled \"L&T Construction Bags  Orders Valued Rs.1015 crore\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Larsen & Toubro winning a construction order worth Rs.1015 crore. That sounds like an order win, so step 1 would be order_win. \n\nNext, the base rate. I remember that on the NSE, order wins are usually positive. Companies getting new contracts often see their stock rise because it indicates future revenue. So the base rate is usually-up.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -5.12%, which is negative. The volume shock is 0.55, which might indicate some volatility. FinBERT prior is 0.00, so no strong sentiment from that. Since the stock has been down and this is positive news, maybe the move isn't fully priced in. But the volume shock might suggest some reaction already. However, the news is about a significant order, so it's possible the market hasn't fully reacted yet. So, the positioning might be that the news isn't fully priced in, making it a potential up move.\n\nCommitting the vote. Since it's an order win, usually-up, and the positioning suggests the news isn't fully priced, the vote should be UP with confidence. The confidence level should be moderate, maybe 0.6. Steps 1, 2, and 3 are key here. Step 4 is just committing based on those steps. \n\nWait, the confidence can't be 1.0. The event is a confirmed filing (the press release), so maybe confidence is 0.6. Also, the base rate is usually-up, so that supports the UP vote. The positioning is that the stock was down, so the news could be a positive catalyst. So the sentiment should be positive, aligning with UP. The confidence is 0.6, which is reasonable. Let me check the steps again. Step 1: order_win. Step 2: usually-up. Step 3: the stock was down, so the news is positive and not fully priced. Step 4: commit UP with confidence 0.6. That should be correct.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.8,
+ "attempts": 1
+}

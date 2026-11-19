@@ -1,0 +1,23 @@
+{
+ "case_id": "EICHERMOT.NS_2017-12-05_0e95433f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: EICHERMOT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.27%, volume shock (z): 3.36, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Eicher Motors Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions Analysts/Institutional Investor Meet/Con. Call Updates. Eicher Motors Limited informed the Exchange about these updates. So, this seems like a management update, maybe related to investor relations or meetings. The possible categories are management, earnings_result, etc. Since there's no mention of earnings numbers or guidance, but rather a meeting update, I think it's a management event.\n\nNext, the base rate. For NSE, management updates can be mixed. Sometimes they might have positive implications, sometimes not. But generally, they don't have a strong historical trend. So the base rate is probably mixed.\n\nPositioning: The PRE-T context says the 5-day trend is -5.27%, volume shock z of 3.36, and FinBERT prior is 0.00. The volume shock might indicate some unusual activity. But the event is a management update. If the stock is down and there's a meeting, maybe investors are reacting to the news. However, the FinBERT prior is neutral. Since the event is a management update, and the stock is down, but there's no clear positive or negative news, maybe the move isn't fully priced in. But the volume shock might suggest some reaction. However, without specific news, it's hard to tell. Maybe it's a neutral event, so the positioning is neither overbought nor oversold. So the move might not be priced in yet.\n\nCommit: Since it's a management event, and the base rate is mixed, and the positioning isn't clear, the sentiment might be neutral. The confidence should be low. The vote would be FLAT with confidence around 0.3. But wait, the instructions say if it's noise, vote FLAT. But is this a noise event? Management updates can be noise if there's no specific info. So maybe it's noise. Hence, FLAT with confidence 0.3. But the steps need to be cited. So trace steps 1,2,3,4. The sentiment would be 0.0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 46.5,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2020-03-16_ee506fb1",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -23.43%, volume shock (z): 0.82, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. S B Adani Family Trust has submitted to the Exchange a copy of the disclosure on detailed reasons for encumbrance\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI Takeover Regulations, specifically about the Adani Family Trust submitting details on encumbrance. That sounds like a regulatory filing. So, the event type is regulatory.\n\nNext, the base rate. I remember that regulatory disclosures can have mixed impacts. Sometimes they might reveal issues that could be negative, but other times they might be routine. On the NSE, regulatory news isn't always a clear signal. It could go either way, so the base rate is probably mixed.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -23.43%, which is a significant drop. The volume shock is 0.82, which might indicate some volatility. The FinBERT prior is 0.00, suggesting no strong sentiment from news. The event here is a regulatory disclosure, which might not be priced in yet. Since the stock has been down, if the news is neutral or positive, it might be a bounce. But since it's a disclosure about encumbrance, which could be negative, maybe the market hasn't fully reacted. However, the article doesn't specify if the encumbrance is bad or just a routine disclosure. So, it's unclear if it's priced in.\n\nCommitting the vote. Since the event is regulatory with mixed base rate, and the positioning isn't clear, maybe the sentiment is neutral. But the stock is oversold, so if the news is neutral, it might bounce. However, without knowing the exact content of the disclosure, it's risky. The confidence should be low. Maybe FLAT with low confidence, but the instruction says if noise, vote FLAT with confidence up to 0.3. Since regulatory filings can be noise, maybe FLAT. But the user wants the sentiment to align with the vote. If FLAT, sentiment should be near 0. But the steps say if noise, vote FLAT. So, maybe the answer is FLAT with confidence 0.3. But I need to check the steps again. Step 1: classify as regulatory. Step 2: base rate is mixed. Step 3: positioning is unclear, but given the 5-day trend is down, if the news is neutral, it might be a bounce. However, without knowing the disclosure content, it's hard to say. Maybe the move isn't priced in, so it's a bounce candidate. But since the event is regulatory and the base rate is mixed, the vote might be FLAT. Hmm. Maybe the answer is FLAT with confidence 0.3, sentiment 0. But the user says if noise, vote FL. So I think the correct vote is FLAT with confidence up to 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 45.2,
+ "attempts": 1
+}

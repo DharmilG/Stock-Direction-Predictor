@@ -1,0 +1,23 @@
+{
+ "case_id": "JSWSTEEL.NS_2016-04-08_2e571c2c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: JSWSTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.85%, volume shock (z): -1.14, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disc. under Reg.30 of SEBI (SAST) Reg.2011. Sajjan Jindal has submitted to the Exchange vide letter dated April 1, 2016  a copy of disclosure under Regulation 30(1) and 30(2) of SEBI (Substantial Acquisition of Shares & Takeovers) Regulations, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI regulations, specifically Regulation 30. The key point here is that Sajjan Jindal submitted a disclosure on April 1, 2016. Since this is a regulatory filing, the event falls under the 'regulatory' category. \n\nNext, the base rate. Regulatory filings on the NSE usually don't have a clear historical precedent of being up or down. Sometimes they might be neutral, but since this is a disclosure, it's more about compliance than positive or negative news. So the base rate is probably mixed.\n\nPositioning: The PRE-T context includes a 5-day trend of 0.85% and a volume shock (z) of -1.14. The FinBERT prior is 0.00. The regulatory filing might not directly impact the stock price unless there's a significant disclosure. Since the filing is about a disclosure under SEBI, it's a routine compliance action. The volume shock suggests some volatility, but without specific news, it's hard to say if it's priced in. The 5-day trend is slightly positive, but the volume shock might indicate some negative sentiment. However, since the event is a regulatory filing without new information, the move might not be priced in yet.\n\nCommit: Since the event is regulatory and there's no new information, the sentiment is neutral. The vote should be FLAT with low confidence. The confidence is around 0.3 as it's a noise event. The steps that matter are 1 (classifying as regulatory), 2 (mixed base rate), 3 (not priced in), and 4 (FLAT vote with low confidence).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 99.9,
+ "attempts": 2
+}

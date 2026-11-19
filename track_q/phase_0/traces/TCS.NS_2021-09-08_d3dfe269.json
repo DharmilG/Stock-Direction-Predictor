@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2021-09-08_d3dfe269",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.59%, volume shock (z): 1.65, FinBERT prior: 0.53\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Consultancy Services Limited has informed the Exchange regarding a press release dated September 07, 2021, titled \"TCS Positioned as a Leader in Life Sciences Operations Services by Everest Group\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Consultancy Services (TCS) being positioned as a leader in Life Sciences Operations Services by Everest Group. That sounds like a recognition of their position in a specific sector, which might relate to their business expansion or industry recognition. So, looking at the categories, \"expansion\" seems relevant here because it's about entering or strengthening a market segment.\n\nNext, the base rate. I need to recall historical precedents for \"expansion\" events on the NSE. Usually, positive news about expansion can be bullish as it indicates growth potential. However, sometimes if the market is already priced in such news, the impact might be mixed. But generally, expansions are seen as positive, so the base rate is usually-up.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 1.59% positive, volume shock (z) of 1.65, and FinBERT prior of 0.53. The 5-day trend is up, and the volume shock suggests some volatility. FinBERT prior is positive. Since the news is about expansion, which is positive, but the market has already had a positive trend. If the news is already reflected in the price (since the trend is up), then the move might be priced in. However, the volume shock could indicate some uncertainty. But since the trend is up and the news is positive, maybe it's not overbought. Wait, the question says if overbought plus good news is a fade, or oversold plus bad news is a bounce. Here, the trend is up, so maybe not overbought. So the positioning might not indicate a fade, but since the news is positive, maybe it's not a bounce. So the positioning might not be a strong indicator here.\n\nCommitting the vote. Since it's an expansion event, which is usually positive, and the base rate is usually-up. However, the positioning might not be strong enough to suggest a strong up move. The confidence should be moderate. The event is a single-source press release, so confidence can't be over 0.8. Given the positive base rate and the news being a positive expansion, but the market already trending up, maybe the confidence is around 0.6. Sentiment should be positive, so vote UP with confidence 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.7,
+ "attempts": 1
+}

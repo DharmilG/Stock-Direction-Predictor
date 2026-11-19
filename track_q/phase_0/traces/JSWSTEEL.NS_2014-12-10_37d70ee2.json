@@ -1,0 +1,23 @@
+{
+ "case_id": "JSWSTEEL.NS_2014-12-10_37d70ee2",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: JSWSTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.51%, volume shock (z): -0.55, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. JSW Steel Limited has informed the Exchange regarding a press release dated December 09, 2014\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from JSW Steel Limited dated December 9, 2014. The pre-t context mentions a 5-day trend of -4.51%, volume shock z of -0.55, and FinBERT prior of 0.00. The event here is a press release, but the content isn't detailed beyond the date. Since it's a press release, I need to see what type of event it falls under. The options include earnings_result, earnings_guidance, order_win, etc. But the press release here is just informing about the release date, not specific news. So maybe it's a 'noise' event because there's no specific information provided. If it's noise, the vote should be FLAT with confidence up to 0.3.\n\nNext, the base rate. For NSE, if the event is noise, the historical precedent might be mixed, but since it's a press release without specific content, maybe it's usually neutral. But the user says not to invent stats, so I have to be careful here. Maybe the base rate is mixed, but without specific data, it's hard to say. However, since the event is noise, the base rate might not be relevant.\n\nPositioning: Using the pre-t context, the 5-day trend is negative, volume shock is negative, and FinBERT prior is 0.00. The move might look priced in if there's a negative trend and volume shock. But since the event is noise, maybe there's no clear pricing. However, the negative trend and volume could indicate oversold conditions, but without specific news, it's hard to say. The positioning step might suggest that if it's noise, the move isn't priced in, so maybe FLAT.\n\nCommit: If it's noise, vote FLAT with confidence up to 0.3. The trace steps would be 1 (noise), 2 (base rate mixed?), 3 (positioning not priced in), and 4. But I need to check if the event is indeed noise. The press release is just an announcement, but without specific content, it's noise. So the sentiment would be 0, vote FLAT, confidence 0.3. The steps would be 1, 2, 3, 4. But the base rate step is tricky. If the event is noise, maybe the base rate is usually neutral, but the user says not to invent stats. So maybe base rate is mixed. But the instruction says if noise, vote FLAT. So the answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1, 2, 3, 4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 119.4,
+ "attempts": 2
+}

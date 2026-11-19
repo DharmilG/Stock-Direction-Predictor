@@ -1,0 +1,23 @@
+{
+ "case_id": "POWERGRID.NS_2017-05-09_64547bba",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: POWERGRID.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.14%, volume shock (z): -0.84, FinBERT prior: 0.63\nARTICLE TEXT (full, un-summarized):\n  Updates. Power Grid Corporation of India Limited has informed the Exchange that Department of Telecommunications, Ministry of Communications, Govt. of India has granted Unified dated May 02, 2017 to POWERGRID with National Long Distance (NLD) and Internet Service Provider - Category 'A' (ISP-'A') Service Authorizations for providing Telecom services. This license is valid for 20 years\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Power Grid Corporation getting a telecom license from the Department of Telecommunications. The event seems regulatory since it's about a government grant of authorization. So step 1 would be regulatory.\n\nNext, the base rate. I remember that regulatory approvals can sometimes be positive, but it depends. On NSE, if a company gets a regulatory green light, especially for new services, it might be seen as positive. But I'm not sure if this is usually up or down. Maybe mixed? Wait, the user said not to invent stats, so I have to rely on what's known. If the company is expanding into new services, it's usually a positive, so maybe the base rate is usually up.\n\nPositioning: The pre-t context has a 5-day trend of 1.14%, which is positive. The volume shock is -0.84, which might indicate some selling pressure. FinBERT prior is 0.63, which is positive sentiment. The news is about a 20-year license, which is a significant expansion. Since the trend is up and the news is positive, but the volume is down, maybe the move is already priced in? Wait, the positioning step says if overbought with good news, it's a fade. Oversold with bad news is a bounce. Here, the trend is up (so not overbought), but volume is down. Maybe the market hasn't fully priced in the news yet? Or maybe the positive news could push it higher. Need to check if the news is new and if the market has reacted. Since the pre-t context doesn't mention recent price movement beyond the 5-day trend, maybe the positioning is that the news is positive but not yet fully reflected. So maybe the move isn't priced in, so the vote could be up.\n\nCommit: Since it's a regulatory approval, base rate usually up. Positioning: the news is positive, but volume is down. Maybe the market hasn't reacted yet, so the vote is up with confidence. But how much confidence? The event is confirmed via a filing, so maybe confidence 0.6. Steps 1,2,3,4. Sentiment should be positive, so vote UP. Confidence 0.6. Trace steps 1,2,3,4. Wait, the user said to return strict JSON. Let me make sure all steps are included. So the final answer would have sentiment 0.6, vote UP, confidence 0.6, trace steps [1,2,3,4].\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.6,
+ "attempts": 1
+}

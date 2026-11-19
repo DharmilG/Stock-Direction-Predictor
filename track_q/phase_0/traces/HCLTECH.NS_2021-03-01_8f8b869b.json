@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2021-03-01_8f8b869b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.11%, volume shock (z): -0.19, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. HCL Technologies Limited has informed the Exchange regarding 'Intimation under Regulation 30 of the Securities and Exchange Board of India (Listing Obligations and Disclosure Requirements) Regulations, 2015'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about HCL Technologies Limited informing the Exchange regarding an intimation under Regulation 30 of the SEBI regulations. That sounds like a regulatory filing. So the event type is regulatory. \n\nNext, the base rate. I remember that regulatory filings on the NSE can have mixed impacts. Sometimes they might be positive if they're about compliance or good news, but other times they could be neutral or even negative if there's something like penalties or investigations. Since the user said not to invent stats, I'll go with mixed historical precedent.\n\nPositioning: The pre-t context mentions a 5-day trend of 1.11%, volume shock z of -0.19, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the trend is slightly positive. However, the event is a regulatory filing, which might not directly impact the stock price unless there's more to it. Since there's no clear positive or negative signal in the context, it's probably not priced in yet. So maybe a flat sentiment here?\n\nCommit: Since it's a regulatory event with mixed historical impact and no clear pricing in the pre-t context, the vote should be FLAT. Confidence would be low, maybe around 0.3. But the user said if it's noise, vote FLAT with confidence up to 0.3. So I think that's the case here. The steps would be 1, 2, 3, 4. Let me check the confidence again. Since it's a single regulatory filing without additional context, confidence should be 0.3 max. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 97.8,
+ "attempts": 2
+}

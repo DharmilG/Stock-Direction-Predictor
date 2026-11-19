@@ -1,0 +1,23 @@
+{
+ "case_id": "TATACONSUM.NS_2012-12-31_7cf6c609",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATACONSUM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.56%, volume shock (z): -0.87, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. Life Insurance Corporation of India has submitted to the Exchange vide letter dated December 28, 2012 a copy of disclosure under Regulation 29(2) of SEBI (Substantial Acquisition of Shares and Takeovers) Regulations, 2011 along with disclosure under regulation 13(3) and 13(6) of SEBI (Prohibition of Insider Trading) Regulations, 1992\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI regulations, specifically about a takeover. The key terms here are \"SEBI Takeover Regulations\" and \"Substantial Acquisition of Shares and Takeovers.\" That sounds like a regulatory filing related to a merger or acquisition. So, the event type is likely \"mna\" (merger and acquisition) since it's about a takeover disclosure.\n\nNext, the base rate. I remember that on the NSE, regulatory filings related to takeovers can have mixed impacts. Sometimes they signal positive news if it's a strategic move, but other times they might be neutral or even negative if there are concerns about the deal. But since the base rate is usually mixed, I should note that.\n\nNow, positioning. The PRE-T context has a 5-day trend of -0.56%, which is a slight decline. The volume shock is -0.87, indicating lower volume than usual. FinBERT prior is 0.00, which is neutral. The article itself is a regulatory disclosure, not new information. Since the market might have already priced in some of the takeover rumors, but the actual filing is just a disclosure, there's no new info. So the move might be priced in, but since the volume is lower, maybe there's some uncertainty. But without new info, it's hard to say if it's a fade or bounce. However, the existing trend is slightly down, so if the news is neutral, maybe the market is already factoring it in, leading to a flat sentiment.\n\nCommitting the vote. Since the event is a regulatory disclosure without new info, and the base rate is mixed, and the positioning isn't clearly overbought or oversold, the sentiment should be flat. Confidence is low because it's just a regulatory filing without new content. So, vote FLAT with confidence around 0.3. The steps that matter are 1 (classifying as mna), 2 (mixed base rate), and 3 (priced in with neutral positioning).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 109.9,
+ "attempts": 2
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2015-02-06_ad710ff8",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.37%, volume shock (z): 4.38, FinBERT prior: -0.63\nARTICLE TEXT (full, un-summarized):\n  Trading Window. Tata Motors Limited has informed the Exchange that pursuant to Clause 3.2 of the SEBI (Prohibition of Insider Trading Regulations), 1992, the Company had intimated its designated employees regarding the closure of the trading window from January 29, 2015 to February 6, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.6,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Motors closing a trading window as per SEBI regulations. That sounds like a regulatory announcement. So step 1 would be regulatory.\n\nNext, the base rate. I remember that regulatory announcements on the NSE can go either way. Sometimes they're neutral, but if it's about compliance or insider trading, maybe it's a negative signal. But I'm not sure if there's a clear historical precedent here. The user said not to invent stats, so I have to be careful. Maybe it's mixed?\n\nPositioning: The pre-t context has a 5-day trend of -4.37%, volume shock z of 4.38, and FinBERT prior of -0.63. The news is about a trading window closure, which might be seen as negative. If the market was already down, and this is another negative, maybe it's priced in. But since it's a regulatory action, maybe it's a bounce? Wait, the positioning step says if overbought with good news, fade; oversold with bad news, bounce. The trend is down, so maybe oversold? But the event is regulatory, which might not be good news. So maybe the move is not priced in, leading to a bounce? Or is it neutral?\n\nCommitting: If it's regulatory, base rate is mixed. Positioning is oversold (since 5-day trend is -4.37%) and the news is regulatory, which might be negative. But the volume shock is high (4.38), which could indicate uncertainty. So maybe the sentiment is negative, vote DOWN, confidence around 0.5? But the user said if it's noise, vote FLAT. Since this is a regulatory event, not noise, so proceed. But the base rate is mixed. So confidence would be moderate. Let me check the steps again.\n\nWait, step 3 says if the move looks priced in, then maybe fade or bounce. The pre-t context shows the trend is down, volume shock is high, which might indicate the market is reacting. If the news is about a trading window closure, which could be seen as negative, but maybe it's a compliance action, so not necessarily bad. However, the FinBERT prior is -0.63, which is negative. So combining all, maybe the sentiment is negative, vote DOWN, confidence 0.5. But the user said confidence can't be 1.0. So I'll go with that.\n",
+ "content": "{\"sentiment\": -0.6, \"vote\": \"DOWN\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 229.6,
+ "attempts": 3
+}

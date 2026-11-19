@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDUNILVR.NS_2015-04-29_db6db6b0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDUNILVR.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.45%, volume shock (z): -0.03, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Trading Window. Hindustan Unilever Limited has informed the Exchange that pursuant to Clause 5 of the Share Dealing Code of the Company, Trading Window to deal in Company shares is closed for Special Employees from April 1, 2015 to May 9, 2015 (both days inclusive)\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Hindustan Unilever closing the Trading Window for Special Employees from April to May 2015. The options are things like earnings, guidance, M&A, regulatory, etc. Since the Trading Window closure is a regulatory action, maybe under regulatory events. But wait, the options include \"regulatory\" as a category. So step 1: classify as regulatory.\n\nNext, the base rate. What's the historical precedent for regulatory events on NSE? I remember that regulatory announcements can go either way. Sometimes they're neutral, sometimes they affect trading. But since the Trading Window closure is about restricting trading, maybe it's a regulatory action that could impact liquidity. But without specific stats, I have to say it's mixed. So base rate is mixed.\n\nPositioning: Using the PRE-T context. The 5-day trend is -5.45%, volume shock is -0.03, FinBERT prior is 0.00. The event is about closing a trading window, which might affect short-term trading. If the trend is down and volume is low, maybe the news isn't priced in yet. But since it's a regulatory action, maybe the market already accounted for it. Wait, the volume shock is negative, which might indicate lower volume, so maybe the move isn't fully priced. But the FinBERT prior is 0.00, so no prior sentiment. So positioning is neutral. The move might not be priced in, so maybe a bounce or fade? But the trend is down, so if the news is neutral, maybe the market is oversold, leading to a bounce. But I'm not sure. Maybe it's a flat.\n\nCommit: Since the event is regulatory (step1), base rate is mixed (step2), positioning is neutral (step3). So the vote is FLAT with confidence 0.3. But wait, the user says if noise, vote FLAT. Is this a noise event? The Trading Window closure might be a regulatory action, but not necessarily a big event. Maybe it's considered noise. So step1: noise, step2: base rate is mixed, step3: not priced in, step4: vote FLAT with confidence 0.3. But the confidence can't be more than 0.3. So the answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 113.0,
+ "attempts": 2
+}

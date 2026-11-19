@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2019-02-04_61907eb1",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.20%, volume shock (z): -0.26, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. ICICI Bank Limited has informed the Exchange regarding 'Confirmation of Interest payment made to Bondholders.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about ICICI Bank confirming interest payment to bondholders. That sounds like a capital action because it's related to debt management. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions, especially interest payments, are usually seen as positive because the company is fulfilling obligations, which can signal financial health. But I'm not sure if there's a specific historical precedent for this exact event. Maybe it's mixed? Wait, the user said not to invent stats, so I have to rely on general knowledge. Typically, such payments are neutral or slightly positive, but maybe sometimes they're seen as a sign of stability, so maybe usually-up?\n\nPositioning: The pre-t context mentions a 5-day trend of 3.20% and a volume shock of -0.26. The FinBERT prior is 0.00. The news is about confirming interest payment, which might not be new information. If the market already priced in this, then the move might be priced in. But since it's a confirmation, maybe it's a positive signal. However, the volume shock is negative, which could indicate some selling pressure. But the prior sentiment was neutral. So maybe the move isn't fully priced in, but it's not a strong signal either.\n\nCommit: Since it's a capital action, and assuming the base rate is usually-up, but the positioning isn't clear. The confidence should be moderate. Maybe 0.5. The sentiment would be positive, so vote UP. But need to check if the steps support this. Step 1 is capital_action, step 2 base rate usually-up, step 3 positioning maybe not fully priced in. So confidence is moderate. The final answer should be UP with confidence 0.5.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 171.7,
+ "attempts": 3
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2013-09-20_b4758b3f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.18%, volume shock (z): 0.27, FinBERT prior: 0.79\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Consultancy Services Limited has informed the Exchange regarding a Press Release dated September 19, 2013, titled \" TCS Demonstrates Significant Commitment to Building Expertise in Oracle Products\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Tata Consultancy Services about their commitment to Oracle products. The options are things like earnings, orders, M&A, etc. Since it's a press release about demonstrating expertise in Oracle products, that sounds like an expansion or maybe a strategic move. But the options include expansion. So I'll go with expansion.\n\nNext, the base rate. I need to recall historical precedents for expansion events on NSE. Generally, expansions can be positive as they might indicate growth, but sometimes they might not have immediate impact. The base rate here is probably mixed because while expansion can be good, the market might not always react the same. So I'll say mixed.\n\nPositioning: Looking at the pre-t context. The 5-day trend is -0.18%, which is a slight decline. Volume shock z is 0.27, which might indicate some volume changes. FinBERT prior is 0.79, which is positive sentiment. The event is a press release about commitment to Oracle, which is positive. But since the 5-day trend is slightly down and the volume is a bit high, maybe the market hasn't fully priced in the positive news. However, the FinBERT prior is already positive. So maybe the move isn't fully priced in, but I need to check if it's overbought or oversold. The 5-day trend is -0.18%, which isn't extremely negative, so maybe not oversold. So the positioning might not be a clear fade or bounce. But since the news is positive, maybe the market hasn't reacted yet, so the sentiment could be positive.\n\nCommit: Since the event is expansion, base rate is mixed, positioning isn't clearly overbought or oversold. The FinBERT prior is positive, but the trend is slightly down. The confidence should be moderate. Maybe 0.5. The vote would be UP because the news is positive, but not sure if it's strong enough. Wait, the base rate is mixed, so maybe the vote is UP with some confidence. But need to check if the positioning is priced in. If the news is positive but the trend is slightly down, maybe the market hasn't fully priced it in, so the sentiment is positive. So the vote is UP with confidence around 0.5. The trace steps would be 1 (expansion), 2 (mixed), 3 (positioning not fully priced), 4 (commit based on steps 1 and 2).\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.8,
+ "attempts": 1
+}

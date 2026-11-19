@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2015-06-11_99e40cde",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.23%, volume shock (z): -0.05, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. Adani Enterprises Limited has submitted to the Exchange vide letter dated June 10, 2015 a copy of disclosure under Regulation 29(2) of SEBI (Substantial Acquisition of Shares & Takeovers) Regulations, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI Takeover Regulations, specifically Regulation 29(2). That sounds like a regulatory filing. So the event type is regulatory. \n\nNext, the base rate. I remember that regulatory disclosures can have mixed impacts. Sometimes they might signal positive changes, other times negative. But since it's a disclosure, maybe it's a routine filing. However, without specific details on the disclosure content, it's hard to say. The base rate here is probably mixed.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -2.23%, which is a decline. The volume shock is -0.05, and FinBERT prior is 0.00. The event is a regulatory disclosure, which might not be priced in yet. Since the trend is down, but the news is a disclosure, which could be neutral or have some impact. But without more info, it's hard to tell if it's already priced in.\n\nCommitting the vote. Since the event is regulatory and the base rate is mixed, and the positioning isn't clear, the sentiment might be neutral. The confidence should be low. The steps that matter are classification as regulatory (step 1), base rate mixed (step 2), and positioning not clearly priced in (step 3). So the vote is FLAT with confidence around 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 26.1,
+ "attempts": 1
+}

@@ -15,6 +15,7 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException, Query
 
 from ..config import Settings, load_settings
+from ..qpipeline.paths import Q0_STATE_FILE, Q0_VERDICT_FILE
 from .dashboard_support import (
     age_seconds,
     artifact_paths,
@@ -806,8 +807,8 @@ def dashboard_activity(limit: int = Query(default=12, ge=1, le=50)) -> dict[str,
         paths.artifacts / "model_metadata.json",
         paths.checkpoints / "lightgbm_final_checkpoint.txt.json",
         paths.state / "refresh.json",
-        paths.state / "q0_d1.json",
-        paths.results / "q0_d1.json",
+        Q0_STATE_FILE,
+        Q0_VERDICT_FILE,
     ]
     entries = []
     for path in candidates:

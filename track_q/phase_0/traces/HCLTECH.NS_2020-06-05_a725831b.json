@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2020-06-05_a725831b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.67%, volume shock (z): -0.46, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. HCL Technologies Limited has informed the Exchange regarding a press release dated Jun 04, 2020, titled \"HCL and Google Cloud Expand Partnership to Digitally Transform Commerce\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release about HCL Technologies expanding their partnership with Google Cloud. The options include things like earnings results, M&A, expansions, etc. Since it's a partnership expansion, that falls under the 'expansion' category. So step 1 is done.\n\nNext, the base rate. I need to recall the historical precedent for expansion news on the NSE. From what I remember, expansion announcements are usually positive. Companies expanding partnerships or entering new markets are typically seen as growth opportunities, which should drive stock prices up. So the base rate is usually up.\n\nNow, positioning. The pre-t context has a 5-day trend of 4.67%, which is positive. The volume shock is -0.46, which might indicate some selling pressure, but not sure. FinBERT prior is 0.00, which is neutral. The news is about expanding a partnership, which is positive. But since the volume shock is negative, maybe there's some selling. However, the 5-day trend is up, so maybe the market has already priced in some of this? Wait, the question is whether the move looks priced in. If the trend is up and the news is positive, but volume is down, maybe it's already priced in, so a fade could be possible. But I'm not certain. Need to check if the news is new enough or if the trend already includes this.\n\nCommitting the vote. Since it's an expansion, base rate is up. The positioning is a bit mixed with positive trend but negative volume. However, the news is positive, so the sentiment should be positive. Confidence might be around 0.6 since it's a confirmed filing but not sure if the market has fully priced it. So vote UP with confidence 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 112.2,
+ "attempts": 2
+}

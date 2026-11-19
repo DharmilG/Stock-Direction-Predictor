@@ -1,0 +1,23 @@
+{
+ "case_id": "CIPLA.NS_2016-12-19_af540ae3",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: CIPLA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.98%, volume shock (z): -0.04, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Cipla Limited has informed the Exchange regarding a press release dated December 19, 2016, titled \"Cipla Receives Final Approval for Generic Tricor  Tablets\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Cipla receiving final approval for a generic drug, Tricor Tablets. That sounds like a regulatory approval. So, the event type is regulatory. \n\nNext, the base rate. I remember that regulatory approvals in the pharmaceutical sector usually have mixed historical impacts. Sometimes they're positive, sometimes not, depending on factors like market competition or patent issues. But since it's a final approval, it's likely a positive event. However, I can't be sure without specific stats, so I'll note it as mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -0.98%, volume shock, and FinBERT prior of 0.00. The stock was down recently, and the volume is low. The news is positive, but since the stock is oversold, this might be a bounce candidate. However, the FinBERT prior is neutral, so maybe the market hasn't priced in this news yet. Wait, the volume shock is negative, which might indicate some selling pressure. But the news is positive, so if the stock is oversold, the move could be a bounce. But I need to check if the news is already priced in. The pre-t context doesn't mention any prior positive news, so maybe it's not fully priced in. \n\nCommit: The event is regulatory, which has mixed historical impact. The stock is oversold, so positive news might lead to a bounce. But the volume is low, which could mean uncertainty. The confidence should be moderate. Since it's a confirmed filing (press release) and the positioning suggests oversold, maybe confidence around 0.5. The sentiment should be positive, so vote UP. \n\nWait, the steps: 1. Regulatory, 2. Mixed, 3. Oversold with positive news (bounce), 4. So vote UP with confidence 0.5. But the confidence can't be more than 0.8. Since it's a confirmed filing, maybe 0.6. Let me check the rules again. The confidence is up to 0.8 for confirmed filing plus supporting positioning. So yes, 0.6. Sentiment is positive, so vote UP. The trace steps would be 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 51.7,
+ "attempts": 1
+}

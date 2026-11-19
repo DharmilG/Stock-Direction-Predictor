@@ -1,0 +1,49 @@
+{
+ "driver_windows": "617.14",
+ "gpu": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+ "inference": {
+  "health_check": "pass-corrected 2026-10-01 (thinking field + valid JSON vote; initial <think>-tag parser was wrong for Ollama API \u2014 reasoning is message.thinking, not <think> tags; num_predict>=1024 required or content truncates to empty)",
+  "model": "qwen3:8b",
+  "quant": "Q4_K_M",
+  "server": "Ollama 0.34.2",
+  "vram_probe": {
+   "ctx": 4096,
+   "gpu_split": "70% GPU / 30% CPU",
+   "note": "Full offload exceeds 6GB at 4k ctx; split accepted (local-only, inference speed cost only). Training-side fit re-probed in Phase 6 with real HF weights.",
+   "used_mib": 5423
+  },
+  "model_hash": "500a1f067a9f",
+  "model_size_gb": 5.2,
+  "ctx_pinned": 2048,
+  "num_predict_min": 1024,
+  "gpu_split_observed": "25%/75% CPU/GPU @ctx2048, 5.7GB resident (ollama ps 2026-10-01)"
+ },
+ "phase": 1,
+ "status": "phase1-complete-sampled",
+ "training": {
+  "os": "Ubuntu 26.04.1 LTS (WSL2, VHDX on C:)",
+  "python": "3.14.4",
+  "torch": "2.12.1+cu130",
+  "torch_cuda": true,
+  "unsloth": "2026.9.7 (import OK)",
+  "venv": "~/Adaniports/.venv"
+ },
+ "windows_profile_models_on": "C:",
+ "phase1": {
+  "date": "2026-10-01",
+  "health": "pass (1/1 with num_predict=1024: think_len 1163, content 51 chars, valid JSON UP, 21.9s)",
+  "throughput_probe": "5-case corrected @ctx2048: median 20.3s/article (18.4-22.4s); 20-case @ctx4096 run: median 43.8s, 0/20 think-tag OK (parser wrong), 6 server errors",
+  "extrapolation_h": {
+   "N_92960": 524.2,
+   "N_20000": 112.8,
+   "N_5000": 28.2
+  },
+  "gate_14d": "FAIL for full Pool A (21.8d > 14d) -> sampled STaR per App.D (announcements-only, relevance>=0.5 first)",
+  "stability": "ctx4096 UNSTABLE: llama-server crashes (0xc0000409 stack overrun, PTX JIT fail, CUDA_Host 1.57GB alloc fail); ctx2048 stable, no crashes in 6 consecutive calls",
+  "deviations_from_v2": [
+   "ctx 4096 -> 2048 pinned (OOM/crash at 4k on driver 617.14 + Ollama 0.34.2)",
+   "num_predict floor 1024 for think=True workloads",
+   "thinking read from message.thinking, not <think> tags \u2014 harness spec \u00a714A to be patched accordingly"
+  ]
+ }
+}

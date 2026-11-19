@@ -1,0 +1,23 @@
+{
+ "case_id": "TATACONSUM.NS_2018-05-14_5a315c50",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATACONSUM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -13.02%, volume shock (z): 10.76, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Tata Global Beverages Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions Analysts/Institutional Investor Meet/Con. Call Updates. That sounds like a management event because it's about updates from the company's management to investors. So step 1 would be management.\n\nNext, the base rate. I remember that on NSE, management updates can go either way. Sometimes they provide positive guidance, other times maybe not. But I think the usual precedent is mixed. So step 2 is mixed.\n\nNow positioning. The PRE-T CONTEXT says the 5-day trend is -13.02%, which is a significant drop. The volume shock is 10.76, which might indicate some volatility. FinBERT prior is 0.00, so no strong sentiment from that. The news is about management updates, but there's no specific good or bad news mentioned. Since the trend is down and there's no clear positive or negative info, maybe the move isn't fully priced in. But without specific details, it's hard to say. So step 3 might be that it's not priced in, but I'm not sure.\n\nCommitting. Since it's a management event with mixed historical precedent and no clear pricing, maybe the sentiment is neutral. But the 5-day trend is negative. However, the news is just an update, not a clear positive or negative. So maybe vote FLAT with low confidence. But the instructions say if noise, vote FLAT. But is this noise? The event is management, which isn't noise. So maybe the sentiment is neutral, vote FLAT, confidence 0.3. But I need to check the steps again. Wait, the trace steps need to be cited. So steps 1,2,3,4. The confidence is up to 0.8 if confirmed filing plus supporting positioning. But here, the news is just an update, not a confirmed filing. So maybe confidence is 0.3. The sentiment would be FLAT, so 0.0. Wait, the instruction says sentiment sign must agree with vote. If vote is FLAT, sentiment is 0.0. So the final answer would be sentiment 0.0, vote FLAT, confidence 0.3, trace steps 1,2,3,4. But I'm not entirely sure. Maybe the positioning is that the move isn't priced in because the trend is down and the news is just an update. But without specific info, it's hard. So I'll go with FLAT.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 123.0,
+ "attempts": 2
+}

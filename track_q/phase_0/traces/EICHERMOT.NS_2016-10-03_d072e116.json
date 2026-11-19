@@ -1,0 +1,23 @@
+{
+ "case_id": "EICHERMOT.NS_2016-10-03_d072e116",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: EICHERMOT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.46%, volume shock (z): -0.08, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Eicher Motors Limited has informed the Exchange regarding Release of information with respect to sale volume of VE Commercial Vehicles Limited for the month of September 2016\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's break this down step by step. First, I need to classify the event. The news is about Eicher Motors Limited informing the Exchange regarding the release of information on the sale volume of VE Commercial Vehicles Limited for September 2016. The key here is that it's about the sale volume data from a past month. Since the information is about historical sales data and not about future earnings, guidance, or any management changes, this doesn't fit into earnings_result, earnings_guidance, order_win, mna, regulatory, etc. It's just a disclosure of past data. The PRE-T context mentions a 5-day trend and some metrics, but the article text is about a past event. Since there's no new information being released here, it's likely noise. \n\nNext, the base rate. If this is noise, the historical precedent would be that such disclosures usually don't impact prices significantly. But since the user said not to invent statistics, I need to rely on the fact that releasing past data isn't a standard event that affects stock prices. \n\nPositioning: The PRE-T context shows a 5-day trend of 4.46% and volume shock z of -0.08. The FinBERT prior is 0.00. But the news is about past data, so there's no new information. Therefore, the move isn't priced in because the news is old. However, the article mentions \"Release of information,\" which might imply that the data was not previously disclosed. If the market didn't know about the sale volume before, this could be a new piece of information. Wait, but the sale volume is for September 2016, which is over five years ago. So this is historical data. The company is just releasing it now, which might not be relevant. So the event is noise.\n\nCommit: Since it's noise, the vote is FLAT with confidence up to 0.3. The steps that carried weight are 1 (classifying as noise) and 2 (base rate for noise). So the final answer should be FLAT with low confidence.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.3,
+ "attempts": 1
+}

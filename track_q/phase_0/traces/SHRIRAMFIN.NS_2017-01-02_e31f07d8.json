@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2017-01-02_e31f07d8",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 12.63%, volume shock (z): -0.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Shriram Transport Finance Company Limited has informed the Exchange that the Company have made timely payment of interest for the Non- Convertible Debentures issued by the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Shriram Transport Finance paying interest on non-convertible debentures on time. That sounds like a debt-related announcement. So, looking at the checklist, the event type would be 'debt_credit' because it's about fulfilling debt obligations.\n\nNext, the base rate. I remember that on the NSE, timely debt payments are usually seen as positive. Companies meeting their debt obligations are viewed as financially responsible, which can boost investor confidence. So the historical precedent here is usually-up. \n\nNow, positioning. The PRE-T context mentions a 5-day trend of 12.63% and a volume shock (z) of -0.18. The FinBERT prior is 0.00. The positive news about paying interest on time might be seen as good news. However, the volume shock is slightly negative, which could indicate some selling pressure. But since the company is fulfilling its obligations, it's a positive signal. The question is whether this is already priced in. If the stock was already up due to previous positive trends, then this news might not add much. But the volume shock might suggest some uncertainty. However, the key point is that the company is meeting its debt payments, which is a positive sign. So maybe the move isn't fully priced in yet, especially if the volume is a bit negative. \n\nCommitting the vote. Since the event is debt_credit, which is usually-up, and the news is positive, but the volume is slightly negative. The confidence should be moderate. The source is a confirmed filing (the company informing the exchange), so that's a solid source. But since it's a single event without additional factors, maybe confidence around 0.6. The sentiment should be positive, so the vote is UP. \n\nPutting it all together, the JSON should reflect these steps. Let me check again: event type is debt_credit, base rate usually-up, positioning is that the news is positive but volume is a bit negative, so maybe not fully priced in. Therefore, vote UP with confidence 0.6. The trace steps would be 1,2,3,4. Sentiment is positive, so 0.6. That should be it.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 109.4,
+ "attempts": 2
+}

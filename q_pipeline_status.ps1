@@ -1,4 +1,4 @@
-# Track Q pipeline status (read-only). CODE READY — UNTESTED.
+﻿# Track Q pipeline status (read-only). CODE READY â€” UNTESTED.
 [CmdletBinding()]
 param(
     [switch]$Json
@@ -6,8 +6,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$statePath = Join-Path $root 'artifacts\state\q_track_state.json'
-$q0Path = Join-Path $root 'results\q0_d1.json'
+$statePath = Join-Path $root 'track_q\_common\phase_registry.json'
+$q0Path = Join-Path $root 'track_q\phase_0\verdict\q0_d1.json'
 
 function Read-JsonFile($path) {
     if (-not (Test-Path $path)) { return $null }

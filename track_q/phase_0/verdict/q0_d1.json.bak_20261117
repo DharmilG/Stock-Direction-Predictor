@@ -1,0 +1,27 @@
+{
+  "n": 657,
+  "qwen_agreement": 0.2815829528158295,
+  "finbert_agreement": 0.2009132420091324,
+  "delta": 0.0806697108066971,
+  "se_diff": 0.02350041628874006,
+  "bar_2se": 0.04700083257748012,
+  "pass": true,
+  "harness_fail_rate": 0.562,
+  "rated_total": 1500,
+  "ledger_total": 1500,
+  "judged_total": 657,
+  "pool_total": 1500,
+  "complete": true,
+  "thermal_rests": 0,
+  "thermal": {
+    "hard_trips": 0,
+    "rests": 0,
+    "cooldowns": 0,
+    "proactive_breaks": 0,
+    "alarms": 0,
+    "prepares": 0,
+    "aborts": 0,
+    "max_temp_c": 64.0,
+    "rest_minutes": 0.0
+  }
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2011-04-15_60bf938f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -8.72%, volume shock (z): 20.54, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Infosys Technologies Limited has informed the Exchange regarding a press release dated April 15, 2011, titled as per IFRS INR Press Release \"Q4 revenues sequentially grew by 2.0%, FY11 revenues grew by 20.9%\" and titled as per IFRS - USD Press Release \"Q4 revenues grew by 1.1% sequentially; FY11 revenues grew by 25.8%\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.8,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Infosys' quarterly revenue growth from a 2011 press release. The user mentioned the event types like earnings_result, earnings_guidance, etc. Since this is a historical earnings report, it's an earnings_result. \n\nNext, the base rate. On NSE, earnings reports are usually positive, but since this is old data, maybe the market reaction isn't clear. Wait, the user says to state historical precedent, but I can't invent stats. Maybe the base rate is usually-up because positive earnings typically move stocks up. But I'm not sure. Need to be careful here.\n\nPositioning: The pre-t context has a 5-day trend of -8.72%, volume shock z of 20.54, and FinBERT prior of 0.00. The negative trend and high volume might indicate the stock is oversold. The news is positive (revenue growth), so if it's oversold and good news, it could be a bounce candidate. So the move might not be priced in yet.\n\nCommit: Since it's an earnings result (step 1), base rate is usually-up (step 2), positioning suggests oversold with good news (step 3), so the vote would be UP. Confidence should be moderate. Maybe 0.6. Steps 1,2,3,4. Sentiment should be positive, so 0.8. Wait, confidence can't be 1.0. Let me check the rules again. Single-source rumor max 0.4, confirmed filing plus support up to 0.8. This is a confirmed filing (press release), so 0.8 is okay. Sentiment is positive, so 0.8. Vote UP. Trace steps 1,2,3,4. Alright, that should be it.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.8, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 185.1,
+ "attempts": 3
+}

@@ -50,8 +50,8 @@ def get_gradcam(image: Image.Image, model=None):
     try:
         for parameter in model.backbone.parameters():
             parameter.requires_grad = True
-        cam = GradCAM(model=pattern_model, target_layers=[target_layer], use_cuda=False)
-        grayscale_cam = cam(input_tensor=input_tensor)[0]
+        cam = GradCAM(model=pattern_model, target_layers=[target_layer])
+        grayscale_cam = cam(input_tensor=input_tensor, targets=None)[0]
     finally:
         for parameter, original in zip(model.backbone.parameters(), original_requires_grad):
             parameter.requires_grad = original

@@ -1,0 +1,23 @@
+{
+ "case_id": "KOTAKBANK.NS_2019-07-22_60eb846f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: KOTAKBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.57%, volume shock (z): 0.97, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Kotak Mahindra Bank Limited has informed the Exchange regarding 'This has reference to our letter dated 17th July 2019, we wish to inform you that, the Earnings Conference Call scheduled today has been preponed to 6.00 p.m.(IST) instead of 6.30 p.m. (IST). '\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Kotak Mahindra Bank moving their earnings conference call to an earlier time. The key here is that the event is related to an earnings call rescheduling. The possible classifications include earnings_result, earnings_guidance, or maybe management. But since the call is just being rescheduled and there's no new information about earnings results or guidance, it's more about the management's scheduling. So I think it's a management event.\n\nNext, the base rate. For management events on NSE, historically, they can go either way. Sometimes changes in management or scheduling might not impact prices much, but if there's a positive signal, it could be up. But since the event here is just a rescheduling without any new info, the base rate is probably mixed. \n\nPositioning: The PRE-T context mentions a 5-day trend of -3.57%, which is a decline. The volume shock is 0.97, which might indicate some volatility. The FinBERT prior is 0.00, suggesting no prior sentiment. Since the news is about rescheduling a call, which isn't new info, but the market might have already priced in any expectations. However, the volume shock might mean there's some uncertainty. But since the event is just a time change, maybe it's already priced in. But the 5-day trend is down, so if the news is neutral, maybe the market is oversold and could bounce. But the event isn't positive or negative, so maybe it's noise.\n\nWait, the instructions say if it's noise, vote FLAT with confidence up to 0.3. Since the event is just a rescheduling without any substantive info, it's probably noise. So step 1 would be noise, leading to FLAT with low confidence. But I need to check if there's any other factors. The base rate for management events is mixed, but the positioning here might be that the market is already down, and the news is neutral. So maybe the sentiment is neutral, leading to FLAT. But the confidence should be low. \n\nSo the final vote would be FLAT with confidence around 0.2. The trace steps would include classifying as noise, base rate mixed, positioning as maybe oversold but neutral news, leading to FLAT.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.5,
+ "attempts": 1
+}

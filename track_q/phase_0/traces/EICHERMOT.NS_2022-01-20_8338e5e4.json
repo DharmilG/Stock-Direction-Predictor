@@ -1,0 +1,23 @@
+{
+ "case_id": "EICHERMOT.NS_2022-01-20_8338e5e4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: EICHERMOT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.49%, volume shock (z): -0.34, FinBERT prior: -0.72\nARTICLE TEXT (full, un-summarized):\n  Loss of Share Certificates. Eicher Motors Limited has informed the Exchange about Loss of Share Certificates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates. Looking at the possible categories, this seems like a capital_action because it involves the company's shares and certificates. So step 1 is classified as capital_action.\n\nNext, the base rate. I remember that on the NSE, capital actions like loss of share certificates usually have mixed outcomes. Sometimes it might be neutral or even positive if it's about share buybacks, but loss of certificates could imply something negative, like a problem with shareholding. But I'm not sure if there's a clear precedent. Maybe it's mixed, so step 2 is mixed.\n\nPositioning: The PRE-T context shows a 5-day trend of -3.49%, which is a decline. The volume shock is -0.34, and FinBERT prior is -0.72. These indicators are negative. The event is about losing share certificates, which might be a bad news. Since the market is already down and the news is negative, it might be a bounce candidate. But the volume shock is slightly negative, so maybe it's already priced in? Wait, the positioning step says if overbought with good news, fade; oversold with bad news, bounce. Here, the trend is down, so oversold? But the volume shock is -0.34, which is a small negative. Maybe the market is already reacting, so the news might not add much. So the move might be priced in, leading to a flat? But the user says if noise, vote flat. But this is a capital action, not noise. Hmm.\n\nCommit: Since the event is capital_action, base rate is mixed. Positioning is oversold (due to the 5-day trend) with bad news (loss of certificates), which would suggest a bounce. But the volume shock is slightly negative. Maybe the confidence is low. So vote could be UP with confidence around 0.5? But the steps need to be cited. So trace steps 1,2,3,4. Confidence can't be 1.0. Maybe 0.5. Sentiment would be positive since vote is UP. But need to check if the steps support it. The base rate is mixed, but positioning suggests a bounce (oversold + bad news). So the vote is UP with confidence 0.5. But need to make sure the confidence is proportionate. Since it's a confirmed filing (the company informed the exchange), maybe confidence is higher. Maybe 0.6? But the instructions say confirmed filing plus supporting positioning up to 0.8. So maybe 0.6. Sentiment is positive, so 0.6. The trace steps would be 1,2,3,4. So the JSON would have sentiment 0.6, vote UP, confidence 0.6, trace steps [1,2,3,4].\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 59.8,
+ "attempts": 1
+}

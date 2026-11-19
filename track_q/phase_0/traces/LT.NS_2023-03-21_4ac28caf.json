@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2023-03-21_4ac28caf",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.00%, volume shock (z): 1.81, FinBERT prior: 0.67\nARTICLE TEXT (full, un-summarized):\n  Press Release. Larsen & Toubro Limited has informed the Exchange regarding a press release dated March 21, 2023, titled \"L&T Wins (Major*) Contracts for its Hydrocarbon Business\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.7,
+ "confidence": 0.7,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Larsen & Toubro winning major contracts for their hydrocarbon business. That sounds like an order_win since it's about securing contracts. So step 1 is order_win.\n\nNext, the base rate. On the NSE, winning major contracts usually is a positive event. Companies that secure big contracts often see their stock rise because it indicates future revenue and growth. So the historical precedent is usually-up. That's step 2.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 3.00% and volume shock z of 1.81. The FinBERT prior is 0.67, which is positive. The volume shock might indicate some volatility, but since the news is positive, if the market hasn't reacted yet, it could be priced in. But the 5-day trend is up, so maybe the positive news is already reflected. However, the volume shock might suggest some uncertainty. But since the news is about winning contracts, which is a good sign, maybe the move isn't fully priced in yet. Wait, the user says if the move looks priced in, then it's a fade or bounce. But here, the pre-t context doesn't mention the stock price movement yet. The 5-day trend is up, but the event is a positive one. So maybe the positive news is already priced in, making it a fade candidate. But the FinBERT prior is positive, so maybe the market hasn't fully reacted yet. Hmm, this is a bit confusing. The volume shock z of 1.81 might indicate some unusual volume, but not sure. Maybe the positioning is neutral, so the move isn't fully priced in. Therefore, step 3 would be that the move isn't priced in, so the sentiment is positive.\n\nCommitting, the vote is UP with confidence. Since it's a confirmed filing (the press release) and the positioning is positive, confidence could be 0.7. But the user said never 1.0. So maybe 0.7. The steps that carried weight are 1, 2, and 3. So the trace steps are 1,2,3,4. Wait, step 4 is commit, which is part of the process. So the trace_steps would be [1,2,3,4]. \n\nPutting it all together, the sentiment is positive (0.7), vote UP, confidence 0.7, trace steps 1,2,3,4. Let me check again. The event is order_win, base rate usually-up, positioning not fully priced in (since the 5-day trend is up but the news is positive, maybe the market hasn't reacted yet). So the sentiment is positive, vote UP, confidence 0.7. That seems right.\n",
+ "content": "{\"sentiment\": 0.7, \"vote\": \"UP\", \"confidence\": 0.7, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 46.2,
+ "attempts": 1
+}

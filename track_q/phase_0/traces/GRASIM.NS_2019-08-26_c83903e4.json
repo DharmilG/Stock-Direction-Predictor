@@ -1,0 +1,23 @@
+{
+ "case_id": "GRASIM.NS_2019-08-26_c83903e4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: GRASIM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.68%, volume shock (z): -0.28, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. Grasim Industries Limited has informed the Exchange regarding Proceedings of Annual General Meeting held on August 23, 2019. Further, the company has submitted the Exchange a copy of Srutinizers report along with voting results\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Annual General Meeting (AGM) and the submission of the scrutineers' report along with voting results. The options are things like earnings, guidance, M&A, regulatory, etc. Since it's about a shareholder meeting and reports, this seems like a regulatory or management event. The PRE-T context mentions \"Proceedings of Annual General Meeting\" and \"Srutinizers report,\" which are part of corporate governance. So, the classification would be \"management.\"\n\nNext, the base rate. I need to recall historical precedent for management-related events on NSE. Typically, AGM announcements might not have a strong directional impact unless there's significant news. But since this is just the submission of reports and voting results, it's probably mixed. Sometimes, such events might be neutral or even have a slight positive if there's good news, but without specific info, it's safer to say mixed.\n\nPositioning: Using the PRE-T context, the 5-day trend is 0.68% positive, volume shock is -0.28, and FinBERT prior is 0.00. The event is about routine AGM proceedings. Since there's no new information beyond what's already known (like the meeting was held and reports submitted), the move might already be priced in. The volume shock is slightly negative, but the trend is positive. However, since the news is just a routine filing, it's unlikely to move the market. So, it's not overbought or oversold, so maybe not a fade or bounce. But since the news is neutral, the positioning might be that it's already priced in, leading to a flat sentiment.\n\nCommit: Since it's a management event with mixed historical impact and the news is routine, the vote should be FLAT. Confidence is low, maybe 0.3. But the instructions say if noise, vote FLAT with confidence at most 0.3. Since the event is management, which isn't necessarily noise, but the news is just a filing without new info, it's probably considered noise. So, FLAT with confidence 0.3. The trace steps would be 1 (classification as management), 2 (mixed base rate), 3 (priced in), and 4 (commit based on that).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.3,
+ "attempts": 1
+}

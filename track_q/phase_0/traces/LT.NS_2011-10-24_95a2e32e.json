@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2011-10-24_95a2e32e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -6.22%, volume shock (z): 1.80, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. Larsen & Toubro Limited has informed the Exchange that the Company has allotted 6,83,530 (Six Lakh Eighty Three Thousand Five Hundred Thirty only) shares on October 21, 2011 to those grantees who had exercised their options under the Company's Employee Stock Ownership/ Option Schemes. The said shares will rank pari-passu with the existing shares of the Company in all respects\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of securities, which is a capital action. The company issued shares to employees under an ESOP scheme. So step 1 is capital_action.\n\nNext, the base rate. On NSE, capital actions like share allotments are usually neutral or mixed. Sometimes they can be positive if it's a bonus issue, but here it's a regular allotment. So the base rate is probably mixed.\n\nPositioning: The PRE-T context shows a 5-day trend of -6.22%, which is a drop. Volume shock is 1.80, which might indicate some volatility. FinBERT prior is 0.00, so no strong sentiment. The news is about issuing shares, which might not be a big deal. Since the trend is down and the news is a capital action, maybe it's already priced in. But since the volume is a shock, maybe there's some reaction. However, the event isn't bad news, so maybe the market has already factored it in. But since the trend is down, maybe the news isn't enough to reverse the trend. So positioning might be neutral.\n\nCommit: The event is a capital action, base rate is mixed. The positioning is neutral because the news isn't strongly positive or negative. So the sentiment is neutral, vote FLAT, confidence low. But wait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since this is a capital action, maybe it's not noise. But the base rate is mixed. So maybe the vote is FLAT with confidence 0.3. But the steps need to be cited. So the trace steps would be 1,2,3,4. The sentiment is 0.0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 32.6,
+ "attempts": 1
+}

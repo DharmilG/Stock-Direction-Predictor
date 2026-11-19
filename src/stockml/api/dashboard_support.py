@@ -20,6 +20,7 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from ..config import Paths, Settings, load_settings
+from ..qpipeline.paths import p0_from, PHASE_REGISTRY
 
 # NSE timestamps are stored as naive IST; a session's data only exists after the
 # exchange settles, so anything before the cutoff refers to the previous session.
@@ -439,13 +440,13 @@ def artifact_paths(paths: Paths) -> dict[str, Path]:
         "best_params": paths.artifacts / "best_params.json",
         "checkpoint_index": paths.checkpoints / "lightgbm_final_checkpoint.txt.json",
         "checkpoint_model": paths.checkpoints / "lightgbm_final_checkpoint.txt",
-        "q0_verdict": paths.results / "q0_d1.json",
-        "q0_ledger": paths.root / "data" / "llm" / "qwen_rating_ledger.parquet",
-        "q0_heartbeat": paths.logs / "q0_heartbeat.json",
-        "q0_supervisor": paths.logs / "q0_supervisor.json",
-        "q0_gpu": paths.logs / "gpu_5s.csv",
-        "q0_setup": paths.state / "qwen_setup.json",
-        "q_track_state": paths.state / "q_track_state.json",
+        "q0_verdict": p0_from(paths.root)["verdict"],
+        "q0_ledger": p0_from(paths.root)["state"] / "qwen_rating_ledger.parquet",
+        "q0_heartbeat": p0_from(paths.root)["logs"] / "q0_heartbeat.json",
+        "q0_supervisor": p0_from(paths.root)["logs"] / "q0_supervisor.json",
+        "q0_gpu": p0_from(paths.root)["logs"] / "gpu_5s.csv",
+        "q0_setup": p0_from(paths.root)["state"] / "qwen_setup.json",
+        "q_track_state": PHASE_REGISTRY,
         "refresh_state": paths.state / "refresh.json",
     }
 

@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2019-08-05_1e92173c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.32%, volume shock (z): -0.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Shriram Transport Finance Company Limited has informed the Exchange regarding 'Certificate under Regulation 74(5) of SEBI (Depositories and Participants) Regulations, 2018 '\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news item about Shriram Transport Finance Company Limited and give a 5-day directional signal. First, I need to follow the checklist steps.\n\nStep 1: Classify the event. The article mentions a regulatory filing under SEBI regulations. The event here is a regulatory update. So the classification is \"regulatory\".\n\nStep 2: Base rate. I need to recall historical precedent for regulatory events on NSE. Usually, regulatory filings can be neutral or have mixed impacts. Sometimes they might signal compliance issues or positive steps, but generally, they don't strongly move the stock unless there's a significant announcement. So the base rate is probably mixed.\n\nStep 3: Positioning. The PRE-T context shows a 5-day trend of 0.32% positive, volume shock z of -0.16, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the trend is slightly up. Since the event is regulatory and there's no clear positive or negative news, the move doesn't seem fully priced in. The news is just a routine filing, so maybe the market hasn't reacted yet. Therefore, it's not overbought or oversold, so not a fade or bounce candidate. But since the event is regulatory and the base rate is mixed, maybe the sentiment is neutral.\n\nStep 4: Commit. Since the event is regulatory with mixed historical impact, and the current positioning isn't showing overbought/oversold, the vote should be FLAT. Confidence would be low, maybe 0.3. But wait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since regulatory filings can sometimes be noise, especially if they're just routine, this might be considered noise. So confidence 0.3. The sentiment should be FLAT, so 0.0. But the instruction says sentiment sign must agree with vote. FLAT would have sentiment 0.0. \n\nWait, the user's instruction says if noise, vote FLAT with confidence at most 0.3. So this case is regulatory, which might be noise. Therefore, vote FLAT, confidence 0.3. Sentiment is 0.0. The trace steps would be 1,2,3,4. So the final JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.8,
+ "attempts": 1
+}

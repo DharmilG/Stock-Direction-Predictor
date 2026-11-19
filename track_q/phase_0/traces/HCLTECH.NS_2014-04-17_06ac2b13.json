@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2014-04-17_06ac2b13",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.22%, volume shock (z): 0.50, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Dividend. HCL Technologies Limited has informed the Exchange that the Board of Directors of the Company at its meeting held on April 17, 2014 has declared an interim dividend of Rs.4/- per equity share of Rs 2/- each of the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.8,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about HCL Technologies declaring an interim dividend. Dividends are a type of capital action since they involve distributing profits to shareholders. So step 1 would be to classify it as capital_action.\n\nNext, the base rate. I remember that on the NSE, dividend announcements are usually positive. When a company declares a dividend, it's a sign of profitability and can boost the stock price. So the historical precedent is usually-up. That's step 2.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 3.22% and volume shock z of 0.50. The FinBERT prior is 0.00. The news is about a dividend, which is a positive event. However, the 5-day trend is positive, so if the news is good, it might already be priced in. But since the volume shock is 0.50, which is moderate, maybe there's some reaction. But since the dividend is a capital action, and the stock was already trending up, maybe the move is already priced in. So step 3 would indicate that the move is priced in, so maybe a fade candidate if overbought. But the volume isn't extremely high, so not sure. Wait, the 5-day trend is up, so if the news is positive, it might be already reflected. So positioning might suggest that the move is priced in, leading to a possible fade. But I need to check if the news is positive enough. Since the dividend is a good news, but if the stock was already trending up, maybe the market has already reacted. So step 3 would say the move is priced in.\n\nCommitting the vote. Since it's a capital action (positive), base rate is usually-up, but positioning suggests it's already priced in. So maybe the vote is UP with confidence. But how much confidence? The event is a confirmed filing (dividend declaration is a formal action), so confidence would be higher. The confidence can be up to 0.8. So the vote is UP, confidence 0.8. The trace steps would be 1,2,3,4. Sentiment should be positive, so 0.8. \n\nWait, but the FinBERT prior is 0.00, which might indicate no prior sentiment. But the dividend is a positive event. So the sentiment is positive. So the final answer would be sentiment 0.8, vote UP, confidence 0.8, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.8, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 114.0,
+ "attempts": 2
+}

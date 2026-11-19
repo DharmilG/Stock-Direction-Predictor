@@ -1,0 +1,23 @@
+{
+ "case_id": "ULTRACEMCO.NS_2018-07-16_6c260fc6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ULTRACEMCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.90%, volume shock (z): -0.38, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. UltraTech Cement Limited has informed the Exchange regarding 'Certificate under Regulation 54(5) of the SEBI(Depository and Participants) Regulations, 1996 for the quarter ended 30th June, 2018'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about UltraTech Cement Limited filing a certificate under SEBI regulations for a quarter ended in 2018. That sounds like a regulatory filing. So the event type is regulatory.\n\nNext, the base rate. I remember that regulatory filings on the NSE can have mixed impacts. Sometimes they might signal compliance or transparency, which could be positive, but other times they might just be routine and not affect prices much. Since there's no specific historical data mentioned, I'll note it as mixed.\n\nPositioning: The PRE-T context has a 5-day trend of -0.90%, volume shock of -0.38, and FinBERT prior of 0.00. The negative trend and volume might indicate the stock is in a downtrend. The regulatory filing isn't bad news, but since the market is already down, maybe there's a bounce potential. However, the FinBERT prior is neutral, so not sure if there's any positive sentiment. The move might not be fully priced in, so maybe a bounce?\n\nCommit: Since it's a regulatory filing, which is a neutral to mixed event, and the market is oversold with a negative trend, there's a possibility of a bounce. But confidence isn't high because it's just a filing without clear positive news. So vote FLAT with low confidence. Wait, but the user said if it's noise, vote FLAT with confidence up to 0.3. Since regulatory filings can be noise, maybe that's the case here. So confidence around 0.3. But the positioning step mentioned oversold plus bad news is a bounce, but this isn't bad news. Hmm. Maybe it's noise, so FLAT with 0.3 confidence. But the steps require to check if it's noise first. Since the event is regulatory, which isn't necessarily bad, but the base rate is mixed. So maybe the vote is FLAT with confidence 0.3. But the user's instruction says if noise, vote FLAT. So I think this is noise, so FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 68.5,
+ "attempts": 2
+}

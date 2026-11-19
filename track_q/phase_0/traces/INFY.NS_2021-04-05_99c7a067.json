@@ -1,0 +1,21 @@
+{
+ "case_id": "INFY.NS_2021-04-05_99c7a067",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 5.71%, volume shock (z): 0.63, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  ESOP/ESOS/ESPS. Infosys Limited has informed the Exchange regarding Grant of 37,88,260 stock incentives\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Infosys receiving stock incentives, which falls under capital_action since it's about stock grants. Next, the base rate for capital actions on NSE\u2014usually, such actions can be mixed, but sometimes they're positive. Now, looking at the pre-t context: the 5-day trend is up 5.71%, volume shock is 0.63, and FinBERT prior is 0.00. The stock incentives might be seen as positive, but since the trend is already up, maybe the move is already priced in. The positioning step says if overbought with good news, it's a fade. Since the trend is up, maybe the market has already reacted. So, the vote might be FLAT with low confidence. But wait, the event is a capital action, which isn't typically a strong driver. So, maybe the sentiment is neutral, leading to FLAT. Confidence would be low, around 0.3. Let me check the steps again. Classification is capital_action. Base rate is mixed. Positioning: overbought (since 5-day trend is up) with good news (stock incentives) could be a fade, but the news might not be significant enough. So, maybe the vote is FLAT. Confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 23.8,
+ "attempts": 1
+}

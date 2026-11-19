@@ -1,0 +1,23 @@
+{
+ "case_id": "NTPC.NS_2019-07-22_5ef228f7",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: NTPC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.27%, volume shock (z): -0.06, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. NTPC Limited has informed the Exchange regarding 'Compliance under regulation 57(1) of the SEBI (LODR) Regulations, 2015 - SRS 46'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about NTPC Limited informing the Exchange regarding compliance under SEBI regulations. That sounds like a regulatory issue. So the event type is 'regulatory'. \n\nNext, the base rate. I remember that regulatory filings can have mixed impacts. Sometimes they might be positive if the company is following rules, but other times they could signal issues. Since the user said not to invent stats, I'll go with 'mixed' as the historical precedent.\n\nPositioning: The PRE-T context mentions a 5-day trend of 2.27% and volume shock. The FinBERT prior is 0.00. The news is about compliance, which might not be a big deal if they're just following regulations. But since there's no clear positive or negative sentiment in the text, maybe the move isn't priced in. However, the volume shock is negative, which might indicate some selling pressure. But since the event is regulatory and not obviously bad, maybe it's a flat?\n\nWait, the user said if it's noise, vote FLAT with confidence up to 0.3. But the event is regulatory, which isn't noise. So maybe the positioning is that the news isn't strongly positive or negative. The base rate is mixed, so the move might not be priced in. \n\nCommitting: Since the event is regulatory with mixed historical impact, and the current context doesn't show strong positive or negative signals, the vote is FLAT. Confidence would be around 0.3. The steps that matter are 1 (classification), 2 (base rate), and 3 (positioning). So the trace steps are 1,2,3,4. Wait, step 4 is COMMIT, which is part of the process. So the trace steps should include all four steps. But the user says to cite step numbers in trace. So the final answer should have trace_steps as [1,2,3,4]. \n\nSentiment should be FLAT, so 0.0. Confidence 0.3. Vote FLAT. That aligns with the steps.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.1,
+ "attempts": 1
+}

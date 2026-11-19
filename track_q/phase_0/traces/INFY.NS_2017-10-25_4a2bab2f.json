@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2017-10-25_4a2bab2f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.52%, volume shock (z): 1.78, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Financial Result Updates. Infosys Limited has submitted to the Exchange, the financial results for the period ended September 30, 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions Infosys submitting financial results for September 30, 2017. That sounds like an earnings report, so the event is an earnings_result. Next, the base rate for earnings results on NSE\u2014usually, earnings reports can go either way, but historically, they're often mixed. Now, looking at the pre-t context: the 5-day trend is 0.52% positive, volume shock is 1.78, and FinBERT prior is 0.00. The volume shock might indicate some activity, but since the FinBERT prior is neutral, maybe the market hasn't priced in the results yet. Since it's a confirmed filing, but there's no clear positive or negative news mentioned, the positioning might be neutral. So, no clear fade or bounce. The confidence should be moderate, maybe 0.5. But wait, the instruction says if noise, vote FLAT. Is this a noise event? The event is a financial result, which is significant, so not noise. So, the vote might be FLAT with low confidence. Wait, but the base rate is mixed. Hmm. Maybe the sentiment is neutral, leading to FLAT. But the user said to use the pre-t context. The 5-day trend is slightly positive, but the volume shock is high. Maybe the market hasn't fully priced in the results yet. So, the positioning is neutral. Therefore, the vote is FLAT with confidence 0.3. But I need to check the steps again. Step 1: earnings_result. Step 2: base rate is mixed. Step 3: positioning is neutral (not overbought or oversold). Step 4: commit with confidence 0.3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 103.0,
+ "attempts": 2
+}

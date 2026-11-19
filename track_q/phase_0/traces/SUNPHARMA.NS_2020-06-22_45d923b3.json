@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2020-06-22_45d923b3",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.52%, volume shock (z): -0.66, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Trading Window. Sun Pharmaceutical Industries Limited has informed the Exchange regarding the Trading Window closure pursuant to SEBI (Prohibition of Insider Trading) Regulations, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a Trading Window closure under SEBI regulations. That sounds like a regulatory event because it's about compliance and insider trading. So step 1 is regulatory.\n\nNext, the base rate. I remember that regulatory announcements on the NSE can go either way. Sometimes they're positive if they clear issues, but often they might lead to negative reactions if there's a violation. But since it's a closure, maybe it's a routine compliance action. However, without specific historical data, I should note that the precedent is mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 1.52% positive, volume shock negative, and FinBERT prior neutral. The event is a regulatory filing, which might not be newsworthy enough. Since the trend is up but volume is low, maybe the market hasn't priced in this news. But since it's a regulatory filing, maybe it's already considered. However, the volume shock is negative, which could indicate some selling pressure. But the event itself isn't bad news, just a compliance action. So maybe the move isn't fully priced in, but it's unclear.\n\nCommit: Since it's a regulatory event with mixed historical impact, and the current positioning isn't clearly overbought or oversold, I might lean FLAT. But the user said if it's noise, vote FLAT. However, regulatory filings can sometimes have implications. Wait, the article is about closing a trading window, which might be a routine action. If there's no specific bad or good news, it's noise. So step 1 is regulatory, but maybe it's noise. So vote FLAT with low confidence. But the base rate is mixed. Hmm. Maybe the confidence is low, so FLAT with confidence 0.3. But the user said if noise, vote FLAT. Since the event is a regulatory filing without clear positive or negative impact, it's noise. So the answer would be FLAT with confidence up to 0.3. But the steps need to be cited. So the trace steps would be 1,2,3,4. The sentiment would be neutral, so 0. The vote is FLAT, confidence 0.3. That's the plan.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 49.7,
+ "attempts": 1
+}

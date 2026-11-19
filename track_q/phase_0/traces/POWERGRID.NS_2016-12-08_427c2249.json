@@ -1,0 +1,23 @@
+{
+ "case_id": "POWERGRID.NS_2016-12-08_427c2249",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: POWERGRID.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.73%, volume shock (z): -1.64, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Change in Director(s). Power Grid Corporation of India Limited has informed the Exchange that Additional Charge assigned to Shri R P Sasmal, Director (Operations) for the post of the Director (Project) for a further period of six months w.e.f. November 11, 2016 or till the regular appointment is made or until further orders, whichever is the earliest\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a change in director(s), specifically an additional charge assigned to a director for a further period. The options include management, which seems to fit here since it's about director appointments. So step 1 is management.\n\nNext, the base rate. I remember that director changes in NSE companies usually don't have a strong historical precedent. Sometimes it might be neutral or mixed, but not typically a clear up or down. So step 2 is mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 0.73% and a volume shock of -1.64. The FinBERT prior is 0.00. The news is about a director's extended assignment, which might not be a significant change. Since the trend is slightly positive but volume is down, maybe the market hasn't fully priced in this news. But since it's a management change, maybe it's already considered. However, the volume shock suggests some negative reaction, but the event itself isn't bad news. So step 3 might be that it's not priced in, but I need to check.\n\nCommitting: Since it's a management event with mixed historical impact, and the current positioning isn't clearly overbought or oversold, the vote might be FLAT. But the confidence should be low. The confidence can't be over 0.4 for a single-source rumour. Wait, the news is from a confirmed filing, so maybe higher. But since it's a management change without clear positive or negative impact, maybe FLAT with confidence 0.3. But the trace steps need to include 1,2,3,4. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 31.2,
+ "attempts": 1
+}

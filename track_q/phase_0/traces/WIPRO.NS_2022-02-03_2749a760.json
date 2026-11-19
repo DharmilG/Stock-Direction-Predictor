@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2022-02-03_2749a760",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 6.15%, volume shock (z): -0.85, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  ESOP/ESOS/ESPS. Wipro Limited has informed the Exchange regarding Grant of 259067  Options\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro Limited granting 259,067 options. The event type here is related to employee stock options, which falls under capital_action. So step 1 is classified as capital_action.\n\nNext, the base rate. I need to recall historical precedents for capital actions on NSE. Usually, capital actions like stock option grants might not have a clear trend. Sometimes they can be neutral or mixed because they don't directly impact earnings or operations. So the base rate is probably mixed.\n\nPositioning: Looking at the pre-t context, the 5-day trend is 6.15% positive, volume shock is -0.85, and FinBERT prior is 0.00. The positive trend might suggest the market is already up, so if the news is about options, which is a capital action, it might be priced in. Since the volume shock is negative, maybe there's some selling pressure, but the trend is up. However, the event is a capital action, which might not be a strong driver. So the move might already be priced in, making it a fade candidate if overbought. But since the trend is positive, maybe the market is already reacting, so the news might not add much. So positioning is priced in.\n\nCommit: Since it's a capital action with mixed historical impact, and the positioning suggests it's priced in, the vote would be FLAT. Confidence is low because it's a single event without strong indicators. So confidence around 0.3. The trace steps would be 1,2,3,4. Sentiment should be FLAT, so 0.0. Wait, but the instructions say if FLAT, sentiment must be between -0.2 and 0.2. So 0.0 is correct. The vote is FLAT, confidence 0.3. Steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 173.1,
+ "attempts": 3
+}

@@ -1,4 +1,4 @@
-# Q0-D1 overnight supervisor (Windows PowerShell)
+﻿# Q0-D1 overnight supervisor (Windows PowerShell)
 #
 # Zero-touch design (Option A, 2026-10-20):
 # - One-time elevated setup registers a Scheduled Task; runtime never prompts.
@@ -37,7 +37,7 @@ if (-not $script:RepoRoot) { $script:RepoRoot = (Get-Location).Path }
 Set-Location $script:RepoRoot
 
 $script:Python = Join-Path $script:RepoRoot ".venv\Scripts\python.exe"
-$script:LogDir = Join-Path $script:RepoRoot "logs"
+$script:LogDir = Join-Path $script:RepoRoot "track_q\phase_0\logs"
 New-Item -ItemType Directory -Force -Path $script:LogDir | Out-Null
 
 if ($Scheduled -or $NoElevate) {
@@ -226,7 +226,7 @@ function Ensure-Ollama {
 
 function Get-LedgerCount {
     try {
-        $count = & $script:Python -c "import pandas as pd; print(len(pd.read_parquet('data/llm/qwen_rating_ledger.parquet')))" 2>$null
+        $count = & $script:Python -c "import pandas as pd; print(len(pd.read_parquet('track_q/phase_0/state/qwen_rating_ledger.parquet')))" 2>$null
         if ($LASTEXITCODE -eq 0 -and $count -match '^\s*(\d+)') {
             return [int]$Matches[1]
         }
@@ -236,7 +236,7 @@ function Get-LedgerCount {
 }
 
 function Test-Complete {
-    $verdictPath = Join-Path $script:RepoRoot "results\q0_d1.json"
+    $verdictPath = Join-Path $script:RepoRoot "track_q\phase_0\verdict\q0_d1.json"
     if (Test-Path $verdictPath) {
         try {
             $verdict = Get-Content $verdictPath -Raw | ConvertFrom-Json
@@ -384,7 +384,7 @@ function Start-SleepWithHeartbeat {
 
 function Write-DoneMarker {
     $verdictText = ""
-    $verdictPath = Join-Path $script:RepoRoot "results\q0_d1.json"
+    $verdictPath = Join-Path $script:RepoRoot "track_q\phase_0\verdict\q0_d1.json"
     if (Test-Path $verdictPath) {
         try { $verdictText = Get-Content $verdictPath -Raw } catch { }
     }

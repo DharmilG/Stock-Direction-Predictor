@@ -1,0 +1,23 @@
+{
+ "case_id": "BHARTIARTL.NS_2022-02-21_43bf99ef",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BHARTIARTL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.94%, volume shock (z): -0.74, FinBERT prior: 0.64\nARTICLE TEXT (full, un-summarized):\n  Press Release. Bharti Airtel Limited has informed the Exchange about press release dated 21-Feb-2022 titled Airtel joins SEA-ME-WE-6 undersea cable consortium to scale up high speed network for India\ufffd\ufffd\ufffds emerging digital economy\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Bharti Airtel joining a submarine cable consortium. That sounds like an expansion move, right? So the event type would be expansion. \n\nNext, the base rate. I remember that expansion news on the NSE usually has mixed outcomes. Sometimes it's positive, sometimes not, depending on the specifics. But I shouldn't make up stats. Let me think\u2014expansion can be good if it's strategic, but if it's too costly or risky, it might be negative. So the base rate is probably mixed.\n\nNow, positioning. The pre-t context mentions a 2.94% 5-day trend, volume shock of -0.74, and FinBERT prior of 0.64. The volume shock being negative might indicate some selling pressure, but the FinBERT prior is positive. However, the event is expansion, which might not be fully priced in if the market hasn't reacted yet. Since the volume shock is negative, maybe the market is already factoring in some of the positive news, but not sure. The 5-day trend is up, so maybe the positive sentiment is there. But the expansion could be a long-term play, so the short-term price might not have reacted fully. \n\nCommitting the vote. Since it's an expansion, which is a positive event but with mixed historical outcomes. The FinBERT prior is positive, but the volume shock is negative. Maybe the market hasn't fully priced in the expansion's benefits yet, so the sentiment is positive but with some uncertainty. Confidence should be moderate. Let's say 0.6. The steps that matter are classification as expansion, base rate mixed, positioning that the move isn't fully priced in. So the vote would be UP with confidence 0.6.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 100.4,
+ "attempts": 2
+}

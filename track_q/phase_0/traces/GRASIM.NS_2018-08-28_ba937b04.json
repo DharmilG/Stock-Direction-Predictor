@@ -1,0 +1,21 @@
+{
+ "case_id": "GRASIM.NS_2018-08-28_ba937b04",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: GRASIM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.10%, volume shock (z): -0.71, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Grasim Industries Limited has informed the Exchange regarding 'Notice of the 71st Annual General Meeting to be held on Friday, 14th September 2018 at the Registered office of the Company.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Grasim Industries announcing the date and details of their Annual General Meeting (AGM). The AGM is a management event because it's related to corporate governance and shareholder meetings. So, the event type is \"management.\"\n\nNext, the base rate. I remember that on the NSE, management announcements like AGM dates usually don't have a strong historical precedent. They're routine and often don't impact stock prices significantly. So the base rate is probably mixed, meaning it can go either way depending on other factors.\n\nNow, positioning. The PRE-T context gives a 5-day trend of 3.10% positive, volume shock is -0.71, and FinBERT prior is 0.00. The volume shock being negative might indicate some selling pressure, but the trend is positive. However, the AGM announcement is a routine event, so the market might already have priced in any expectations. Since there's no specific positive or negative news here, just a meeting date, the move doesn't look overly priced in. It's neutral.\n\nCommitting the vote. Since the event is management and the base rate is mixed, with no clear positive or negative signals, the sentiment should be FLAT. The confidence is low because it's just a routine announcement without any new information. The trace steps would be 1 (classification), 2 (base rate), 3 (positioning), and 4 (commit). The confidence is 0.3 as per the noise category, but since it's a management event, maybe 0.4? Wait, the instructions say if noise, vote FLAT with confidence at most 0.3. But management isn't noise. Hmm. Wait, the checklist says if it's noise, vote FLAT. But management is a valid event type. So maybe the confidence is 0.4? But the base rate is mixed, so maybe lower. Let me check again. The event is management, which isn't noise. The base rate is mixed. Positioning is neutral. So the vote is FLAT with confidence up to 0.3. So confidence 0.3. The sentiment should be FLAT, which is 0.0. So the final answer is FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 41.5,
+ "attempts": 1
+}

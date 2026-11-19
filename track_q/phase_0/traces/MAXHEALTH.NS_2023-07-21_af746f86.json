@@ -1,0 +1,21 @@
+{
+ "case_id": "MAXHEALTH.NS_2023-07-21_af746f86",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: MAXHEALTH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.33%, volume shock (z): -0.85, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Max Healthcare Institute Limited has informed the Exchange regarding update on petition filed by the Company against Touch Healthcare Private Limited and Others\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Max Healthcare Institute Limited updating the exchange regarding a petition against Touch Healthcare Private Limited and others. The key here is the petition filed by the company against others. That sounds like a litigation event because it's about a legal action. So step 1 would be litigation.\n\nNext, the base rate for litigation events on NSE. From what I remember, litigation outcomes can go either way. Sometimes companies win, sometimes lose, and it depends on the specifics. So the historical precedent is mixed. That's step 2.\n\nNow, positioning using the PRE-T context. The 5-day trend is 0.33% positive, volume shock is -0.85, and FinBERT prior is 0.00. The volume shock being negative might indicate some selling pressure, but the 5-day trend is slightly up. However, the event is a petition filing, which might not be a major news yet. Since the news is about a legal action, and there's no clear indication if it's a good or bad news, the move might not be fully priced in. But since the volume is a bit negative, maybe there's some selling, but not enough to be overbought. So step 3, the move doesn't look fully priced in, so maybe a bounce candidate if it's positive, but since it's litigation, it's uncertain.\n\nCommitting the vote. Since it's a litigation event with mixed historical outcomes, and the current positioning isn't clearly overbought or oversold, but the volume is slightly negative. However, the news is a filing, which might be a positive step for the company. So maybe a slight up move. Confidence would be moderate, maybe 0.5. But according to the instructions, single-source rumors are up to 0.4, but here it's a confirmed filing, so maybe 0.6? Wait, the instruction says confirmed filing plus supporting positioning at most 0.8. Since the PRE-T context has some volume shock but not sure if it's supporting. Maybe 0.5 confidence. Sentiment should be positive, so vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 38.6,
+ "attempts": 1
+}

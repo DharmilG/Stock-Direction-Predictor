@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2023-03-03_a6abdef6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 22.50%, volume shock (z): 1.11, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Adani Ports and Special Economic Zone Limited has informed the Exchange about Schedule of meet\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions an Analysts/Institutional Investor Meet/Con. Call Updates. Adani Ports has informed the Exchange about the schedule of the meet. So, this seems like a management event because it's about a meeting with analysts and investors. The PRE-T CONTEXT doesn't mention anything about earnings, orders, M&A, regulations, ratings, capital actions, debt, litigation, expansion, macro policies, short sellers, or noise. So the classification should be \"management\".\n\nNext, the base rate. For management events on NSE, historically, they can go either way. Sometimes positive updates can be bullish, but without specific info, it's mixed. The base rate here is probably mixed.\n\nPositioning: The PRE-T CONTEXT has a 5-day trend of 22.50% which is positive, volume shock z of 1.11 (which might indicate some volatility), and FinBERT prior of 0.00. The event is about a meeting schedule, which might not be new info. Since the trend is up, but the event is just a meeting announcement, maybe the market has already priced in some of this. However, without specific news, it's hard to say if it's overbought or oversold. The volume shock might suggest some activity, but not sure if it's priced in.\n\nCommit: Since the event is management, and the base rate is mixed. The positioning isn't clear if it's priced in. The confidence should be low because it's just an announcement without concrete details. So, maybe a FLAT vote with low confidence. But wait, the instruction says if noise, vote FLAT. But is this noise? The event is a management meeting, which isn't noise. But without specific info, maybe it's considered noise? Or maybe it's a management event which isn't necessarily noise. Hmm. The base rate is mixed, and the positioning isn't clear. So the sentiment might be neutral, leading to FLAT. Confidence would be around 0.3. But the user said if noise, vote FLAT. Since the event is management, not noise. So maybe the vote is FLAT with confidence 0.3. But the steps: classification is management, base rate mixed, positioning not priced in, so maybe the vote is FLAT. But I'm not sure. Alternatively, if the meeting is about future guidance, maybe it's a management event that could be positive. But without details, it's hard. So safest is FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 43.4,
+ "attempts": 1
+}

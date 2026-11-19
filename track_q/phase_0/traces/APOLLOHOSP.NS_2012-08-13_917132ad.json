@@ -1,0 +1,23 @@
+{
+ "case_id": "APOLLOHOSP.NS_2012-08-13_917132ad",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: APOLLOHOSP.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.06%, volume shock (z): -0.25, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Proceedings of Annual General Meeting. Apollo Hospitals Enterprise Limited has submitted to the Exchange a copy of the proceedings of the Annual General Meeting of the Company held on August 09, 2012\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about the proceedings of the Annual General Meeting (AGM) submitted to the Exchange. The options include things like earnings results, management, or maybe regulatory. Since it's about the AGM proceedings, that's more related to management or corporate governance. The event isn't about earnings, so probably \"management\" is the right category here.\n\nNext, the base rate. I need to recall historical precedent for management-related events on NSE. From what I know, management announcements can go either way. Sometimes they might signal stability or changes in leadership, but without specific details, it's usually mixed. So the base rate is probably mixed.\n\nNow, positioning. The PRE-T context has a 5-day trend of -1.06%, volume shock z of -0.25, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. The FinBERT prior is neutral. The event itself is a filing about the AGM, which might not be newsworthy enough to affect prices. Since the trend is down and the volume is low, maybe the move isn't priced in. But since it's just a filing, there's no clear positive or negative signal. So the positioning might be neutral, not enough to suggest a fade or bounce.\n\nCommitting the vote. Since the event is management-related, base rate is mixed, and the positioning isn't clearly overbought or oversold, the sentiment should be neutral. The confidence should be low because it's just a filing without specific positive or negative info. So the vote is FLAT with confidence around 0.3. The trace steps would be 1, 2, 3, 4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 29.3,
+ "attempts": 1
+}

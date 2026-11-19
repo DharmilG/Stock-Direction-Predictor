@@ -12,38 +12,42 @@ phase3:
   n: 1000
   seed: 43
   budgets: [256, 512, 1024]
-  ledger_path: "data/llm/q3_thinking_cap_ledger.jsonl"
-  results_path: "results/q3_thinking_cap.json"
-  trace_dir: "results/traces_q3"
+  # Runtime state lives under track_q/phase_3 (single source of truth:
+  # src/stockml/qpipeline/paths.py). Paths are relative to the repo root so
+  # the tree is portable between local PC and Colab.
+  ledger_path: "track_q/phase_3/data/q3_thinking_cap_ledger.jsonl"
+  results_path: "track_q/phase_3/results/q3_thinking_cap.json"
+  trace_dir: "track_q/phase_3/traces"
 
 star:
   cutoff: "2023-08-24"
-  pool_a_path: "data/llm/pool_a.parquet"
-  candidates_path: "data/llm/star_candidates.jsonl"
-  kept_path: "data/llm/star_kept.jsonl"
-  dropped_path: "data/llm/star_dropped.jsonl"
-  audit_template_path: "results/star_audit_template.csv"
-  audit_results_path: "results/star_audit_results.csv"
-  report_path: "results/phase5_filter_audit.json"
-  trace_dir: "results/traces_star"
+  # Phases 4/5 live in track_q/phase_4 and track_q/phase_5 when they first run.
+  pool_a_path: "track_q/phase_4/data/pool_a.parquet"
+  candidates_path: "track_q/phase_4/data/star_candidates.jsonl"
+  kept_path: "track_q/phase_5/data/star_kept.jsonl"
+  dropped_path: "track_q/phase_5/data/star_dropped.jsonl"
+  audit_template_path: "track_q/phase_5/results/star_audit_template.csv"
+  audit_results_path: "track_q/phase_5/results/star_audit_results.csv"
+  report_path: "track_q/phase_5/results/phase5_filter_audit.json"
+  trace_dir: "track_q/phase_4/traces"
   default_sample_size: 5000
   default_seed: 43
   relevance_min: 0.5
   audit_n: 200
 
 nightly:
-  ledger_path: "data/llm/qwen_nightly_ledger.parquet"
-  results_path: "results/qwen_nightly.json"
-  trace_dir: "results/traces_q7"
+  ledger_path: "track_q/phase_7/data/qwen_nightly_ledger.parquet"
+  results_path: "track_q/phase_7/results/qwen_nightly.json"
+  trace_dir: "track_q/phase_7/traces"
   default_thinking_budget: 512
 
 phase6:
-  adapter_dir: "artifacts/models/qwen_lora_r1"
-  checkpoint_dir: "checkpoints/qwen_lora"
-  train_jsonl: "data/llm/star_kept.jsonl"
-  eval_jsonl: "data/llm/star_val.jsonl"
-  results_path: "results/qwen_qlora.json"
-  probe_results_path: "results/qwen_10step_probe.json"
+  adapter_dir: "track_q/phase_6/adapter/qwen_lora_r1"
+  checkpoint_dir: "track_q/phase_6/checkpoints"
+  train_jsonl: "track_q/phase_5/data/star_kept.jsonl"
+  eval_jsonl: "track_q/phase_5/data/star_val.jsonl"
+  results_path: "track_q/phase_6/results/qwen_qlora.json"
+  probe_results_path: "track_q/phase_6/results/qwen_10step_probe.json"
   seq_len: 4096
   fallback_seq_len: 3072
   fallback_rank: 8
@@ -59,21 +63,23 @@ phase6:
 phase8:
   holdout_start: "2023-08-29"
   embargo_days: 5
-  results_path: "results/q8_ablation.json"
-  touch_ledger_path: "results/holdout_touches.jsonl"
+  results_path: "track_q/phase_8/results/q8_ablation.json"
+  touch_ledger_path: "track_q/phase_8/results/holdout_touches.jsonl"
   n_bootstrap: 1000
   bootstrap_seed: 42
   alpha: 0.05
 
 runner:
   # The pipeline refuses to start a phase if the previous phase is not PASSED
-  # in artifacts/state/q_track_state.json. Q0 is checked separately from
-  # results/q0_d1.json (complete=true AND pass=true).
+  # in track_q/_common/phase_registry.json. Q0 is checked separately from
+  # track_q/phase_0/verdict/q0_d1.json (complete=true AND pass=true).
+  # phase6_probe reads star_kept.jsonl (written by phase5), so it MUST run after
+  # phase5 — not before it.
   order:
     - phase3
-    - phase6_probe
     - phase4
     - phase5
+    - phase6_probe
     - phase6_train
     - phase7
     - phase8

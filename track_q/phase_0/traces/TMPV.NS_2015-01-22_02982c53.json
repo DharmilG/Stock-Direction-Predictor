@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2015-01-22_02982c53",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 6.30%, volume shock (z): 0.54, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure of Voting Pattern - Clause 35A. Tata Motors Limited has submitted to the Exchange a copy of Results of the Postal Ballot pursuant to Clause 35A of the Listing Agreement\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a disclosure of a voting pattern related to a postal ballot under Clause 35A. This seems like a regulatory or governance issue since it's about shareholder voting and compliance with listing agreements. So, the event type would be \"regulatory\".\n\nNext, the base rate. I remember that regulatory filings on the NSE usually don't have a strong directional impact. They might be neutral or have mixed effects. Since this is a disclosure, it's more about transparency than positive or negative news. So the historical precedent is probably mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 6.30% and volume shock. The event is a regulatory filing, which might not be priced in. Since there's no clear positive or negative sentiment in the article, and the prior FinBERT was 0.00, it's likely that the market hasn't reacted yet. So the move isn't priced in, making it a flat or maybe a bounce if there's a negative sentiment, but the article doesn't indicate that.\n\nCommitting the vote. Since it's a regulatory filing with no clear direction, and the base rate is mixed, the sentiment should be neutral. Confidence is low because there's no strong evidence. So, vote FLAT with confidence around 0.3. The steps that matter are 1 (classifying as regulatory), 2 (mixed base rate), and 3 (not priced in). Step 4 is just confirming the decision.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 105.0,
+ "attempts": 2
+}

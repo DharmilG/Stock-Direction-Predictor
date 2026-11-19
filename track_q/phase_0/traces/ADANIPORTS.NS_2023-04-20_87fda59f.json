@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2023-04-20_87fda59f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.27%, volume shock (z): -0.32, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Board Meeting Intimation. Intimation under Regulation 29 of the Securities and Exchange Board of India (Listing Obligations and Disclosure Requirements) Regulations, 2015, as amended\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a board meeting intimation under SEBI regulations. There's no mention of earnings, orders, M&A, ratings, management changes, capital actions, debt, litigation, expansion, macro policies, short sellers, or noise. It's just a regulatory notice. So according to the checklist, this falls under the 'regulatory' category.\n\nNext, the base rate. Historical precedent for regulatory events on NSE\u2014usually, these are mixed. Sometimes they can be neutral or have minimal impact, but sometimes they might affect trading if there's a significant announcement. But since it's just an intimation, not a major regulatory change, the base rate is probably mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 1.27% and volume shock. The event is a regulatory notice, which might not be priced in. Since there's no specific bad or good news, the move doesn't look priced in. So, it's neither overbought nor oversold with significant news, so maybe neutral.\n\nCommitting: Since it's a regulatory event with mixed historical impact and no clear pricing, the vote should be FLAT. Confidence is low, maybe 0.2. But wait, the instructions say if noise, vote FLAT with confidence up to 0.3. Since regulatory isn't noise but mixed, maybe confidence is lower. But the steps say to use only the pre-t context. The volume shock is negative, but the event itself isn't a clear signal. So, maybe FLAT with confidence 0.2. But the base rate is mixed, so the sentiment is neutral. The trace steps would be 1,2,3,4. So the final answer should be FLAT with confidence 0.2.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 36.2,
+ "attempts": 1
+}

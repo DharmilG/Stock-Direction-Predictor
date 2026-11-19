@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2020-09-07_aad8f98f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.07%, volume shock (z): -0.35, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. HCL Technologies Limited has informed the Exchange regarding Notice of Annual General Meeting to be held on September 29, 2020\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news item about HCLTECH.NS's shareholders meeting and provide a 5-day directional signal. \n\nFirst, I need to classify the event. The news is about an Annual General Meeting (AGM) notice. Looking at the checklist, the possible categories are things like earnings, guidance, management, etc. Since the AGM is a management-related event, that's the classification. So step 1 is management.\n\nNext, the base rate. I need to recall historical precedents for management events on the NSE. From what I remember, management events like AGMs usually don't have a strong directional impact unless there's something specific like a dividend announcement or a major decision. Since this is just a notice of the meeting without any new info, the base rate is probably mixed. But maybe usually neutral? Wait, the user says to state the historical precedent. If there's no clear trend, maybe it's mixed. But I need to be careful not to invent stats. If I'm unsure, maybe it's mixed.\n\nPositioning: The pre-t context has a 5-day trend of 2.07% up, volume shock z of -0.35, and FinBERT prior of 0.00. The event is just a notice of the AGM. Since there's no new information, the move isn't priced in. The prior sentiment was neutral (FinBERT 0.00), so the news doesn't add anything. So the positioning is that the move isn't priced in. \n\nCommit: Since the event is management, base rate is mixed, and the positioning isn't priced in, the vote might be FLAT. But the confidence needs to be low. The user said if it's noise, vote FLAT with confidence up to 0.3. Since this is a management event without new info, it's noise. So vote FLAT with confidence 0.3. \n\nWait, but the steps: step 1 is management, step 2 base rate (mixed), step 3 positioning (not priced in), step 4 commit. So the trace steps are 1,2,3,4. The sentiment should be neutral (close to 0), but the user says if absolute value below 0.2, FLAT. So sentiment 0.0, vote FLAT, confidence 0.3. That fits.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.7,
+ "attempts": 1
+}

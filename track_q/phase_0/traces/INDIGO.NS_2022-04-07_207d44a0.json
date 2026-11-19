@@ -1,0 +1,23 @@
+{
+ "case_id": "INDIGO.NS_2022-04-07_207d44a0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INDIGO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.68%, volume shock (z): -0.81, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. Promoter/Promoter Group of InterGlobe Aviation Limited has submitted a disclosure under Regulation 31(4) of SEBI Takeover Regulations for the year ended 31-Mar-2022\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI Takeover Regulations by the promoter group of InterGlobe Aviation. That sounds like a regulatory filing. So according to the checklist, the event type is regulatory. \n\nNext, the base rate. I remember that regulatory disclosures can have mixed effects. Sometimes they might signal positive changes, other times negative. But since it's a disclosure under takeover regulations, maybe it's about a takeover or ownership change. But without more info, the historical precedent on NSE for regulatory events is usually mixed. \n\nNow, positioning. The PRE-T context has a 5-day trend of -1.68%, volume shock z of -0.81, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. But the FinBERT prior is neutral. The event itself is a regulatory filing, which might not be positive or negative. Since the market is already down and volume is low, maybe the news isn't priced in. But I'm not sure if this is a good or bad news. \n\nCommitting the vote. Since it's a regulatory event with mixed historical impact, and the current positioning isn't clearly overbought or oversold, maybe the sentiment is neutral. The confidence should be low because it's a single event without strong indicators. So FLAT with low confidence. But wait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since regulatory filings can be noise, maybe that's the case here. So FLAT with confidence 0.3. \n\nWait, the steps: classify as regulatory, base rate mixed, positioning not clearly priced in, so commit FLAT. The sentiment should be near zero. So the final answer would be sentiment 0, vote FLAT, confidence 0.3, steps 1-4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 105.5,
+ "attempts": 2
+}

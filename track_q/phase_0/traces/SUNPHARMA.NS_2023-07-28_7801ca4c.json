@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2023-07-28_7801ca4c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.77%, volume shock (z): -0.02, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. Sun Pharmaceutical Industries Limited has informed the Exchange regarding Notice of Annual General Meeting to be held on August 28, 2023\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a shareholders meeting announcement for the Annual General Meeting. The options are things like earnings results, M&A, regulatory, etc. Since it's a meeting notice, it doesn't seem to be earnings-related or M&A. The sector is unknown, but the event is a regulatory or management-related announcement. Wait, the options include \"management\" as a category. So I think this falls under \"management\" because it's about the company's governance structure.\n\nNext, the base rate. I need to recall historical precedents for management-related events on NSE. Usually, such announcements don't have a strong directional impact. They might be neutral or mixed. If the company is announcing a meeting, it's routine, so the market might not react much. So the base rate is probably mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 3.77% positive, volume shock is -0.02, and FinBERT prior is 0.00. The positive trend might mean the stock is already up, so if the news is neutral, maybe the move is already priced in. But since the event is a meeting notice, which is standard, there's no new info. So the positioning is that the news isn't new, so the move is likely already priced in. Therefore, it's a flat signal.\n\nCommit: Since the event is management, base rate is mixed, and positioning is flat, the vote should be FLAT. Confidence is low because it's just a routine announcement. The confidence should be under 0.3. So the final answer is FLAT with confidence 0.2, citing steps 1, 2, 3, and 4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 136.6,
+ "attempts": 3
+}

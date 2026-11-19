@@ -1,0 +1,23 @@
+{
+ "case_id": "LT.NS_2015-06-01_cb769194",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: LT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.62%, volume shock (z): 2.84, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Larsen & Toubro Limited has informed the Exchange regarding a press release dated June 01, 2015, titled \"L&T Construction Wins Orders Vlaued Rs 1099 Crores\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.8,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Larsen & Toubro winning a significant order worth Rs 1099 crores. That sounds like an order win, so I'll go with \"order_win\" for step 1.\n\nNext, the base rate. I remember that order wins on the NSE are usually positive. Companies winning big contracts often see their stock rise because it indicates future revenue and growth. So the historical precedent is usually-up. \n\nNow, positioning. The PRE-T context mentions a 5-day trend of 4.62% and a volume shock z of 2.84. The FinBERT prior is 0.00. The 5-day trend is positive, but the volume shock might indicate some volatility. However, since the event is a confirmed filing (the press release is dated), and the positive news is about a major order, it might not be fully priced in yet. The volume shock could mean there's some uncertainty, but the news is positive. So maybe the market hasn't fully reacted yet, making it a potential up move.\n\nCommitting the vote. Since it's an order win, which is usually positive, and the positioning isn't fully priced in, I should vote UP. Confidence is moderate, maybe 0.6. The steps that matter are 1 (event type), 2 (base rate), and 3 (positioning). So the trace steps are 1,2,3,4. Sentiment should be positive, so 0.8. Wait, the confidence can't be 1.0. Let me check. The event is a confirmed filing, so confidence should be up to 0.8. So sentiment is 0.8, vote UP, confidence 0.8. Steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.8, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 177.7,
+ "attempts": 3
+}

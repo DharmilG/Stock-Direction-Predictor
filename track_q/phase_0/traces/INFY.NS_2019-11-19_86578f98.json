@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2019-11-19_86578f98",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.20%, volume shock (z): -0.68, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Infosys Limited has informed the Exchange regarding a press release dated November 19, 2019, titled \" Infosys Foundation India International Challenge 2019 to host 250 players from 13 countries\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Infosys Foundation hosting a challenge with players from various countries. It's a press release about an event, not financial results, guidance, mergers, or anything else. So, this seems like a 'noise' event because it's unrelated to financial performance or significant corporate actions. \n\nNext, the base rate for 'noise' events on NSE. Since noise events usually don't impact prices, the historical precedent is mixed, but likely neutral. \n\nPositioning: The pre-t context mentions a 1.20% 5-day trend, volume shock z of -0.68, and FinBERT prior of 0.00. The event is neutral, so there's no indication it's priced in. Since it's noise, the positioning isn't strong enough to suggest a trend.\n\nCommitting: Since it's noise, the vote is FLAT with low confidence. The steps 1 and 3 are key here. Confidence should be under 0.3 as per the instructions. The sentiment should be FLAT, so the value is 0.0. \n\nI need to make sure the JSON is strict, with the right keys and values. Let me double-check each step to ensure compliance with the checklist.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 21.6,
+ "attempts": 1
+}

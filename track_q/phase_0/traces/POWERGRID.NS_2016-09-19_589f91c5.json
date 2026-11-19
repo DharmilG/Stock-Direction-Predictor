@@ -1,0 +1,23 @@
+{
+ "case_id": "POWERGRID.NS_2016-09-19_589f91c5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: POWERGRID.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.48%, volume shock (z): -0.81, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Regulation 44(3) of SEBI (LODR), Reg., 2015. Power Grid Corporation of India Limited has submitted to the Exchange the Proceedings and details of voting results of the Annual General Meeting of the Company held on September 16, 2016 along with the Scrutinizer  s Report\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a regulatory filing under SEBI LODR regulations. The company submitted proceedings from their AGM and a Scrutinizer's report. This seems like a regulatory event because it's about compliance and reporting to the exchange. So, the event type is regulatory.\n\nNext, the base rate. From what I know, regulatory filings on the NSE usually don't have a strong directional impact. They might be neutral or mixed. Sometimes, if there's a regulatory issue, it could be negative, but if it's just routine reporting, it might not affect the stock much. So the base rate is probably mixed.\n\nNow, positioning. The pre-t context has a 5-day trend of -3.48%, which is negative. The volume shock is -0.81, indicating lower volume, maybe a lack of interest. FinBERT prior is 0.00, so no sentiment from that. The event here is a regulatory filing, which might not be new information. Since the trend is down and the event is just a routine filing, maybe the market has already priced in any potential impacts. So, it's not a surprise, so the move might be priced in. Therefore, the positioning isn't a fade or bounce candidate.\n\nCommitting the vote. Since the event is regulatory and the base rate is mixed, with no new info, the sentiment should be flat. The confidence is low because there's no strong evidence either way. So, the vote is FLAT with confidence around 0.3. The steps that matter are 1 (classifying as regulatory), 2 (mixed base rate), 3 (priced in), and 4 (confidence based on evidence).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 28.7,
+ "attempts": 1
+}

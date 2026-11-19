@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2021-11-22_35af64d0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.17%, volume shock (z): 1.02, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Infosys Limited has informed the Exchange regarding a press release dated November 18, 2021, titled \"Infosys Foundation Inaugurates Three Infrastructure Projects in Mysuru\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. First, I need to classify the event. The article is about Infosys Foundation inaugurating infrastructure projects. The event isn't related to earnings, guidance, orders, M&A, regulatory actions, ratings, management changes, capital actions, debt, litigation, expansion, macro policies, short sellers, or noise. Wait, expansion might be a possibility since infrastructure projects could relate to expansion. But the event is about a foundation's projects, not the company's own expansion. So maybe it's noise? The user said if it's noise, vote FLAT with confidence up to 0.3.\n\nNext, the base rate. If it's noise, there's no historical precedent to consider. But if it's expansion, maybe expansions usually have mixed effects. But since the event is about a foundation's projects, not the company's own, maybe it's noise. \n\nPositioning: The pre-t context has a 5-day trend of -1.17%, volume shock z of 1.02, and FinBERT prior of 0.00. The volume shock might indicate some unusual activity, but the FinBERT prior is neutral. The event isn't directly related to the company's performance, so maybe the move isn't priced in. But since it's noise, the positioning might not matter.\n\nCommit: If it's noise, vote FLAT with confidence up to 0.3. The steps would be 1 (noise), 2 (no precedent), 3 (not priced in), 4 (commit based on noise). Sentiment should be FLAT. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1, 2, 3, 4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 35.2,
+ "attempts": 1
+}

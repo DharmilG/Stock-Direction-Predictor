@@ -1,0 +1,23 @@
+{
+ "case_id": "TITAN.NS_2019-12-03_71a0caf1",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TITAN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.68%, volume shock (z): -0.43, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Titan Company Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions Analysts/Institutional Investor Meet/Con. Call Updates. That sounds like a management event because it's about communication with investors and analysts. So step 1 would be management.\n\nNext, the base rate. I remember that on the NSE, management updates can go either way. Sometimes they might have positive news, sometimes not. But I think the usual precedent is mixed. So step 2 is mixed.\n\nNow, positioning. The PRE-T context has a 5-day trend of -0.68%, volume shock z of -0.43, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. But the FinBERT prior is neutral. The news is about a meeting update, which might not be a major positive or negative. Since the trend is down and the volume is negative, but the news isn't clearly bad or good, maybe it's already priced in? Or maybe there's a possibility of a bounce if the meeting brings positive info. But since it's just an update, not sure if it's priced in. Maybe the market hasn't reacted yet, so it's not overbought or oversold. So step 3 might say not priced in, but need to check.\n\nCommitting: Since the event is management, base rate is mixed, and positioning is unclear. The confidence should be low. Maybe a FLAT vote with low confidence. But wait, the instructions say if it's noise, vote FLAT. But management isn't noise. So maybe the sentiment is neutral. Wait, the steps: if the move looks priced in, but here it's unclear. Maybe the vote is FLAT with confidence 0.3? But the base rate is mixed. Hmm. Alternatively, since the news is just an update, maybe it's not a strong signal. So the sentiment is neutral, vote FLAT, confidence 0.3. But I need to check the steps again. The trace steps should include 1,2,3,4. So the answer would be FLAT with confidence 0.3, trace steps 1-4. Let me make sure I didn't miss any details. The article doesn't mention any specific positive or negative info, just an update. So it's noise? Or management. Since management is a category, but the base rate is mixed. So the vote is FLAT with confidence 0.3. Yeah, that makes sense.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.1,
+ "attempts": 1
+}

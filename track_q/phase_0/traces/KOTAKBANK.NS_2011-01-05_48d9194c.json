@@ -1,0 +1,23 @@
+{
+ "case_id": "KOTAKBANK.NS_2011-01-05_48d9194c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: KOTAKBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.00%, volume shock (z): -0.77, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Kotak Mahindra Bank Limited has informed the Exchange regarding a press release dated December 31, 2010, titled \"Kotak Mahindra Bank revises Base Rate\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Kotak Mahindra Bank revising their Base Rate, which is a regulatory or monetary policy change. Since the event is related to a bank adjusting its base rate, which is a regulatory action, I think it falls under the 'regulatory' category. \n\nNext, the BASE RATE. I remember that changes in base rates by banks can have mixed effects. If a bank lowers the base rate, it might be seen as positive for borrowers but negative for lenders. However, since this is a revision, maybe it's a standard adjustment. But I need to check historical precedents on NSE. From what I recall, base rate changes are usually neutral or mixed because they affect different stakeholders differently. So the historical precedent is probably mixed.\n\nNow, POSITIONING. The PRE-T CONTEXT mentions a 5-day trend of 0.00%, volume shock (z) of -0.77, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the trend is flat. Since the news is about a base rate revision, which is a regulatory action, and the market hasn't reacted yet (flat trend), it might not be priced in. However, since it's a regulatory change, maybe the market hasn't fully reacted yet, so the positioning isn't clear. But the volume shock suggests some negative sentiment, but the event itself isn't bad news. So maybe it's not overbought or oversold, so the positioning isn't a fade or bounce candidate. Therefore, the move might not be priced in yet.\n\nFinally, COMMIT. Since the event is regulatory, the base rate change has mixed historical impact, and the positioning isn't clearly overbought or oversold, the sentiment is neutral. The vote would be FLAT with low confidence. But wait, the instructions say if it's noise, vote FLAT. But is this a noise event? The event is a press release about a base rate revision, which is a significant regulatory action. So maybe it's not noise. However, the historical precedent is mixed, and the positioning isn't clear. So the confidence is low. Maybe confidence around 0.3. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.3,
+ "attempts": 1
+}

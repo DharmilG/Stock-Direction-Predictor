@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2020-04-13_962189e3",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 5.74%, volume shock (z): -2.57, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disclosure under SEBI Takeover Regulations. Promoters of Infosys Limited has informed the Exchange regarding Disclosure under Regulation 30(2) of SEBI (SAST) Regulations, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the given news item for a 5-day directional signal on INFY.NS. The steps are clear, so I need to follow them carefully.\n\nFirst, classify the event. The article mentions a disclosure under SEBI Takeover Regulations. The promoters informed the Exchange about Regulation 30(2) of SEBI (SAST) Regulations, 2011. This seems like a regulatory filing. So, the event type is regulatory. That's step 1.\n\nNext, the base rate. What's the historical precedent for regulatory filings on NSE? Typically, regulatory announcements can have mixed effects. Sometimes they might be neutral or even positive if they signal compliance, but other times they might cause uncertainty. Since the user says not to invent stats, I have to rely on general knowledge. Regulatory filings are usually not major news, so the base rate is likely mixed. Step 2 done.\n\nPositioning: Using the PRE-T CONTEXT. The 5-day trend is 5.74% up, volume shock is -2.57, and FinBERT prior is 0.00. The volume shock being negative might indicate some selling pressure, but the price trend is positive. However, the event is a regulatory disclosure. Since there's no specific positive or negative info in the filing, the move might not be priced in yet. But the previous trend is up, so maybe the market has already reacted. Wait, the PRE-T CONTEXT is before the news. So the volume shock is from before the news. The event is a regulatory filing, which might not directly impact the stock unless it's something significant. Since the filing is under SEBI regulations, maybe it's about a takeover or some structural change. But the article doesn't specify the content of the disclosure. So without more info, the positioning is unclear. Maybe the market hasn't priced in this yet, so it's a neutral. Step 3.\n\nCommit: Since the event is regulatory (step 1), base rate is mixed (step 2), and positioning is unclear (step 3), the vote should be FLAT. Confidence would be low, maybe 0.3. But wait, the user said if noise, vote FLAT with confidence at most 0.3. Since regulatory filings can sometimes be noise, especially without specific details, this might be considered noise. So confidence 0.3. The trace steps would be 1,2,3,4. Sentiment should be FLAT, so 0. The final JSON would have sentiment 0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 70.0,
+ "attempts": 2
+}

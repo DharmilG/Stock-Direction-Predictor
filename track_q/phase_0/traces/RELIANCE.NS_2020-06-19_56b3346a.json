@@ -1,0 +1,23 @@
+{
+ "case_id": "RELIANCE.NS_2020-06-19_56b3346a",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: RELIANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 10.74%, volume shock (z): 7.89, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Reliance Industries Limited has informed the Exchange regarding a press release dated Jun 19, 2020, titled \"RELIANCE RAISES OVER &#8377; 168,818 CRORE IN JUST 58 DAYS\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Reliance Industries about raising a huge amount of money in 58 days. The event here is a capital action because they're talking about raising funds. So step 1 is classified as capital_action.\n\nNext, the base rate. Historical precedent for capital actions on NSE\u2014usually, when companies raise a lot of capital, it can be either positive or negative. If they're raising funds for expansion or debt, it might be positive. But sometimes, if it's for debt, it could be seen as negative. But since the press release is about raising a significant amount, the base rate is probably mixed. So step 2 is mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 10.74% and volume shock z of 7.89. The FinBERT prior is 0.00. The volume shock being high might indicate some volatility. But the event is a capital action. If the market already priced in the possibility of a capital raise, then the move might be priced in. However, the 5-day trend is positive, but the volume shock suggests maybe some uncertainty. Since it's a capital action, and the news is about raising funds, which could be for expansion or debt. If the market hasn't fully priced in the details, maybe there's a reaction. But the FinBERT prior is neutral. So the positioning might be that the move is not fully priced in, but need to check if the positive trend suggests it's already reflected.\n\nCommit: The vote would be UP if the capital action is seen as positive. But since the base rate is mixed, and the positioning is uncertain, but the press release is a confirmed filing. The confidence would be around 0.6. So the sentiment is positive, vote UP, confidence 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 113.3,
+ "attempts": 2
+}

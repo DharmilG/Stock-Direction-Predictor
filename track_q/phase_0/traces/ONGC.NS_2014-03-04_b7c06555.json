@@ -1,0 +1,23 @@
+{
+ "case_id": "ONGC.NS_2014-03-04_b7c06555",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ONGC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.84%, volume shock (z): -0.41, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Oil & Natural Gas Corporation Limited has informed the Exchange that in terms of clause 9.2.1 of Code of Conduct for Prevention of Insider Trading of ONGC, as per disclosure received by ONGC, Shri. D K Sarraf and his dependents hold 3,192 equity shares of ONGC as on March 01, 2014 i.e. date of his assumption of Charge of the post of Chairman & Managing Director, ONGC\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about ONGC's chairman's equity holdings disclosed per regulatory requirements. The key points are the disclosure of shares held by the chairman and his dependents as of March 2014. This seems like a regulatory disclosure, so the event type is \"regulatory\". \n\nNext, the base rate for regulatory events on NSE. From what I know, regulatory disclosures can have mixed impacts. Sometimes they might be seen as positive transparency, but other times they could hint at insider trading concerns. However, since this is a routine disclosure as per code of conduct, it's more about compliance than negative news. So the historical precedent is probably mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 4.84% and a volume shock. The event is a disclosure of past holdings, not new information. Since the news is about past data and not current performance, the market might have already priced in any potential implications. The volume shock is negative, but the event itself isn't a significant catalyst. So the move might not be priced in, but the context isn't clear enough to say for sure.\n\nCommitting: Since the event is regulatory and the base rate is mixed, but the disclosure is routine, the sentiment might be neutral. However, the volume shock could indicate some negative sentiment. But without clear positive or negative signals, the vote might be FLAT with low confidence. Wait, but the user said if noise, vote FLAT with confidence up to 0.3. This seems like noise since it's a disclosure of past holdings, not new info. So confidence would be around 0.3. But the steps need to be cited. \n\nWait, step 1 classification is regulatory. Step 2 base rate is mixed. Step 3 positioning: the event is about past data, so maybe not priced in. But the volume shock is -0.41, which is a negative volume anomaly. However, the news itself isn't a strong catalyst. So maybe the positioning is neutral. \n\nSo, the sentiment would be neutral, vote FLAT, confidence 0.3. Trace steps 1,2,3,4. But the user says if noise, vote FLAT. Since this is a regulatory disclosure, which might be considered noise, then yes. So the final answer should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.6,
+ "attempts": 1
+}

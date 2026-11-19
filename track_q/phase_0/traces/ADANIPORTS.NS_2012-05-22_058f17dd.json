@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2012-05-22_058f17dd",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.57%, volume shock (z): -1.23, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Change in Director(s). Adani Ports And Special Economic Zone Limited has informed the Exchange that Dr. Ravindra Dholakia has ceased to be a Director of Adani Ports and Special Economic Zone Limited w.e.f May 19, 2012 on his joining as an Independent Director of Adani Enterprises Limited w.e.f. May 21, 2012\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a director change. The article mentions that Dr. Ravindra Dholakia ceased to be a director of Adani Ports due to joining another company. This seems like a management change, so the classification should be \"management\". \n\nNext, the base rate. I remember that management changes can have mixed impacts. Sometimes it's positive if the new management brings good strategies, but sometimes it's negative if there's instability. On the NSE, I think the usual precedent is mixed because it depends on the context. So the base rate is mixed.\n\nNow, positioning. The PRE-T context shows a 5-day trend of -2.57%, which is a decline. The volume shock is -1.23, indicating lower volume. FinBERT prior is 0.00, which is neutral. The news is about a director leaving, which might not be a big deal unless there's more context. Since the trend is down and the news is neutral, maybe the move isn't fully priced in. But since it's a management change, maybe the market already considered it. However, the volume is low, so maybe there's not enough reaction yet. \n\nCommitting the vote. Since the event is management, which has a mixed base rate, and the positioning isn't clearly overbought or oversold, but the trend is down. The confidence should be low. Maybe a FLAT vote with confidence around 0.3. But wait, the user said if it's noise, vote FLAT. Is this a noise event? Management changes can be noise if not significant. So the answer would be FLAT with confidence 0.3. But the steps need to be cited. So trace steps 1,2,3,4. The sentiment should be neutral, so 0.0. Wait, the instructions say sentiment sign must agree with vote. Since vote is FLAT, sentiment should be 0.0. But the confidence is 0.3. Let me check again. The classification is management, base rate mixed, positioning not clearly priced in, so FLAT. Confidence up to 0.3. So the JSON would have sentiment 0.0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 134.9,
+ "attempts": 2
+}

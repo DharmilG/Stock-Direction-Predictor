@@ -1,0 +1,23 @@
+{
+ "case_id": "CIPLA.NS_2020-11-12_a4a8be16",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: CIPLA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -6.78%, volume shock (z): 0.32, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Cipla Limited has informed the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions Analysts/Institutional Investor Meet/Con. Call Updates. That sounds like a management event because it's about updates from meetings with analysts and investors. So step 1 would be management.\n\nNext, the base rate. I remember that on the NSE, management updates can go either way. Sometimes they might have positive news, sometimes not. But I think the usual precedent is mixed. So step 2 is mixed.\n\nNow, positioning. The pre-t context has a 5-day trend of -6.78%, which is a drop. The volume shock is 0.32, which might indicate some volatility. FinBERT prior is 0.00, so no strong sentiment from that. The event is a management update, but the news itself doesn't specify if it's positive or negative. Since the trend is down and there's no clear positive info, maybe the move isn't fully priced in. But without specific details, it's hard to say. So step 3 might be that the move isn't priced in yet, but since there's no clear direction, maybe it's neutral.\n\nCommitting. Since the event is management, and the base rate is mixed, and there's no clear positive or negative info, the sentiment might be neutral. But the 5-day trend is down, so maybe a slight bias. However, without specific news, confidence should be low. So vote FLAT with confidence around 0.3. But the instructions say if noise, vote FLAT. Is this noise? The event is a management update, which isn't necessarily noise. But since there's no specific info, maybe it's considered noise. Hence, FLAT with confidence 0.3. But I need to check the steps again. Step 3 says if overbought with good news, fade; oversold with bad news, bounce. Here, the trend is down (oversold?), but the news is neutral. So maybe the positioning is that the move isn't priced in, but since the news is neutral, maybe it's FLAT. So confidence 0.3. The sentiment would be close to 0. So the final answer would be FLAT with confidence 0.3, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 51.8,
+ "attempts": 1
+}

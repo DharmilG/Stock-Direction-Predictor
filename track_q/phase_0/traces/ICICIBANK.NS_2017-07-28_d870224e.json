@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2017-07-28_d870224e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.95%, volume shock (z): 2.91, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. ICICI Bank Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call UpdatesSub: Earnings call for results for the quarter ended 30th June, 2017This is further to our letter dated July 26, 2017 on the captioned subject. Please find attached the investor presentation and the opening remarks for the analyst call for the Q1-2018 results. The same has also been uploaded on the website of the Bank and can be accessed on the link http://www.icicibank.com/aboutus/qfr.page?#toptitle\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about ICICI Bank Limited providing updates on an earnings call for Q1-2018 results. They mentioned an investor presentation and opening remarks. So, this seems like an earnings_result because it's related to their quarterly results. \n\nNext, the base rate. Historically, earnings reports on the NSE usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the actual results. But since the event is an earnings call, the base rate is probably mixed.\n\nNow, positioning. The PRE-T CONTEXT says the 5-day trend is -1.95%, which is a decline. The volume shock is 2.91, which might indicate some volatility. The FinBERT prior is 0.00, suggesting no strong sentiment beforehand. The news is about an earnings call, but there's no actual result mentioned yet. The company is just providing materials for the call. So, the move might not be fully priced in yet. Since the trend is down and there's no clear positive or negative news, maybe it's a bounce candidate if the results are good, but we don't know yet.\n\nCommitting the vote. Since the event is an earnings call, but no actual results are released yet, the sentiment is neutral. The base rate is mixed, and the positioning isn't clearly overbought or oversold. So, the vote should be FLAT with low confidence. But wait, the user said if it's noise, vote FLAT. Is this considered noise? The news is about preparing for the earnings call, not the actual results. So maybe it's noise. Hence, FLAT with confidence up to 0.3. But the instructions say if noise, vote FLAT with confidence at most 0.3. So I should check if this is noise. Since the event is just about the call preparation, not the actual result, it's probably noise. Therefore, FLAT with confidence 0.3. But the steps need to be cited. So steps 1, 2, 3, 4. The sentiment would be 0.0, vote FLAT, confidence 0.3. That's the conclusion.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 110.4,
+ "attempts": 2
+}

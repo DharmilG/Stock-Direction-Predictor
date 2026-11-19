@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2018-12-24_bc31d01f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.23%, volume shock (z): -0.96, FinBERT prior: -0.84\nARTICLE TEXT (full, un-summarized):\n  Strikes/Lockouts/Disturbances. Disclosure under Regulation 30 of SEBI (LODR) Regulations, 2015 - Call of Strike\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a strike called under SEBI regulations. Strikes are usually related to labor disputes, which fall under the 'regulatory' category because they involve regulatory disclosures. So step 1 is regulatory.\n\nNext, the base rate. I remember that regulatory events on NSE can go either way. Sometimes they're positive if they resolve issues, but often they're negative due to operational disruptions. The base rate is probably mixed, but maybe slightly negative because strikes can lead to downtime and financial impacts.\n\nPositioning: The pre-t context has a 5-day trend of 1.23%, which is positive. The volume shock is -0.96, indicating lower volume, which might mean the news is not widely priced in. FinBERT prior is -0.84, suggesting negative sentiment. Since the news is a strike, which is bad, and the volume isn't high, it might not be fully priced. So the move looks underpriced, maybe a bounce candidate.\n\nCommitting: The event is regulatory, base rate mixed but leaning negative, positioning suggests it's not fully priced. So the vote would be DOWN with moderate confidence. Confidence around 0.6 because it's a confirmed filing but not strong enough to be 0.8. Sentiment should be negative, so -0.8. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": -0.8, \"vote\": \"DOWN\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 97.2,
+ "attempts": 2
+}

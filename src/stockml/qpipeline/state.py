@@ -12,12 +12,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from ..config import load_settings
-from .contracts import PHASES
+from .contracts import PHASES, Q_TRACK_STATE_PATH
 
 
 def state_path() -> Path:
-    return Path(load_settings().paths.state) / "q_track_state.json"
+    return Path(Q_TRACK_STATE_PATH)
 
 
 def _empty_state() -> dict[str, Any]:

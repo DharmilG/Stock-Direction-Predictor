@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2012-09-05_66896583",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.02%, volume shock (z): -0.51, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. State Bank Of India has informed the Exchange vide letter dated September 05, 2012 regarding the Revision in Interest Rates of Retail Term Deposits\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the State Bank of India revising interest rates on retail term deposits. The PRE-T CONTEXT mentions a 5-day trend of 0.02%, volume shock, and FinBERT prior. The article is an update about a past decision from 2012. Since it's about a regulatory change related to interest rates, this falls under the 'regulatory' category. \n\nNext, the base rate. Regulatory changes on interest rates usually have mixed effects. If the rates are increased, it might be seen as positive for banks' income but negative for depositors. However, the historical precedent on NSE for such regulatory actions isn't clear. But since the event is about a past decision, maybe the impact isn't well-established. The base rate might be mixed.\n\nPositioning: The PRE-T context shows a very slight positive trend (0.02%) but the volume shock is negative. However, the news is about an old regulatory change, so maybe the market has already priced in this information. Since the event is from 2012, it's possible the market has already reacted, making the move look priced in. But the volume shock might indicate some uncertainty. However, since the news is about a past decision, perhaps there's no new information here, leading to a flat sentiment.\n\nCommit: Since the event is regulatory and the news is about a past action, there's no new info. The sentiment is neutral, so vote FLAT with low confidence. The steps that matter are classification as regulatory, base rate being mixed, and positioning indicating the move is priced in. Confidence should be around 0.3 as it's noise. The final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 190.6,
+ "attempts": 3
+}

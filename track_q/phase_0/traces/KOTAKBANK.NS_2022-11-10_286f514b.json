@@ -1,0 +1,23 @@
+{
+ "case_id": "KOTAKBANK.NS_2022-11-10_286f514b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: KOTAKBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.12%, volume shock (z): 0.43, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Schedule of Analysts/Institutional Investor Meet/Con. Call. Pursuant to the provisions of Regulation 30 of the SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015, please note that the representative(s) of Kotak Mahindra Bank Limited will be speaking to investors at UBS India Virtual Conference 2022 through audio/video conference call on November 11, 2022\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about an analyst meeting/conference call. The key points here are that the bank is participating in a virtual conference, which is a management event. So according to the checklist, management events fall under the 'management' category. \n\nNext, the base rate. I remember that management events on the NSE usually don't have a strong directional impact. They can be neutral or mixed because they don't directly relate to earnings or major news. So the historical precedent is probably mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 0.12%, volume shock z of 0.43, and FinBERT prior of 0.00. The volume shock might indicate some unusual activity, but since the event is a management meeting, there's no direct news. The FinBERT prior is neutral. So the move doesn't seem priced in yet. Since it's a management event without clear positive or negative news, the positioning isn't strong enough to suggest a fade or bounce.\n\nCommitting the vote. Since the event is management, which is a neutral category, and the base rate is mixed, with no clear pricing in, the sentiment should be FLAT. Confidence is low because it's a single event without strong indicators. So the vote is FLAT with confidence around 0.3. The trace steps would be 1, 2, 3, 4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 106.8,
+ "attempts": 2
+}

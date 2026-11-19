@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2023-01-25_b1949723",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.68%, volume shock (z): -0.30, FinBERT prior: -0.74\nARTICLE TEXT (full, un-summarized):\n  Loss of Share Certificates. HCL Technologies Limited has informed the Exchange about Loss of Share Certificates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates. Hmm, share certificates are like physical shares, right? So losing them might relate to corporate actions. The options for classification include things like capital_action, which covers events like share issues or buybacks. Since the company is informing the exchange about losing these certificates, it's probably a corporate action. So I'll go with capital_action.\n\nNext, the base rate. I need to recall if similar events on the NSE usually lead to price movements. From what I remember, capital actions like share buybacks or issues can have mixed effects. If they're losing certificates, maybe it's about repurchasing shares or some administrative issue. But without specific stats, I have to rely on general knowledge. I think these events are often neutral or mixed, so the base rate is probably mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 0.68% positive, volume shock z of -0.30, and FinBERT prior of -0.74. The volume shock being negative might indicate lower volume, which could mean the news isn't heavily priced in. The FinBERT prior is negative, suggesting some negative sentiment. But the 5-day trend is positive. However, the event is about losing share certificates, which might not directly impact the stock price unless it's related to a buyback or something else. Since the news isn't clearly positive or negative, and the volume is low, maybe the move isn't fully priced in. But I'm not sure if this is a bounce or fade. The positioning might be neutral.\n\nCommitting the vote. Since the event is a capital action, which is mixed, and the positioning isn't clearly overbought or oversold, the sentiment might be neutral. The confidence should be low because it's a single event without strong indicators. So I'll vote FLAT with confidence around 0.3. Let me check the steps again to make sure. Classification as capital_action, base rate mixed, positioning neutral, so FLAT. That fits with the steps.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 180.7,
+ "attempts": 3
+}

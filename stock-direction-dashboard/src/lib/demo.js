@@ -172,8 +172,8 @@ const Q0_STATUS = {
   thermal: { state: 'nominal', temperature_c: 61, max_temperature_c: 74, clock_mhz: 2100, applied_clock_mhz: 1800, cap_mhz: 1800, rests: 12, hard_trips: 0, cooldowns: 3, alarms: 0, prepares: 14, aborts: 2 },
   timing: { run_started_at: '2026-10-27T04:02:00+00:00', last_checkpoint_at: '2026-10-27T12:29:00+00:00', work_seconds: 29400, total_model_seconds: 26100, proactive_target_seconds: 40 },
   supervisor: { available: false, state: null, message: null, pid: null, child_pid: null, child_alive: null, restart_in_seconds: null, last_exit_code: null, updated_at: null, age_seconds: null, mutex: null },
-  gate: { available: true, verdict: 'INCOMPLETE', recorded_pass: true, passed: null, complete: false, n: 97, pool_total: 1500, qwen_agreement: 0.2817, finbert_agreement: 0.1991, delta: 0.0515, se_diff: 0.0631, bar_2se: 0.1262, harness_fail_rate: 0.0094, rated_total: 716, recorded_at: '2026-09-30T09:12:00+00:00', state_status: 'running', note: 'Gate pass/fail is copied verbatim from results/q0_d1.json; nothing is recomputed here.' },
-  phases: { available: false, phases: ['phase3', 'phase6_probe', 'phase4', 'phase5', 'phase6_train', 'phase7', 'phase8'].map((name) => ({ name, status: 'pending', updated_at: null, note: null })), note: 'artifacts/state/q_track_state.json has not been written.' },
+  gate: { available: true, verdict: 'INCOMPLETE', recorded_pass: true, passed: null, complete: false, n: 97, pool_total: 1500, qwen_agreement: 0.2817, finbert_agreement: 0.1991, delta: 0.0515, se_diff: 0.0631, bar_2se: 0.1262, harness_fail_rate: 0.0094, rated_total: 716, recorded_at: '2026-09-30T09:12:00+00:00', state_status: 'running', note: 'Gate pass/fail is copied verbatim from track_q/phase_0/verdict/q0_d1.json; nothing is recomputed here.' },
+  phases: { available: false, phases: ['phase3', 'phase6_probe', 'phase4', 'phase5', 'phase6_train', 'phase7', 'phase8'].map((name) => ({ name, status: 'pending', updated_at: null, note: null })), note: 'track_q/_common/phase_registry.json has not been written.' },
   setup: { available: false, phase: null, status: null, model: null, quantization: null, ctx_pinned: null, num_predict_min: null, corrected_fields: null, raw: null },
   gpu: { available: true, samples: DATES.slice(-40).map((date, index) => ({ at: `${date} 0${(index % 9) + 1}:00:00`, temp_c: 52 + (index % 9) })), latest_c: 60, peak_c: 74, timezone: 'naive-local (written by q0_d1._append_gpu_sample)', size_bytes: 288000 },
   resume: { note: 'Read-only hint. The dashboard never starts or stops the run.', command: 'powershell -NoProfile -ExecutionPolicy Bypass -File .\\setup_q0_task.ps1', alternative: 'powershell -NoProfile -ExecutionPolicy Bypass -File .\\run_q0_overnight.ps1', resumable: true, ledger_is_append_only: true },
@@ -787,13 +787,13 @@ function demoQ0Timeline(window) {
       available: true,
       fields: ['temp_c', 'util_pct', 'mem_used_mb', 'mem_total_mb', 'power_w', 'fan_pct', 'clock_sm_mhz', 'clock_max_sm_mhz'],
       series,
-      source: 'logs/q0_resource_5s.csv',
+      source: 'track_q/phase_0/logs/q0_resource_5s.csv',
       stride_seconds: 15,
       timezone: 'naive-local (written by q0_d1)',
       supplementary: true,
     },
     history: { available: true, rows: history, source: 'logs/q0_history.jsonl' },
-    progress: { available: true, rows: Q0_PROGRESS, window: 50, source: 'data/llm/qwen_rating_ledger.parquet' },
+    progress: { available: true, rows: Q0_PROGRESS, window: 50, source: 'track_q/phase_0/state/qwen_rating_ledger.parquet' },
     psi: { available: true, rows: psi, source: 'artifacts/state/psi_history.jsonl' },
     live: {
       running: true,
@@ -909,7 +909,7 @@ function demoQ0Analytics() {
     latency: {
       overall: quantiles(Q0_ROWS.map((row) => row.seconds)),
       by_outcome: latencyByOutcome,
-      source: 'results/traces/*.json (seconds)',
+      source: 'track_q/phase_0/traces/*.json (seconds)',
       available: true,
     },
     cohorts,
@@ -1073,14 +1073,14 @@ export function demoEnvelope(pathname, search = '') {
   }
   if (path.endsWith('/dashboard/q0/status')) return env(Q0_STATUS);
   if (path.endsWith('/dashboard/q0/timeline')) {
-    return env(demoQ0Timeline(params.window ?? '2h'), ['logs/q0_resource_5s.csv', 'logs/q0_history.jsonl', 'artifacts/state/psi_history.jsonl']);
+    return env(demoQ0Timeline(params.window ?? '2h'), ['track_q/phase_0/logs/q0_resource_5s.csv', 'logs/q0_history.jsonl', 'artifacts/state/psi_history.jsonl']);
   }
-  if (path.endsWith('/dashboard/q0/analytics')) return env(demoQ0Analytics(), ['data/llm/qwen_rating_ledger.parquet']);
-  if (path.endsWith('/dashboard/q0/cases')) return env(demoQ0Cases(params), ['data/llm/qwen_rating_ledger.parquet']);
+  if (path.endsWith('/dashboard/q0/analytics')) return env(demoQ0Analytics(), ['track_q/phase_0/state/qwen_rating_ledger.parquet']);
+  if (path.endsWith('/dashboard/q0/cases')) return env(demoQ0Cases(params), ['track_q/phase_0/state/qwen_rating_ledger.parquet']);
   if (path.includes('/dashboard/q0/case/')) {
     const match = /\/dashboard\/q0\/case\/([^/]+)$/.exec(path);
-    return env(demoQ0Case(decodeURIComponent(match?.[1] ?? '')), ['results/traces/*.json']);
+    return env(demoQ0Case(decodeURIComponent(match?.[1] ?? '')), ['track_q/phase_0/traces/*.json']);
   }
-  if (path.endsWith('/dashboard/q0/ledger-summary')) return env(demoQ0LedgerSummary(), ['data/llm/qwen_rating_ledger.parquet']);
+  if (path.endsWith('/dashboard/q0/ledger-summary')) return env(demoQ0LedgerSummary(), ['track_q/phase_0/state/qwen_rating_ledger.parquet']);
   return null;
 }

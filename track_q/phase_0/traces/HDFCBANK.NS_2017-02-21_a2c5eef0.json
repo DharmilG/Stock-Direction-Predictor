@@ -1,0 +1,21 @@
+{
+ "case_id": "HDFCBANK.NS_2017-02-21_a2c5eef0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HDFCBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 7.97%, volume shock (z): -0.22, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. HDFC Bank Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions an Analysts/Institutional Investor Meet/Con. Call Updates. That sounds like a management event because it's about updates from the company's management to investors. So step 1 would be \"management\".\n\nNext, the base rate. I remember that on NSE, management updates can go either way. Sometimes they provide positive info, sometimes not. But generally, they are mixed. So step 2 is mixed.\n\nNow, positioning. The PRE-T context has a 5-day trend of 7.97% which is positive. The volume shock is -0.22, which might indicate some selling pressure. FinBERT prior is 0.00, so no strong sentiment from the text. Since the trend is up but volume is down, maybe the good news is already priced in. But the event is a management update, which could have mixed effects. However, since the trend is positive, maybe the market has already reacted, so the move might be priced in. So step 3 would be priced in.\n\nCommitting, the vote would be UP because the trend is positive, but the confidence is moderate. Since it's a management event with mixed base rate and positioning suggests it's priced in, confidence around 0.5. So the sentiment would be positive, vote UP, confidence 0.5. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 191.1,
+ "attempts": 3
+}

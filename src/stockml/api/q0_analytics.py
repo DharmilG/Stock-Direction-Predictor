@@ -23,6 +23,8 @@ from typing import Any
 import numpy as np
 import pandas as pd
 
+from ..qpipeline.paths import p0_from
+
 from .dashboard_support import age_seconds, file_meta
 
 VOTES = ("DOWN", "FLAT", "UP")
@@ -250,7 +252,7 @@ def analytics(paths, frame: pd.DataFrame | None) -> dict[str, Any]:
         "by_outcome": [
             {"outcome": name, **_quantiles(seconds[outcome == name])} for name in ("match", "mismatch", "harness_fail")
         ],
-        "source": "results/traces/*.json (seconds)",
+        "source": "track_q/phase_0/traces/*.json (seconds)",
         "available": bool(seconds.notna().any()),
     }
 
@@ -312,12 +314,13 @@ def _window_seconds(window: str) -> float | None:
 def _resource_series(paths, window: str, step: int) -> tuple[dict[str, Any], list[str]]:
     """GPU series from the superset file when it exists, else temperature only."""
     warnings: list[str] = []
-    flat_path = paths.logs / "q0_resource_5s.csv"
-    legacy_path = paths.logs / "gpu_5s.csv"
+    p0 = p0_from(paths.root)
+    flat_path = p0["logs"] / "q0_resource_5s.csv"
+    legacy_path = p0["logs"] / "gpu_5s.csv"
     path = flat_path if flat_path.exists() else legacy_path
     meta = file_meta(path)
     if not meta["available"]:
-        warnings.append("Neither logs/q0_resource_5s.csv nor logs/gpu_5s.csv exists; no GPU series to draw.")
+        warnings.append("Neither track_q/phase_0/logs/q0_resource_5s.csv nor track_q/phase_0/logs/gpu_5s.csv exists; no GPU series to draw.")
         return {"available": False, "fields": [], "series": [], "source": None}, warnings
 
     try:
@@ -328,7 +331,7 @@ def _resource_series(paths, window: str, step: int) -> tuple[dict[str, Any], lis
 
     if path is legacy_path:
         warnings.append(
-            "logs/q0_resource_5s.csv is missing (written by q0_d1) — only temperature is available. "
+            "track_q/phase_0/logs/q0_resource_5s.csv is missing (written by q0_d1) — only temperature is available. "
             "Utilisation, power, fan and clocks are absent, not zero."
         )
     fields = [name for name in RESOURCE_FIELDS if name in frame.columns and pd.to_numeric(frame[name], errors="coerce").notna().any()]
@@ -373,7 +376,7 @@ def _resource_series(paths, window: str, step: int) -> tuple[dict[str, Any], lis
 def _history_rows(path: Path, limit: int = 4000) -> tuple[list[dict], list[str]]:
     warnings: list[str] = []
     if not file_meta(path)["available"]:
-        warnings.append("logs/q0_history.jsonl is missing — written by q0_d1 once per rest/heartbeat (30s throttle).")
+        warnings.append("track_q/phase_0/logs/q0_history.jsonl is missing — written by q0_d1 once per rest/heartbeat (30s throttle).")
         return [], warnings
     rows: list[dict] = []
     try:
@@ -387,7 +390,7 @@ def _history_rows(path: Path, limit: int = 4000) -> tuple[list[dict], list[str]]
                 except ValueError:
                     continue
     except OSError:
-        warnings.append("logs/q0_history.jsonl is unreadable.")
+        warnings.append("track_q/phase_0/logs/q0_history.jsonl is unreadable.")
         return [], warnings
     return rows[-limit:], warnings
 
@@ -452,21 +455,23 @@ def _thin(rows: list[dict], limit: int) -> list[dict]:
 
 def timeline(paths, frame: pd.DataFrame | None, window: str = "2h", step: int = 5) -> dict[str, Any]:
     """Everything the Live tab plots, from the files the run actually wrote."""
+    p0 = p0_from(paths.root)
     resource, warnings = _resource_series(paths, window, step)
-    history, history_warnings = _history_rows(paths.logs / "q0_history.jsonl")
+    history, history_warnings = _history_rows(p0["logs"] / "q0_history.jsonl")
     warnings.extend(history_warnings)
-    heartbeat_meta = file_meta(paths.logs / "q0_heartbeat.json")
+    hb_path = p0["logs"] / "q0_heartbeat.json"
+    heartbeat_meta = file_meta(hb_path)
     heartbeat = {}
     if heartbeat_meta["available"]:
         try:
-            heartbeat = json.loads((paths.logs / "q0_heartbeat.json").read_text(encoding="utf-8"))
+            heartbeat = json.loads(hb_path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
-            warnings.append("logs/q0_heartbeat.json is unreadable.")
+            warnings.append("track_q/phase_0/logs/q0_heartbeat.json is unreadable.")
     age = age_seconds(heartbeat_meta["modified_at"])
     running = bool(heartbeat) and age is not None and age <= LIVE_SECONDS and str(heartbeat.get("phase") or "") not in {"complete", "done"}
 
     progress = _progress_rows(frame, _seconds_series(frame, trace_map(paths, frame)) if frame is not None else None)
-    psi_path = paths.state / "psi_history.jsonl"
+    psi_path = p0["state"] / "psi_history.jsonl"
     psi_rows, psi_warnings = ([], [])
     if file_meta(psi_path)["available"]:
         try:
@@ -481,9 +486,9 @@ def timeline(paths, frame: pd.DataFrame | None, window: str = "2h", step: int = 
         "window": window,
         "step": int(step or SAMPLE_SECONDS),
         "resource": resource,
-        "history": {"available": bool(history), "rows": _thin(history, 400), "source": "logs/q0_history.jsonl"},
-        "progress": {"available": bool(progress), "rows": _thin(progress, 300), "window": ROLLING_CASES, "source": "data/llm/qwen_rating_ledger.parquet"},
-        "psi": {"available": bool(psi_rows), "rows": psi_rows[-60:], "source": "artifacts/state/psi_history.jsonl"},
+        "history": {"available": bool(history), "rows": _thin(history, 400), "source": "track_q/phase_0/logs/q0_history.jsonl"},
+        "progress": {"available": bool(progress), "rows": _thin(progress, 300), "window": ROLLING_CASES, "source": "track_q/phase_0/state/qwen_rating_ledger.parquet"},
+        "psi": {"available": bool(psi_rows), "rows": psi_rows[-60:], "source": "track_q/phase_0/state/psi_history.jsonl"},
         "live": {
             "running": running,
             "phase": heartbeat.get("phase"),
@@ -552,7 +557,7 @@ def case_rows(
 
 
 def safe_case_id(case_id: str) -> bool:
-    """Reject anything that could escape ``results/traces``."""
+    """Reject anything that could escape the phase-0 trace directory."""
     if not case_id or len(case_id) > 200:
         return False
     return not ("/" in case_id or "\\" in case_id or ".." in case_id or ":" in case_id)
@@ -572,7 +577,7 @@ def case_detail(paths, frame: pd.DataFrame | None, case_id: str) -> dict[str, An
             row = {key: (None if pd.isna(record.get(key)) else record.get(key)) for key in record.index}
             if isinstance(raw, str) and raw:
                 trace_path = Path(raw)
-    traces_dir = (paths.results / "traces").resolve()
+    traces_dir = (p0_from(paths.root)["traces"]).resolve()
     if trace_path is None:
         slug = re.sub(r"[^A-Za-z0-9_.-]", "_", case_id)
         candidate = traces_dir / f"{slug}.json"

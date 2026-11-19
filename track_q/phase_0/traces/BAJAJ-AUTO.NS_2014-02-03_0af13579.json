@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJAJ-AUTO.NS_2014-02-03_0af13579",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJAJ-AUTO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.29%, volume shock (z): -1.03, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Bajaj Auto Limited has informed the Exchange regarding a Press Release dated February 03, 2014 titled \"January 14, Sales\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Bajaj Auto Limited about sales from January 14, dated February 3, 2014. The possible event types include earnings_result, earnings_guidance, order_win, etc. But since it's a press release about sales, maybe it's related to earnings? Wait, the date is February 3, 2014, and the sales data is from January 14. That sounds like a sales report, which could be part of earnings results. But the event classification options don't have a specific \"sales report\" category. The closest might be earnings_result if the sales data is part of the earnings report. Alternatively, maybe it's a regulatory event? Or maybe it's considered noise since it's just a press release without specific financial details. The user mentioned that if it's noise, vote FLAT with confidence up to 0.3. \n\nNext, the BASE RATE. If this is a sales report, what's the historical precedent on NSE? If it's a regular sales announcement, maybe it's mixed. But since the user says not to invent stats, I need to rely on known categories. If the event is classified as earnings_result, then usually-up or usually-down? Without specific data, maybe it's mixed. But if it's noise, then the base rate would be mixed as well. \n\nPositioning: Using the PRE-T CONTEXT. The 5-day trend is -4.29%, volume shock is -1.03, FinBERT prior is 0.00. The volume shock is negative, which might indicate lower volume, possibly a lack of interest. The FinBERT prior is neutral (0.00). The 5-day trend is down. If the event is noise, then the move might be priced in already, leading to a FLAT vote. \n\nCommit: If it's noise, vote FLAT with confidence up to 0.3. But if it's classified as earnings_result, maybe the base rate is mixed. However, the article is a press release about sales, which might not be a significant earnings result. Since there's no specific financial data mentioned, maybe it's noise. Therefore, vote FLAT with confidence 0.3. The steps would be 1 (noise), 2 (mixed base rate), 3 (priced in), 4 (commit FLAT). Sentiment should be neutral, so 0.0. But the user says if absolute value below 0.2, go FLAT. So sentiment is 0.0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 189.9,
+ "attempts": 3
+}

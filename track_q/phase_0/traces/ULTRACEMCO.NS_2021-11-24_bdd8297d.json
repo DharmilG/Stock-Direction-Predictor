@@ -1,0 +1,23 @@
+{
+ "case_id": "ULTRACEMCO.NS_2021-11-24_bdd8297d",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ULTRACEMCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.87%, volume shock (z): -0.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. UltraTech Cement Limited has informed the Exchange about Schedule of meet\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions an Analysts/Institutional Investor Meet/Con. Call Updates. UltraTech Cement Limited informed the Exchange about a Schedule of meet. So, this seems like a management event because it's about a meeting with analysts and investors. Management events can be neutral or have mixed impacts, but they're not typically earnings results or guidance. So classification is management.\n\nNext, the base rate. For management events on NSE, historical precedent is usually mixed. Sometimes meetings can lead to positive news, sometimes not. No clear trend, so mixed.\n\nPositioning: The PRE-T context has a 5-day trend of -3.87%, volume shock z of -0.16, and FinBERT prior of 0.00. The negative trend and volume shock might indicate some negative sentiment, but the FinBERT prior is neutral. Since the event is a management meeting, which might not have immediate price impact, the move doesn't look overly priced in. It's a neutral event, so maybe not a strong fade or bounce.\n\nCommit: Since it's a management event with mixed historical impact and no clear pricing in, the vote is FLAT. Confidence should be low, maybe 0.3. But wait, the instructions say if noise, vote FLAT with confidence up to 0.3. But management events aren't necessarily noise. However, without clear positive or negative signals, maybe it's safer to go FLAT. But the base rate is mixed, so maybe the confidence is lower. Let me check again. The steps: classification as management, base rate mixed, positioning not priced in, so commit FLAT with confidence 0.3. But the user said if noise, vote FLAT. Is this event noise? The meeting is a scheduled event, not a rumor or a clear positive/negative. So maybe it's noise. Hence, FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 107.8,
+ "attempts": 2
+}

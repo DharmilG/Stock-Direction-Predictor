@@ -6,8 +6,8 @@ Frozen base model (no LoRA) on Pool C (n=1500 stratified pre-holdout,
 decision_date < 2023-08-24). Compares Qwen vote-agreement vs FinBERT
 agreement on the identical cases. Bar: Δ > 2×SE (≈3.6pp at p≈0.47).
 
-Resumable: appends rating-ledger rows to data/llm/qwen_rating_ledger.parquet;
-re-runs skip completed case_ids. Pool C verdict → results/q0_d1.json.
+Resumable: appends rating-ledger rows to track_q/phase_0/state/qwen_rating_ledger.parquet;
+re-runs skip completed case_ids. Pool C verdict → track_q/phase_0/verdict/q0_d1.json.
 
 Usage:
     python -m stockml.data.q0_d1 --build-pool
@@ -32,6 +32,10 @@ import numpy as np
 import pandas as pd
 
 from ..config import load_settings
+from ..qpipeline.paths import (
+    Q0_LEDGER, Q0_POOL, Q0_VERDICT_FILE, Q0_STATE_FILE, Q0_TRACES,
+    Q0_HEARTBEAT, Q0_GPU, Q0_RESOURCE, Q0_HISTORY, Q0_MAIN_LOG,
+)
 from ..utils.io import atomic_write_json, atomic_write_parquet
 from ..utils.logging import setup_logging
 from ..utils.state import update_state
@@ -559,9 +563,9 @@ def build_pool(seed: int = 42) -> pd.DataFrame:
 def run_gate(limit: int | None = None) -> dict:
     settings = load_settings()
     paths = settings.paths
-    logger = setup_logging(paths.logs / "q0_d1.log")
-    ledger_path = paths.root / "data" / "llm" / "qwen_rating_ledger.parquet"
-    pool_cache = paths.root / "data" / "llm" / "pool_c.parquet"
+    logger = setup_logging(Q0_MAIN_LOG)
+    ledger_path = Q0_LEDGER
+    pool_cache = Q0_POOL
     assert STAR_CUTOFF < HOLDOUT_START, "STAR cutoff must precede holdout"
     if pool_cache.exists():
         pool = pd.read_parquet(pool_cache)
@@ -578,11 +582,11 @@ def run_gate(limit: int | None = None) -> dict:
     if limit is not None:
         todo = todo.head(limit)
     logger.info("Q0-D1: %d todo (%d done).", len(todo), len(done))
-    trace_dir = paths.results / "traces"
-    sample_path = paths.logs / THERMAL_SAMPLE_LOG
-    resource_path = paths.logs / RESOURCE_SAMPLE_LOG
-    history_path = paths.logs / HISTORY_LOG
-    heartbeat_path = paths.logs / "q0_heartbeat.json"
+    trace_dir = Q0_TRACES
+    sample_path = Q0_GPU
+    resource_path = Q0_RESOURCE
+    history_path = Q0_HISTORY
+    heartbeat_path = Q0_HEARTBEAT
     state = ThermalState()
     run_started_at = datetime.now(timezone.utc).isoformat()
     attempted = 0
@@ -746,7 +750,7 @@ def run_gate(limit: int | None = None) -> dict:
             "rest_minutes": float(state.rest_minutes),
         },
     }
-    atomic_write_json(paths.results / "q0_d1.json", verdict)
+    atomic_write_json(Q0_VERDICT_FILE, verdict)
     logger.info("Q0-D1 verdict: %s", verdict)
     hb(phase="verdict", current_case=None, complete=verdict["complete"],
        n=int(n), qwen_agreement=p_q, finbert_agreement=p_f, delta=delta,
@@ -756,8 +760,8 @@ def run_gate(limit: int | None = None) -> dict:
         status = "complete" if verdict["pass"] else "stopped"
     else:
         status = "partial"
-    update_state(paths.state, "q0_d1", status=status,
-                 verdict=str(paths.results / "q0_d1.json"))
+    update_state(Q0_STATE_FILE.parent, "q0_d1", status=status,
+                 verdict=str(Q0_VERDICT_FILE))
     return verdict
 
 

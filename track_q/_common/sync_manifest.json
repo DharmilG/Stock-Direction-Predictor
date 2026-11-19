@@ -1,0 +1,35 @@
+{
+  "schema": "track-q-sync-v1",
+  "updated_at": "2026-11-19T06:53:46+05:30",
+  "note": "One source of truth for resume across machines (local PC / Colab). Update at each phase checkpoint. Hashes let a fresh clone verify it has the exact state.",
+  "active_machine": "local-pc",
+  "active_lease_at": "2026-11-19T06:53:46+05:30",
+  "base_model": "qwen3:8b",
+  "phase_order": ["phase3", "phase4", "phase5", "phase6_probe", "phase6_train", "phase7", "phase8"],
+  "phases": {
+    "phase_0": {
+      "status": "complete",
+      "gate": "pass",
+      "n_judged": 1431,
+      "harness_fail_rate": 0.046,
+      "last_completed_unit": "1500/1500",
+      "files": {
+        "ledger": "track_q/phase_0/state/qwen_rating_ledger.parquet",
+        "verdict": "track_q/phase_0/verdict/q0_d1.json",
+        "pool": "track_q/phase_0/data/pool_c.parquet",
+        "traces": "track_q/phase_0/traces/"
+      }
+    },
+    "phase_3": {
+      "status": "pending",
+      "config_fingerprint": null,
+      "last_completed_unit": null,
+      "files": {
+        "ledger": "track_q/phase_3/data/q3_thinking_cap_ledger.jsonl",
+        "results": "track_q/phase_3/results/q3_thinking_cap.json",
+        "traces": "track_q/phase_3/traces/",
+        "heartbeat": "track_q/phase_3/logs/q3_heartbeat.json"
+      }
+    }
+  }
+}

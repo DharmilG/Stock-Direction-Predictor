@@ -198,6 +198,20 @@ def _fingerprint(stage: int, hyper: dict, dataset_fp: str) -> str:
     )
 
 
+def _chronological_split(frame: pd.DataFrame, validation_fraction: float = 0.2):
+    """Chronological holdout: all validation dates are after the train cutoff."""
+    dates = pd.to_datetime(frame["date"])
+    unique = np.sort(dates.unique())
+    if len(unique) < 2:
+        raise ValueError("need at least two distinct dates for a chronological split")
+    cutoff = unique[max(1, int(len(unique) * (1 - validation_fraction)))]
+    train_idx = np.where(dates < cutoff)[0].tolist()
+    val_idx = np.where(dates >= cutoff)[0].tolist()
+    if not train_idx or not val_idx:
+        raise ValueError("chronological split produced an empty side")
+    return train_idx, val_idx
+
+
 def _split_dataset(dataset, seed: int, train_fraction: float = 0.8):
     n = len(dataset)
     if n < 2:
@@ -361,6 +375,7 @@ def train_stage1(
                     "train_stage1",
                     {
                         "epoch": epoch,
+                        "fingerprint": fp,
                         "train": train_metrics,
                         "val": val_metrics,
                         "learning_rate": optimizer.param_groups[0]["lr"],
@@ -535,10 +550,11 @@ def train_stage2(
 
         train_full = RealChartDataset(REAL_LABELS_CSV, REAL_DIR, transform=TRAIN_TRANSFORM)
         val_full = RealChartDataset(REAL_LABELS_CSV, REAL_DIR, transform=VAL_TRANSFORM)
-        train_ds, _ = _split_dataset(train_full, seed)
-        _, val_idx = _split_dataset(val_full, seed)
+        train_idx, val_idx = _chronological_split(labels)
+        train_ds = Subset(train_full, train_idx)
+        val_ds = Subset(val_full, val_idx)
         train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True, generator=torch.Generator().manual_seed(seed))
-        val_loader = DataLoader(val_idx, batch_size=batch_size, shuffle=False)
+        val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False)
         device = torch.device("cpu")
 
         summary = {"stage": 2, "epochs_run": 0, "best_metric": best, "stopped": False}
@@ -556,6 +572,7 @@ def train_stage2(
                     "train_stage2",
                     {
                         "epoch": epoch,
+                        "fingerprint": fp,
                         "train": train_metrics,
                         "val": val_metrics,
                         "learning_rate": optimizer.param_groups[0]["lr"],
@@ -628,7 +645,16 @@ def evaluate(resume: bool = True) -> dict:
 
     model = load_cv_model()
     use_real = REAL_LABELS_CSV.exists()
-    dataset = RealChartDataset(REAL_LABELS_CSV, REAL_DIR, transform=VAL_TRANSFORM) if use_real else ChartDataset(LABELS_CSV, SYNTHETIC_DIR, transform=VAL_TRANSFORM)
+    if use_real:
+        frame = pd.read_csv(REAL_LABELS_CSV)
+        _, val_idx = _chronological_split(frame)
+        full = RealChartDataset(REAL_LABELS_CSV, REAL_DIR, transform=VAL_TRANSFORM)
+        dataset = Subset(full, val_idx)
+        split_name = "chronological-holdout-20pct"
+    else:
+        full = ChartDataset(LABELS_CSV, SYNTHETIC_DIR, transform=VAL_TRANSFORM)
+        _, dataset = _split_dataset(full, 42)
+        split_name = "random-20pct"
     loader = DataLoader(dataset, batch_size=32, shuffle=False)
     ys, yp, scores = [], [], []
     with torch.no_grad():
@@ -666,6 +692,8 @@ def evaluate(resume: bool = True) -> dict:
             "accuracy": float(accuracy_score(y_true, yp)),
             "auc_ovr": auc,
             "dataset": "real" if use_real else "synthetic",
+            "split": split_name,
+            "n_evaluated": len(y_true),
             "labels": labels_order,
             "matrix": matrix.tolist(),
             "report": report_dict,
@@ -683,7 +711,7 @@ def evaluate(resume: bool = True) -> dict:
     from ..fault import atomic_write_bytes
 
     atomic_write_bytes(EVALUATION_DIR / "cv_confusion_matrix.png", buffer.getvalue())
-    update_state("evaluate", status="done", fingerprint=fp, accuracy=accuracy_score(y_true, yp), auc_ovr=auc)
+    update_state("evaluate", status="done", fingerprint=fp, accuracy=accuracy_score(y_true, yp), auc_ovr=auc, split=split_name, n_evaluated=len(y_true))
     return {"status": "done", "accuracy": accuracy_score(y_true, yp), "auc_ovr": auc}
 
 

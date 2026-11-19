@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJFINANCE.NS_2020-08-20_ffbd7a05",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJFINANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.76%, volume shock (z): -1.78, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Issue of Securities. Intimation of allotment of Secured Redeemable Non-Convertible Debentures on Private Placement basis\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.1,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the issuance of securities and an intimation of allotment for debentures via private placement. That sounds like a capital action since it's about raising capital through debt instruments. So step 1 would be capital_action.\n\nNext, the base rate. On NSE, capital actions like issuing debentures can have mixed effects. If a company is issuing debt, it might signal financial pressure, which could be negative. But sometimes it's for expansion or funding, which could be positive. But without specific historical data, the base rate is probably mixed. So step 2 is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -0.76%, volume shock z of -1.78, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. But the event is a capital action. If the market already priced in the possibility of raising capital, then the move might be priced in. However, since the volume is down, maybe there's some negative sentiment. But the event itself isn't necessarily bad. So maybe the move isn't fully priced in. Step 3: not priced in?\n\nCommit: Since it's a capital action, which can be mixed, but the volume shock is negative. If the market hasn't fully reacted, maybe the sentiment is slightly negative. But the confidence shouldn't be too high. Maybe a confidence of 0.5. The vote could be FLAT if the sentiment is neutral, but the base rate is mixed. Wait, the instructions say if noise, vote FLAT. But this isn't noise. So maybe the sentiment is neutral, leading to FLAT. But the base rate is mixed. Hmm. Alternatively, if the capital action is a debt issuance, which might be seen as negative, leading to a DOWN vote. But the confidence depends on the evidence. Since it's a confirmed filing, maybe confidence is 0.5. So the final answer would be sentiment -0.1, vote FLAT, confidence 0.5, with steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": -0.1, \"vote\": \"FLAT\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.6,
+ "attempts": 1
+}

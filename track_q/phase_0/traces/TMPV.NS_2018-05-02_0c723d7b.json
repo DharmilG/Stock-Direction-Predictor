@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2018-05-02_0c723d7b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.36%, volume shock (z): 0.65, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Motors Limited has informed the Exchange regarding a press release dated May 01, 2018, titled \"Tata Motors Monthly Sales April 2018\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Tata Motors about their monthly sales from April 2018. The PRE-T context mentions a 5-day trend of 1.36%, volume shock z of 0.65, and FinBERT prior of 0.00. The event here is a press release regarding sales data, which is historical. Since the release is about past sales, not earnings results or guidance, it's not an earnings_result or earnings_guidance. It's also not an order_win, MNA, or any other category listed. The event seems to be a routine press release, so maybe 'noise'?\n\nNext, the base rate. The user said not to invent stats, so I have to rely on known precedents. Press releases about past sales might not have a clear historical precedent. If they're just reporting historical data, maybe the market usually ignores them, leading to a mixed or neutral base rate. But I'm not sure. Maybe the base rate is usually-neutral?\n\nPositioning: The PRE-T context has a 5-day trend of 1.36% positive, volume shock z of 0.65 (which is a moderate volume change), and FinBERT prior of 0.00. The press release is about past sales, so if the market already priced in the sales data, then the move might be priced in. But since the release is from 2018, and the current date isn't given, maybe the market hasn't reacted to this info yet. Wait, but the user says the analyst hasn't seen prices after the decision date. So if the press release is old, maybe the market already reacted, making it priced in. But the PRE-T context's 5-day trend is positive, so if the news is old, maybe the positive trend is already reflected. However, the FinBERT prior is 0.00, which might indicate no sentiment from prior news. So the positioning could be that the move is not priced in because the release is historical, but the trend is positive. Hmm, conflicting factors.\n\nCommit: If the event is noise, then vote FLAT with confidence up to 0.3. But if the base rate is mixed and positioning isn't clear, maybe the confidence is low. Alternatively, if the event is not noise, but a routine release, maybe the sentiment is neutral. But the user said if noise, vote FLAT. So if I classify it as noise, then FLAT. But is this press release considered noise? Since it's about past sales, and not new info, maybe it's noise. So confidence would be 0.3 max. The trace steps would be 1 (noise), 2 (base rate mixed?), 3 (positioning not priced in?), 4 (commit based on noise). But I need to check each step carefully.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 47.2,
+ "attempts": 1
+}

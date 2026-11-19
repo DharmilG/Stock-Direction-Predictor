@@ -1,0 +1,23 @@
+{
+ "case_id": "MARUTI.NS_2013-04-26_6fe130c4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: MARUTI.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 11.95%, volume shock (z): 8.98, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Dividend. Maruti Suzuki India Limited has informed the Exchange that the Board of Directors of the Company at its meeting held on April 26, 2013, has considered and recommended a final dividend aggregating Rs. 24,167 lacs i.e. Rs. 8 per share (Nominal value Rs. 5.00 per share) (Previous Year Rs. 21,668 lacs i.e. Rs. 7.5 per share) for the financial year 2012-13\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Maruti Suzuki declaring a final dividend. Dividends are a type of capital action since they involve distributing profits to shareholders. So step 1 would be capital_action.\n\nNext, the base rate. I remember that on the NSE, dividend announcements are usually positive. Companies paying dividends are seen as healthy, which can boost stock prices. So the base rate is usually-up.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 11.95% and a volume shock of 8.98. The FinBERT prior is 0.00. The positive sentiment here is that the dividend is higher than the previous year. But since the news is about a past event (2012-13 financial year), the market might have already priced in this information. If the stock was already up due to the dividend, then the news might not be a new catalyst. However, if the dividend was unexpected, it could still move the price. But given the pre-t context shows a positive trend and volume shock, maybe the market has already reacted. So the move might be priced in, making it a fade candidate if overbought. But the user said to check if the move is priced in based on pre-t context. Since the 5-day trend is positive, and the volume is high, maybe the market has already considered this. So positioning might indicate the news is already reflected, leading to a potential fade.\n\nCommitting the vote: Since the event is a capital action with a positive base rate, but the positioning suggests the move is already priced in, the sentiment would be positive but confidence might be moderate. The confidence can't be over 0.8. Since it's a confirmed filing (dividend declaration), and the positioning shows some positive indicators, maybe confidence is 0.6. So vote UP with confidence 0.6. The trace steps would be 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 36.3,
+ "attempts": 1
+}

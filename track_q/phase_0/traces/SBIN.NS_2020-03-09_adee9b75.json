@@ -1,0 +1,23 @@
+{
+ "case_id": "SBIN.NS_2020-03-09_adee9b75",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -11.81%, volume shock (z): 1.62, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. State Bank Of India has informed the Exchange regarding 'Disclosure under Regulation 30 of SEBI (LODR) Regulations 2015: Press Release on draft scheme of reconstitution of Yes Bank Ltd.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about State Bank Of India informing the Exchange regarding a disclosure under SEBI regulations related to Yes Bank's reconstitution scheme. That sounds like a regulatory filing. So the event type is \"regulatory\".\n\nNext, the base rate. I remember that regulatory disclosures can have mixed impacts. Sometimes they might be neutral or even positive if they're about compliance, but in this case, it's about a press release on a draft scheme. I think historically, such disclosures might not directly impact the stock price much. Maybe the base rate is mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of -11.81%, which is a significant drop. The volume shock is 1.62, which might indicate some volatility. The FinBERT prior is 0.00, suggesting no strong sentiment from text analysis. Since the news is a regulatory filing and the market is already down, maybe the move isn't fully priced in. But since it's a disclosure, maybe it's already reflected. Wait, the user said to check if the move looks priced in. If the stock is down and the news is a regulatory filing, which might not be a big deal, maybe the market hasn't priced it yet. But the volume shock is high, so maybe there's some reaction. Hmm, not sure. Maybe it's a bounce candidate if oversold, but the trend is negative. \n\nCommitting: Since it's a regulatory event with mixed historical impact, and the market is down but the news isn't clearly positive or negative, maybe the sentiment is neutral. So vote FLAT with low confidence. But wait, the user said if it's noise, vote FLAT. Since regulatory filings can be noise, maybe that's the case here. So confidence around 0.3. \n\nWait, the steps: classify as regulatory, base rate mixed, positioning: since the trend is down and the news is a disclosure, maybe it's not priced in. But the FinBERT is 0.00, so no strong sentiment. So maybe the move isn't priced in, but the event is neutral. So vote FLAT. Confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 46.5,
+ "attempts": 1
+}

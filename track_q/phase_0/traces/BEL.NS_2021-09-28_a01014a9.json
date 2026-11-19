@@ -1,0 +1,23 @@
+{
+ "case_id": "BEL.NS_2021-09-28_a01014a9",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.89%, volume shock (z): 0.84, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Investor Presentation. Bharat Electronics Limited has informed the Exchange about Investor Presentation\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about an Investor Presentation by Bharat Electronics Limited. The options include things like earnings results, order wins, M&A, regulatory, etc. An Investor Presentation isn't exactly an earnings report or a major deal announcement. It's more about sharing information with investors, maybe strategic plans or updates. But since it's not a specific event like earnings or a merger, I think it falls under 'management' because it's related to company communications.\n\nNext, the base rate. The user mentioned historical precedent on NSE. From what I remember, Investor Presentations aren't typically major events that drive stock prices significantly. They might be neutral or have mixed effects. Some companies use these to announce positive news, but others might just provide routine updates. So the base rate is probably mixed, meaning the impact isn't consistently up or down.\n\nPositioning: The PRE-T context has a 5-day trend of 2.89% positive, volume shock z of 0.84, and FinBERT prior of 0.00. The volume shock is moderate, not extreme. The prior sentiment is neutral. Since the trend is positive but the news isn't a strong positive or negative event, the move might already be priced in. However, the presentation could still have some impact, but since it's not a clear positive or negative, maybe it's not overbought or oversold. So the positioning isn't clear enough to be a fade or bounce candidate.\n\nCommitting: Since the event is classified as management, and the base rate is mixed, with no clear pricing in the movement, the vote should be FLAT. Confidence is low because there's no strong evidence. The confidence should be under 0.3 as per the noise category. But wait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since the event is management, which isn't noise, but the base rate is mixed, maybe the confidence is around 0.2. The steps that matter are 1 (classification), 2 (base rate), and 3 (positioning). So the trace steps are 1,2,3,4. The sentiment should be neutral, so 0.0. The vote is FLAT, confidence 0.2. Let me check again. The event isn't noise, but the impact is mixed. So maybe the vote is FLAT with low confidence. Yeah, that makes sense.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 135.1,
+ "attempts": 2
+}

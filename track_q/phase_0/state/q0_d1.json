@@ -1,0 +1,6 @@
+{
+  "status": "complete",
+  "verdict": "E:\\books\\Adaniports\\stock_direction_platform\\results\\q0_d1.json",
+  "reason": "2026-11-17 run had 843 harness failures because the Ollama llama-server binary was missing; failed rows were purged and Q0 will be re-run.",
+  "updated_at": "2026-11-18T10:18:05.058399+00:00"
+}

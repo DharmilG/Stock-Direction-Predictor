@@ -1,0 +1,23 @@
+{
+ "case_id": "EICHERMOT.NS_2017-06-01_750fcf28",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: EICHERMOT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.80%, volume shock (z): -0.03, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Eicher Motors Limited has informed the Exchange regarding Release of information to SIAM with respect to sale volume of VE Commercial Vehicles Limited for the month of May 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Eicher Motors releasing information regarding the sale volume of VE Commercial Vehicles Limited for May 2017. The key here is that it's about past sales data, not current earnings or guidance. Since the information is about a past period (May 2017), this doesn't relate to earnings results or guidance. It's also not an order win, M&A, regulatory, rating change, management, capital action, debt credit, litigation, expansion, macro policy, short seller, or any of the other categories listed. The event seems to be about disclosing historical sales data, which might fall under 'noise' because it's not new information affecting current operations. But wait, the PRE-T context mentions a 5-day trend of 2.80% and volume shock. However, the article is about a past sale volume, so maybe it's not a significant event. If it's noise, then the vote should be FLAT with confidence up to 0.3. \n\nNext, the base rate. Since this event type (disclosure of past sales data) isn't common on NSE, there's no historical precedent. But the instruction says not to invent statistics, so maybe the base rate is mixed or unknown. However, if it's considered noise, the base rate might be neutral.\n\nPositioning: The PRE-T context has a 5-day trend of 2.80% positive, but the volume shock is negative. However, the event is about past data, so the market might have already priced in any relevant info from that period. Since it's historical, the current price might not react much. So the move might be priced in, leading to a fade if overbought, but since the trend is positive, maybe it's not overbought. But without current price data, it's hard to tell. The article doesn't mention anything new, so positioning might be neutral.\n\nCommit: Since the event is about historical data and not new information, it's likely noise. So vote FLAT with confidence 0.3. The steps would be 1 (noise), 2 (base rate unknown but no precedent), 3 (priced in), 4 (commit based on noise). But the confidence can't exceed 0.3. So the final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1, 2, 3, 4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.5,
+ "attempts": 1
+}

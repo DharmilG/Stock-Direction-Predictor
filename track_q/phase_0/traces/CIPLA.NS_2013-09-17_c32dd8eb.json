@@ -1,0 +1,23 @@
+{
+ "case_id": "CIPLA.NS_2013-09-17_c32dd8eb",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: CIPLA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.01%, volume shock (z): -0.99, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  ESOPs/ESOS/ESPS. Cipla Limited has informed the Exchange vide letter dated September 16, 2013 regarding \"Grant of Options under the Employee Stock option Scheme 2013-B(\"ESOS 2013-B\")\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. The user is asking me to analyze a news item for a 5-day directional signal on CIPLA.NS. The news is about ESOS 2013-B, which is an Employee Stock Option Scheme. \n\nFirst, I need to classify the event. The options granted under an ESOS are a capital action because it involves the company's capital structure. So step 1 would be capital_action. \n\nNext, the base rate. I remember that ESOS announcements on NSE usually don't have a strong historical precedent. They might be neutral or mixed because they relate to employee incentives rather than direct financial performance. So the base rate is probably mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -2.01%, volume shock z of -0.99, and FinBERT prior of 0.00. The negative trend and volume shock suggest the stock might be oversold. However, the event is about an ESOS, which isn't directly related to earnings or major news. Since the move doesn't seem to be priced in yet, maybe there's a bounce potential if the market hadn't reacted to it before.\n\nCommitting: Since it's a capital action with mixed historical impact and the stock is oversold, maybe a slight up move. Confidence should be low because it's a single event without strong indicators. So sentiment positive, vote UP, confidence around 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 98.0,
+ "attempts": 2
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJFINANCE.NS_2017-09-08_0d773a9e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJFINANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 5.07%, volume shock (z): 1.38, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Outcome of Board Meeting. Bajaj Finance Limited has informed the Exchange regarding Outcome of Board Meeting held on September 08, 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the outcome of a board meeting from September 2017. The possible categories include things like earnings results, management changes, or maybe regulatory stuff. But since it's a board meeting outcome, it's probably under \"management\" because it's about internal decisions. The other options like earnings_result or regulatory don't fit here. So step 1 is management.\n\nNext, the base rate. I need to recall historical precedent for management-related news on NSE. Usually, management changes or board decisions can go either way. If the company is performing well, positive news might be priced in, but if there's uncertainty, it could be mixed. Since the base rate isn't specified, I'll have to assume it's mixed. \n\nNow, positioning. The pre-t context mentions a 5-day trend of 5.07% and volume shock z of 1.38. The FinBERT prior is 0.00. The news is about a past board meeting, so there's no new info. The 5-day trend is positive, but since the event is old, maybe the market already priced in this news. If the trend is up and the news is already reflected, maybe it's a fade candidate. But the volume shock is 1.38, which is moderate. However, without recent price movement, it's hard to say. Since the event is from 2017, the current prices might not be affected, so the move might not be priced in. \n\nCommitting the vote. Since the event is management and the base rate is mixed, and the positioning isn't clearly overbought or oversold, the sentiment might be neutral. But the 5-day trend is positive, so maybe a slight up. However, since the news is old, the confidence should be low. The confidence cap for single-source rumour is 0.4, but since it's a confirmed filing, maybe 0.5. But the steps 1, 2, 3, 4 are all considered. The vote would be FLAT if the sentiment is too low. Wait, the sentiment must align with the vote. If the vote is FLAT, sentiment is near 0. But the base rate is mixed, and the positioning isn't clear. Maybe the sentiment is neutral, so FLAT with confidence 0.3. But the steps need to be cited. The trace steps would be 1,2,3,4. So the final answer is FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.7,
+ "attempts": 1
+}

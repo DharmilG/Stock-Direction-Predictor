@@ -1,0 +1,23 @@
+{
+ "case_id": "HDFCLIFE.NS_2019-03-13_0805916f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HDFCLIFE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -6.13%, volume shock (z): 5.51, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Offer for sale. Standard Life (Mauritius Holding) 2006 Limited has informed the Exchange regarding Offer for Sale of face value of Rs. 10 each (\"Equity Shares\") of HDFC Life Insurance Company Limited (formerly known as HDFC Standard Life Insurance Company Limited) (the \"Company\") by one of its promoters, Standard Life (Mauritius Holdings) 2006 Limited (the \"Seller\") through the stock exchange mechanism intimated by way of notice on March 11, 2019\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.6,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about an offer for sale by a promoter of HDFC Life. That sounds like a capital action since it's about selling shares. So step 1 would be capital_action.\n\nNext, the base rate. I remember that on NSE, capital actions like share offerings can have mixed effects. Sometimes it's positive if it's a strategic move, but often it's seen as negative because it might dilute existing shareholders' value. So the base rate is probably mixed.\n\nNow, positioning using the pre-t context. The 5-day trend is down -6.13%, and there's a volume shock with a z-score of 5.51, which indicates high volatility. The FinBERT prior is 0.00, so no sentiment from that. The event is a sale by a promoter, which might be seen as negative. Since the market is already down and there's a volume spike, this could be a fade candidate if it's overbought, but here the trend is down, so maybe it's a bounce? Wait, the positioning step says if overbought with good news, fade; oversold with bad news, bounce. The pre-t context shows a down trend and high volume, so maybe the market is oversold? But the event is a sale, which is a negative event. So maybe the positioning is that the move is not priced in yet, but the volume suggests some reaction. Not sure, but the base rate is mixed, so maybe the positioning isn't clear.\n\nCommitting: Since it's a capital action, base rate mixed. Positioning is unclear but the volume shock might indicate some reaction. The confidence should be moderate. Maybe 0.5 confidence. The sentiment would be slightly negative, so vote DOWN. But need to check the steps again. The event is a capital action, base rate mixed. Positioning: the 5-day trend is down, volume shock, so maybe the market is already reacting, so the news might not add much. But since it's a sale, it's a negative event. So the sentiment is negative, vote DOWN with confidence 0.5. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": -0.6, \"vote\": \"DOWN\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 45.2,
+ "attempts": 1
+}

@@ -167,7 +167,7 @@ export function Q0LiveTab() {
               </>
             )
           ) : (
-            <Missing title="No temperature series" detail="logs/q0_resource_5s.csv and logs/gpu_5s.csv are both empty or missing." />
+            <Missing title="No temperature series" detail="track_q/phase_0/logs/q0_resource_5s.csv and track_q/phase_0/logs/gpu_5s.csv are both empty or missing." />
           )}
         </Panel>
 
@@ -206,7 +206,7 @@ export function Q0LiveTab() {
           ) : (
             <Missing
               title="Utilisation was not recorded"
-              detail="logs/q0_resource_5s.csv is missing, so only temperature exists. It appears after the next Q0 run; nothing is inferred here."
+              detail="track_q/phase_0/logs/q0_resource_5s.csv is missing, so only temperature exists. It appears after the next Q0 run; nothing is inferred here."
             />
           )}
         </Panel>
@@ -243,7 +243,7 @@ export function Q0LiveTab() {
               />
             </>
           ) : (
-            <Missing title="Power and fan were not recorded" detail="These columns arrive with logs/q0_resource_5s.csv." />
+            <Missing title="Power and fan were not recorded" detail="These columns arrive with track_q/phase_0/logs/q0_resource_5s.csv." />
           )}
         </Panel>
 
@@ -271,7 +271,7 @@ export function Q0LiveTab() {
               />
             </>
           ) : (
-            <Missing title="No ledger rows" detail="data/llm/qwen_rating_ledger.parquet is missing." />
+            <Missing title="No ledger rows" detail="track_q/phase_0/state/qwen_rating_ledger.parquet is missing." />
           )}
         </Panel>
 
@@ -637,7 +637,7 @@ export function Q0AnalyticsTab() {
               />
             </>
           ) : (
-            <Missing title="No durations" detail="results/traces/*.json were not readable." />
+            <Missing title="No durations" detail="track_q/phase_0/traces/*.json were not readable." />
           )}
         </Panel>
 

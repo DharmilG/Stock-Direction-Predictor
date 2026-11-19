@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2021-12-16_e7fa003f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.17%, volume shock (z): 0.45, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Wipro Limited has informed the Exchange regarding a press release dated December 15, 2021, titled \"UMPI to deploy IoT-based Wipro Sewage Monitor Solution for Efficient Wastewater Management and Sustainability\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro winning an order for an IoT-based sewage monitor solution. That sounds like an order win, so I'll go with \"order_win\" for step 1.\n\nNext, the base rate. I remember that order wins on the NSE usually have a positive impact. Companies getting contracts often see their stock rise because it indicates future revenue. So the historical precedent is usually-up. \n\nNow, positioning. The pre-t context mentions a 5-day trend of 0.17% and a volume shock of 0.45. The FinBERT prior is 0.00. The volume shock might suggest some volatility, but since the news is positive, if the stock isn't already priced in this news, it could be a buying opportunity. However, the 5-day trend is slightly positive, so maybe the market has already reacted a bit. But since it's a press release about a contract, which is a positive event, the move might not be fully priced in yet. So positioning is neutral here.\n\nCommitting the vote. Since it's an order win with a usually-up base rate and the positioning isn't overbought or oversold, the sentiment should be positive. Confidence is moderate, maybe 0.6. But wait, the user said to use confidence up to 0.8 for confirmed filings with supporting positioning. Here, the press release is a confirmed filing, so maybe 0.7. But the pre-t context doesn't have much info, so maybe 0.6. Let me check again. The steps: 1 is order_win, 2 is usually-up, 3 is neutral positioning, so confidence is 0.6. Sentiment should be positive, so 0.6. Vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 31.3,
+ "attempts": 1
+}

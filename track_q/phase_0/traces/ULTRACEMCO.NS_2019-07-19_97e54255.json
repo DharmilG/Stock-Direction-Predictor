@@ -1,0 +1,23 @@
+{
+ "case_id": "ULTRACEMCO.NS_2019-07-19_97e54255",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ULTRACEMCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.94%, volume shock (z): 3.48, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. UltraTech Cement Limited has informed the Exchange regarding Proceedings of Annual General Meeting held on July 18, 2019. Further, the company has submitted the Exchange a copy of Srutinizers report along with voting results\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a shareholders meeting and the submission of a scrutinizers report and voting results. That sounds like a management-related event because it's about the company's internal processes and reporting to the exchange. So step 1 would be management.\n\nNext, the base rate. I remember that on the NSE, management events can go either way. Sometimes positive updates might be seen as good news, but if there's no specific positive outcome mentioned, it's usually mixed. So step 2 is mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -0.94% and a volume shock. The FinBERT prior is 0.00, which is neutral. The news here is about routine reporting, not any significant change. Since the market might already have priced in routine disclosures, especially if there's no new info, this could be considered as priced in. So step 3 would be priced in, maybe leading to a flat or neutral move.\n\nCommitting the vote. Since the event is management and the base rate is mixed, and the positioning is priced in, there's no strong direction. The confidence should be low, maybe around 0.3. But the user said if it's noise, vote flat with confidence up to 0.3. So the vote is FLAT with confidence 0.3. The trace steps would be 1,2,3,4. The sentiment should be neutral, so 0.0. Wait, the instructions say sentiment sign must agree with vote. Since FLAT is neutral, sentiment should be 0.0. But the example in the problem might have different rules. Let me check again. The user says if noise, vote FLAT with confidence up to 0.3. So this event is management, which isn't necessarily noise. But since there's no new info, maybe it's considered noise. So vote FLAT, confidence 0.3. Steps 1,2,3,4. Sentiment 0.0. But the user says \"if noise, vote FLAT...\" So maybe this is noise. Hence, the answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 112.2,
+ "attempts": 2
+}

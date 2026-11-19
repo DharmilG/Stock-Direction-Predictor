@@ -1,0 +1,23 @@
+{
+ "case_id": "ONGC.NS_2011-05-27_bf93bbc0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ONGC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.29%, volume shock (z): -0.15, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Appointment of Director. Oil & Natural Gas Corporation Limited has informed the Exchange that Shri K. S. Jamestin has been appointed as Director (HR) of Oil And Natural Gas Corporation Ltd. with effect from May 25, 2011. He has assumed the charge of Director (HR) on May 25, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the appointment of a director at ONGC.NS. The options include management, which seems to fit here since it's a director appointment. So step 1 is management.\n\nNext, the base rate. I remember that director appointments in the NSE sector usually don't have a strong historical precedent. Sometimes they might be neutral or mixed, but I don't recall specific stats. The user said not to invent statistics, so I'll go with mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 3.29%, volume shock z of -0.15, and FinBERT prior of 0.00. The volume shock is slightly negative, but the trend is positive. Since the news is a management change, and the trend is up, maybe the move is already priced in. But since it's a director appointment, which isn't typically a major event, maybe it's not fully priced. So the positioning might be neutral, not overbought or oversold. So step 3 might say not priced in.\n\nCommit: Since it's a management event with mixed base rate and positioning not clearly overbought or oversold, the confidence should be low. Maybe 0.4. The vote could be FLAT since the sentiment isn't strong enough. Wait, the sentiment needs to align with the vote. If FLAT, sentiment should be near 0. But the user says if noise, vote FLAT with confidence up to 0.3. Since this is a management event, which isn't necessarily noise but has mixed base rate, maybe FLAT is appropriate. So confidence 0.3, sentiment 0.0. But the trace steps would include 1,2,3,4. Let me check again.\n\nWait, the instruction says if noise, vote FLAT. But is this a noise event? Management changes can sometimes be noise. Since the base rate is mixed and positioning isn't clearly overbought or oversold, maybe it's noise. So vote FLAT, confidence 0.3. Sentiment would be 0.0. The trace steps would be 1,2,3,4. So the JSON would have sentiment 0.0, vote FLAT, confidence 0.3, trace steps [1,2,3,4].\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 244.8,
+ "attempts": 3
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2014-04-30_dc56a261",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -9.43%, volume shock (z): 1.68, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Appointment. Shriram Transport Finance Company Limited has informed the Exchange that the Board of Directors of the Company at their meeting held on April 29, 2014 has appointed Mr. Gerrit Van Heerde, Director & Chief Financial Officer of Sanlam Emerging Markets (Pty) Ltd. as an additional Director of the Company in the Non-Executive Director capacity. His appointment shall be effective on the date Mr. Gerrit receives his Director Identification Number (DIN) from the Ministry of Corporate Affairs\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about an appointment of a new non-executive director. Looking at the categories, \"management\" seems relevant here. The other options like earnings or M&A don't fit. So step 1 is management.\n\nNext, the base rate. I remember that management changes, especially appointments, can have mixed effects. Sometimes they signal stability, other times maybe not. But on the NSE, I think the usual precedent is mixed. So step 2 is mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -9.43%, which is a significant drop. The volume shock is 1.68, which might indicate some volatility. The FinBERT prior is 0.00, so no prior sentiment. The news is about a director appointment, which isn't directly positive or negative. Since the stock has been down, but the news isn't strongly positive, maybe it's not fully priced in. But since it's a management change, maybe investors have already reacted. However, without strong positive or negative signals, it's hard to say. So step 3 might be that it's not fully priced in, but the context is a bit unclear.\n\nCommitting. Since the event is management, and the base rate is mixed, but the stock is down, maybe the sentiment is neutral. However, the confidence should be low because it's a single event without strong indicators. So confidence around 0.3. The vote might be FLAT because the news isn't strong enough to tip the scale. But wait, the user said if noise, vote FLAT. Since management changes can be noise, maybe that's the case here. So step 1 is management, step 2 mixed, step 3 not priced in, but the news is neutral. So the sentiment is 0.0, vote FLAT, confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 33.4,
+ "attempts": 1
+}

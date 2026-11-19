@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2016-09-20_7fa79519",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.88%, volume shock (z): -0.19, FinBERT prior: 0.93\nARTICLE TEXT (full, un-summarized):\n  Press Release. Adani Ports and Special Economic Zone Limited has informed the Exchange regarding Press release dated September 20, 2016 title \" APSEZ enhances its operational foothold- Signs agreement to acquire a company conducting ports operations-Abbot point Bulkcoal Pty Ltd (APB),Queensland, Australia.\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Adani Ports acquiring a company in Australia. That sounds like a merger or acquisition, so MNA (Mergers and Acquisitions) seems right. Not earnings or regulatory, so MNA is the category.\n\nNext, the base rate. I remember that MNA events on NSE usually have mixed outcomes. Sometimes they're positive, sometimes not. But I'm not sure if there's a clear trend. The user said not to invent stats, so I'll note it's mixed.\n\nPositioning: The pre-t context has a 5-day trend of 3.88% up, volume shock negative, and FinBERT prior 0.93. The news is about an acquisition, which is positive. But since the volume shock is negative, maybe there's some selling pressure. However, the prior FinBERT is positive. The question is if the move is already priced in. Since the news is about expanding operations, which is good, but the volume shock might indicate some uncertainty. Maybe the market hasn't fully priced in the acquisition yet, so it could be a bounce candidate if it's oversold. But the 5-day trend is up, so maybe not oversold. Hmm, need to check if the news is new and if the market has reacted. Since the volume shock is negative, maybe there's some skepticism, but the prior sentiment is positive. Maybe the move isn't fully priced in, so a potential up move.\n\nCommit: The event is MNA, base rate mixed, positioning might have some positive sentiment but with volume shock. Confidence would be around 0.5. Sentiment should be positive. So vote UP with confidence 0.5. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 29.6,
+ "attempts": 1
+}

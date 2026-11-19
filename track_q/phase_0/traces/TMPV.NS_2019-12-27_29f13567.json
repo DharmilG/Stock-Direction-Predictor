@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2019-12-27_29f13567",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.67%, volume shock (z): -1.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Tata Motors Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Motors informing the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates. So, this seems like an institutional investor meeting or a call update. The possible categories are things like management, earnings guidance, or maybe regulatory. But the key here is that it's about updates from meetings and calls with analysts and institutional investors. That sounds more like a management-related event because it's about communication with investors, which is part of management activities. So, I'll classify this as \"management\".\n\nNext, the base rate. I need to recall historical precedent for management-related events on the NSE. From what I remember, management announcements can go either way. Sometimes, positive communication can boost\u80a1\u4ef7, but sometimes it might not have much impact. Since there's no specific data here, the base rate is probably mixed. So, the historical precedent is mixed.\n\nPositioning: Using the PRE-T CONTEXT. The 5-day trend is -1.67%, which is a negative trend. The volume shock (z) is -1.16, indicating lower volume than usual. FinBERT prior is 0.00, which suggests no strong sentiment from the text. The event is a management update, but there's no specific positive or negative news mentioned. The company is just informing the exchange about the meeting. Since the market is already down, and there's no clear positive or negative signal, the move might not be priced in. However, since the volume is low, maybe there's not much reaction yet. But without specific news, it's hard to say. So, the positioning is neutral. The move doesn't look clearly priced in because there's no clear direction from the news.\n\nCommit: Since the event is management, and the base rate is mixed, and the positioning is neutral, the vote should be FLAT. Confidence is low because there's no strong evidence. The confidence should be around 0.3 as per the checklist. The sentiment should be FLAT, which is 0.0. So, the final JSON would have sentiment 0.0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 106.3,
+ "attempts": 2
+}

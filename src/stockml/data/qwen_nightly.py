@@ -94,7 +94,7 @@ def run_phase7(
     budget = int(thinking_budget or nightly_cfg.get("default_thinking_budget", 512))
     artifacts = phase_artifacts()
     ledger_path = Path(artifacts["phase7"]["ledger"])
-    trace_dir = Path(nightly_cfg.get("trace_dir", "results/traces_q7"))
+    trace_dir = Path(nightly_cfg.get("trace_dir", "track_q/phase_7/traces"))
     settings = load_settings()
     paths = settings.paths
     logger = setup_logging(paths.logs / "qwen_nightly.log")

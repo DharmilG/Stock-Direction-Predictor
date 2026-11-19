@@ -1,0 +1,23 @@
+{
+ "case_id": "CIPLA.NS_2019-04-16_5ebf1f70",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: CIPLA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 5.14%, volume shock (z): -0.39, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Cipla Limited has informed the Exchange regarding 'Cipla's wholly owned subsidiary in USA i.e. Cipla Technologies LLC has signed the definitive agreement today with Pulmatrix Inc.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Cipla's subsidiary signing a definitive agreement with Pulmatrix Inc. That sounds like a merger or acquisition (MNA) activity. So step 1 would be MNA.\n\nNext, the base rate. On the NSE, MNA events usually have mixed outcomes. Sometimes they're positive, sometimes not. But I remember that acquisitions can be good if they add value, but there's always uncertainty. So the base rate is probably mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 5.14% and a volume shock of -0.39. The FinBERT prior is 0.00. The positive trend might suggest the stock is already up, so if there's good news, it might be priced in. But since the volume shock is negative, maybe there's some selling pressure. However, the news is a definitive agreement, which is a positive event. If the stock was already trending up, maybe the market has already priced in some of this, making it a fade candidate. But I'm not sure if the volume shock is enough to indicate overbought conditions.\n\nFor the commit, since it's an MNA, and the base rate is mixed, but the news is positive. However, the positioning might suggest that the move is already priced in. So maybe the sentiment is positive, but confidence is moderate. Since it's a confirmed filing (definitive agreement), maybe confidence is around 0.6. But I need to check if the steps support that. Step 1 is MNA, step 2 mixed, step 3 positioning might indicate priced in, so maybe a fade. But the user says if it's priced in, then the vote could be FLAT, but the news is positive. Wait, the instructions say if the move looks priced in, overbought plus good news is fade, oversold plus bad news is bounce. Here, the 5-day trend is positive (5.14%), which might indicate overbought. So if the news is good, it's a fade. But the vote would be UP with lower confidence. Alternatively, if the volume shock is negative, maybe the market is selling, so the news could be a bounce. Hmm. This is a bit conflicting. Maybe the confidence is 0.6, and the vote is UP with a sentiment of 0.5. But I need to make sure the confidence is not over 0.8. Since it's a confirmed filing, maybe confidence is 0.6. So the final answer would be sentiment 0.5, vote UP, confidence 0.6, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.2,
+ "attempts": 1
+}

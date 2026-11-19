@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDUNILVR.NS_2021-11-12_05a548a9",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDUNILVR.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.74%, volume shock (z): -0.46, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Change in Director(s). Hindustan Unilever Limited has informed the Exchange regarding Change in Director(s) of the company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a change in directors at Hindustan Unilever. Looking at the categories provided, \"management\" seems to fit here because director changes are a management-related event. So step 1 is management.\n\nNext, the base rate. I remember that on the NSE, changes in management can have mixed effects. Sometimes it's positive if the new management brings in good strategies, but sometimes it might be negative if there's instability. But I don't recall a specific statistic, so I'll note it as mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of -0.74% and volume shock. The FinBERT prior is 0.00, which is neutral. The news is about a director change, which is a management event. Since the market trend is slightly down and volume is low, maybe the move isn't fully priced in. But without more info, it's hard to say. Maybe it's a neutral event, so the positioning isn't clearly overbought or oversold.\n\nCommitting: Since it's a management event with mixed historical precedent and no clear pricing, the vote might be FLAT. But the user said if it's noise, vote FLAT. However, director changes aren't noise. Wait, the instruction says if noise, vote FLAT. But management events aren't noise. So maybe the confidence is low. But the user said to use the PRE-T context. The volume shock is -0.46, which is a bit negative. But the FinBERT prior is 0.00. Maybe the sentiment is neutral. So the vote could be FLAT with low confidence. But I need to check the confidence levels. Since it's a confirmed filing (the news is about a director change, which is a public filing), maybe confidence is 0.5. But the user says single-source rumour at most 0.4. Wait, the PRE-T context has the FinBERT prior as 0.00, which might indicate neutral sentiment. So maybe the sentiment is 0.0, vote FLAT, confidence 0.3. But the user says if noise, vote FLAT. Since this is a management event, not noise, but the base rate is mixed. Maybe the vote is FLAT with confidence 0.3. Alternatively, maybe the sentiment is neutral, so FLAT. Let me structure the JSON accordingly.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.1,
+ "attempts": 1
+}

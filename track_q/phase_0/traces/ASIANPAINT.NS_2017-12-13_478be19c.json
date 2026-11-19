@@ -1,0 +1,23 @@
+{
+ "case_id": "ASIANPAINT.NS_2017-12-13_478be19c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ASIANPAINT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.10%, volume shock (z): 0.12, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Scheme of Arrangement. Asian Paints Limited has informed the Exchange that This is to inform you that the Mumbai Bench of the National Company Law Tribunal vide its Order dated 29th November, 2017 approved the Scheme of Amalgamation of Asian Paints (International) Limited, Mauritius, wholly owned subsidiary company of Asian Paints Limited (\"the Company\") with the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a Scheme of Arrangement approved by the National Company Law Tribunal. This seems related to a merger or restructuring, so maybe MNA (Mergers and Acquisitions) or maybe regulatory. But the key here is that it's about amalgamation of a subsidiary with the parent company. That sounds like a corporate restructuring, which falls under MNA.\n\nNext, the base rate. On NSE, MNA events usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the specifics. But generally, they can be neutral or have mixed impacts. So the base rate is probably mixed.\n\nPositioning: Looking at the PRE-T context, the 5-day trend is 1.10% positive, volume shock is 0.12, and FinBERT prior is 0.00. The volume shock is low, so maybe not a big move. The FinBERT prior is neutral. Since the news is about a Scheme of Arrangement, which is a confirmed filing, but the PRE-T context doesn't indicate if it's good or bad. The market might already be pricing in some of this, but since it's a regulatory approval, maybe it's a positive but not unexpected move. However, the 5-day trend is up, so if the news is positive, it might be priced in. But since the FinBERT prior is 0.00, maybe there's no prior sentiment. So the positioning might be that the move isn't fully priced in, but given the 5-day trend, maybe it's a fade candidate if overbought. Wait, the 5-day trend is 1.10% which is positive, but the volume shock is 0.12, which is low. So maybe the market hasn't reacted much yet. So the positioning could be that the news is positive but not fully priced in, so maybe a potential up move.\n\nCommit: Since it's an MNA event, which is a confirmed filing, and the base rate is mixed. But the news is about a regulatory approval, which is positive. However, the PRE-T context doesn't show strong overbought conditions. The volume shock is low, so maybe the market hasn't reacted much. So the confidence would be moderate. The sentiment should be positive, vote UP, confidence around 0.6. But according to the instructions, confidence can't be 1.0. So maybe 0.6. The trace steps would be 1 (MNA), 2 (mixed), 3 (positioning not fully priced in), and 4 (commit based on steps 1-3).\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 55.4,
+ "attempts": 1
+}

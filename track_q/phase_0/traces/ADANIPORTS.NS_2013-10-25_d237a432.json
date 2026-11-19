@@ -1,0 +1,21 @@
+{
+ "case_id": "ADANIPORTS.NS_2013-10-25_d237a432",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.47%, volume shock (z): 1.00, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Financial Result Updates. Adani Ports and Special Economic Zone Limited has submitted to the exchange the standalone & consolidated financial results for the period ended 30-sep-2013\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions Adani Ports submitting their financial results for September 2013. Since it's about financial results, that's an earnings_result. Next, the base rate for earnings results on NSE\u2014usually, earnings reports can go either way, but historically, they're often mixed. Now, looking at the pre-t context: the 5-day trend is -5.47%, volume shock is 1.00, and FinBERT prior is 0.00. The financial results are for 2013, which is pretty old. The market might have already priced in this news, especially since the volume shock is 1.00, which might indicate some volatility. But since the results are from 2013, maybe the market isn't reacting much now. The positioning step says if the move is priced in, then it's a fade or bounce. But since the data is old, perhaps the news isn't new, so the sentiment might be flat. However, the confidence can't be too high. The vote would be FLAT with low confidence. Let me check the confidence levels. Since it's a confirmed filing but the data is old, maybe confidence is 0.3. So the final answer should be FLAT with confidence 0.3, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 69.7,
+ "attempts": 3
+}

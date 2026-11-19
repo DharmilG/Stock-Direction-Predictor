@@ -1,0 +1,23 @@
+{
+ "case_id": "TECHM.NS_2011-06-14_07463598",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TECHM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.63%, volume shock (z): -0.90, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  ESOPs/ESOS. Tech Mahindra Limited has informed the Exchange regarding the circular resolution passed by the Compensation Committee of the Board of Directors of the Company, approving grant of 9,03,500 options under ESOP 2000 & 2006 covering 9,03,500 shares of the Company at an exercise price of Rs.701/- per share (being the latest available price on National Stock Exchange on June 09, 2011) to the employees and/or directors of the Company or its subsidiary companies\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tech Mahindra granting ESOPs (Employee Stock Option Plans) to employees and directors. ESOPs are a form of compensation, so this falls under capital_action because it's related to equity issuance or employee benefits. The options are being granted, which is a capital action.\n\nNext, the base rate. On the NSE, ESOP announcements are usually neutral or mixed. Sometimes they can be positive if it's a significant grant, but often they don't move the stock much because it's just a compensation package. However, if the company is using existing shares, it might not be a big deal. So the historical precedent is probably mixed, but maybe leaning towards neutral.\n\nPositioning: The PRE-T context shows a 5-day trend of -0.63%, which is a slight downtrend. The volume shock is -0.90, indicating lower volume than usual. FinBERT prior is 0.00, which is neutral. The news is about ESOPs, which isn't directly positive or negative. Since the market is slightly down and volume is low, but the news isn't bad, maybe it's already priced in. But since it's a capital action, maybe there's some positive sentiment. However, without clear positive impact, it might be considered noise. Wait, but ESOPs can sometimes be seen as positive because it's rewarding employees, but not sure if it's a strong enough signal. The base rate was mixed, so maybe the positioning isn't clearly overbought or oversold. \n\nCommit: Since the event is a capital action, and the base rate is mixed, and the positioning isn't clearly overbought or oversold, but the news isn't strongly positive or negative. The confidence should be low. The user said if it's noise, vote FLAT with confidence up to 0.3. Since ESOPs are a common event and not a strong signal, maybe it's noise. So vote FLAT with confidence 0.3. But the steps: 1. classify as capital_action, 2. base rate mixed, 3. positioning not clearly priced in, 4. commit FLAT. So the trace steps are 1,2,3,4. Sentiment should be FLAT, so 0. The confidence is 0.3. The vote is FLAT. That's the answer.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 39.7,
+ "attempts": 1
+}

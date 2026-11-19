@@ -1,0 +1,23 @@
+{
+ "case_id": "COALINDIA.NS_2020-09-16_46bc9399",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: COALINDIA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.44%, volume shock (z): -1.07, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Coal India Limited has informed the Exchange regarding 'Investor meet'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. The user wants me to act as an NSE equity analyst rating a news item for a 5-day directional signal. The stock in question is COALINDIA.NS, and the sector is unknown. The pre-t context gives some data: 5-day trend is -2.44%, volume shock (z) is -1.07, and FinBERT prior is 0.00. The article text says Coal India Limited informed the Exchange about an 'Investor meet'.\n\nFirst, I need to classify the event. The options are earnings_result, earnings_guidance, order_win, mna, regulatory, rating_change, management, capital_action, debt_credit, litigation, expansion, macro_policy, short_seller, noise. The news is about an investor meet. Investor meets are usually management-related events where the company interacts with investors. So, the event type here is likely 'management'. \n\nNext, the base rate. I need to recall the historical precedent for 'management' events on NSE. Typically, management announcements can go either way. If the company is sharing positive updates or strategic plans, it might be positive. But if it's about restructuring or issues, it could be negative. Since the article just mentions an investor meet without specific details, the historical precedent is probably mixed. So the base rate is mixed.\n\nPositioning: Using the pre-t context. The 5-day trend is down -2.44%, which suggests the stock has been declining. The volume shock (z) is -1.07, which might indicate lower volume than usual, possibly a lack of interest or selling pressure. FinBERT prior is 0.00, meaning no clear sentiment from the text. The news is about an investor meet, which is a management event. Since the stock has been down and the event is management-related, but there's no clear positive or negative news, it's unclear if the move is priced in. The article doesn't provide specific details that would indicate a significant change. So, the positioning is neutral. \n\nCommit: Since the event is management, base rate is mixed, and the positioning is neutral, the vote should be FLAT. Confidence is low because there's no clear positive or negative signal. The confidence should be around 0.3 as per the rules. The steps that carried weight are 1 (classifying as management), 2 (mixed base rate), and 3 (neutral positioning). \n\nI need to make sure the sentiment aligns with the vote. Since the vote is FLAT, the sentiment should be close to 0. The confidence is 0.3. The trace steps are 1,2,3,4. \n\nDouble-checking: The event is management, base rate is mixed, positioning is neutral, so FLAT with confidence 0.3. Correct.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 116.5,
+ "attempts": 2
+}

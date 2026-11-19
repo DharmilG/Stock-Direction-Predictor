@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2015-04-17_a22b93ad",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -7.12%, volume shock (z): 12.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Consultancy Services Limited has informed the Exchange regarding a press release dated April 16, 2015, titled \"TCS announces Special Reward for Employees to mark 10th anniversary of IPO\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Tata Consultancy Services announcing a special reward for employees on their IPO anniversary. The PRE-T context mentions a 5-day trend of -7.12%, volume shock, and FinBERT prior of 0.00. The event here is a company announcement regarding an employee reward, which doesn't seem to be earnings, guidance, order win, M&A, regulatory, etc. It's more of a management decision or a corporate event. So, the classification would be \"management\".\n\nNext, the base rate. For NSE, management announcements like employee rewards usually don't have a strong historical precedent. They might be neutral or mixed. Since the event is about a reward, which is positive but not directly affecting financials, the base rate is probably mixed.\n\nPositioning: The PRE-T context shows a 5-day trend of -7.12%, which is a decline. Volume shock is high at 12.18, indicating unusual trading volume. FinBERT prior is 0.00, suggesting no strong sentiment from news. The event is a management decision, which might not be priced in. Since the stock has been down and there's a positive announcement, but it's a management action, maybe it's a bounce candidate? But the volume shock could indicate uncertainty. However, the FinBERT prior is neutral. So, the positioning might not be clear. The move might not be priced in yet, but the negative trend could mean a potential rebound if the news is positive.\n\nCommit: Since it's a management event, which is not a strong driver, and the base rate is mixed, but the news is positive. However, the stock has been down, so maybe a bounce. But the confidence should be low. The confidence can't be over 0.8. Since it's a single event without strong supporting factors, maybe confidence around 0.4. The vote would be UP, sentiment positive, confidence 0.4. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 118.8,
+ "attempts": 2
+}

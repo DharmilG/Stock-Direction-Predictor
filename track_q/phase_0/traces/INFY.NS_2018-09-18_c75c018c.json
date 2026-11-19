@@ -1,0 +1,21 @@
+{
+ "case_id": "INFY.NS_2018-09-18_c75c018c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.61%, volume shock (z): -0.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Infosys Limited has informed the Exchange regarding a press release dated September 17, 2018, titled \"Infosys Makes Additional Investment of US$1.5 million in TidalScale Inc.\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Infosys investing $1.5 million in TidalScale Inc. That sounds like a capital action since it's an investment. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on the NSE usually have mixed outcomes. Sometimes it's positive if it's a strategic move, but sometimes it might not impact the stock much. So the base rate is mixed.\n\nNow, positioning. The pre-t context shows a 5-day trend of -1.61%, which is a drop. The volume shock is -0.16, and FinBERT prior is 0.00. The news is about an investment, which might be seen as positive. But since the stock has been down, maybe the market hasn't fully priced in this positive news yet. So the move might not be priced in, making it a potential bounce candidate. But wait, the volume shock is negative, which could indicate some selling pressure. Hmm, maybe the market is still reacting to the news, so the positioning isn't clear. Maybe the news is positive but the stock is oversold, so there's a bounce potential.\n\nCommitting the vote. Since it's a capital action, and the base rate is mixed, but the stock is down and the news is positive, maybe the sentiment is slightly positive. Confidence should be moderate, maybe 0.5. But I need to check if the news is confirmed. The article mentions a press release, so it's a confirmed filing. So confidence could be up to 0.8. But the positioning isn't clear if it's oversold. The 5-day trend is down, but volume shock is negative. Maybe the market hasn't reacted yet, so the sentiment is positive. So vote UP with confidence 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 34.3,
+ "attempts": 1
+}

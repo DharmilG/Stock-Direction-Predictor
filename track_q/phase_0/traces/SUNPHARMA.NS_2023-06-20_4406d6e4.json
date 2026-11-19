@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2023-06-20_4406d6e4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.39%, volume shock (z): -1.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Sun Pharmaceutical Industries Limited has informed the Exchange regarding a press release dated Jun 19, 2023, titled \"Sun Pharma Announces Health Canada Approval of PRWINLEVI\ufffd\ufffd (clascoterone cream 1%) for Topical Treatment of Acne\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Sun Pharma getting Health Canada approval for a new acne treatment. That sounds like a regulatory approval, so the event type should be 'regulatory'. \n\nNext, the base rate. On the NSE, regulatory approvals usually have a positive impact because they can lead to increased sales and market share. But I should check if there's any historical data. Wait, the user said not to invent statistics, so I have to rely on general knowledge. Typically, such approvals are positive, so the base rate is usually-up.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 0.39% and a volume shock of -1.18. The FinBERT prior is 0.00. The volume shock being negative might indicate some selling pressure, but the news is positive. Since the news is good but the volume is down, maybe the market hasn't fully priced in the approval. However, the 5-day trend is slightly positive. The question is whether the move is already priced in. If the volume is down, maybe there's some uncertainty, but the approval is a clear positive. So maybe the move isn't fully priced in, making it a potential up move.\n\nCommitting the vote. Since the event is regulatory (step 1), base rate is usually-up (step 2), and positioning suggests the news might not be fully priced in (step 3), the vote should be UP. Confidence should be moderate. The evidence is a confirmed filing (the press release) but the volume shock might indicate some hesitation. So confidence around 0.6. \n\nCheck the sentiment. The news is positive, so sentiment should be positive. The vote is UP, so sentiment aligns. Confidence is 0.6, which is proportionate. The trace steps are 1,2,3,4. Make sure the JSON is strict and only includes those steps.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 31.0,
+ "attempts": 1
+}

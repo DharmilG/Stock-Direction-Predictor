@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2021-09-24_71f0325e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.39%, volume shock (z): 0.54, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Trading Window. ICICI Bank Limited has informed the Exchange regarding the Trading Window closure pursuant to SEBI (Prohibition of Insider Trading) Regulations, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news about ICICI Bank's Trading Window closure and give a 5-day directional signal. First, I need to follow the checklist steps.\n\nStep 1: Classify the event. The article mentions the Trading Window closure under SEBI regulations. That sounds like a regulatory event. So, the category is regulatory.\n\nStep 2: Base rate. I remember that regulatory announcements on the NSE can go either way. Sometimes they're positive, sometimes negative. But since it's about insider trading prohibition, maybe it's neutral. Wait, the base rate here is usually mixed. I need to confirm that. If there's no clear historical trend, it's mixed.\n\nStep 3: Positioning. The PRE-T context has a 5-day trend of 0.39% and volume shock z of 0.54. FinBERT prior is 0.00. The event is a regulatory closure. Since the trend is positive but volume is slightly high, maybe the market hasn't fully priced in the news. If the news is neutral, maybe there's a bounce or fade. But without more info, it's hard to say. The positioning might be neutral, so not overbought or oversold.\n\nStep 4: Commit. Since it's a regulatory event with mixed historical impact and no clear pricing, the vote is FLAT. Confidence should be low, maybe 0.3. But wait, the user said if noise, vote FLAT with confidence up to 0.3. Since this is a regulatory filing, maybe it's not noise. But without clear direction, maybe it's safer to go FLAT. Wait, the base rate is mixed, so the vote is FLAT. Confidence 0.3. The trace steps would be 1,2,3,4. Sentiment should be FLAT, so 0.0. Wait, the sentiment must align with vote. If vote is FLAT, sentiment is 0.0. But the user said if the vote is FLAT, sentiment is absolute value below 0.2. So 0.0 is okay. So the final answer is FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 139.2,
+ "attempts": 2
+}

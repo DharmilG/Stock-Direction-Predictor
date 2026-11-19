@@ -1,0 +1,23 @@
+{
+ "case_id": "MARUTI.NS_2019-03-20_bb39108f",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: MARUTI.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.89%, volume shock (z): 1.31, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Maruti Suzuki India Limited has informed the Exchange regarding a press release dated March 20, 2019, titled \"'English' version of the press release issued by ToyotaMotor Corporation (Toyota) and Suzuki Motor Corporation (Suzuki) in Japan\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a press release from Maruti Suzuki regarding a press release from Toyota and Suzuki in Japan. It doesn't mention anything about earnings, orders, mergers, regulatory actions, or other event types. It's just a notification about a press release. So, this seems like a 'noise' event because it's not directly related to financial results or significant corporate actions. \n\nNext, the base rate. Since it's a noise event, there's no historical precedent to reference. The base rate would be mixed, but since it's noise, the impact is usually negligible.\n\nPositioning: The pre-t context shows a 5-day trend of -5.89%, volume shock z of 1.31, and FinBERT prior of 0.00. The event is unrelated to the company's performance, so the move isn't priced in. Since it's noise, there's no reason to expect a directional move.\n\nCommit: Since it's noise, the vote is FLAT with confidence at most 0.3. The steps that matter are 1 (classifying as noise) and 3 (positioning). The sentiment should be FLAT, so the value is 0. The confidence is 0.3. The trace steps are 1, 2, 3, 4. I need to make sure the JSON is strict and follows the guidelines.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1, 2, 3, 4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 27.3,
+ "attempts": 1
+}

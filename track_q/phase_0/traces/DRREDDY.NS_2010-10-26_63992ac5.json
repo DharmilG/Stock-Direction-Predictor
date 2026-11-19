@@ -1,0 +1,23 @@
+{
+ "case_id": "DRREDDY.NS_2010-10-26_63992ac5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: DRREDDY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.41%, volume shock (z): nan, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Dr. Reddy'S Laboratories Limited has informed the Exchange regarding the press release dated October 25, 2010, titled \"Dr. Reddy's expands portfolio in Russia & CIS through in-licensing deals\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Dr. Reddy's expanding their portfolio in Russia and CIS through in-licensing deals. That sounds like an expansion move. So step 1 would be to classify it as 'expansion'.\n\nNext, the base rate. I remember that expansion news on the NSE usually has mixed outcomes. Sometimes it's positive, but sometimes market reactions can be uncertain depending on factors like market conditions or existing investments. So the base rate is probably mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 1.41% and volume shock is NaN. The FinBERT prior is 0.00. The recent trend is slightly positive, but since the volume shock isn't provided, maybe the market hasn't fully priced in this news. If the news is positive but the market hasn't reacted much, there might be potential for a move. But since the trend is already up, maybe it's overbought? Wait, the 5-day trend is 1.41%, which is a small positive move. If the expansion is good news, but the market hasn't reacted strongly, maybe it's not fully priced in. But without more info on volume or other factors, it's hard to say. The FinBERT prior is 0, which might indicate neutral sentiment. So positioning might be neutral, but since the event is expansion, which can be positive, maybe the move isn't fully priced in yet.\n\nCommitting the vote. Since it's an expansion, which is a positive event, but the base rate is mixed. If the market hasn't priced it in, maybe the sentiment is positive. But confidence should be moderate. The confidence can't be too high because it's a single event without strong supporting data. So maybe confidence around 0.5. The vote would be UP, with sentiment positive. But need to check if the steps support this. Step 1: expansion. Step 2: mixed base rate. Step 3: positioning maybe neutral or not fully priced. So the vote is UP with confidence 0.5. Wait, but the instructions say confidence must be proportionate. Since it's a single event, maybe confidence is 0.5. The trace steps would be 1, 2, 3, 4. Let me make sure I'm not missing anything. The article is a press release about expansion, so the steps are correct. So the final answer should be sentiment positive, vote UP, confidence 0.5, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 43.5,
+ "attempts": 1
+}

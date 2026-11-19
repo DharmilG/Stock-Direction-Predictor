@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2023-06-07_3727d37e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.23%, volume shock (z): -0.63, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Copy of Newspaper Publication. Infosys Limited has informed the Exchange about Copy of Newspaper Publication\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about Infosys informing the exchange about a copy of a newspaper publication. The key here is that it's a copy of a newspaper, which might relate to a regulatory filing or a public announcement. Since there's no mention of earnings, management changes, or other typical event types, it might fall under 'regulatory' or 'noise'. \n\nLooking at the PRE-T CONTEXT, the 5-day trend is down, volume shock is negative, and FinBERT prior is neutral. The article text doesn't mention anything significant like earnings results or major deals. It's just a notice about a newspaper copy. This seems like a routine regulatory filing rather than a material event. So, classifying it as 'regulatory' makes sense.\n\nNext, the base rate for regulatory events on NSE. From what I know, regulatory announcements can go either way. Sometimes they might have minimal impact, but sometimes they could affect the stock if there's a compliance issue. However, since this is just a copy of a newspaper publication, it's probably not a big deal. The base rate here is likely mixed, but maybe leaning towards neutral or slightly negative because the stock has been trending down.\n\nPositioning: The PRE-T context shows a negative 5-day trend and volume shock. If the news is regulatory but not negative, maybe the market has already priced in some of the recent downward movement. However, since the news itself isn't bad, maybe it's not a bounce candidate. The volume shock suggests some selling pressure, but without more info, it's hard to say if the move is priced in. The article doesn't provide any new info that would reverse the trend, so maybe it's a flat signal.\n\nCommitting: Since the event is regulatory, which has a mixed base rate, and the news doesn't add new info, the sentiment should be neutral. The confidence is low because it's a routine filing. So, vote FLAT with confidence around 0.3. The trace steps would be 1 (classified as regulatory), 2 (base rate mixed), 3 (move looks priced in), and 4 (commit based on steps 1-3).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.9,
+ "attempts": 1
+}

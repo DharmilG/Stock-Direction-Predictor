@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2020-08-18_6145db35",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.01%, volume shock (z): -1.17, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Infosys Limited has informed the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item mentions Infosys informing the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates. This sounds like a management update, maybe related to meetings or calls with investors. So, the event type is likely \"management\".\n\nNext, the base rate. I recall that on the NSE, management-related announcements can go either way. Sometimes, positive updates from management can boost the stock, but if there's no concrete news, it might not move the market much. The historical precedent here is probably mixed, so the base rate is mixed.\n\nNow, positioning. The PRE-T context has a 5-day trend of 2.01%, which is positive. The volume shock is -1.17, indicating lower volume, which might mean less immediate reaction. The FinBERT prior is 0.00, suggesting no strong sentiment from prior text. Since the news is about a meeting update, which isn't a clear positive or negative, and the volume is low, it might not be priced in. So, the move doesn't look priced in, but since it's management news, which can be neutral, maybe it's a flat?\n\nWait, the user said if it's noise, vote FLAT with confidence up to 0.3. But the event is management, which isn't noise. The base rate is mixed, so the direction isn't clear. The positioning isn't overbought or oversold, so maybe the sentiment is neutral. But the 5-day trend is positive, so maybe the sentiment is slightly positive. However, the confidence needs to be low because there's no strong evidence. So, maybe sentiment is 0.1, vote FLAT with confidence 0.3. But the steps require checking if the move is priced in. Since the volume is low and the trend is positive, maybe it's not priced in, leading to a flat. But the instruction says if noise, vote flat. Since this is management, not noise, but the base rate is mixed. So, the vote is FLAT with confidence 0.3. But the user said to use the steps. Let me check again.\n\nStep 1: management. Step 2: mixed. Step 3: the move isn't priced in because the news is a meeting update, not a clear positive or negative. So, the positioning is neutral. Step 4: commit with FLAT, confidence 0.3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4. Wait, but the sentiment must align with the vote. FLAT would have sentiment near 0. So that's correct.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.6,
+ "attempts": 1
+}

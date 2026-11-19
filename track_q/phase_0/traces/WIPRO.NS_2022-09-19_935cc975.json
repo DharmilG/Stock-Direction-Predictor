@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2022-09-19_935cc975",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.75%, volume shock (z): -0.12, FinBERT prior: -0.68\nARTICLE TEXT (full, un-summarized):\n  Loss of share certificate. Wipro Limited has informed the Exchange about loss of share certificate and issuance of duplicate share certificate in lieu thereof\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.4,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro losing a share certificate and issuing a duplicate. That sounds like a capital action because it involves the issuance of shares. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on NSE can go either way. Sometimes issuing shares might be seen as diluting existing shares, which could be negative, but sometimes it's for corporate purposes. I think the historical precedent is mixed, so step 2 is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -4.75%, volume shock, and FinBERT prior. The news here is about a share certificate loss, which might not directly impact the stock price much. Since the trend is down and the event is a capital action, maybe it's already priced in. But the volume shock is negative, so maybe the market hasn't fully reacted yet. Wait, the user said to use only the pre-t context. The 5-day trend is down, and the FinBERT prior is negative. So if the event is a capital action, and the market is already down, maybe the move is priced in, leading to a fade candidate. But since the event is a capital action, which can be neutral or mixed, maybe the positioning is that it's not a strong positive or negative. So step 3: the move looks priced in?\n\nCommit: Since it's a capital action with mixed historical precedent, and the pre-t context shows a negative trend, but the event itself isn't strongly positive or negative. The confidence should be low. Maybe 0.4? But the user said if it's noise, vote flat with confidence up to 0.3. But since it's a capital action, not noise, so maybe confidence 0.4. The sentiment would be slightly negative because the trend is down. So vote DOWN with confidence 0.4. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": -0.4, \"vote\": \"DOWN\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 105.8,
+ "attempts": 2
+}

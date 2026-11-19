@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2022-12-05_aa86c78c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.04%, volume shock (z): 0.08, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Schedule of Analysts/Institutional Investor Meet/Con. Call. Tata Motors Limited has informed the Exchange about Schedule of Analysts/Institutional Investor Meet/Con. Call\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Motors scheduling a meeting with analysts and institutional investors. The options are things like earnings results, guidance, order wins, M&A, etc. This seems like a management event because it's about scheduling a meeting, which is part of corporate communication. So step 1 would be management.\n\nNext, the base rate. I remember that on NSE, management-related announcements usually have mixed impacts. Sometimes they can be positive if the meeting leads to good news, but often they're just routine and don't move the market much. So the base rate is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -1.04%, volume shock z of 0.08, and FinBERT prior of 0.00. The volume shock is slightly positive, but the trend is negative. Since the event is a management meeting, which is routine, the market might already have priced in any potential news. The FinBERT prior is neutral, so there's no strong sentiment. So the move doesn't look priced in, but it's not a clear fade or bounce candidate.\n\nCommit: Since it's a management event with mixed base rate and no strong positioning, the vote should be FLAT. Confidence is low, maybe 0.3. But wait, the user said if noise, vote FLAT with confidence at most 0.3. Since this is a management event, which is not noise but maybe just routine, but the base rate is mixed. However, the FinBERT prior is 0.00, so no strong sentiment. So maybe FLAT with confidence 0.3. But the instruction says if noise, vote FLAT. Is this event noise? Management meetings are sometimes considered noise unless there's specific info. Since the article just says they scheduled a meeting without any details, it's probably noise. So vote FLAT with confidence 0.3. But the trace steps need to include 1,2,3,4. So the answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 34.7,
+ "attempts": 1
+}

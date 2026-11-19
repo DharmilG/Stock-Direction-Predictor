@@ -1,0 +1,23 @@
+{
+ "case_id": "APOLLOHOSP.NS_2018-09-28_ba96a952",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: APOLLOHOSP.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.19%, volume shock (z): -0.37, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Shareholders meeting. Apollo Hospitals Enterprise Limited has informed the Exchange regarding Proceedings of Annual General Meeting held on September 27, 2018. Further, the company has informed the Exchange regarding voting results along with copy of scrutinizers report together with copy of minutes\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a shareholders meeting and the annual general meeting proceedings, including voting results and reports. That sounds like a management event because it's about corporate governance and shareholder activities. So step 1 is management.\n\nNext, the base rate. I remember that on NSE, management-related news can go either way. Sometimes it's neutral, but if there's positive shareholder approval or good governance outcomes, it might be positive. But since the article doesn't mention any specific positive outcomes, just the meeting details, the historical precedent is probably mixed. So step 2 is mixed.\n\nNow, positioning. The pre-t context has a 5-day trend of -0.19%, volume shock negative, and FinBERT prior neutral. The news is about a meeting that's already happened, so the market might have already priced in some of this. Since there's no new info beyond the meeting details, and the trend is slightly down, maybe the move is already priced. So step 3 would be that it's not a fade or bounce candidate, so maybe neutral.\n\nCommitting, since it's management and the base rate is mixed, and the positioning isn't clear, the vote might be flat. Confidence should be low, maybe 0.3. But wait, the user said if noise, vote flat with confidence up to 0.3. Since this is management, not noise, but the base rate is mixed. Maybe the confidence is 0.4? But the steps need to be cited. So the trace steps would be 1, 2, 3, 4. The sentiment should be neutral, so 0. The vote is FLAT, confidence 0.3. But the instruction says if noise, vote flat. Wait, is this noise? The event is management, which isn't noise. So maybe the vote is FLAT with confidence 0.3. But the base rate is mixed, so maybe the confidence is higher. Hmm. Wait, the user says if noise, vote flat. Since this is a management event, not noise, so maybe the vote is FLAT with confidence 0.3. But I'm not sure. Let me check again. The steps: 1. Management, 2. Mixed, 3. Already priced in, 4. Vote FLAT with confidence 0.3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.0,
+ "attempts": 1
+}

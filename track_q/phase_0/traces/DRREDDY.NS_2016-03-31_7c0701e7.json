@@ -1,0 +1,23 @@
+{
+ "case_id": "DRREDDY.NS_2016-03-31_7c0701e7",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: DRREDDY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.74%, volume shock (z): 1.17, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Dr. Reddy's Laboratories Limited has informed the Exchange that regarding a press release dated March 31, 2016 titled \" Dr. Reddy s Laboratories Acquires the Rights to Investigational Anticancer Agent E7777 for U.S, Europe and Certain Emerging Markets from Eisai\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Dr. Reddy's acquiring rights to a drug from Eisai. That sounds like a merger or acquisition (M&A) activity. So the event type should be \"mna\" (merger and acquisition). \n\nNext, the base rate. I remember that M&A news on the NSE can be mixed. Sometimes it's positive, sometimes it's negative depending on the terms. But generally, acquisitions can be seen as positive because they expand a company's portfolio. However, there might be mixed reactions if the deal is seen as overpaying or if there are regulatory hurdles. So the base rate is probably mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -0.74%, which is a slight decline. The volume shock (z) is 1.17, which might indicate some volatility. FinBERT prior is 0.00, suggesting no strong sentiment beforehand. Since the stock has been down and there's a positive M&A news, maybe the move isn't fully priced in. If the news is good but the stock is oversold, it might be a bounce candidate. But the volume shock is a bit high, so maybe there's some uncertainty. \n\nCommitting the vote. Since it's an M&A event, which is usually mixed, but the stock is down and the news is positive, there's a chance for a bounce. However, the confidence shouldn't be too high. The pre-t context doesn't have strong positive signals, so maybe confidence around 0.5. The sentiment should be positive, so vote UP. \n\nWait, the user said if it's noise, vote FLAT. But this is an M&A, which is a real event. So not noise. So steps 1-4: classify as mna, base rate mixed, positioning maybe oversold with good news, so bounce. But the 5-day trend is -0.74, which is a decline, so maybe the stock is oversold. So the positioning is oversold plus good news, which is a bounce candidate. So the vote would be UP with confidence around 0.5. Let me check the confidence levels. Since it's a confirmed filing (the press release) but no other supporting factors, maybe confidence is 0.5. The sentiment should be positive, so 0.5. The trace steps would be 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 49.1,
+ "attempts": 1
+}

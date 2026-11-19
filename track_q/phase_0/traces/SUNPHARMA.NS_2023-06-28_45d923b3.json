@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2023-06-28_45d923b3",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.01%, volume shock (z): 1.83, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Trading Window. Sun Pharmaceutical Industries Limited has informed the Exchange regarding the Trading Window closure pursuant to SEBI (Prohibition of Insider Trading) Regulations, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a Trading Window closure under SEBI regulations. That sounds like a regulatory event because it's about compliance and insider trading. So step 1 is regulatory.\n\nNext, the base rate. I remember that regulatory announcements on the NSE can go either way. Sometimes they're positive if they clear issues, but sometimes they might lead to penalties. But generally, regulatory actions are mixed. So step 2 is mixed.\n\nPositioning: The pre-t context has a 5-day trend of 3.01% up, volume shock z of 1.83, and FinBERT prior 0.00. The event is a regulatory closure, which might not be priced in. Since the trend is up and volume is a bit high, maybe the market hasn't fully reacted. But without more info, it's hard to say. Step 3: not sure if priced in.\n\nCommit: Since it's a regulatory event with mixed historical impact, and the positioning isn't clear, maybe vote FLAT with low confidence. But wait, the user said if noise, vote FLAT. Is this a noise event? Regulatory actions can be significant, so maybe not noise. Hmm. Maybe the confidence is low, but the vote could be UP or DOWN. Wait, the base rate is mixed, so maybe the sentiment is neutral. But the instructions say if noise, FLAT. Since this is a regulatory event, not sure if it's noise. Maybe the answer is FLAT with confidence 0.3. But I need to check the steps again. Step 1: regulatory. Step 2: mixed. Step 3: not sure if priced in. Step 4: commit based on that. Since the event is regulatory and base rate is mixed, maybe the vote is FLAT. Confidence 0.3. The sentiment would be 0.0. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 185.2,
+ "attempts": 3
+}

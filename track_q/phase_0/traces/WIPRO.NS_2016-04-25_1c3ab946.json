@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2016-04-25_1c3ab946",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.55%, volume shock (z): -0.09, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Meeting Updates. Wipro Limited has submitted to the Exchange a copy of Extracts of the Resolutions passed by the Board of Directors of the company at their meeting held on April 20, 2016\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about Wipro Limited submitting extracts of resolutions from a board meeting held on April 20, 2016. The options are things like earnings_result, order_win, M&A, etc. Since it's about a board meeting resolution, maybe it's a management event. But the key here is that the event is a filing of resolutions, which might not be a significant news event. The user mentioned that if it's noise, we should vote FLAT with confidence up to 0.3.\n\nNext, the base rate. The user says not to invent statistics, so I need to recall if such filings typically have a precedent on NSE. From what I know, routine filings like board resolutions might not have a strong historical impact. They might be considered noise since they're just procedural and not related to earnings or major decisions. So the base rate might be mixed or neutral.\n\nPositioning: The PRE-T context has a 5-day trend of -5.55%, volume shock of -0.09, and FinBERT prior of 0.00. The event is a past board meeting filing. Since the news is about an old meeting, it's unlikely to affect current prices. The market might have already priced in any info from that meeting. So the move isn't priced in because it's old news. But the context shows a negative trend, but the event itself isn't new. So maybe it's a flat signal.\n\nCommit: Since the event is a routine filing, it's noise. So vote FLAT with confidence up to 0.3. The steps would be 1 (noise), 2 (mixed base rate), 3 (not priced in), and 4 (commit based on noise). Sentiment should be FLAT, so sentiment is 0. Confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 32.5,
+ "attempts": 1
+}

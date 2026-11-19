@@ -1,0 +1,23 @@
+{
+ "case_id": "JSWSTEEL.NS_2019-04-22_b6eb1635",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: JSWSTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 1.48%, volume shock (z): -0.14, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. JSW Steel Limited has informed the Exchange regarding 'Further to our letters dated April 5, 2019 and April 10, 2019, we hereby inform you that the Company has raised US$ 500 million by the allotment of fixed rate senior unsecured notes (\ufffd\ufffdNotes\ufffd\ufffd) in accordance with Regulation S of the U.S. Securities Act, 1933 as amended, and applicable Indian regulations.The Notes will be listed on Singapore Exchange Securities Trading Limited.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about JSW Steel raising $500 million through issuing senior unsecured notes. That sounds like a capital action since they're raising funds. So step 1 would be capital_action.\n\nNext, the base rate. I remember that on NSE, capital actions like issuing debt can have mixed effects. Sometimes it's seen as positive for growth, but it might also increase debt, which could be negative. But I'm not sure if there's a clear historical trend here. Maybe it's mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 1.48% and volume shock. The news is about a capital raise, which might be priced in already if the market anticipated it. But since the volume shock is negative, maybe there's some surprise. However, the prior FinBERT sentiment was 0.00, so neutral. Not sure if it's overbought or oversold. Maybe the move isn't fully priced in.\n\nCommitting: Since it's a capital action, and the base rate is mixed, but the news is a confirmed filing. The confidence should be moderate. Maybe 0.6. The sentiment would be slightly positive since raising funds can be good for expansion. So vote UP with confidence 0.6. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 24.0,
+ "attempts": 1
+}

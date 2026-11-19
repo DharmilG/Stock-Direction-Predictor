@@ -1,0 +1,23 @@
+{
+ "case_id": "TATACONSUM.NS_2018-06-06_27bb0327",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATACONSUM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.47%, volume shock (z): -0.62, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Tata Global Beverages Limited has informed the Exchange regarding Analysts/Institutional Investor Meet/Con. Call Updates In compliance with Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations 2015, please find attached the details of schedule of meetings proposed to be had with several investor groups / Fund Houses / Broking Firms at Mumbai tomorrow the 6th June, 2018\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about Tata Global Beverages announcing meetings with investors, fund houses, and broking firms. The key here is that it's an update on scheduled meetings, not an earnings result or any financial disclosure. The event seems to be about regulatory compliance, as they're informing the Exchange about these meetings in line with SEBI regulations. So, the classification would be 'regulatory'.\n\nNext, the base rate. Regulatory filings usually don't have a strong directional impact. Historically, such announcements are often neutral or mixed. They might not drive the stock significantly up or down unless there's something more in the filing. Since the article just mentions the schedule of meetings without any new info, the base rate is probably mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 0.47%, volume shock z of -0.62, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. However, the event itself is a regulatory update, so there's no new info. The move doesn't seem to be priced in because the news is just about scheduling meetings, not any financial results or strategic moves. So, the positioning isn't indicating overbought or oversold conditions. Since there's no clear pricing in, maybe it's a flat?\n\nCommit: Since the event is regulatory, which is usually mixed, and there's no new info, the sentiment should be neutral. The vote is FLAT with low confidence. The trace steps would be 1 (regulatory), 2 (mixed), 3 (not priced in), and 4 (FLAT with confidence 0.3). Wait, but the confidence cap for noise is 0.3. However, the event isn't noise, it's regulatory. But since there's no clear direction, maybe FLAT is appropriate. So the final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 34.8,
+ "attempts": 1
+}

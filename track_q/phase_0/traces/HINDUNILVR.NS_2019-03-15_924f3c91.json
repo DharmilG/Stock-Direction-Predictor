@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDUNILVR.NS_2019-03-15_924f3c91",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDUNILVR.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.19%, volume shock (z): 5.70, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Hindustan Unilever Limited has informed the Exchange regarding a press release dated March 14, 2019, titled \"Press Release - Mr. Sanjiv Mehta\ufffd\ufffds elevation as President, South Asia, Unilever and Member of Unilever Leadership Executive\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a press release announcing Sanjiv Mehta's elevation to a leadership position. That sounds like a management change, so I'll go with \"management\" as the event type. \n\nNext, the base rate. I remember that management changes can go either way. Sometimes they're positive if it's a good leader, sometimes negative if there's uncertainty. But on NSE, I think the usual precedent is mixed. So I'll note that as mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -0.19%, volume shock z of 5.70, and FinBERT prior of 0.00. The volume shock might indicate some volatility, but the trend is slightly down. Since the news is about a management promotion, which is generally positive, but the market might already have priced in some of this if the trend is negative. However, the volume shock could mean there's some reaction. But since the prior FinBERT was neutral (0.00), maybe the market hasn't fully reacted yet. So the move might not be fully priced in, but I need to check if it's overbought or oversold. The 5-day trend is a small down, not overbought. So maybe the positive news could lead to a bounce, but since the trend is slightly down, maybe it's a fade candidate if overbought. But the volume shock is high, which might indicate some buying pressure. Hmm, this is a bit tricky. Maybe the positioning isn't clear, but since the news is positive, and the trend is slightly down, maybe the market hasn't priced in the positive news yet, so a potential up move.\n\nCommitting the vote. Since the event is management, which has a mixed base rate, but the news is positive. The positioning isn't clearly overbought or oversold, but the trend is slightly down. So maybe the confidence is moderate. The confidence can't be over 0.8. Since it's a confirmed filing (press release), maybe confidence is 0.6. The sentiment should be positive, so vote UP. Let me check the steps again. Step 1: management. Step 2: mixed. Step 3: not clearly priced in, but trend is slightly down. Step 4: vote UP with confidence 0.6. Sentiment is positive. That should align.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.4,
+ "attempts": 1
+}

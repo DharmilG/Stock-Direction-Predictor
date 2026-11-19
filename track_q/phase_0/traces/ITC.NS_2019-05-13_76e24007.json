@@ -1,0 +1,23 @@
+{
+ "case_id": "ITC.NS_2019-05-13_76e24007",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ITC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.77%, volume shock (z): 5.34, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Demise. ITC Limited has informed the Exchange regarding Demise of Mr Y C Deveshwar, Chairman of the company on May 11, 2019\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the demise of a chairman, Mr. Y C Deveshwar, from ITC Limited. The options are things like earnings results, management changes, etc. Since it's about a chairman passing away, that's a management event. So step 1 is management.\n\nNext, the base rate. I remember that on NSE, management changes can have mixed impacts. Sometimes it's positive if the new management is strong, sometimes negative if there's uncertainty. But I don't recall exact stats, so I'll say mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -5.77%, volume shock z of 5.34, and FinBERT prior 0.00. The volume shock might indicate some volatility. The news is about a chairman's demise, which is negative. Since the stock was down recently, maybe the market hasn't fully priced in the bad news. So if it's oversold and bad news, it could be a bounce candidate. But the volume shock might suggest some reaction already. Not sure, but maybe the move isn't fully priced in.\n\nCommit: Since it's a management event (step 1), base rate is mixed (step 2), positioning suggests maybe a bounce (step 3). Confidence should be moderate. The news is a confirmed filing, so maybe 0.6. Sentiment would be negative, so vote DOWN. Trace steps 1,2,3,4. Let me check the confidence cap. Confirmed filing plus supporting positioning\u2014maybe up to 0.8. But since it's a single event, maybe 0.6. Okay, that should be it.\n",
+ "content": "{\"sentiment\": -0.6, \"vote\": \"DOWN\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 172.2,
+ "attempts": 3
+}

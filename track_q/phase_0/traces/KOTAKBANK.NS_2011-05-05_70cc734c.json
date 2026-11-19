@@ -1,0 +1,23 @@
+{
+ "case_id": "KOTAKBANK.NS_2011-05-05_70cc734c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: KOTAKBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.36%, volume shock (z): 6.06, FinBERT prior: -0.65\nARTICLE TEXT (full, un-summarized):\n  Results Update, Year ended, 31-MAR-2011 (Standalone). Kotak Mahindra Bank Limited has informed the Exchange regarding the standalone Results for the year ended on 31-MAR-2011 as follows: Interest earned of Rs. 430355.82 lacs for the year ending on 31-MAR-2011 against Rs. 325562.49 lacs for the year ending on 31-MAR-2010. Interest expended of Rs. 205848.54 lacs for the year ending on 31-MAR-2011 against Rs. 139747.55 lacs for the year ending on 31-MAR-2010. Net Profit / (Loss) of Rs. 81818.21 lacs for the year ending on 31-MAR-2011 against Rs. 56110.57 lacs for the year ending on 31-MAR-2010\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.65,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Kotak Mahindra Bank's standalone results for the year ended March 31, 2011. They provided figures for interest earned, interest expended, and net profit. Since it's about financial results, the event type should be earnings_result. \n\nNext, the base rate. On the NSE, earnings reports usually have mixed impacts. If a company's earnings are better than expected, it might be positive, but if they're worse, it's negative. However, the base rate here is mixed because past earnings results can go either way depending on the actual numbers and expectations.\n\nPositioning: The PRE-T context mentions a 5-day trend of -4.36%, volume shock z of 6.06, and FinBERT prior of -0.65. The volume shock and negative FinBERT suggest some negative sentiment. The net profit increased from 56,110.57 lacs to 81,818.21 lacs, which is a positive move. However, the 5-day trend is down, and the volume shock indicates possible selling pressure. The positioning here might be that the positive earnings are not fully priced in because the recent trend is negative, but the actual results are better. So maybe it's a bounce candidate if oversold, but the volume shock might indicate some selling.\n\nCommit: The event is earnings_result. Base rate is mixed. Positioning shows some negative indicators but positive earnings. The confidence should be moderate. Since it's a confirmed filing (the results are official), but the market reaction is mixed, maybe confidence around 0.6. The sentiment should be positive as the earnings are up, so vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\n  \"sentiment\": 0.65,\n  \"vote\": \"UP\",\n  \"confidence\": 0.6,\n  \"trace_steps\": [1,2,3,4]\n}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.8,
+ "attempts": 1
+}

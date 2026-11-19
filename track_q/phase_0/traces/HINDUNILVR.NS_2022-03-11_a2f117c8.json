@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDUNILVR.NS_2022-03-11_a2f117c8",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDUNILVR.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.71%, volume shock (z): 0.18, FinBERT prior: -0.70\nARTICLE TEXT (full, un-summarized):\n  Loss of share certificate. Hindustan Unilever Limited has informed the Exchange about Loss of share certificate\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.1,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of a share certificate. Looking at the possible categories, \"capital_action\" seems relevant because losing a share certificate might involve corporate actions like share issues or transfers. But wait, the event here is just the loss of a certificate, not necessarily a capital action. Maybe \"regulatory\" could fit if it's related to compliance, but the article doesn't mention regulatory issues. Alternatively, \"management\" if it's an internal corporate matter. However, the options don't have a perfect fit. The user mentioned \"capital_action\" as a category, so maybe that's the closest. But I'm not entirely sure. Let me check the other steps.\n\nNext, the base rate. If this event type is rare, the historical precedent might be mixed. But I don't have specific data on share certificate loss events. The user said not to invent statistics, so I might have to say \"mixed\" if there's no clear precedent.\n\nPositioning: Using the PRE-T context, the 5-day trend is 3.71% positive, volume shock is 0.18, and FinBERT prior is -0.70. The event is about losing a share certificate. Since the trend is positive, but the FinBERT prior is negative, maybe the market hasn't fully priced in this event. If it's a neutral event, maybe the positioning is not overbought or oversold. But without more info, it's hard to say. The user says to use only the PRE-T context. The volume shock is low, so maybe not a big impact. The prior sentiment is negative, but the trend is positive. Maybe the move isn't fully priced in, so the positioning is neutral. But how does that affect the vote?\n\nCommit: If the event is classified as capital_action, and the base rate is mixed, and the positioning isn't overbought or oversold, maybe the vote is FLAT. But the user said if it's noise, vote FLAT with confidence up to 0.3. If the event is considered noise, then FLAT. But is losing a share certificate noise? It's a corporate action but maybe not significant enough. Alternatively, if it's a capital action, and the base rate is mixed, and the positioning isn't clear, maybe confidence is low. So the final vote could be FLAT with confidence 0.3. But I need to make sure the steps are followed correctly.\n",
+ "content": "{\"sentiment\": -0.1, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.5,
+ "attempts": 1
+}

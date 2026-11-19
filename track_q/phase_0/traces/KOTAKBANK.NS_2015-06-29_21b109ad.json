@@ -1,0 +1,23 @@
+{
+ "case_id": "KOTAKBANK.NS_2015-06-29_21b109ad",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: KOTAKBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.78%, volume shock (z): -0.66, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Annual General Meeting Updates. Kotak Mahindra Bank Limited has submitted to the Exchange a Certified True Copy of the Resolution passed at the Annual General Meeting of the bank held on June 29, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Annual General Meeting updates, specifically submitting a Certified True Copy of a resolution passed in 2015. The options are things like earnings, guidance, M&A, regulatory, etc. Since it's about a resolution from the AGM, which is a regulatory or management event. But the key here is whether it's a regulatory filing or a management decision. The event seems to be a regulatory disclosure, so maybe \"regulatory\" is the category. Wait, but the resolution was passed in 2015, and they're just submitting it now. Maybe it's a management event because it's about the bank's internal resolutions. But the main point is that it's a filing, so maybe \"regulatory\" is more accurate. Alternatively, \"management\" could fit if it's about internal decisions. However, the event doesn't mention anything new; it's just a submission of an old resolution. So maybe it's noise because there's no new information. But the user says if it's noise, vote FLAT with confidence up to 0.3. \n\nNext, the base rate for regulatory events on NSE. I need to recall historical precedents. Regulatory filings usually don't have a strong directional impact unless they involve significant changes. Since this is just submitting an old resolution, it's likely not a big deal. So the base rate might be mixed, but maybe usually neutral. \n\nPositioning: Using the PRE-T context. The 5-day trend is 0.78% positive, volume shock is -0.66, and FinBERT prior is 0.00. The event is about an old resolution, so there's no new info. The volume shock is negative, which might indicate some selling pressure, but the 5-day trend is positive. However, since the event is old, the market might have already priced in any potential impact. So if there's no new info, the move is likely priced in, making it a flat. \n\nCommit: Since the event is noise (no new info), the vote is FLAT. Confidence should be low, maybe 0.3. Steps 1 and 2 would be the classification as regulatory or noise, and the base rate. But since it's noise, step 1 would be noise, leading to FLAT. So the trace steps would include 1, 2, 3, and 4. The sentiment should be neutral, so 0. The final JSON would have sentiment 0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 116.7,
+ "attempts": 2
+}

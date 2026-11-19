@@ -1,0 +1,23 @@
+{
+ "case_id": "NTPC.NS_2020-12-04_283e30c5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: NTPC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.73%, volume shock (z): -0.33, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Buyback. NTPC Limited has informed the Exchange about Buyback\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.8,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a buyback, which is a capital action. So step 1 would be \"capital_action\". \n\nNext, the base rate. I remember that buybacks are usually positive because companies buy back shares, which can signal confidence in their stock. On the NSE, this is typically a bullish event. So the base rate is usually-up.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 4.73% and volume shock z of -0.33. The FinBERT prior is 0.00. The buyback is a positive event, but the volume shock is slightly negative. However, since the trend is positive, maybe the market hasn't fully priced in the buyback. But I need to check if the buyback is already reflected in the recent price movement. The volume shock might indicate some selling pressure, but the trend is up. Maybe the buyback is a positive surprise, so the positioning isn't fully priced in. \n\nCommitting the vote. Since it's a capital action with a usually-up base rate, and the positioning isn't fully priced in, the vote should be UP. Confidence would be moderate. The evidence is a confirmed filing (buyback announcement) and some positioning clues. So confidence around 0.6. \n\nPutting it all together: sentiment positive, vote UP, confidence 0.6, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.8, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 24.7,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "COALINDIA.NS_2019-02-14_b2079d5c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: COALINDIA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.25%, volume shock (z): 3.49, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Coal India Limited has informed the Exchange regarding 'Newspaper publication of Unaudited Financial Results of Coal India Limited (Standalone & Consolidated) for the 3rd Quarter ended December 31, 2018.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Coal India Limited informing the Exchange about the publication of their unaudited financial results for the 3rd quarter ended December 31, 2018. Since it's about releasing financial results, that's an earnings_result. \n\nNext, the base rate. Earnings reports on the NSE usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the actual results. But the base rate here is mixed because the market's reaction can vary. \n\nNow, positioning. The PRE-T context mentions a 5-day trend of -1.25%, volume shock (z): 3.49, and FinBERT prior: 0.00. The volume shock might indicate some volatility, but the FinBERT prior is neutral. The news is about past results, so if the market already priced in the possibility of these results, then the move might be priced in. However, since it's unaudited, there might be some surprise. But the 5-day trend is down, so if the news is neutral or slightly positive, maybe it's already considered. But since it's unaudited, maybe there's some uncertainty. \n\nCommitting the vote. Since it's an earnings result, and the base rate is mixed, but the positioning shows some negative trend and volume shock. However, the news itself isn't positive or negative, just the disclosure. So maybe the sentiment is neutral. But the instructions say if it's noise, vote FLAT. But the event is an earnings result, which isn't noise. So maybe the sentiment is neutral, but the vote could be FLAT due to mixed base rate and positioning. Wait, but the confidence needs to be proportionate. Since it's a confirmed filing but without clear positive or negative info, maybe confidence is low. So vote FLAT with confidence 0.3. But the steps say if noise, vote FLAT. But this isn't noise. Hmm. Maybe the sentiment is 0.0, vote FLAT, confidence 0.3. But the trace steps need to include 1,2,3,4. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.1,
+ "attempts": 1
+}

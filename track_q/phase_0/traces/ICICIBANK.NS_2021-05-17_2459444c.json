@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2021-05-17_2459444c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.72%, volume shock (z): -0.34, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. ICICI Bank Limited has informed the Exchange regarding allotment of  441312 securities pursuant to ESOP/ESPS at its meeting held on May 14, 2021\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.5,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of securities under ESOP/ESPS. Looking at the categories, \"capital_action\" seems relevant here because it's about issuing securities. So step 1 is classified as capital_action.\n\nNext, the base rate. I remember that capital actions like issuing shares can sometimes be negative because it might dilute existing shareholders' value. But I'm not sure if there's a clear historical pattern. Maybe it's mixed? Wait, the user said not to invent stats, so I should state what's known. If there's no clear precedent, maybe it's mixed. But I'm not certain. Let me think again. Capital actions can go either way depending on context. So the base rate is probably mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 2.72% and volume shock. The event is about allotting securities, which might be seen as negative. If the market is already up, maybe this is priced in. But the volume shock is negative, which could indicate selling pressure. So if the news is negative and the market is overbought, maybe it's a fade. But the event is a capital action, which might not be a big deal. Wait, the prior FinBERT was 0.00, so no strong sentiment. So maybe the move isn't fully priced in. But I'm not sure. The positioning step needs to check if the news is already reflected in the price. Since the 5-day trend is positive, but the volume is down, maybe the market is in a state where this news isn't fully priced. So the positioning might lean towards not being priced in, but I need to be careful here.\n\nCommitting: The event is a capital action, which is usually mixed. The positioning isn't clear, but the volume shock might suggest some negative reaction. However, without more info, maybe the confidence is low. Since it's a single-source filing, maybe confidence is 0.4. But the user said to use confirmed filing plus supporting positioning. If the positioning isn't strong, maybe confidence is 0.4. The sentiment would be negative, so vote DOWN. But I need to check the steps again. Step 1: capital_action. Base rate: mixed. Positioning: maybe the move isn't priced in because the volume is negative. So the vote could be FLAT? Wait, the instruction says if noise, vote FLAT. But capital actions aren't noise. So maybe the sentiment is negative, vote DOWN with confidence 0.4. Let me structure this properly.\n",
+ "content": "{\"sentiment\": -0.5, \"vote\": \"DOWN\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 43.3,
+ "attempts": 1
+}

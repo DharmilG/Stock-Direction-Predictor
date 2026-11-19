@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2017-01-31_25946e16",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.74%, volume shock (z): 1.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Shriram Transport Finance Company Limited has informed the Exchange regarding a press release dated January 31, 2017, titled \"Press Release\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is a press release from Shriram Transport Finance Company Limited dated January 31, 2017. The PRE-T CONTEXT mentions a 5-day trend of 3.74%, volume shock z of 1.18, and FinBERT prior of 0.00. The article text is just a press release mention without specific details.\n\nSo, the event type here is a press release. But according to the checklist, the possible classifications are earnings_result, earnings_guidance, order_win, mna, regulatory, rating_change, management, capital_action, debt_credit, litigation, expansion, macro_policy, short_seller, or noise. Since the press release is just a generic one without specific info on earnings, management changes, mergers, etc., it might fall under 'noise' because there's no concrete information provided. If it's noise, the vote should be FLAT with confidence up to 0.3.\n\nNext, the base rate. The user says not to invent statistics, so I need to rely on general knowledge. Press releases without specific details usually don't have a strong historical precedent. They might be mixed, but since there's no info, maybe it's considered neutral. However, the instruction says if it's noise, vote FLAT. So step 1 would be noise, leading to FLAT.\n\nPositioning: The PRE-T context has a 5-day trend of 3.74% which is positive, and volume shock z of 1.18. But FinBERT prior is 0.00. Since the news is just a press release with no specific info, the positioning might not be priced in. But since the event is noise, maybe there's no pricing. So step 3 might say not priced in, but since it's noise, we already decided FLAT.\n\nCommit: Since it's noise, vote FLAT with confidence up to 0.3. The trace steps would be 1 (noise), 2 (base rate mixed?), but the user said if noise, vote FLAT. So confidence is 0.3. The sentiment should be FLAT, so sentiment is 0. The JSON would have sentiment 0, vote FLAT, confidence 0.3, trace steps [1,2,3,4]. Wait, but the steps need to be cited in order. Let me check again.\n\nStep 1: classify as noise. Step 2: base rate for noise events? The user says if noise, vote FLAT. So step 2's base rate is probably mixed, but since it's noise, step 3 says not priced in. Then step 4 commit. So the trace steps would be 1,2,3,4. The confidence is 0.3. Sentiment is 0. So the final JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1, 2, 3, 4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 47.8,
+ "attempts": 1
+}

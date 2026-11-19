@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2017-06-14_1360a1fa",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -1.74%, volume shock (z): -0.05, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Amendment to AOA/MOA. ICICI Bank Limited has informed the Exchange regarding the Amendment to AOA/MOA of the company.Subject: Amendments to the Capital Clauses of the Memorandum and Articles of Association of the Bank. This is further to our letter dated today vide which we have informed about the results of the postal ballot.Pursuant to Regulation 30 of SEBI Listing Regulations, we wish to inform you that the Members vide postal ballot resolution dated June 12, 2017 approved the amendments to the Capital Clauses of the Memorandum and Articles of Association of the Bank.The details of the amendments are mentioned in the enclosed annexure. Request you to please note the same\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about amendments to the Memorandum and Articles of Association, specifically the Capital Clauses. The company mentioned it's a regulatory filing under SEBI Listing Regulations. So, this seems like a regulatory event. The options include regulatory, which fits here.\n\nNext, the base rate. Regulatory filings on the NSE\u2014usually, how do they affect the stock? I remember that regulatory changes can be neutral or have mixed impacts. Sometimes they might be positive if they align with strategic moves, but often they're just compliance actions. So the historical precedent is probably mixed. \n\nNow, positioning using the PRE-T CONTEXT. The 5-day trend is -1.74%, which is a bit negative. The volume shock is -0.05, which is a small negative. FinBERT prior is 0.00, so no strong sentiment from that. The event is a regulatory amendment, which might not be priced in. Since the trend is down and the news is regulatory (not necessarily bad), but the volume is slightly negative. However, the news isn't bad, so maybe the market hasn't reacted yet. So the move might not be fully priced in. \n\nCommitting the vote. Since it's a regulatory event with mixed historical impact, and the current context isn't showing overbought or oversold, maybe the sentiment is neutral. But the confidence should be low. The event is a confirmed filing, but without strong positive or negative signals. So confidence around 0.4. The vote could be FLAT since the sentiment is neutral. Wait, the instructions say if noise, vote FLAT. But regulatory isn't noise. Hmm. Maybe the base rate is mixed, so the vote is FLAT with confidence 0.4. Let me check again. The steps: classify as regulatory, base rate mixed, positioning not priced in, so commit FLAT with confidence 0.4. Sentiment should be 0.0, but the rules say absolute value below 0.2 is FLAT. So sentiment 0.0, vote FLAT, confidence 0.4. That fits.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 35.2,
+ "attempts": 1
+}

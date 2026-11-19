@@ -1,0 +1,23 @@
+{
+ "case_id": "ITC.NS_2019-12-20_2daace11",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ITC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.19%, volume shock (z): 0.61, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of ESOP/ESPS. ITC Limited has informed the Exchange regarding allotment of  1821980 Equity Shares under ESOP\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of ESOP/ESPS shares by ITC Limited. ESOPs are employee stock option plans, so this is a capital action. The options given include capital_action, which fits here. So step 1 is classified as capital_action.\n\nNext, the base rate. I recall that on the NSE, capital actions like ESOP allotments usually don't have a strong historical precedent. Sometimes they might be neutral or even negative if it's seen as diluting shares, but often they're just routine. The base rate here is probably mixed, but maybe leaning neutral. However, the user said not to invent stats, so I have to rely on existing knowledge. From what I remember, ESOP announcements can go either way, but often they're not significant enough to move prices much. So the base rate might be mixed, but maybe the default is usually-neutral.\n\nPositioning: The PRE-T context mentions a 5-day trend of -0.19%, volume shock z of 0.61, and FinBERT prior of 0.00. The volume shock z is 0.61, which is moderate. The FinBERT prior is neutral. The 5-day trend is slightly down. Now, the event is a capital action. If the market already priced in this news, then the move might be a fade. But since the volume shock is moderate, maybe the news isn't fully priced. However, the 5-day trend is down, so if the news is neutral, maybe the market is already adjusting. But since it's a capital action, which is often not a strong mover, the positioning might be that the move isn't fully priced. So maybe it's a bounce candidate if oversold, but the trend is slightly down, not oversold. So maybe the positioning is neutral, not enough to commit.\n\nCommit: Since the event is a capital action, which is usually mixed, and the positioning isn't strongly overbought or oversold, the vote might be FLAT with low confidence. But the user said if noise, vote FLAT. Is this noise? Capital actions are sometimes considered noise. So step 1 is capital_action, which is not noise. So maybe the base rate is mixed, and positioning is neutral. Therefore, the vote is FLAT with confidence up to 0.3. But the confidence can be up to 0.3. So the final answer would be FLAT with confidence 0.3, sentiment 0, trace steps 1,2,3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 54.5,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "JSWSTEEL.NS_2015-04-21_743c9c7e",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: JSWSTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.86%, volume shock (z): 0.18, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Disc. under Reg.30 of SEBI (SAST) Reg.2011. Heston Securities Limited has submitted to the Exchange vide letter dated April 02, 2015 a copy of disclosure under Regulation 30(1) and 30(2) of SEBI (Substantial Acquisition of Shares & Takeovers) Regulations, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions a disclosure under SEBI regulations, specifically Regulation 30. The company is Heston Securities Limited, and they submitted a disclosure on April 2, 2015. The event here is a regulatory filing, so that's a regulatory event. \n\nNext, the base rate. Regulatory filings on the NSE usually don't have a strong historical precedent. Sometimes they can be neutral or even negative if there's bad news, but often they're just routine disclosures. The base rate might be mixed, but I need to check if there's any specific data. Since the user says not to invent stats, I'll go with mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 0.86%, volume shock z of 0.18, and FinBERT prior of 0.00. The volume shock is low, so maybe the market hasn't reacted much. Since it's a regulatory filing, if it's a routine disclosure, the move might already be priced in. But if there's something significant in the filing, maybe not. But the article doesn't specify the content beyond the disclosure. So the positioning might be that it's not priced in yet, but without more info, it's hard to say. Wait, the user says to use only the PRE-T context. The 5-day trend is positive, but volume shock is low. The FinBERT prior is neutral. So maybe the market hasn't reacted, so the move isn't priced in. But since it's a regulatory filing, maybe it's a neutral event. \n\nCommit: Since it's a regulatory filing, and the base rate is mixed, but the positioning isn't clearly overbought or oversold. The sentiment might be neutral. But the user says to use the steps. Step 1: regulatory. Step 2: mixed. Step 3: not priced in? Or maybe the filing is a routine one, so the sentiment is neutral. So vote FLAT with confidence up to 0.3. But the user says if noise, vote FLAT. Is this a noise event? Regulatory filings can be noise if they don't contain new info. Since the article only mentions the submission of a disclosure under SEBI, without specific details, it's likely noise. So vote FLAT with confidence 0.3. \n\nWait, the confidence can be up to 0.3 for noise. So the final answer would be FLAT with confidence 0.3, and sentiment 0.0. But the sentiment must align with the vote. Since FLAT is neutral, sentiment should be 0.0. So the JSON would have sentiment 0.0, vote FLAT, confidence 0.3, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 46.6,
+ "attempts": 1
+}

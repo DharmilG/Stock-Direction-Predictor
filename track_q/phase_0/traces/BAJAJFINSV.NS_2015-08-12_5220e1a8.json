@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJAJFINSV.NS_2015-08-12_5220e1a8",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJAJFINSV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.21%, volume shock (z): -0.28, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Annual General Meeting Updates. Bajaj Finserv Limited has informed the Exchange about the submission of proceedings of the Annual General Meeting of the Company held on July 22, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Annual General Meeting updates, specifically mentioning the submission of proceedings from July 2015. The options are things like earnings results, management, regulatory, etc. Since it's about an AGM, which is a management-related event, I think the classification here is \"management\". \n\nNext, the base rate. I need to recall historical precedents for management-related events on NSE. Usually, AGM updates might not have a strong directional impact unless there's significant news. But since this is just submitting proceedings from a past meeting, there's no new info. So the base rate is probably mixed, as past events might not affect current prices much.\n\nPositioning: The pre-t context shows a 5-day trend of -0.21%, volume shock of -0.28, and FinBERT prior of 0.00. The news is about an old AGM, so maybe the market already priced in any potential info from that meeting. Since the trend is slightly down and volume is low, but the news isn't new, it might not be a fade or bounce candidate. So the move might already be priced in, leading to a flat sentiment.\n\nCommitting: Since the event is management, base rate is mixed, and the news isn't new, the vote should be FLAT with low confidence. The confidence is around 0.3 as per the noise category. So the final answer should be FLAT with confidence 0.3, citing steps 1, 2, 3, and 4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 28.1,
+ "attempts": 1
+}

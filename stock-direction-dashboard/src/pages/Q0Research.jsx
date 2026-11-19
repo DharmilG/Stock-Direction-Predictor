@@ -291,7 +291,7 @@ export default function Q0Research() {
                     {gate.note && <p className="mt-5 text-[.875rem] text-[var(--ink-2)]">{gate.note}</p>}
                   </>
                 ) : (
-                  <Empty title="No gate verdict recorded" detail="results/q0_d1.json has not been written yet." />
+                  <Empty title="No gate verdict recorded" detail="track_q/phase_0/verdict/q0_d1.json has not been written yet." />
                 )}
               </Panel>
 
@@ -302,7 +302,7 @@ export default function Q0Research() {
                   what: 'The research phases this run has to clear, in order, and the status each one recorded.',
                   reads: 'Written to the Q-track state file by the run itself, one row per phase with its status and any note. When that file is absent the order is still shown, but no phase claims a status.',
                   ideal: 'Phases completing in order. The phase marked running is the one currently consuming the GPU.',
-                  when: 'Every phase reading "not recorded" means the runner has not written artifacts/state/q_track_state.json yet. The run may still be advanced: the ledger and heartbeat below are the progress that survives a missing phase file.',
+                  when: 'Every phase reading "not recorded" means the runner has not written track_q/_common/phase_registry.json yet. The run may still be advanced: the ledger and heartbeat below are the progress that survives a missing phase file.',
                 }}
               >
                 {phases?.available ? (
@@ -324,7 +324,7 @@ export default function Q0Research() {
                     </ul>
                   </>
                 ) : (
-                  <Empty title="No phase plan" detail={phases?.note ?? 'artifacts/state/q_track_state.json is missing.'} />
+                  <Empty title="No phase plan" detail={phases?.note ?? 'track_q/_common/phase_registry.json is missing.'} />
                 )}
               </Panel>
             </div>
@@ -502,7 +502,7 @@ export default function Q0Research() {
                     </div>
                   </>
                 ) : (
-                  <Empty title="No GPU samples" detail="logs/gpu_5s.csv is missing or empty." />
+                  <Empty title="No GPU samples" detail="track_q/phase_0/logs/gpu_5s.csv is missing or empty." />
                 )}
               </Panel>
             </div>

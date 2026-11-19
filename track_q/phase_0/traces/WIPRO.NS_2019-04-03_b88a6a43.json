@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2019-04-03_b88a6a43",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.61%, volume shock (z): -0.71, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Wipro Limited has informed the Exchange regarding 'Completion of Divestment of Wipro's Workday and Cornerstone On Demand Business'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro completing the divestment of their Workday and Cornerstone On Demand business. Divestment related to M&A activities, so that's probably a 'mna' event. \n\nNext, the base rate. I remember that on NSE, divestments can have mixed impacts. If a company sells off a business, it might be seen as either positive (unlocking value) or negative (divesting core business). But historically, it's usually mixed. So the base rate is mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 2.61% and volume shock z of -0.71. The FinBERT prior is 0.00. The news is about completing a divestment. Since the volume shock is negative, maybe the market hasn't fully priced in this news yet. But the 5-day trend is positive. However, the event is a confirmed filing, so maybe the positive sentiment is already reflected. Wait, the FinBERT prior is 0.00, which might indicate neutral sentiment before the news. But the news is about a completed divestment, which could be positive. However, the volume shock is negative, which might suggest some selling pressure. But since it's a completed transaction, maybe the market has already reacted. But the pre-t context doesn't mention any prior price movement related to this news. So maybe the move isn't fully priced in. But I'm not sure. \n\nCommitting: Since it's a confirmed filing (divestment completion), and the base rate is mixed, but the event is a positive move (divesting non-core assets might be good). However, the volume shock is negative. But the 5-day trend is positive. Maybe the sentiment is slightly positive. Confidence would be moderate. Let's say confidence 0.6. The vote might be UP, but since the base rate is mixed, maybe FLAT? Wait, the instructions say if noise, vote FLAT. But this is a confirmed filing, so not noise. So the sentiment is positive, vote UP, confidence 0.6. Trace steps 1,2,3,4. \n\nWait, step 3: positioning. If the move is not priced in, then maybe the sentiment is positive. But the volume shock is negative. Hmm. Maybe the market hasn't fully priced in the positive news, so the sentiment is positive. So the vote is UP with confidence 0.6.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 48.1,
+ "attempts": 1
+}

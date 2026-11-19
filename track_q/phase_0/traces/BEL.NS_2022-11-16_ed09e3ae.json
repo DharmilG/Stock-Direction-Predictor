@@ -1,0 +1,23 @@
+{
+ "case_id": "BEL.NS_2022-11-16_ed09e3ae",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.23%, volume shock (z): 1.22, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Bharat Electronics Limited has informed the Exchange about press release dated 15-Nov-2022 titled BEL signs MoU with SVC TECH VENTURES LLP\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about BEL signing an MoU with SVC TECH VENTURES LLP. The options are things like earnings, orders, M&A, etc. Since it's a partnership or collaboration, that falls under 'order_win' or maybe 'expansion'. But 'order_win' is more about winning a contract, while 'expansion' is about growing the business. The MoU here is a collaboration, so maybe 'expansion' is better. Wait, the possible categories include 'expansion', so I'll go with that.\n\nNext, the base rate. I need to recall historical precedent for expansion news on NSE. Usually, expansion news is positive, but it depends. Sometimes, if the partner isn't significant, the impact might be mixed. But generally, expansion is seen as positive, so the base rate is usually-up.\n\nPositioning: The pre-t context mentions a 5-day trend of 0.23% positive, volume shock z of 1.22, and FinBERT prior of 0.00. The volume shock z is 1.22, which is moderate. Since the trend is slightly positive and the volume isn't extremely high, the move might not be fully priced in. The news is positive, but the market might not have reacted yet. So, the positioning isn't overbought, so maybe a fade isn't needed. But since the news is good, and the trend is positive, maybe the sentiment is positive.\n\nCommit: The event is expansion, base rate usually-up. Positioning isn't overbought, so the move might be priced in. But since the volume is a bit high, maybe there's some reaction. However, the FinBERT prior is 0.00, so no prior sentiment. The confidence should be moderate. Since it's a confirmed filing (press release), and the positioning is somewhat positive, confidence around 0.6. The sentiment should be positive, so vote UP. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 202.0,
+ "attempts": 3
+}

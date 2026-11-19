@@ -1,0 +1,23 @@
+{
+ "case_id": "ULTRACEMCO.NS_2018-07-16_1ccd86ab",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ULTRACEMCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.90%, volume shock (z): -0.38, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. UltraTech Cement Limited has informed the Exchange regarding 'Newspaper Publication-  Compulsory transfer of Equiy Shares to Investor Education and Protection Fund Suspense Account.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a compulsory transfer of equity shares to the Investor Education and Protection Fund Suspense Account. That sounds like a regulatory action, so I'll go with 'regulatory' as the event type. \n\nNext, the base rate. I remember that regulatory actions on the NSE can go either way. Sometimes they're positive if they protect investors, but other times they might be seen as negative if they affect shareholder rights. Since I can't invent stats, I'll say the historical precedent is mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of -0.90% and a volume shock. The FinBERT prior is 0.00, which is neutral. The news itself is a regulatory action, but there's no clear indication if it's positive or negative. Since the volume shock is negative, maybe the market hasn't fully priced in this news yet. But without more info, it's hard to tell if it's overbought or oversold. \n\nCommitting the vote. Since the event is regulatory and the base rate is mixed, and there's no clear pricing in, I might lean FLAT. But the confidence should be low. Let me check the confidence levels. Single-source rumour is max 0.4. Since this is a confirmed filing but no supporting positioning, maybe 0.3. But the instructions say if noise, vote FLAT with confidence up to 0.3. Since it's a regulatory event, maybe it's not noise. Hmm. Wait, the user said if noise, vote FLAT. But this is a regulatory action, which isn't noise. So maybe the confidence is 0.4. But the base rate is mixed, so maybe the sentiment is neutral. The vote would be FLAT with confidence 0.3. Wait, the trace steps need to be cited. So steps 1, 2, 3, 4. But in the end, since the event is regulatory and the base rate is mixed, and positioning isn't clear, the vote is FLAT. But I need to make sure the sentiment aligns. FLAT would have sentiment near 0. So the final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 36.5,
+ "attempts": 1
+}

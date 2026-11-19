@@ -1,0 +1,23 @@
+{
+ "case_id": "HDFCLIFE.NS_2022-09-29_d31c9bab",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HDFCLIFE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.26%, volume shock (z): 0.73, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Schedule of Analysts/Institutional Investor Meet/Con. Call. HDFC Life Insurance Company Limited has informed the Exchange about Schedule of Analysts/Institutional Investor Meet/Con. Call\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the schedule of an analysts' meeting and conference call. The user mentioned categories like earnings_result, earnings_guidance, etc. Since the event is just announcing a meeting schedule, it doesn't seem like earnings results or guidance. It's also not an order win, M&A, regulatory, rating change, management, capital action, debt credit, litigation, expansion, macro policy, short seller, or noise. The closest might be \"management\" since it's about an investor meeting, but the event is just scheduling a meeting, not a management decision. However, the options don't have a perfect fit. Since the user said if it's noise, vote FLAT. But maybe it's a management event? Wait, the event is about scheduling a meeting, which could be part of management communication. But the base rate for management events on NSE\u2014usually, such meetings might not have a strong directional impact. Maybe it's noise? But the user said to check if it's noise. If it's noise, then vote FLAT. But I need to check the steps.\n\nStep 1: Classify. The event is a schedule of a meeting. The options include management. So maybe management. But the user's checklist says if it's noise, vote FLAT. So first, is this noise? The article is about scheduling a meeting, which is a routine communication. In the NSE, such events are often considered noise because they don't directly impact financials or operations. So step 1: noise. Then step 2: base rate for noise events. The user said if noise, vote FLAT with confidence up to 0.3. Step 3: positioning. The pre-t context has a 5-day trend of -3.26%, volume shock z=0.73, FinBERT prior 0.00. Since the event is noise, the move might already be priced in. But the 5-day trend is negative, and volume shock is 0.73 (which is moderate). FinBERT prior is 0, so no sentiment. So maybe the market hasn't fully priced in the noise, but since it's noise, the sentiment is neutral. Step 4: commit. Since it's noise, vote FLAT with confidence up to 0.3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3. The trace steps would be 1,2,3,4. Let me check again. The event is a meeting schedule, which is a management event. But the base rate for management events? The user said to state historical precedent. If the base rate for management events is usually mixed, but since it's noise, the vote is FLAT. So the answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 136.3,
+ "attempts": 2
+}

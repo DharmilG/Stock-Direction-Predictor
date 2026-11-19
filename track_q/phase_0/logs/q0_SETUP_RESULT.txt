@@ -1,0 +1,9 @@
+﻿STATUS: SUCCESS
+AT: 2026-10-29T10:41:37.3760001+05:30
+TASK: StockML_Q0_Supervisor
+REPO: E:\books\Adaniports\stock_direction_platform
+Task state: Running
+Supervisor heartbeat: E:\books\Adaniports\stock_direction_platform\logs\q0_supervisor.json
+Runner heartbeat: E:\books\Adaniports\stock_direction_platform\logs\q0_heartbeat.json
+Status command: powershell -NoProfile -ExecutionPolicy Bypass -File .\q0_status.ps1
+No further UAC prompts are needed.

@@ -1,0 +1,23 @@
+{
+ "case_id": "ASIANPAINT.NS_2013-10-21_91193125",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ASIANPAINT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 6.34%, volume shock (z): 7.46, FinBERT prior: 0.95\nARTICLE TEXT (full, un-summarized):\n  Press Release. Asian Paints Limited has informed the Exchange regarding a press release dated October 21, 2013 titled \"Asian Paints Consolidated income from operations for the Quarter Increases By 18.3%; Net Profit up By 36.7%\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about Asian Paints' earnings result from 2013, mentioning increased income from operations and net profit. So that's an earnings_result. Next, the base rate for earnings results on NSE\u2014usually, positive earnings surprises tend to be up, but I should confirm if there's a historical trend. Since the user says not to invent stats, I'll stick with the general knowledge that earnings results are usually positive. \n\nNow, positioning: the pre-t context has a 5-day trend of 6.34% and volume shock z of 7.46. The FinBERT prior is 0.95, which is positive. But since the news is from 2013, the market might have already priced in this information. The volume shock suggests higher volume, which could mean the news is being digested. If the move is already priced in, then the sentiment might be flat. However, the FinBERT prior is high, indicating positive sentiment. But since the event is old, maybe the market has already reacted. \n\nCommitting: the event is earnings_result, base rate usually up, but positioning might be overbought if the trend is positive. However, the news is old, so maybe it's already factored in. The confidence should be low because it's a past event. So vote FLAT with confidence 0.3. But the user said if noise, vote FLAT. Wait, is this noise? The article is a press release, so it's a confirmed filing. But since it's from 2013, the market might have already reacted. So maybe it's a fade candidate. But the user says to use pre-t context. The 5-day trend is up, and volume shock is high. If the news is already priced in, then the sentiment is flat. So the answer would be FLAT with confidence 0.3. But the FinBERT prior is 0.95, which is positive. Maybe the positioning is not overbought. Hmm, this is tricky. I think the correct classification is earnings_result, base rate usually up, but since the news is old, the positioning is already priced in, leading to FLAT. So the sentiment is 0, vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.8,
+ "attempts": 1
+}

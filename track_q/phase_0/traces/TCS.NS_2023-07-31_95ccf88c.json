@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2023-07-31_95ccf88c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.79%, volume shock (z): 0.38, FinBERT prior: -0.78\nARTICLE TEXT (full, un-summarized):\n  Loss of Share Certificates. Tata Consultancy Services Limited has informed the Exchange about Loss of Share Certificates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "DOWN",
+ "sentiment": -0.8,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates. Looking at the possible categories, this seems like a capital_action because it involves the company's shares and certificates. So step 1 is classified as capital_action.\n\nNext, the base rate. I remember that on the NSE, capital actions like loss of share certificates usually have mixed outcomes. Sometimes it's a positive if it's a voluntary action, but if it's due to theft or loss, it might be negative. But I don't have exact stats, so I'll note it as mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 0.79% and volume shock z of 0.38. FinBERT prior is -0.78. The event is about losing share certificates, which might be a negative event. However, the prior sentiment is negative, so if the news is bad, it might be priced in already. But since the volume shock is low, maybe the market hasn't fully reacted yet. So the move might not be priced in, but I need to check if the news is significant enough. Since it's a loss, it's a negative event, but the impact could vary. Maybe the market hasn't reacted much, so it's a potential downside.\n\nCommit: Since it's a capital action with mixed base rate, and the news is negative, but the prior sentiment is already negative. The volume shock is low, so maybe the market hasn't priced it in yet. So the vote would be DOWN with confidence around 0.5. But I need to make sure not to exceed 0.8. Also, the sentiment should be negative. So the final answer would be sentiment -0.8, vote DOWN, confidence 0.5, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": -0.8, \"vote\": \"DOWN\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 188.1,
+ "attempts": 3
+}

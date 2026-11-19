@@ -1,0 +1,23 @@
+{
+ "case_id": "HINDALCO.NS_2013-01-07_2d5f38fa",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HINDALCO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.99%, volume shock (z): -0.52, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. Hindalco Industries Limited has informed the Exchange that the Committee of Directors vide their resolution dated January 04, 2013 has allotted 4,000 equity shares of par value of Re.1/- to the optionee as detailed in the resolution, pursuant to the exercise of the options granted to the employees under the Company's Employee Stock Option Scheme, 2006\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news item about Hindalco Industries Limited and determine a 5-day directional signal for NSE equity. \n\nFirst, I need to classify the event. The article talks about the allotment of securities under their Employee Stock Option Scheme. That sounds like a capital action since it's about issuing shares to employees. So step 1 would be capital_action.\n\nNext, the base rate. I remember that capital actions on NSE usually have mixed outcomes. Sometimes it's positive if it's a shareholder benefit, but other times it might be neutral or even negative if it's dilutive. But since the article is about allotting shares to employees, it's more of a routine corporate action rather than a major event. So the historical precedent is probably mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 2.99% and a volume shock of -0.52. The FinBERT prior is 0.00. The news is about an allotment, which might not be a big deal. Since the volume shock is negative, maybe there's some selling pressure. But the event itself is a regular capital action, so maybe the market has already priced in such announcements. If the trend is positive but the volume is down, maybe the move is already reflected, so it's priced in. So positioning would be that the move is already priced in, so maybe a fade candidate if overbought. But the trend is positive, so maybe not overbought. Hmm.\n\nCommitting the vote. Since it's a capital action with mixed historical impact and the event seems already priced in, the sentiment might be neutral. But the user wants the sentiment to align with the vote. If the vote is FLAT, then sentiment should be near zero. But the confidence needs to be low. Since it's a single-source filing without strong supporting factors, confidence would be around 0.3. So the vote is FLAT with confidence 0.3. \n\nWait, but the user said if it's noise, vote FLAT with confidence up to 0.3. Since this is a capital action, which is not noise, but maybe the positioning is that it's priced in. So maybe the vote is FLAT because the move is already reflected. The steps would be 1,2,3,4. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.1,
+ "attempts": 1
+}

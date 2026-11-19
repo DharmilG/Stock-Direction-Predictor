@@ -1,0 +1,23 @@
+{
+ "case_id": "ONGC.NS_2017-01-19_b5bb89e1",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ONGC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.65%, volume shock (z): 2.23, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Record Date. Oil & Natural Gas Corporation Limited has informed the Exchange that the Company has fixed Record Date as February 8, 2017 for the purpose of Second Interim Dividend\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about ONGC setting a record date for a second interim dividend. Dividend-related announcements usually fall under capital_action. So step 1 is capital_action.\n\nNext, the base rate. I remember that on the NSE, dividend announcements can have mixed impacts. Sometimes they're positive because investors like dividends, but if the market is already pricing in the dividend, the impact might be minimal. But I shouldn't invent stats, so I'll note it's mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of 0.65% and a volume shock z-score of 2.23. The FinBERT prior is 0.00. The news is about a dividend record date, which might not be new info. If the market already knew about the dividend, then the news might be priced in. But since the volume shock is high, maybe there's some reaction. However, since it's a record date, not the actual dividend amount, the impact could be limited. So maybe the move isn't fully priced in, but not sure.\n\nCommit: Since it's a capital action, but the news is about a record date, not a change in dividend policy. The base rate is mixed, and positioning isn't clear. Confidence should be low. Maybe vote FLAT with confidence 0.3. But wait, the user said if noise, vote FLAT. Is this noise? Dividend record dates are usually routine, so maybe it's noise. Hence, FLAT with confidence up to 0.3. But the pre-t context has a volume shock, which might indicate some movement. However, without price data, it's hard to tell. Maybe the sentiment is neutral. So final vote FLAT, confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.4,
+ "attempts": 1
+}

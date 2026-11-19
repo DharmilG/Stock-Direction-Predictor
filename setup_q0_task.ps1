@@ -1,4 +1,4 @@
-# Q0-D1 one-time scheduled-task setup (Windows PowerShell)
+﻿# Q0-D1 one-time scheduled-task setup (Windows PowerShell)
 #
 # Run this ONCE. It requests administrator rights (one UAC prompt), registers
 # a Highest-privileges Scheduled Task, stops the current manual supervisor,
@@ -26,7 +26,7 @@ Set-Location $script:RepoRoot
 
 $script:SupervisorPath = Join-Path $script:RepoRoot "run_q0_overnight.ps1"
 $script:Python = Join-Path $script:RepoRoot ".venv\Scripts\python.exe"
-$script:LogDir = Join-Path $script:RepoRoot "logs"
+$script:LogDir = Join-Path $script:RepoRoot "track_q\phase_0\logs"
 New-Item -ItemType Directory -Force -Path $script:LogDir | Out-Null
 $script:SetupLog = Join-Path $script:LogDir "q0_setup.log"
 $script:ResultPath = Join-Path $script:LogDir "q0_SETUP_RESULT.txt"

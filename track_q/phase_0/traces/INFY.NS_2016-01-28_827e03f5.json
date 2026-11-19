@@ -1,0 +1,23 @@
+{
+ "case_id": "INFY.NS_2016-01-28_827e03f5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: INFY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.74%, volume shock (z): 0.04, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Infosys Limited has informed the Exchange vide letter dated January 28, 2016 regarding \"Infosys Invests in Waterline Data Science\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Infosys investing in Waterline Data Science. The options are things like earnings, orders, M&A, etc. Since it's an investment in another company, that sounds like a merger or acquisition (MNA) event. So step 1 is MNA.\n\nNext, the base rate for MNA events on NSE. From what I remember, M&A news can go either way. Sometimes it's positive if the acquisition is strategic, but sometimes it's mixed because of integration risks. So the base rate is probably mixed.\n\nNow, positioning using the PRE-T context. The 5-day trend is 0.74% positive, volume shock is 0.04, and FinBERT prior is 0.00. The volume shock is low, so maybe not a big move. The FinBERT prior is neutral. Since the news is about an investment, which is positive, but the trend is slightly up. However, the volume isn't a big indicator here. The positioning might not be overly priced in, so maybe not a fade or bounce. But since the event is MNA, which can be positive, but the base rate is mixed, I'm not sure yet.\n\nCommitting the vote. Since it's an MNA, which is a positive event but with mixed historical outcomes, and the positioning isn't strongly overbought or oversold. The confidence should be moderate. Maybe 0.5? But the instructions say to be proportional. Since there's a confirmed filing (the press release) but no strong supporting data, maybe confidence is around 0.5. The sentiment should be positive since the vote is UP. So the JSON would have sentiment 0.5, vote UP, confidence 0.5, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 32.2,
+ "attempts": 1
+}

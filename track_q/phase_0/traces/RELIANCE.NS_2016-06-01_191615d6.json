@@ -1,0 +1,23 @@
+{
+ "case_id": "RELIANCE.NS_2016-06-01_191615d6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: RELIANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.25%, volume shock (z): -1.02, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Reliance Industries Limited has informed the Exchange regarding disclosure under \"Regulation 30 of SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015 - GAPCO\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Reliance Industries Limited informing the Exchange regarding disclosure under Regulation 30 of SEBI. That sounds like a regulatory disclosure. So the event type is regulatory.\n\nNext, the base rate. I remember that regulatory disclosures on the NSE can go either way. Sometimes they're positive if it's good news, but here it's a disclosure requirement. Usually, such disclosures might not have a clear precedent, but I think they're often neutral or mixed. Maybe the base rate is mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 0.25%, volume shock z of -1.02, and FinBERT prior of 0.00. The volume shock is negative, which might indicate some selling pressure. But the 5-day trend is slightly positive. However, the event is a regulatory disclosure, which might not be priced in yet. Since there's no clear positive or negative signal, maybe the move isn't fully priced. But the volume shock could suggest some negative sentiment.\n\nCommitting: Since it's a regulatory event, and the base rate is mixed, and the positioning isn't clearly overbought or oversold, the vote might be FLAT. But the confidence should be low. The confidence can't be more than 0.3 if it's noise. Wait, but the event isn't noise, it's regulatory. So maybe confidence is around 0.3. The sentiment should be neutral, so FLAT. The trace steps would be 1, 2, 3, 4. Let me check again. The event is regulatory, base rate mixed, positioning not clearly priced in, so FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 99.5,
+ "attempts": 2
+}

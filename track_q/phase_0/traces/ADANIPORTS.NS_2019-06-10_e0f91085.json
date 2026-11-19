@@ -1,0 +1,23 @@
+{
+ "case_id": "ADANIPORTS.NS_2019-06-10_e0f91085",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ADANIPORTS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.25%, volume shock (z): -0.72, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Public Announcement - Buyback of Shares. Adani Ports and Special Economic Zone Limited has submitted to the Exchange a copy of Public announcement in relation to proposed buy-back of fully paid-up equity shares of face value of Rs. 2 each published in newspapers along with a copy of board resolution passed by the Board of Directors of the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a share buyback, which falls under capital_action. That's step 1.\n\nNext, the base rate. From what I know, buybacks on the NSE are usually positive. Companies buying back shares often signal confidence in their stock, which tends to push prices up. So the historical precedent is usually-up. That's step 2.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 2.25% and a volume shock of -0.72. The FinBERT prior is 0.00. The buyback is a positive event, but the volume shock is negative. However, the 5-day trend is positive. The question is whether this news is already priced in. Since the volume shock is negative, maybe there's some selling pressure, but the buyback is a positive catalyst. However, the FinBERT prior is neutral. So maybe the market hasn't fully priced in the buyback yet, but there's some mixed signals. But the user says to use only the PRE-T context. The 5-day trend is positive, but the volume shock is negative. So it's not clear if it's overbought or oversold. Maybe the positioning isn't strongly indicating a fade or bounce. So step 3 might be neutral, but the user wants to know if the move looks priced in. If the positive news is not yet reflected, then it's a potential up move. But the volume shock might suggest some selling, so maybe the market is not fully pricing in the buyback. Hmm.\n\nCommitting: Since it's a capital action (buyback), which is usually positive, and the base rate is up. The positioning is mixed but the positive news might not be fully priced. So the vote is UP with confidence around 0.6. Confidence isn't too high because it's a single event, but it's a confirmed filing. So confidence 0.6. Trace steps 1,2,4. Wait, step 3 was positioning, which might have influenced the decision. So steps 1,2,3,4. But the confidence is based on confirmed filing and positioning. So the confidence is 0.6. Sentiment should be positive, so 0.6. Vote UP. That should be the JSON.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 41.9,
+ "attempts": 1
+}

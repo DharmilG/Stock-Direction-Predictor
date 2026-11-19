@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2020-07-13_4e7c9956",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.22%, volume shock (z): 1.10, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Wipro Limited has informed the Exchange regarding 'Certificate under Regulation 74(5) of SEBI (Depositories and Participants) Regulations, 2018 for the period ended June 30, 2020'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro Limited submitting a certificate under SEBI regulations for a specific period. That sounds like a regulatory filing. So the event type is regulatory.\n\nNext, the base rate. Regulatory filings on the NSE\u2014usually, they don't directly impact stock prices unless there's something negative. But sometimes, if there's a compliance issue, it might be down. However, the base rate here is probably mixed because it depends on the content of the filing. But since the article doesn't mention anything negative, maybe it's neutral. Wait, the base rate is about historical precedent. If past regulatory filings were usually neutral or mixed, then the base rate is mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 2.22% and volume shock z of 1.10. The FinBERT prior is 0.00. The news is a regulatory filing, which might not be priced in. Since the volume shock is 1.10, which is a bit high, maybe there's some reaction. But the event is a filing, not necessarily bad news. So the move might not be priced in yet. If the market hasn't reacted, maybe it's a flat.\n\nCommit: Since the event is regulatory, and the base rate is mixed, and the positioning isn't clearly overbought or oversold, the vote is FLAT. Confidence is low, maybe 0.3. But the user said if noise, vote FLAT with confidence at most 0.3. Since this is a regulatory filing without clear impact, it's noise. So confidence 0.3. Trace steps 1,2,3,4. Sentiment is FLAT, so 0.0. Wait, the sentiment must agree with vote. If vote is FLAT, sentiment is 0.0. So the final answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 36.8,
+ "attempts": 1
+}

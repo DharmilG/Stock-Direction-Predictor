@@ -1,0 +1,23 @@
+{
+ "case_id": "TRENT.NS_2022-04-01_770c1737",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TRENT.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.57%, volume shock (z): -0.37, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Loss of share certificate. Pursuant to Regulation 39(3) of the Securities and Exchange Board of India (Listing Obligations and Disclosure Requirements) Regulations, 2015, please find enclosed the intimation letter dated 1st April 2022 from the Registrar and Share Transfer Agent of the Company \ufffd\ufffd\ufffd TSR Darashaw Consultants Private Limited, wherein the Company is informed regarding loss of share certificate and request for issue of duplicate share certificate / letter of confirmation\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is about a loss of share certificate and the company requesting a duplicate. The PRE-T context mentions a regulatory reference. So, this seems like a regulatory event. The options include regulatory, which fits here.\n\nNext, the base rate. I remember that regulatory events on NSE can go either way. Sometimes they're neutral, but sometimes they might affect the stock. But I don't recall specific stats, so I'll note it as mixed.\n\nPositioning: The PRE-T context has a 5-day trend of 0.57% and volume shock of -0.37. The FinBERT prior is 0.00. The event is about a regulatory issue, but there's no clear positive or negative signal. The volume shock is negative, but the trend is slightly positive. Since the event is regulatory and the context isn't showing overbought or oversold, maybe it's not priced in yet. But I'm not sure. Maybe the market hasn't reacted yet, so the positioning isn't clear.\n\nCommit: Since it's a regulatory event, and the base rate is mixed, with no clear pricing in the position, the vote might be FLAT. Confidence should be low, maybe 0.3. But the user said if noise, vote FLAT with confidence up to 0.3. Since this is a regulatory event, maybe not noise. Wait, the article is about a formal request for duplicate shares, which is a regulatory filing. So maybe it's a regulatory event. The base rate is mixed. Positioning isn't clear. So maybe FLAT with confidence 0.3. But the user said if noise, vote FLAT. Is this noise? The event is a regulatory filing, which isn't necessarily bad or good. So maybe it's noise. Hence, FLAT with confidence 0.3. But I'm not sure. Alternatively, maybe the sentiment is neutral, leading to FLAT. The trace steps would be 1,2,3,4. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 35.4,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "HCLTECH.NS_2021-07-20_ac8656b4",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: HCLTECH.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.96%, volume shock (z): 2.44, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Appointment. HCL Technologies Limited has informed the Exchange regarding Appointment of Mr C Vijayakumar as Managing Director of the company w.e.f. July 20, 2021\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.5,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the appointment of a new Managing Director. Looking at the categories, \"management\" seems to fit here. So step 1 is management.\n\nNext, the base rate. I remember that management changes can go either way. Sometimes it's positive if the new leader is seen as capable, but sometimes it might not affect the stock much. Since the NSE doesn't have a clear historical trend for this specific event type, the base rate is probably mixed. So step 2 is mixed.\n\nNow, positioning. The pre-t context mentions a 5-day trend of 0.96% and a volume shock z-score of 2.44. The FinBERT prior is 0.00. The news is about a management appointment, which might not be priced in yet. Since the volume shock is high, maybe there's some reaction already. But without prior movement, it's hard to tell. The article is a confirmed filing, so maybe the market hasn't fully reacted. So step 3, the move might not be priced in yet.\n\nCommitting the vote. Since it's a management change, and the base rate is mixed, but the event is a confirmed filing, maybe the confidence is moderate. The sentiment would be slightly positive, so the vote is UP with confidence around 0.5. The trace steps would be 1,2,3,4. Let me check the confidence level. It's a confirmed filing, so maybe 0.6? Wait, the instructions say confirmed filing plus supporting positioning can be up to 0.8. But since there's no prior movement mentioned, maybe 0.5 is safer. The sentiment should be positive, so 0.5. The vote is UP. Alright, putting it all together.\n",
+ "content": "{\"sentiment\": 0.5, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.1,
+ "attempts": 1
+}

@@ -1,0 +1,125 @@
+﻿2026-10-20T02:11:19.4871997+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-20T02:11:19.5072651+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-20T02:11:20.5011813+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-20T02:11:21.6381177+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-20T02:11:21.6453571+05:30 | Stopping any current manual supervisor and worker.
+2026-10-20T02:11:25.8033725+05:30 | Scheduled task start requested.
+2026-10-20T02:11:32.5539443+05:30 | Verified: task Running; supervisor heartbeat age 3s; runner heartbeat age n/a
+2026-10-20T02:11:32.5863894+05:30 | SETUP SUCCESS.
+2026-10-26T10:35:59.6788496+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T10:35:59.6943222+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T10:36:00.3110492+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T10:36:00.6176844+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T10:36:00.6206052+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T10:36:05.7265052+05:30 | Scheduled task start requested.
+2026-10-26T10:36:12.9149096+05:30 | Verified: task Running; supervisor heartbeat age 6s; runner heartbeat age 4s
+2026-10-26T10:36:12.9477426+05:30 | SETUP SUCCESS.
+2026-10-26T11:11:15.8472017+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T11:11:15.8600308+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T11:11:16.3468575+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T11:11:16.6625090+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T11:11:16.6636111+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T11:11:20.4764782+05:30 | Scheduled task start requested.
+2026-10-26T11:11:27.5634635+05:30 | Verified: task Running; supervisor heartbeat age 6s; runner heartbeat age 4s
+2026-10-26T11:11:27.5954073+05:30 | SETUP SUCCESS.
+2026-10-26T13:29:48.8746205+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T13:29:48.8861334+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T13:29:49.5189583+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T13:29:49.8380835+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T13:29:49.8400824+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T13:32:16.6249870+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T13:32:16.6354479+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T13:32:17.0042175+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T13:32:17.3258993+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T13:32:17.3274092+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T13:32:21.1840645+05:30 | Scheduled task start requested.
+2026-10-26T13:32:28.2617257+05:30 | Verified: task Running; supervisor heartbeat age 6s; runner heartbeat age 4s
+2026-10-26T13:32:28.3050459+05:30 | SETUP SUCCESS.
+2026-10-26T14:37:56.9776273+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T14:37:57.0049235+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T14:37:57.7530178+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T14:37:58.0904379+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T14:37:58.0924282+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T14:38:02.0018190+05:30 | Scheduled task start requested.
+2026-10-26T14:38:10.0896616+05:30 | Verified: task Running; supervisor heartbeat age 6s; runner heartbeat age 3s
+2026-10-26T14:38:10.1341098+05:30 | SETUP SUCCESS.
+2026-10-26T18:38:33.2786476+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T18:38:33.3001382+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T18:38:33.9843641+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T18:38:34.2876701+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T18:38:34.2896751+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T18:38:39.8049517+05:30 | Scheduled task start requested.
+2026-10-26T18:38:46.7578249+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 13112s
+2026-10-26T18:38:46.8019113+05:30 | SETUP SUCCESS.
+2026-10-26T21:27:15.3810589+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-26T21:27:15.3963203+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-26T21:27:16.0598750+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-26T21:27:16.4022951+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T21:27:16.4038012+05:30 | Stopping any current manual supervisor and worker.
+2026-10-26T21:27:20.4988559+05:30 | Scheduled task start requested.
+2026-10-26T21:27:27.5930668+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 3s
+2026-10-26T21:27:27.6366657+05:30 | SETUP SUCCESS.
+2026-10-27T09:11:13.0333409+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-27T09:11:13.0698067+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-27T09:11:16.5065307+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-27T09:11:17.2462782+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T09:11:17.2490622+05:30 | Stopping any current manual supervisor and worker.
+2026-10-27T09:11:26.8786727+05:30 | Scheduled task start requested.
+2026-10-27T09:11:48.8508998+05:30 | Verified: task Running; supervisor heartbeat age 2s; runner heartbeat age 33967s
+2026-10-27T09:11:48.8818999+05:30 | SETUP SUCCESS.
+2026-10-27T10:54:59.2231433+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-27T10:54:59.2383269+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-27T10:54:59.9998134+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-27T10:55:00.3246290+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T10:55:00.3276290+05:30 | Stopping any current manual supervisor and worker.
+2026-10-27T10:55:04.5112137+05:30 | Scheduled task start requested.
+2026-10-27T10:55:11.6088697+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 3s
+2026-10-27T10:55:11.6503234+05:30 | SETUP SUCCESS.
+2026-10-27T13:11:00.1653343+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-27T13:11:00.1800117+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-27T13:11:00.8599145+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-27T13:11:01.1417682+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T13:11:01.1437660+05:30 | Stopping any current manual supervisor and worker.
+2026-10-27T13:11:05.8369719+05:30 | Scheduled task start requested.
+2026-10-27T13:11:12.0572994+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 3464s
+2026-10-27T13:11:12.0829028+05:30 | SETUP SUCCESS.
+2026-10-27T14:19:28.8016966+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-27T14:19:29.3155400+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-27T14:19:30.6460494+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-27T14:19:31.2214842+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T14:19:31.2244963+05:30 | Stopping any current manual supervisor and worker.
+2026-10-27T14:19:36.5624031+05:30 | Scheduled task start requested.
+2026-10-27T14:19:44.8218479+05:30 | Verified: task Running; supervisor heartbeat age 54s; runner heartbeat age 140s
+2026-10-27T14:19:44.9990177+05:30 | SETUP SUCCESS.
+2026-10-27T16:31:16.4964674+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-27T16:31:16.5080181+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-27T16:31:17.1652381+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-27T16:31:17.5213813+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T16:31:17.5249079+05:30 | Stopping any current manual supervisor and worker.
+2026-10-27T16:31:21.7905311+05:30 | Scheduled task start requested.
+2026-10-27T16:31:29.0107183+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 3s
+2026-10-27T16:31:29.0429295+05:30 | SETUP SUCCESS.
+2026-10-28T11:58:52.8400248+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-28T11:58:52.8538786+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-28T11:58:53.5736159+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-28T11:58:53.9091791+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-28T11:58:53.9117204+05:30 | Stopping any current manual supervisor and worker.
+2026-10-28T11:58:58.9245457+05:30 | Scheduled task start requested.
+2026-10-28T11:59:06.1780573+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 68846s
+2026-10-28T11:59:06.2229038+05:30 | SETUP SUCCESS.
+2026-10-28T13:12:42.1782650+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-28T13:12:42.2158962+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-28T13:12:46.3113142+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-28T13:12:47.9148034+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-28T13:12:47.9178685+05:30 | Stopping any current manual supervisor and worker.
+2026-10-28T13:12:56.5819858+05:30 | Scheduled task start requested.
+2026-10-28T13:13:33.2260660+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 759s
+2026-10-28T13:13:33.3589457+05:30 | SETUP SUCCESS.
+2026-10-29T10:41:23.6014486+05:30 | === Q0-D1 scheduled-task setup start ===
+2026-10-29T10:41:23.6124475+05:30 | Admin: True | task: StockML_Q0_Supervisor | no-start: False
+2026-10-29T10:41:24.4361188+05:30 | Scheduled task registered: StockML_Q0_Supervisor
+2026-10-29T10:41:24.7459348+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-29T10:41:24.7479484+05:30 | Stopping any current manual supervisor and worker.
+2026-10-29T10:41:30.3521093+05:30 | Scheduled task start requested.
+2026-10-29T10:41:37.3354884+05:30 | Verified: task Running; supervisor heartbeat age 5s; runner heartbeat age 3s
+2026-10-29T10:41:37.3701381+05:30 | SETUP SUCCESS.

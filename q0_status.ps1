@@ -1,4 +1,4 @@
-# Q0-D1 status view (read-only, no administrator rights required)
+﻿# Q0-D1 status view (read-only, no administrator rights required)
 #
 # Usage:
 #   powershell -NoProfile -ExecutionPolicy Bypass -File .\q0_status.ps1
@@ -10,14 +10,14 @@ $script:RepoRoot = $PSScriptRoot
 if (-not $script:RepoRoot) { $script:RepoRoot = (Get-Location).Path }
 Set-Location $script:RepoRoot
 
-$logDir = Join-Path $script:RepoRoot "logs"
+$logDir = Join-Path $script:RepoRoot "track_q\phase_0\logs"
 $supervisorHeartbeat = Join-Path $logDir "q0_supervisor.json"
 $runnerHeartbeat = Join-Path $logDir "q0_heartbeat.json"
 $alertPath = Join-Path $logDir "q0_ALERT.txt"
 $donePath = Join-Path $logDir "q0_DONE.txt"
 $setupResult = Join-Path $logDir "q0_SETUP_RESULT.txt"
-$verdictPath = Join-Path $script:RepoRoot "results\q0_d1.json"
-$ledgerPath = Join-Path $script:RepoRoot "data\llm\qwen_rating_ledger.parquet"
+$verdictPath = Join-Path $script:RepoRoot "track_q\phase_0\verdict\q0_d1.json"
+$ledgerPath = Join-Path $script:RepoRoot "track_q\phase_0\state\qwen_rating_ledger.parquet"
 $python = Join-Path $script:RepoRoot ".venv\Scripts\python.exe"
 $taskName = "StockML_Q0_Supervisor"
 
@@ -111,7 +111,7 @@ Write-Host ""
 Write-Host "== Ledger =="
 if (Test-Path $ledgerPath) {
     try {
-        $count = & $python -c "import pandas as pd; print(len(pd.read_parquet('data/llm/qwen_rating_ledger.parquet')))" 2>$null
+        $count = & $python -c "import pandas as pd; print(len(pd.read_parquet('track_q/phase_0/state/qwen_rating_ledger.parquet')))" 2>$null
         Write-KeyValue "Ledger rows" $count
     } catch {
         Write-Host "Ledger read failed (is the Python venv present?)."

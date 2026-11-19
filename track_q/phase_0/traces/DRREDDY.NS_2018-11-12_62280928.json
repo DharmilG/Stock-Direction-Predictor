@@ -1,0 +1,23 @@
+{
+ "case_id": "DRREDDY.NS_2018-11-12_62280928",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: DRREDDY.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.32%, volume shock (z): -0.79, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Dr. Reddy's Laboratories Limited has informed the Exchange regarding 'Intimation'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Dr. Reddy's Laboratories informing the Exchange regarding an 'Intimation'. The PRE-T CONTEXT mentions a 5-day trend of -0.32%, volume shock z of -0.79, and FinBERT prior of 0.00. The article text is about an update, but the exact nature of the intimation isn't specified. Since it's a regulatory filing, maybe it's a regulatory event. Let me check the classification options. Regulatory is one of the categories. So step 1 would be regulatory.\n\nNext, the base rate for regulatory events on NSE. I remember that regulatory announcements can go either way. Sometimes they're positive, sometimes negative, depending on the context. But since the article doesn't specify, maybe the base rate is mixed. So step 2 would be mixed.\n\nPositioning: The PRE-T context shows a negative 5-day trend and volume shock. The FinBERT prior is neutral. The news is an update, but without specific details, it's hard to tell if it's priced in. Since the volume is down and the trend is negative, maybe the market hasn't fully reacted yet. So the move might not be priced in. Step 3 would be that the move isn't priced in, but since the news is regulatory, which can be neutral, perhaps it's a flat?\n\nWait, the instruction says if it's noise, vote FLAT. But the event is regulatory, which isn't noise. So maybe the positioning is neutral. But the base rate is mixed. So the confidence would be low. The user said to commit with confidence proportional to evidence. Since it's a regulatory update without clear positive or negative info, maybe confidence is 0.3. Then the vote would be FLAT. But the sentiment should align with the vote. If FLAT, sentiment is near 0. \n\nPutting it all together: step 1 is regulatory, step 2 base rate mixed, step 3 not priced in (maybe), step 4 commit with FLAT and confidence 0.3. The trace steps would be 1,2,3,4. The sentiment would be 0.0 since it's FLAT. Let me make sure I didn't miss any steps. The article is an update, but without specific info, it's noise? Wait, the event is regulatory, so not noise. So the vote is FLAT with confidence up to 0.3. So the JSON would have sentiment 0.0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 140.0,
+ "attempts": 1
+}

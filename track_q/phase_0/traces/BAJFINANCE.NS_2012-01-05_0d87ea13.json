@@ -1,0 +1,23 @@
+{
+ "case_id": "BAJFINANCE.NS_2012-01-05_0d87ea13",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BAJFINANCE.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.65%, volume shock (z): -1.20, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Outcome of Postal Ballot. Bajaj Finance Limited has submitted to the Exchange a copy of the proceedings held on December 23, 2011, relating to declaration of the result on the voting by Postal Ballot conducted pursuant to Section 192A of the Companies Act, 1956, read with Companies (Passing of the Resolution by Postal Ballot) Rules, 2011\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the outcome of a Postal Ballot, which is related to shareholder voting. The company submitted the proceedings from December 2011. Since this is about a past event and the result declaration, it seems like a regulatory or litigation matter. The options include regulatory, litigation, etc. The event is about the result of a ballot, which might involve regulatory filings. So, I think it's a regulatory event.\n\nNext, the base rate. Historical precedent for regulatory events on NSE. Usually, regulatory filings might not have a strong directional impact unless there's a significant outcome. But since this is about a past ballot result, maybe it's not a new regulatory action. The base rate might be mixed, but I'm not sure. Need to check if similar events usually move the stock up, down, or mixed. Since the news is about a past event, maybe the market has already priced in any potential impacts. So the base rate might be mixed or neutral.\n\nPositioning: The PRE-T context mentions a 5-day trend of -0.65%, volume shock of -1.20, and FinBERT prior of 0.00. The event is about a past ballot result. If the market already knew about this, then the move is priced in. But if this is new information, maybe it's not. However, the news is about a 2011 event, so it's likely that the market already knew. Therefore, the positioning might indicate that the move is already priced in, so maybe a fade candidate if overbought, but the trend is negative. Wait, the 5-day trend is -0.65%, which is a downtrend. If the news is about a past event, perhaps the market already reacted, so the positioning is that the move is priced in. So, if the news is not new, then the impact is already reflected, leading to a flat or maybe a fade.\n\nCommit: Since the event is regulatory, and the base rate is mixed. The positioning suggests the move is priced in. So the vote might be FLAT with low confidence. But the user said if noise, vote FLAT with confidence at most 0.3. Since the event is regulatory, maybe it's not noise. But the news is about a past event, so maybe it's not new. Therefore, the sentiment might be neutral, leading to FLAT. However, the confidence is low. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 42.6,
+ "attempts": 1
+}

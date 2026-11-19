@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2016-05-17_eaf75e96",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.28%, volume shock (z): -0.38, FinBERT prior: 0.62\nARTICLE TEXT (full, un-summarized):\n  Press Release. Wipro Limited has informed the Exchange regarding a press release dated May 16, 2016 titled \"Wipro and Xactly Partner for Cloud-based Solutions to Help Customers Improve Sales Performance and Drive Growth\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release about Wipro partnering with Xactly for cloud-based solutions. The options are things like earnings, order wins, M&A, etc. Since it's a partnership announcement, that falls under 'mna' (mergers and acquisitions) or maybe 'expansion'. But the key here is that it's a partnership, so 'mna' might be more accurate. Wait, the options include 'expansion' as well. Let me check the list again. The event is a partnership, which is a type of M&A activity. So 'mna' is the correct classification.\n\nNext, the base rate. I need to recall historical precedents for M&A events on the NSE. Usually, M&A announcements can go either way. Sometimes they're positive, sometimes there's uncertainty. But generally, they're mixed. So the base rate is mixed.\n\nPositioning: Using the pre-t context. The 5-day trend is 0.28% positive. Volume shock is -0.38, which might indicate some selling pressure. FinBERT prior is 0.62, which is positive sentiment. The question is whether the move is priced in. The event is a partnership, which is positive, but the volume shock suggests some negative sentiment. However, the FinBERT prior is positive. The 5-day trend is slightly up. So maybe the market hasn't fully priced in the positive news, but there's some mixed signals. Since the volume is negative, maybe it's a fade candidate if overbought, but the trend is only 0.28% up. Not sure if overbought. Maybe the positioning isn't clear, but the news is positive. So perhaps the move isn't fully priced in, so the sentiment might be positive.\n\nCommit: The vote would be UP because the event is a partnership, which is positive. Confidence is moderate. Since it's a confirmed filing (press release) and the FinBERT prior is positive, but the volume shock is negative. The confidence should be around 0.6. So the steps that carried weight are 1 (classification as MNA), 2 (mixed base rate), 3 (positioning with mixed signals but positive news), and 4 (committing based on that). Wait, but the steps for trace are 1,2,3,4. The sentiment should be positive (since vote is UP). The confidence is 0.6. Let me check the confidence limits. Since it's a confirmed filing plus some positioning, maybe 0.6 is acceptable. So the final answer would have sentiment 0.6, vote UP, confidence 0.6, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 53.2,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2023-01-23_d817a334",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.94%, volume shock (z): -0.56, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Copy of Newspaper Publication. Shriram Finance Limited has informed the Exchange about Copy of Newspaper Publication\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news item is about Shriram Finance Limited informing the Exchange about a Copy of Newspaper Publication. The key here is that it's a copy of a newspaper publication, which might be related to regulatory filings or announcements. Since the company is informing the exchange, it could be a regulatory or compliance-related event. But the exact nature isn't clear. The options include regulatory, which seems possible here.\n\nNext, the base rate. Regulatory events on the NSE\u2014what's the usual impact? I remember that regulatory announcements can go either way. Sometimes they're positive if they're about compliance or new regulations that the company is adhering to, but other times they might be negative if there's a regulatory issue. However, since the event here is just about a publication, maybe it's a routine filing. But without specific info, the base rate might be mixed. The user said not to invent stats, so I have to rely on general knowledge. Regulatory events can be neutral or have mixed outcomes, so base rate is mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 0.94% positive, volume shock z of -0.56, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the 5-day trend is positive. However, the event here is a regulatory filing. Since the news is about a publication, maybe it's not a significant event. The FinBERT prior is 0.00, which suggests no prior sentiment. So, the move might not be priced in yet. But since the event is a regulatory filing, which might not be a major news, the positioning might not indicate overbought or oversold. So, maybe the move isn't priced in, but the confidence is low.\n\nCommit: Since the event is regulatory, and the base rate is mixed, and the positioning isn't clear, the vote might be FLAT. Confidence would be low, maybe around 0.3. But the user said if noise, vote FLAT with confidence up to 0.3. However, the event isn't clearly noise. It's a regulatory filing, which could have some impact. But without more info, it's hard to say. So, maybe FLAT with confidence 0.3. But the steps need to be cited. Step 1: classify as regulatory. Step 2: base rate mixed. Step 3: positioning not priced in. Step 4: commit FLAT with confidence 0.3. Sentiment would be neutral, so 0.0. Wait, the user said sentiment sign must agree with vote. FLAT would have sentiment near 0. So the final answer would be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 43.2,
+ "attempts": 1
+}

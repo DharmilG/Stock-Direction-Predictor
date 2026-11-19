@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2020-01-15_e909c9b9",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -2.57%, volume shock (z): 3.86, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Record Date. Wipro Limited has informed the Exchange that the Company has fixed Record Date as January 27, 2020 for the purpose of Dividend\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Wipro setting a record date for a dividend. Dividend announcements are typically a capital action, so that's step 1. Next, the base rate for capital actions on NSE\u2014usually, dividends are positive but can be mixed depending on the context. Since it's a regular dividend, probably a positive precedent. \n\nNow, the pre-t context mentions a 5-day trend of -2.57%, volume shock, and FinBERT prior of 0.00. The news is about a dividend, which is a capital action. The market might have already priced in some expectations, but since the dividend is a positive event, if the stock was oversold, this could be a bounce. However, the volume shock might indicate some uncertainty. \n\nPositioning: The news is a confirmed filing, so it's a solid source. The market might have reacted to the dividend, but since the trend is negative, maybe the move is already priced in. But the volume shock suggests some shock, so maybe the market hasn't fully priced it yet. Wait, the user says to use only the pre-t context. The 5-day trend is down, volume shock, and FinBERT prior is 0. So, the positioning might be that the move is not fully priced in because the volume is high, indicating some reaction. But since it's a dividend, which is positive, if the stock was oversold, this could be a bounce. \n\nCommitting: The event is capital action, base rate usually positive, positioning might be that the move is not fully priced in due to volume shock. So the vote would be UP with confidence around 0.6. But need to check if the steps are correct. Also, the sentiment should be positive. Let me make sure the steps are followed correctly.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.5,
+ "attempts": 1
+}

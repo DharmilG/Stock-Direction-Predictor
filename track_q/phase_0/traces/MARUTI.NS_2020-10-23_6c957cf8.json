@@ -1,0 +1,23 @@
+{
+ "case_id": "MARUTI.NS_2020-10-23_6c957cf8",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: MARUTI.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.02%, volume shock (z): 3.73, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Analysts/Institutional Investor Meet/Con. Call Updates. Maruti Suzuki India Limited has informed the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Maruti Suzuki India informing the Exchange about Analysts/Institutional Investor Meet/Con. Call Updates. So, this seems like a management-related event because it's about updates from meetings with analysts and investors. Management announcements can influence the stock, but they're not necessarily positive or negative. \n\nNext, the base rate. For management events on NSE, historically, they can go either way. Sometimes management updates might bring positive news, other times maybe not. The base rate here is probably mixed because it depends on the content of the meeting. Since there's no specific info given, I can't assume it's usually up or down.\n\nPositioning: The PRE-T CONTEXT mentions a 5-day trend of 3.02% and volume shock z of 3.73. The FinBERT prior is 0.00. The event is about management updates, but there's no clear positive or negative signal in the article. The volume shock might indicate some activity, but without knowing if the news is good or bad, it's hard to say if the move is priced in. Since the news is just an update, maybe it's already factored in, but there's no clear indication of overbought or oversold conditions. \n\nCommit: Since the event is management-related, and there's no clear positive or negative, the base rate is mixed. The positioning doesn't show overbought or oversold, so maybe it's a flat. But the user said if it's noise, vote flat with confidence up to 0.3. Since the event is a management update, which can be noise, but maybe not. However, the confidence should be low. So, vote FLAT with confidence 0.3. The trace steps would be 1 (classification as management), 2 (mixed base rate), 3 (no clear pricing), and 4 (commit based on that).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 113.2,
+ "attempts": 2
+}

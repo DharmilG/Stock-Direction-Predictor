@@ -1,0 +1,23 @@
+{
+ "case_id": "TATASTEEL.NS_2022-02-09_690f154a",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATASTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.70%, volume shock (z): -0.40, FinBERT prior: -0.72\nARTICLE TEXT (full, un-summarized):\n  Loss of Share Certificates. Tata Steel Limited has informed the Exchange about Loss of Share Certificates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.1,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates. Looking at the categories, \"capital_action\" seems relevant because losing share certificates could relate to corporate actions like share buybacks or other capital restructuring. But wait, the event here is specifically about losing certificates, which might be a regulatory or administrative issue. Let me check the options again. The options include \"regulatory\" and \"capital_action\". Since the company is informing the exchange, it might be a regulatory filing. However, the loss of share certificates could also be a capital action if it's related to share redemption or buybacks. But the article doesn't mention any buyback or restructuring. It's just informing about the loss. So maybe it's a regulatory event. But the user's checklist says if it's noise, vote FLAT. Let me see if this is a common event. \n\nNext, the base rate. If this is a regulatory event, what's the historical precedent? Regulatory filings can be neutral, but sometimes they might signal issues. However, without specific data, I need to be cautious. The base rate might be mixed, but since the user says not to invent stats, I have to rely on known categories. \n\nPositioning: The pre-t context has a 5-day trend of 4.70% up, volume shock negative, and FinBERT prior negative. The event is about losing share certificates. If this is a regulatory issue, maybe it's negative, but the market might already have priced in some of this. Since the 5-day trend is positive, but the FinBERT prior is negative, it's a bit conflicting. The volume shock is negative, which might indicate selling pressure. However, the event itself isn't clearly positive or negative. It's more of a disclosure. So maybe the move is already priced in, making it a flat. But the user says if it's noise, vote flat. \n\nCommit: If it's a regulatory event with mixed base rate, and the positioning suggests it's already priced in, then the vote is FLAT. Confidence would be low, maybe 0.3. But I need to check if the event is noise. Since the loss of share certificates isn't a major event, it's likely noise. So the answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": -0.1, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 39.9,
+ "attempts": 1
+}

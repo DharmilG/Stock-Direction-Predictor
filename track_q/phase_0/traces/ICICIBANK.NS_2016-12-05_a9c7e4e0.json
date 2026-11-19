@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2016-12-05_a9c7e4e0",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.17%, volume shock (z): -1.57, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of ESOP/ESPS. ICICI Bank Limited has informed the Exchange regarding allotment of  22300 Equity Shares under ESOP\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of ESOP/ESPS shares. ESOPs are employee stock ownership plans, so this is a capital action. The event type here is capital_action. \n\nNext, the base rate. I remember that on NSE, capital actions like ESOP allotments usually don't have a strong historical precedent. Sometimes they might be neutral or even slightly positive because it's about employee benefits, but it's not a major positive. However, since it's a filing, maybe it's more about compliance than a significant move. So the base rate might be mixed or neutral.\n\nPositioning: The PRE-T context mentions a 5-day trend of 2.17% and volume shock z of -1.57. The FinBERT prior is 0.00. The news is about ESOP allotment, which might not be a big deal. If the market already priced in some of this, maybe the move is already reflected. But since it's a filing, maybe it's not a major event. The volume shock is negative, which might indicate some selling pressure, but the trend is positive. Not sure if it's priced in or not.\n\nCommit: Since it's a capital action, and the base rate is mixed, but the news isn't strongly positive or negative. The positioning isn't clear. Maybe the sentiment is neutral. The confidence should be low because it's a single event without strong indicators. So, vote FLAT with confidence around 0.3. But wait, the instructions say if it's noise, vote FLAT. Since ESOP allotment is a routine filing, maybe it's noise. So confidence 0.3, vote FLAT. But the steps need to be cited. Step 1: classify as capital_action. Step 2: base rate is mixed. Step 3: positioning is not clearly priced in. Step 4: commit based on steps 1-3. So the JSON would have sentiment 0, vote FLAT, confidence 0.3, trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 111.3,
+ "attempts": 2
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "ITC.NS_2023-03-22_86a4fb4c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ITC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.43%, volume shock (z): -0.81, FinBERT prior: -0.70\nARTICLE TEXT (full, un-summarized):\n  Loss of Share Certificates. ITC Limited has informed the Exchange about Loss of Share Certificates\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.05,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of share certificates by ITC Limited. Share certificates are physical documents representing ownership, so losing them might relate to a capital action, maybe a stock split or a change in share structure. But the key here is that the company is informing the exchange about this loss. That sounds like a regulatory filing, so the event type would be regulatory. \n\nNext, the base rate. On the NSE, regulatory filings usually have mixed impacts. Sometimes they can be neutral or even positive if they signal compliance, but other times they might be negative if there's a scandal. But since the event here is just about losing certificates, which isn't inherently bad, the historical precedent is probably mixed. \n\nNow, positioning. The PRE-T context shows a 5-day trend of -0.43%, volume shock z of -0.81, and FinBERT prior of -0.70. These indicators suggest the stock is in a downtrend with negative sentiment. The news about losing share certificates might not be priced in yet. Since the market is already down, if this is a neutral event, maybe it's a bounce candidate. But the FinBERT prior is negative, so maybe the market already priced in some negative sentiment. However, the event itself isn't clearly positive or negative. \n\nCommitting the vote. Since the event is regulatory and the base rate is mixed, and the positioning isn't clearly overbought or oversold, but the existing trend is down, maybe the vote is FLAT. But the confidence should be low. The confidence can't be more than 0.3 if it's noise. But since it's a confirmed filing, maybe slightly higher. However, the event isn't clearly positive or negative, so maybe FLAT with confidence around 0.3. But the instructions say if noise, vote FLAT. Since this is a regulatory filing, maybe it's noise. So the answer would be FLAT with confidence 0.3. But need to check the steps again. \n\nWait, the checklist says if noise, vote FLAT. The event is regulatory, which isn't necessarily noise. But the impact is mixed. So maybe it's not noise. However, the sentiment is neutral. The sentiment should be close to 0. The vote would be FLAT. Confidence up to 0.3. So the final answer would be FLAT with confidence 0.3, sentiment near 0. The trace steps would include 1 (regulatory), 2 (mixed), 3 (not priced in?), but the positioning step might say it's not overbought or oversold. So the vote is FLAT.\n",
+ "content": "{\"sentiment\": -0.05, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 118.9,
+ "attempts": 2
+}

@@ -1,0 +1,21 @@
+{
+ "case_id": "AXISBANK.NS_2018-05-02_b02ed96d",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.74%, volume shock (z): 1.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  News Verification. The Exchange has sought clarification from Axis Bank Limited with respect to recent news item captioned \"Kotak Mahindra Bank to acquire Axis Bank soon?\". In this regard, Exchange have advised the Company to provide clarification/confirmation on the news item in detail including the following: a) Whether such negotiations were taking place and b) Whether you/company are aware of any information that has not been announced to the Exchanges. The response from the company is awaited\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Exchange asking Axis Bank to clarify rumors about Kotak Mahindra Bank acquiring them. The key here is that it's a regulatory inquiry into unconfirmed news. So, the event is a regulatory clarification request. That fits under the 'regulatory' category.\n\nNext, the base rate. Regulatory events on NSE usually have mixed outcomes. Sometimes they can be positive if the clarification is favorable, but often they might lead to volatility. Since the news is about a rumor, the base rate is probably mixed. I can't assume it's usually up or down, so mixed is safe.\n\nPositioning: The PRE-T context mentions a 5-day trend of 3.74% and volume shock. The volume shock is 1.16, which might indicate some unusual activity. But the main point is that the news is a rumor not yet confirmed. The company hasn't responded yet, so the market hasn't priced in any outcome. Since it's a regulatory inquiry, there's no clear direction yet. The volume shock might suggest some traders are reacting, but without confirmation, it's uncertain. So, the move isn't priced in yet.\n\nCommitting: Since the event is regulatory and the base rate is mixed, and the positioning isn't priced in, the vote should be FLAT. The confidence is low because it's a rumor without confirmation. The confidence level should be around 0.3 as per the guidelines. The sentiment should be neutral, so 0.0. Steps 1 and 2 are the main ones here. So the JSON should reflect FLAT with confidence 0.3, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 27.9,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "TCS.NS_2022-02-03_55a3a2d6",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TCS.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.81%, volume shock (z): -0.94, FinBERT prior: 0.58\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Consultancy Services Limited has informed the Exchange regarding a press release dated February 03, 2022, titled \"TCS to Expand STEM Education Programs in New Jersey and Add 1,000 New Employees by 2023\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Consultancy Services expanding STEM education programs and adding 1,000 employees by 2023. That sounds like an expansion, so the event type is expansion. \n\nNext, the base rate for expansion events on the NSE. From what I know, expansions are usually positive and can lead to stock price increases. But I should check if there's any historical data. Wait, the user said not to invent statistics, so I have to rely on general knowledge. Expansions are typically seen as good news, so the base rate is usually-up.\n\nNow, positioning using the PRE-T CONTEXT. The 5-day trend is 4.81% positive, which is a strong upward move. The volume shock (z) is -0.94, indicating lower volume, which might mean the price movement isn't supported by strong volume. FinBERT prior is 0.58, which is positive sentiment. However, since the volume is low, even though the sentiment is positive, the move might not be fully priced in. The previous trend is up, so if the news is positive, maybe the market has already reacted, making it a fade candidate. But since the volume is low, maybe the price hasn't fully reflected the news yet. Wait, the user said if overbought with good news, fade; oversold with bad news, bounce. Here, the trend is up (overbought?), but the volume is low. Maybe the positive news could still push the price higher if the volume picks up. But the volume shock is negative, which might indicate that the price move was on low volume, so the news might not be fully priced in yet. So positioning might be that the move isn't fully priced in, so the sentiment is positive, but the confidence depends on the evidence.\n\nCommitting the vote. Since it's an expansion (positive event), base rate is usually-up. The positioning is that the move might not be fully priced in because of low volume, but the trend is up. However, the FinBERT prior is positive. So the sentiment is positive, vote UP, confidence maybe 0.6. Wait, the user said confidence can't be 1.0. Since it's a confirmed filing (press release) but the volume is low, maybe confidence is 0.6. So the JSON would have sentiment 0.6, vote UP, confidence 0.6, and trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 46.4,
+ "attempts": 1
+}

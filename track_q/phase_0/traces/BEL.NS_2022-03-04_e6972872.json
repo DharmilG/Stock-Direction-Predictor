@@ -1,0 +1,23 @@
+{
+ "case_id": "BEL.NS_2022-03-04_e6972872",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 14.40%, volume shock (z): 2.43, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Record Date. Bharat Electronics Limited has informed the Exchange that Record date for the purpose of Second Interim Dividend is 26-Mar-2022\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a record date for a second interim dividend. Dividend announcements are typically a capital action, so that's step 1. Next, the base rate for capital actions on NSE\u2014usually, dividends are positive, so the base rate is usually-up. Now, checking the pre-t context: the 5-day trend is 14.40% up, volume shock is 2.43, and FinBERT prior is 0.00. The news is about a dividend, which is a capital action. Since the stock has been trending up, maybe the dividend is already priced in. But the volume shock might indicate some reaction. However, since it's a record date announcement, not a new dividend, maybe the market already anticipated it. So positioning might be that the move is priced in. Therefore, the vote would be FLAT with low confidence. Wait, but the user said if noise, vote FLAT. Is this considered noise? Dividend record dates are usually significant, so maybe not noise. Wait, the event is a capital action, which is usually-up. But the pre-t context shows a positive trend. So maybe the market already priced in the dividend, so the news isn't new. Hence, the vote is FLAT. But the confidence should be low. Let me check the steps again. Step 3: if the move is priced in, then maybe it's a fade or bounce. But since it's a record date, not a new dividend, maybe the stock is already reflecting the dividend. So the sentiment would be neutral, vote FLAT, confidence around 0.3. That fits the noise category. So the answer should be FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 37.5,
+ "attempts": 1
+}

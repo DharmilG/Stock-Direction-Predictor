@@ -19,14 +19,17 @@ from stockml.api import q0_analytics as qa
 
 def _paths(tmp_path):
     """The directory handles the module reaches for, nothing else."""
+    base = tmp_path / "track_q" / "phase_0"
     paths = SimpleNamespace(
-        logs=tmp_path / "logs",
+        root=tmp_path,
+        logs=base / "logs",
         results=tmp_path / "results",
-        state=tmp_path / "artifacts" / "state",
+        state=base / "state",
         checkpoints=tmp_path / "checkpoints",
         artifacts=tmp_path / "artifacts",
     )
-    for directory in (paths.logs, paths.results, paths.state, paths.checkpoints, paths.results / "traces"):
+    for directory in (paths.logs, paths.results, paths.state, paths.checkpoints,
+                      base / "traces", base / "verdict", base / "data"):
         directory.mkdir(parents=True, exist_ok=True)
     return paths
 
@@ -112,7 +115,7 @@ def test_latency_is_absent_rather_than_estimated_without_traces(tmp_path):
 
     # With a trace that records seconds, the duration becomes measurable.
     paths = _paths(tmp_path)
-    trace = paths.results / "traces" / "a.json"
+    trace = paths.root / "track_q" / "phase_0" / "traces" / "a.json"
     trace.write_text(json.dumps({"seconds": 12.5, "vote": "FLAT"}), encoding="utf-8")
     measured = qa.analytics(paths, _ledger(str(trace)))
     assert measured["latency"]["available"] is True
@@ -187,7 +190,7 @@ def test_case_id_in_the_normal_form_is_accepted():
 
 def test_case_detail_returns_the_ledger_row_and_its_trace(tmp_path):
     paths = _paths(tmp_path)
-    trace = paths.results / "traces" / "a.json"
+    trace = paths.root / "track_q" / "phase_0" / "traces" / "a.json"
     trace.write_text(
         json.dumps({"seconds": 12.5, "vote": "FLAT", "thinking": "because", "content": "FLAT"}),
         encoding="utf-8",
@@ -206,7 +209,7 @@ def test_case_detail_does_not_read_outside_the_trace_directory(tmp_path):
     outside.write_text(json.dumps({"vote": "UP"}), encoding="utf-8")
     frame = _ledger(str(outside))
 
-    # The row exists but points outside results/traces: refuse rather than serve it.
+    # The row exists but points outside track_q/phase_0/traces: refuse rather than serve it.
     assert qa.case_detail(paths, frame, "AAA|2026-01-06|a") is None
     # And a traversal id never reaches the filesystem at all.
     assert qa.case_detail(paths, frame, "../../etc/passwd") is None

@@ -1,0 +1,23 @@
+{
+ "case_id": "AXISBANK.NS_2019-10-09_a0209dc5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: AXISBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.19%, volume shock (z): -0.48, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of ESOP/ESPS. Axis Bank Limited has informed the Exchange regarding allotment of  20725 Equity Shares under ESOP\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of ESOP/ESPS shares by Axis Bank. ESOPs are employee stock option plans, so this is a capital action. The event type here is capital_action. \n\nNext, the base rate. I remember that on the NSE, capital actions like ESOP allotments usually don't have a strong historical precedent. Sometimes they might be neutral or even slightly positive because it's about employee retention, but there's no clear pattern. The base rate here is probably mixed.\n\nNow, positioning. The PRE-T context mentions a 5-day trend of 0.19%, volume shock (z) of -0.48, and FinBERT prior of 0.00. The volume shock being negative might indicate some selling pressure, but the 5-day trend is slightly positive. However, the event is about ESOP allotment, which might not directly impact the stock price much. Since the news is about a capital action that's already been filed, maybe the market has already priced in some of this. But without more info, it's hard to tell. The positioning might be neutral, so the move isn't clearly priced in.\n\nCommitting the vote. Since the event is a capital action with mixed historical impact and the current positioning isn't strongly positive or negative, the sentiment should be FLAT. Confidence is low, maybe around 0.3. The steps that matter are classification as capital_action, base rate being mixed, and positioning as neutral. So the final vote is FLAT with confidence 0.3.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 27.3,
+ "attempts": 1
+}

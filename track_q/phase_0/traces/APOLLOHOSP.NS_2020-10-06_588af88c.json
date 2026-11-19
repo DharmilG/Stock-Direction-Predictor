@@ -1,0 +1,23 @@
+{
+ "case_id": "APOLLOHOSP.NS_2020-10-06_588af88c",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: APOLLOHOSP.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 3.20%, volume shock (z): -0.85, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Apollo Hospitals Enterprise Limited has informed the Exchange regarding 'Certificate under Regulation 74(5) for the period ended 30th September 2020'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Apollo Hospitals Enterprise Limited informing the Exchange regarding a certificate under Regulation 74(5) for a specific period. Regulation 74(5) typically relates to disclosures about the company's financials, maybe something like quarterly results or compliance. Since the event is about a certificate related to financial disclosures, this seems like a regulatory filing. So, the classification would be 'regulatory'.\n\nNext, the base rate. I need to recall historical precedents for regulatory filings on the NSE. Usually, regulatory filings can be neutral, but sometimes they might signal compliance issues or positive disclosures. However, since the event here is just a certificate under a regulation, it's more about compliance than positive or negative news. So the base rate is probably mixed, as it doesn't inherently drive the stock up or down.\n\nPositioning: The PRE-T context mentions a 5-day trend of 3.20% and a volume shock of -0.85. The FinBERT prior is 0.00. The news is a regulatory filing, which might not be a significant move. Since the volume shock is negative, maybe there's some selling pressure, but the event itself isn't a major positive or negative. The 5-day trend is positive, but the event might not be priced in. However, since it's a regulatory filing, maybe it's already factored in. But without more info, it's hard to say. The positioning might be neutral, so the move isn't clearly priced in.\n\nCommit: Since the event is regulatory and the base rate is mixed, with no clear positive or negative signal, and the positioning isn't strongly indicating a fade or bounce, the vote should be FLAT. Confidence would be low, maybe around 0.3. But wait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since regulatory filings can sometimes be noise, especially if they don't impact operations, this might be considered noise. So, confidence 0.3, FLAT vote. The trace steps would be 1 (classification as regulatory), 2 (base rate mixed), 3 (positioning neutral), and 4 (commit based on those steps).\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 47.3,
+ "attempts": 1
+}

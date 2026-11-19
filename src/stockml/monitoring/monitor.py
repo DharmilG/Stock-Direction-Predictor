@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import pandas as pd
 
 from ..config import Settings, load_settings
+from ..qpipeline.paths import Q0_PSI_HISTORY
 from ..utils.io import atomic_write_json
 from ..utils.logging import setup_logging
 from ..utils.state import update_state
@@ -147,7 +148,7 @@ def run_monitor(settings: Settings | None = None) -> None:
         "threshold": settings.drift_psi_threshold,
     }
     atomic_write_json(paths.results / "monitoring.json", quality)
-    _append_psi_history(paths.state / "psi_history.jsonl", quality, psi)
+    _append_psi_history(Q0_PSI_HISTORY, quality, psi)
     logger.info("Monitoring complete. %d drift alerts.", len(alerts))
     update_state(paths.state, "monitor", status="complete", output=str(paths.results / "monitoring.json"))
 

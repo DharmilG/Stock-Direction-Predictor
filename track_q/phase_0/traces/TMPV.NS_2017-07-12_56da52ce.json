@@ -1,0 +1,23 @@
+{
+ "case_id": "TMPV.NS_2017-07-12_56da52ce",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TMPV.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 6.77%, volume shock (z): 0.07, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Tata Motors Limited has informed the Exchange regarding a press release dated July 12, 2017, titled \"Tata Motors Group global wholesales at 90,966 in June 2017\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Tata Motors about their global wholesales data from June 2017. The event here is about reporting past sales figures, not current earnings or guidance. So, looking at the categories, this seems like a regulatory or maybe a noise event. Since it's a press release about historical data, it's not an earnings result or guidance. The sector is unknown, so maybe it's regulatory? But the main point is that the information is about past performance, which might not impact current stock prices significantly. \n\nNext, the base rate. If this is a regulatory event, I'm not sure about the historical precedent. But since it's a press release about old data, maybe it's considered noise. The base rate for noise events is usually mixed, but since it's not a major announcement, maybe it's usually flat. Wait, the user said if it's noise, vote FLAT with confidence up to 0.3. \n\nPositioning: The pre-t context has a 5-day trend of 6.77% positive, volume shock z of 0.07, and FinBERT prior of 0.00. The event is about past data, so the move might already be priced in. If the market already knew about this data, then the news isn't new. But since the press release is from 2017, it's likely that the market already reacted to it. So the positioning would indicate that the move is priced in, making it a flat. \n\nCommit: Since it's noise, vote FLAT with confidence up to 0.3. The steps that carried weight are 1 (classifying as noise), 2 (base rate for noise), and 3 (positioning shows priced in). Confidence should be 0.3. Sentiment should be FLAT, so 0.0. The trace steps are 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 34.6,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2014-10-27_88fae793",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.23%, volume shock (z): 1.14, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Press Release. Wipro Limited has informed the Exchange regarding a press release dated October 22, 2014 titled \"Results for the quarter ended September 30, 2014 under IFRS\"\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article is a press release from Wipro Limited about their quarterly results from September 30, 2014, under IFRS. Since it's about financial results, that's an earnings_result. \n\nNext, the base rate. Earnings reports on the NSE usually have mixed outcomes. Sometimes they're positive, sometimes negative, depending on the company's performance. But since this is a past result, maybe the historical precedent isn't clear. Wait, the user said not to invent statistics, so I have to rely on known patterns. Typically, earnings results can go either way, so the base rate is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -3.23%, volume shock z of 1.14, and FinBERT prior of 0.00. The volume shock might indicate some volatility, but the FinBERT prior is neutral. The 5-day trend is slightly down. However, the event is an earnings report, which might have already been priced in. Since the news is about past results, maybe the market has already reacted, so the move isn't necessarily priced in. But the volume shock could suggest some activity. \n\nCommit: Since it's an earnings result, and the base rate is mixed, but the positioning isn't clearly overbought or oversold. The confidence should be low because it's a single event without additional confirmation. The sentiment should be neutral, leading to a FLAT vote with low confidence. But wait, the user said if it's noise, vote FLAT. Is this a noise event? The press release is about past results, which might not be new info. So maybe it's noise. Hence, FLAT with confidence up to 0.3. But the steps need to be cited. Let me check again.\n\nClassification is earnings_result. Base rate is mixed. Positioning: the pre-t context doesn't indicate if the news is priced in. The 5-day trend is down, but the event is old. So maybe the positioning isn't clear. Therefore, commit FLAT with confidence 0.3. The sentiment would be 0.0. So the JSON should reflect that.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 38.7,
+ "attempts": 1
+}

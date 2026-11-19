@@ -1,0 +1,494 @@
+﻿**********************
+Windows PowerShell transcript start
+Start time: 20261020021127
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 13300
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-20T02:11:27.5460304+05:30 | === Q0-D1 supervisor start ===
+2026-10-20T02:11:27.5551021+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-20T02:11:27.5589535+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-20T02:11:28.3781600+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-20T02:11:28.5800444+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-20T02:11:28.9420499+05:30 | Started Python child PID 26056.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026103606
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 48608
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T10:36:06.1799398+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T10:36:06.1957113+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T10:36:06.2037691+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T10:36:07.0318531+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T10:36:07.0885378+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T10:36:07.1989384+05:30 | Started Python child PID 19928.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026111120
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 26656
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T11:11:20.8232169+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T11:11:20.8312140+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T11:11:20.8354693+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T11:11:21.6443834+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T11:11:21.7076631+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T11:11:21.8247704+05:30 | Started Python child PID 8596.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026132954
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 36116
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T13:29:54.1695164+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T13:29:54.1776514+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T13:29:54.1806586+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T13:29:54.9706613+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T13:29:55.0482704+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T13:29:55.1773464+05:30 | Started Python child PID 40084.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026133221
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 52720
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T13:32:21.5640248+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T13:32:21.5810150+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T13:32:21.5840175+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T13:32:22.3732997+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T13:32:22.4319172+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T13:32:22.5830348+05:30 | Started Python child PID 33100.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026143802
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 31232
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T14:38:02.5306880+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T14:38:02.5417990+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T14:38:02.5474144+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T14:38:03.4678368+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T14:38:03.5332959+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T14:38:03.6668441+05:30 | Started Python child PID 25912.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026183840
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 14816
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T18:38:40.2819191+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T18:38:40.2997196+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T18:38:40.3030073+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T18:38:41.2126635+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T18:38:41.2806556+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T18:38:41.5310894+05:30 | Started Python child PID 20144.
+**********************
+Windows PowerShell transcript start
+Start time: 20261026212720
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 27888
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-26T21:27:20.8828604+05:30 | === Q0-D1 supervisor start ===
+2026-10-26T21:27:20.8914765+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-26T21:27:20.8954839+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-26T21:27:21.7969218+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-26T21:27:21.8573442+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-26T21:27:22.2954392+05:30 | Started Python child PID 7436.
+**********************
+Windows PowerShell transcript start
+Start time: 20261027091143
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 23872
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-27T09:11:43.4789320+05:30 | === Q0-D1 supervisor start ===
+2026-10-27T09:11:44.5627568+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-27T09:11:44.5799743+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-27T09:11:46.2871169+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T09:11:46.7151357+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-27T09:11:46.9607182+05:30 | Started Python child PID 15916.
+**********************
+Windows PowerShell transcript start
+Start time: 20261027105504
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 53920
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-27T10:55:04.9544675+05:30 | === Q0-D1 supervisor start ===
+2026-10-27T10:55:04.9634133+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-27T10:55:04.9664909+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-27T10:55:05.8457712+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T10:55:05.9330537+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-27T10:55:06.2554108+05:30 | Started Python child PID 3720.
+**********************
+Windows PowerShell transcript start
+Start time: 20261027131106
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 22380
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-27T13:11:06.2609273+05:30 | === Q0-D1 supervisor start ===
+2026-10-27T13:11:06.2700159+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-27T13:11:06.2735481+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-27T13:11:07.0475290+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T13:11:07.1248875+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-27T13:11:07.2736101+05:30 | Started Python child PID 26536.
+**********************
+Windows PowerShell transcript start
+Start time: 20261027141940
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 37076
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-27T14:19:40.8699927+05:30 | === Q0-D1 supervisor start ===
+2026-10-27T14:19:41.0047380+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-27T14:19:41.1041210+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-27T14:19:48.6338030+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T14:19:48.8004659+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-27T14:19:49.4401039+05:30 | Started Python child PID 32764.
+**********************
+Windows PowerShell transcript start
+Start time: 20261027163122
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 4540
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-27T16:31:22.2527245+05:30 | === Q0-D1 supervisor start ===
+2026-10-27T16:31:22.2629359+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-27T16:31:22.2680183+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-27T16:31:23.3278507+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-27T16:31:23.4122885+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-27T16:31:23.5297484+05:30 | Started Python child PID 30600.
+**********************
+Windows PowerShell transcript start
+Start time: 20261028115859
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 39760
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-28T11:58:59.3821398+05:30 | === Q0-D1 supervisor start ===
+2026-10-28T11:58:59.3921401+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-28T11:58:59.4001137+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-28T11:59:00.4491016+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-28T11:59:00.5519389+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-28T11:59:00.9243419+05:30 | Started Python child PID 10360.
+**********************
+Windows PowerShell transcript start
+Start time: 20261028131316
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 39656
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-28T13:13:16.2058796+05:30 | === Q0-D1 supervisor start ===
+2026-10-28T13:13:16.2162057+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-28T13:13:16.2225924+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-28T13:13:26.6663650+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-28T13:13:26.7965943+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-28T13:13:27.7658716+05:30 | Started Python child PID 6384.
+**********************
+Windows PowerShell transcript start
+Start time: 20261029104130
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 56520
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-10-29T10:41:30.8234951+05:30 | === Q0-D1 supervisor start ===
+2026-10-29T10:41:30.8395083+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-10-29T10:41:30.8434915+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-10-29T10:41:31.7364792+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-10-29T10:41:31.8208623+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-10-29T10:41:31.9541709+05:30 | Started Python child PID 23716.
+**********************
+Windows PowerShell transcript start
+Start time: 20261105235547
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 21972
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-11-05T23:55:47.8524973+05:30 | === Q0-D1 supervisor start ===
+2026-11-05T23:55:47.9687067+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-11-05T23:55:47.9737160+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-11-05T23:55:49.0961771+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-11-05T23:55:49.2266732+05:30 | GPU clock cap applied: 0..1400 MHz
+PS>TerminatingError(Invoke-WebRequest): "Unable to connect to the remote server"
+2026-11-05T23:55:51.3239470+05:30 | Ollama not reachable at startup; attempting recovery.
+PS>TerminatingError(Invoke-WebRequest): "Unable to connect to the remote server"
+2026-11-05T23:55:53.3332835+05:30 | Ollama endpoint is not responding - attempting to start 'ollama serve'.
+PS>TerminatingError(Invoke-WebRequest): "The operation has timed out."
+**********************
+Windows PowerShell transcript start
+Start time: 20261106111839
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 14688
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-11-06T11:18:40.0644812+05:30 | === Q0-D1 supervisor start ===
+2026-11-06T11:18:40.1540098+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-11-06T11:18:40.1730217+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+**********************
+Windows PowerShell transcript start
+Start time: 20261114072826
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 4836
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-11-14T07:28:26.5106955+05:30 | === Q0-D1 supervisor start ===
+2026-11-14T07:28:26.5246946+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-11-14T07:28:26.5286988+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-11-14T07:28:27.5732886+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-11-14T07:28:27.6448124+05:30 | GPU clock cap applied: 0..1400 MHz
+PS>TerminatingError(Invoke-WebRequest): "Unable to connect to the remote server"
+2026-11-14T07:28:29.7372822+05:30 | Ollama not reachable at startup; attempting recovery.
+PS>TerminatingError(Invoke-WebRequest): "Unable to connect to the remote server"
+2026-11-14T07:28:31.7486916+05:30 | Ollama endpoint is not responding - attempting to start 'ollama serve'.
+PS>TerminatingError(Invoke-WebRequest): "The operation has timed out."
+PS>TerminatingError(Invoke-WebRequest): "The operation has timed out."
+2026-11-14T07:28:48.9154038+05:30 | Ollama is responding again.
+**********************
+Windows PowerShell transcript start
+Start time: 20261117124413
+Username: RONIL\Ronny
+RunAs User: RONIL\Ronny
+Configuration Name: 
+Machine: RONIL (Microsoft Windows NT 10.0.26200.0)
+Host Application: C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -NoProfile -ExecutionPolicy Bypass -File E:\books\Adaniports\stock_direction_platform\run_q0_overnight.ps1 -NoElevate -Scheduled
+Process ID: 33096
+PSVersion: 5.1.26100.9818
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9818
+BuildVersion: 10.0.26100.9818
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+2026-11-17T12:44:13.4355365+05:30 | === Q0-D1 supervisor start ===
+2026-11-17T12:44:13.4596989+05:30 | Repo: E:\books\Adaniports\stock_direction_platform
+2026-11-17T12:44:13.4636994+05:30 | Admin: True | scheduled: True | clock cap: 1400 MHz | emergency: 89 C
+2026-11-17T12:44:14.5688183+05:30 | Power settings applied: no sleep/hibernate on AC; lid close does nothing.
+2026-11-17T12:44:14.6654700+05:30 | GPU clock cap applied: 0..1400 MHz
+2026-11-17T12:44:14.7282994+05:30 | Started Python child PID 40216.
+2026-11-18T15:48:09.1319675+05:30 | Python exited code= after 97434s.
+2026-11-18T15:48:09.7262663+05:30 | All Pool C cases rated; supervisor complete.
+2026-11-18T15:48:12.0862289+05:30 | GPU clock cap reset to driver default.
+**********************
+Windows PowerShell transcript end
+End time: 20261118154812
+**********************

@@ -1,0 +1,23 @@
+{
+ "case_id": "ICICIBANK.NS_2021-11-29_c0b7a09b",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ICICIBANK.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -4.47%, volume shock (z): 0.25, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. ICICI Bank Limited has informed the Exchange regarding 'Disclosure under the SEBI (Listing Obligations and Disclosure Requirements) Regulations, 2015'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about ICICI Bank disclosing something under SEBI regulations. The key here is the regulatory disclosure. The event type should be 'regulatory' since it's related to compliance and disclosure requirements. \n\nNext, the base rate. Regulatory filings on the NSE usually don't have a strong historical precedent. Sometimes they might be neutral, but sometimes they could influence the market if the disclosure is significant. However, since the article just mentions a disclosure without specific details, the base rate is probably mixed. \n\nPositioning: The pre-t context shows a 5-day trend of -4.47%, which is negative. The volume shock is 0.25, which isn't extremely high. The FinBERT prior is 0.00, indicating no prior sentiment. The disclosure is a regulatory event, which might not be priced in yet. Since the trend is down but the event is neutral, maybe the market hasn't reacted yet. \n\nCommitting: Since it's a regulatory filing without clear positive or negative news, the sentiment is neutral. The vote should be FLAT with low confidence. The steps that matter are classification as regulatory, base rate being mixed, and positioning showing the move isn't fully priced in. Confidence is around 0.3 as per the noise category. \n\nWait, the user said if it's noise, vote FLAT with confidence up to 0.3. Since regulatory filings can sometimes be noise, especially without specific details, this might fall under noise. So the vote is FLAT, confidence 0.3. The trace steps would include 1 (classification), 2 (base rate), 3 (positioning), and 4 (commit). The sentiment should be close to 0. \n\nSo the final JSON should reflect FLAT vote, confidence 0.3, and sentiment near 0.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 30.8,
+ "attempts": 1
+}

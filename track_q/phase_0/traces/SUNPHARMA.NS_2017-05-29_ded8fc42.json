@@ -1,0 +1,23 @@
+{
+ "case_id": "SUNPHARMA.NS_2017-05-29_ded8fc42",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SUNPHARMA.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -21.49%, volume shock (z): 13.00, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Dividend. Sun Pharmaceutical Industries Limited has informed the Exchange that the Board of Directors of the Company at its meeting held on May 26, 2017, has recommended payment of dividend of Rs. 3.5/- (Rupees Three and Fifty Paise Only) per equity share of Re.1/- each of the Company for the year ended March 31, 2017, subject to approval of the members at the ensuing Annual General Meeting of the Company\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.7,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about a dividend payment recommended by the Board of Directors. Dividend announcements usually fall under capital actions because they involve the company's distribution of profits to shareholders. So step 1 would be capital_action.\n\nNext, the base rate. I remember that on the NSE, dividend announcements are typically positive. Companies declaring dividends are usually seen as financially healthy, which can boost stock prices. However, I should check if there's any historical data. Wait, the user said not to invent statistics, so I have to rely on general knowledge. Dividends are usually good news, so the base rate is usually-up.\n\nNow, positioning. The pre-t context mentions a 5-day trend of -21.49%, which is a significant drop. The volume shock is high at 13.00, indicating unusual trading volume. The FinBERT prior is 0.00, which might mean no prior sentiment. The news is about a dividend, which is positive, but the stock has been down. Since the stock is oversold (due to the -21% drop) and the news is positive, this could be a bounce candidate. So the move might not be fully priced in yet, especially with the volume shock suggesting possible short covering.\n\nCommitting the vote. The event is a capital action (dividend), which is usually positive. However, the stock is oversold, so the positive news might lead to a bounce. The confidence should be moderate. Since it's a confirmed filing (dividend recommendation) but the market hasn't reacted yet, maybe 0.6 confidence. The sentiment should be positive, so vote UP. Trace steps 1, 2, 3, 4.\n",
+ "content": "{\"sentiment\": 0.7, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 28.4,
+ "attempts": 1
+}

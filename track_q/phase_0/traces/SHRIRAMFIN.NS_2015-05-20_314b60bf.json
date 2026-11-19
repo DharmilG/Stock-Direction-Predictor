@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2015-05-20_314b60bf",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.83%, volume shock (z): -0.01, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Shriram Transport Finance Company Limited has submitted to the Exchange a copy of the Put Option Exercise Form. The Specified Date for sending notices to NCD holders for exercising Put Option has been fixed by the Company on May 09, 2015. The Early Redemption Put period starts from June 02, 2015 and ends on July 01, 2015 (end of business hours)\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Shriram Transport Finance submitting a Put Option Exercise Form and setting dates for notifying NCD holders. This seems related to a capital action since it's about redeeming notes. So, the event type is capital_action.\n\nNext, the base rate. I remember that capital actions like early redemption can be mixed. Sometimes companies redeem notes when they have excess cash, which might be positive, but other times it could signal financial stress. Since the NSE doesn't have a clear trend for this specific event, the base rate is probably mixed.\n\nPositioning: The PRE-T context mentions a 5-day trend of 2.83% and a volume shock. The event is about a Put Option Exercise, which is a capital action. The question is if this is already priced in. The 5-day trend is positive, but the volume shock is slightly negative. However, the event is a confirmed filing, so maybe the market hasn't fully reacted yet. Since it's a capital action, and the company is exercising a put option, it might indicate they have liquidity, which could be positive. But without more context, it's hard to say if it's priced in. The positioning might be neutral, so the move isn't clearly priced in.\n\nCommit: Since it's a confirmed filing (capital_action), and the base rate is mixed, but the positioning isn't clearly overbought or oversold. The confidence should be moderate. Maybe 0.6. The sentiment should be slightly positive since it's a capital action that could indicate liquidity. So, vote UP with confidence 0.6.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 28.2,
+ "attempts": 1
+}

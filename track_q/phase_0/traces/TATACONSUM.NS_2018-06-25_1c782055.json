@@ -1,0 +1,23 @@
+{
+ "case_id": "TATACONSUM.NS_2018-06-25_1c782055",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: TATACONSUM.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -3.94%, volume shock (z): -0.52, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Trading Window. Tata Global Beverages Limited has informed the Exchange regarding the Trading Window closure pursuant to SEBI (Prohibition of Insider Trading) Regulations, 2015\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.1,
+ "confidence": 0.2,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Tata Global Beverages closing a Trading Window as per SEBI regulations. The options are things like earnings, guidance, M&A, regulatory, etc. Since it's about a regulatory filing related to insider trading, that falls under the 'regulatory' category. So step 1 is done.\n\nNext, the base rate. I need to recall historical precedents for regulatory events on NSE. Usually, regulatory filings can go either way. Sometimes they're neutral, but if it's about compliance or a closure, maybe it's not a big mover. But I'm not sure if it's usually up or down. The user said not to invent stats, so I should say 'mixed' since I can't recall specific data.\n\nPositioning: The PRE-T context mentions a 5-day trend of -3.94%, volume shock z of -0.52, and FinBERT prior of 0.00. The Trading Window closure is a regulatory event. Since the stock is down and volume is low, maybe the move isn't fully priced in. But without more info, it's hard to say. The event is a regulatory filing, which might not directly impact the stock unless there's bad news. But since it's a closure, maybe it's a routine action, so the market might have already priced it. Wait, the volume shock is negative, which could indicate some selling pressure. But the FinBERT prior is neutral. So maybe the move isn't fully priced in, but it's unclear. Need to check if the event is positive or negative. Since it's a regulatory closure, it's a compliance action, which is neutral. So positioning might be neutral, but the existing downtrend could mean that the market hasn't fully priced in any positive or negative. Hmm.\n\nCommit: Since it's a regulatory event with mixed historical impact, and the current positioning isn't clear, but the stock is in a downtrend, maybe the sentiment is slightly negative. But the event itself isn't bad news. However, the volume shock suggests some selling. But without more info, maybe the vote is FLAT with low confidence. Wait, the user said if it's noise, vote FLAT with confidence up to 0.3. But this is a regulatory event, which isn't noise. So maybe the confidence is around 0.5. But I'm not sure. Let me structure the JSON accordingly.\n",
+ "content": "{\"sentiment\": -0.1, \"vote\": \"FLAT\", \"confidence\": 0.2, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 40.7,
+ "attempts": 1
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "SHRIRAMFIN.NS_2022-03-11_dbfab405",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SHRIRAMFIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 0.17%, volume shock (z): -0.29, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  General updates. Shriram Transport Finance Company Limited has informed the Exchange about  Receipt of No Objection to the Scheme from the Debenture Trustees\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.6,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about Shriram Transport Finance Company Limited receiving a No Objection to the Scheme from the Debenture Trustees. The PRE-T CONTEXT mentions a 5-day trend of 0.17%, volume shock (z): -0.29, and FinBERT prior: 0.00. \n\nLooking at the event, it's related to regulatory approval since the No Objection is from the Debenture Trustees. That falls under the \"regulatory\" category. So step 1 is regulatory.\n\nNext, the BASE RATE. I need to recall historical precedents for regulatory approvals on NSE. Usually, such approvals are positive as they indicate compliance and progress in restructuring or schemes. However, sometimes if there are underlying issues, it might not be a strong signal. But generally, regulatory approvals are seen as positive, so the base rate is usually-up.\n\nPositioning: The PRE-T context shows a slight positive 5-day trend (0.17%) and a volume shock of -0.29 (which might indicate decreased volume, possibly a sign of consolidation). FinBERT prior is 0.00, neutral. The news is about receiving approval, which is a positive regulatory event. Since the 5-day trend is slightly positive and the volume is down, maybe the market hasn't fully priced in this news yet. However, the volume shock could mean that the news is not yet reflected in the price. So the move might not be fully priced in, which could mean a potential upward move if the news is positive.\n\nCommitting: The event is regulatory, which usually has a positive base rate. The positioning suggests that the news might not be fully priced in, especially with the volume shock. So the sentiment would be positive, vote UP, confidence around 0.6. The steps that carried weight are 1 (classification), 2 (base rate), and 3 (positioning). Step 4 is just committing based on those steps.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.6, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 183.2,
+ "attempts": 3
+}

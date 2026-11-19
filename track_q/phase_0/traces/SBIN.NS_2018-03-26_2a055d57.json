@@ -1,0 +1,21 @@
+{
+ "case_id": "SBIN.NS_2018-03-26_2a055d57",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: SBIN.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.58%, volume shock (z): 1.16, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  News Clarification. The Exchange had sought clarification from the Company with respect to news item captioned \"SBI registers Rs 824 crore bank fraud case against Kanishk Gold with CBI\". The response from the Company is enclosed\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the Exchange seeking clarification on a bank fraud case against Kanishk Gold. The company responded, so this seems like a regulatory event. The options include regulatory, which fits here.\n\nNext, the base rate. Regulatory events on NSE can go either way. Sometimes they're negative, like fines or legal issues, but sometimes they might lead to positive outcomes if the company is exonerated. So the historical precedent is mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -0.58%, volume shock z of 1.16, and FinBERT prior of 0.00. The volume shock might indicate some volatility, but since the news is about a clarification, maybe the market hasn't fully priced in the outcome yet. The prior sentiment was neutral, so if the clarification is positive, it might be a bounce. But since it's a regulatory matter, there's uncertainty. The move might not be fully priced in, so maybe a fade if overbought, but the trend is slightly down. Not sure yet.\n\nCommit: Since it's a regulatory event with mixed base rate, and the positioning isn't clearly overbought or oversold, but the volume shock suggests some reaction. The confidence should be low. Maybe vote FLAT with confidence 0.3, but the steps say if noise, vote FLAT. But this isn't noise, it's regulatory. So perhaps the sentiment is neutral, vote FLAT, confidence 0.3. But the steps need to be cited. Wait, the trace steps should include 1,2,3,4. So the answer would be FLAT with confidence 0.3, steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "fail_reason": "",
+ "seconds": 102.9,
+ "attempts": 2
+}

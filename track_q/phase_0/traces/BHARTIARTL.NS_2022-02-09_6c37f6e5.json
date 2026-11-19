@@ -1,0 +1,23 @@
+{
+ "case_id": "BHARTIARTL.NS_2022-02-09_6c37f6e5",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: BHARTIARTL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -0.79%, volume shock (z): 0.53, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Updates. Bharti Airtel Limited has informed the Exchange regarding 'Approval of grant of stock options by HR & Nomination Committee.'\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "UP",
+ "sentiment": 0.6,
+ "confidence": 0.4,
+ "thinking": "Okay, let's tackle this. The user wants me to analyze the news about Bharti Airtel's stock options grant approval. First, I need to classify the event. The news is about the HR & Nomination Committee approving stock options. Looking at the checklist, the event types include things like earnings, management actions, etc. Since this is about a stock options grant, which is a management decision, I should classify it under \"management\".\n\nNext, the base rate. I need to recall historical precedents for management-related events on NSE. Usually, management decisions like stock options can be positive or neutral. But since it's about granting options, which is a form of employee incentive, it's generally seen as positive. However, the base rate might be mixed because sometimes it's just routine. But I think the usual precedent is mixed, maybe leaning neutral.\n\nPositioning: The PRE-T context mentions a 5-day trend of -0.79%, volume shock z of 0.53, and FinBERT prior of 0.00. The volume shock is moderate, and the prior sentiment is neutral. Since the news is about a management action, and the stock has been slightly down, but the event isn't bad news. If the move is already priced in, then maybe it's a fade. But since the news is a positive management action, maybe it's not fully priced. However, the prior sentiment is neutral, so the positioning might be that it's not overbought or oversold. The volume shock is 0.53, which is not extremely high. So maybe the move isn't fully priced in, so the positioning is neutral.\n\nCommitting: Since the event is management, base rate is mixed, positioning is neutral. The confidence should be low. The user says to use confidence up to 0.8 for confirmed filings with support. But here, it's a confirmed filing (the company informed the exchange), but the positioning isn't strongly positive. So maybe confidence around 0.4. The sentiment should be positive since the vote is UP. Wait, but the base rate is mixed. However, the event is a positive management action. So the vote is UP with confidence 0.4. The trace steps would be 1, 2, 3, 4. Let me check again. The classification is management. Base rate is mixed. Positioning: not overbought, so maybe not a fade. The stock was down, but the news is positive. So the sentiment is positive, vote UP, confidence 0.4. That seems right.\n",
+ "content": "{\"sentiment\": 0.6, \"vote\": \"UP\", \"confidence\": 0.4, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 44.5,
+ "attempts": 1
+}

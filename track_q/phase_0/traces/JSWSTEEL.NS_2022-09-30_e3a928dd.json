@@ -1,0 +1,23 @@
+{
+ "case_id": "JSWSTEEL.NS_2022-09-30_e3a928dd",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: JSWSTEEL.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: -5.58%, volume shock (z): -0.78, FinBERT prior: -0.61\nARTICLE TEXT (full, un-summarized):\n  Loss of share certificate. JSW Steel Limited has informed the Exchange about Loss of share certificate under Regulation 39(3)\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": -0.1,
+ "confidence": 0.5,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the loss of a share certificate under Regulation 39(3). That sounds like a regulatory issue because it's related to a formal process with the Exchange. So, the event type is regulatory.\n\nNext, the base rate. I remember that regulatory events on the NSE can go either way. Sometimes they might not impact the stock much, but if there's a penalty or something, it could be negative. But since the news here is about a loss of a certificate, which might be a procedural matter, maybe the precedent is mixed. I can't recall exact stats, so I'll note it's mixed.\n\nPositioning: The pre-t context mentions a 5-day trend of -5.58%, volume shock z of -0.78, and FinBERT prior of -0.61. The stock has been down, and the volume is lower. The event is regulatory, which might not be priced in yet. Since the stock is already down, maybe this news could be a bounce if it's a minor issue. But the FinBERT prior is negative, so maybe the market already priced in some negative sentiment. However, the event itself isn't a bad news, just a procedural loss. So maybe the move isn't fully priced in, making it a bounce candidate.\n\nCommitting: The event is regulatory, base rate is mixed, positioning suggests the move isn't fully priced in. The confidence is moderate, maybe 0.5. The vote would be FLAT because the sentiment isn't strongly positive or negative. Wait, but the trace steps require citing steps 1-4. The sentiment should align with the vote. If the vote is FLAT, sentiment is near zero. But the confidence is 0.5. Let me check again. The event is regulatory, which is a neutral event. The base rate is mixed. Positioning: the stock is oversold (5-day trend -5.58%) and the news is regulatory, which might not be a big deal. So maybe the market is oversold, and the news isn't bad, so it's a bounce. But the FinBERT prior is -0.61, which is negative. Hmm, maybe the sentiment is slightly negative, leading to a FLAT vote with low confidence. Wait, the instruction says if noise, vote FLAT with confidence up to 0.3. But this is a regulatory event, which isn't noise. So maybe the sentiment is neutral, leading to FLAT. But the steps need to be followed. Let me structure it properly.\n",
+ "content": "{\"sentiment\": -0.1, \"vote\": \"FLAT\", \"confidence\": 0.5, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 124.3,
+ "attempts": 2
+}

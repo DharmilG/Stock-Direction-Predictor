@@ -14,6 +14,7 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException, Query
 
 from ..config import load_settings
+from ..qpipeline.paths import p0_from
 from . import q0_analytics as analytics_core
 from .dashboard_support import (
     age_seconds,
@@ -119,7 +120,7 @@ def _gpu_trend(paths, limit: int = 120) -> dict[str, Any]:
     try:
         frame = pd.read_csv(path, usecols=["timestamp", "temp_c"]).tail(limit)
     except Exception:
-        return {"available": False, "samples": [], "note": "gpu_5s.csv unreadable"}
+        return {"available": False, "samples": [], "note": "q0 gpu samples (track_q/phase_0/logs/gpu_5s.csv) unreadable"}
     samples = [
         {"at": str(row["timestamp"]), "temp_c": None if pd.isna(row["temp_c"]) else float(row["temp_c"])}
         for _, row in frame.iterrows()
@@ -148,7 +149,7 @@ def _phases(paths) -> dict[str, Any]:
                 {"name": name, "status": "pending", "updated_at": None, "note": None}
                 for name in PHASES
             ],
-            "note": "artifacts/state/q_track_state.json has not been written; the runner creates it when a phase starts.",
+            "note": "track_q/_common/phase_registry.json has not been written; the runner creates it when a phase starts.",
         }
     entries = []
     for name in PHASES:
@@ -164,7 +165,7 @@ def _phases(paths) -> dict[str, Any]:
 
 def _gate(paths) -> dict[str, Any]:
     verdict = json_file(artifact_paths(paths)["q0_verdict"])
-    state = json_file(paths.state / "q0_d1.json")
+    state = json_file(p0_from(paths.root)["state"] / "q0_d1.json")
     pool_total = verdict.get("pool_total") or state.get("pool_total")
     n = verdict.get("n")
     gate_pass = verdict.get("pass")
@@ -198,7 +199,7 @@ def _gate(paths) -> dict[str, Any]:
         "state_status": state.get("status"),
         "state_verdict_path": state.get("verdict"),
         "note": (
-            "Gate pass/fail is copied verbatim from results/q0_d1.json; nothing is recomputed here."
+            "Gate pass/fail is copied verbatim from track_q/phase_0/verdict/q0_d1.json; nothing is recomputed here."
             if verdict
             else "No gate verdict has been recorded yet."
         ),
@@ -226,7 +227,7 @@ def q0_status() -> dict[str, Any]:
 
     warnings: list[str] = []
     if not heartbeat:
-        warnings.append("No runner heartbeat (logs/q0_heartbeat.json). The run is not active.")
+        warnings.append("No runner heartbeat (track_q/phase_0/logs/q0_heartbeat.json). The run is not active.")
     elif runner_stale:
         warnings.append(
             f"Runner heartbeat is {heartbeat_age}s old (limit {RUNNER_STALE_SECONDS}s): the run is stopped or resting."
@@ -338,14 +339,14 @@ def q0_status() -> dict[str, Any]:
             ],
         },
         [
-            "logs/q0_heartbeat.json",
-            "logs/q0_supervisor.json",
-            "logs/gpu_5s.csv",
-            "results/q0_d1.json",
-            "artifacts/state/q0_d1.json",
-            "artifacts/state/q_track_state.json",
+            "track_q/phase_0/logs/q0_heartbeat.json",
+            "track_q/phase_0/logs/q0_supervisor.json",
+            "track_q/phase_0/logs/gpu_5s.csv",
+            "track_q/phase_0/verdict/q0_d1.json",
+            "track_q/phase_0/state/q0_d1.json",
+            "track_q/_common/phase_registry.json",
             "artifacts/state/qwen_setup.json",
-            "data/llm/qwen_rating_ledger.parquet",
+            "track_q/phase_0/state/qwen_rating_ledger.parquet",
         ],
         as_of=heartbeat.get("updated_at") or file_meta(artifacts["q0_ledger"])["modified_at"],
         warnings=warnings,
@@ -358,7 +359,7 @@ def q0_ledger_summary() -> dict[str, Any]:
     paths = settings.paths
     frame = _ledger_frame(paths)
     if frame is None:
-        raise HTTPException(status_code=404, detail="data/llm/qwen_rating_ledger.parquet is missing")
+        raise HTTPException(status_code=404, detail="track_q/phase_0/state/qwen_rating_ledger.parquet is missing")
 
     pools = _pool_stats(frame)
     votes = frame["qwen_vote"].astype(str).str.upper() if "qwen_vote" in frame.columns else pd.Series(dtype=str)
@@ -435,7 +436,7 @@ def q0_ledger_summary() -> dict[str, Any]:
             },
             "top_symbols": share("symbol"),
         },
-        ["data/llm/qwen_rating_ledger.parquet"],
+        ["track_q/phase_0/state/qwen_rating_ledger.parquet"],
         as_of=file_meta(artifact_paths(paths)["q0_ledger"])["modified_at"],
     )
 
@@ -449,14 +450,14 @@ def q0_ledger_summary() -> dict[str, Any]:
 # a synthetic series, because a fake utilisation line is worse than no line.
 # --------------------------------------------------------------------------- #
 TIMELINE_ARTIFACTS = [
-    "logs/q0_resource_5s.csv",
-    "logs/gpu_5s.csv",
-    "logs/q0_history.jsonl",
-    "logs/q0_heartbeat.json",
-    "data/llm/qwen_rating_ledger.parquet",
-    "artifacts/state/psi_history.jsonl",
+    "track_q/phase_0/logs/q0_resource_5s.csv",
+    "track_q/phase_0/logs/gpu_5s.csv",
+    "track_q/phase_0/logs/q0_history.jsonl",
+    "track_q/phase_0/logs/q0_heartbeat.json",
+    "track_q/phase_0/state/qwen_rating_ledger.parquet",
+    "track_q/phase_0/state/psi_history.jsonl",
 ]
-CASES_ARTIFACTS = ["data/llm/qwen_rating_ledger.parquet", "results/traces/*.json"]
+CASES_ARTIFACTS = ["track_q/phase_0/state/qwen_rating_ledger.parquet", "track_q/phase_0/traces/*.json"]
 
 
 @router.get("/timeline")
@@ -473,7 +474,7 @@ def q0_timeline(
     return _envelope(
         payload,
         TIMELINE_ARTIFACTS,
-        as_of=file_meta(paths.logs / "q0_history.jsonl")["modified_at"] or file_meta(artifact_paths(paths)["q0_gpu"])["modified_at"],
+        as_of=file_meta(p0_from(paths.root)["logs"] / "q0_history.jsonl")["modified_at"] or file_meta(artifact_paths(paths)["q0_gpu"])["modified_at"],
         warnings=warnings,
     )
 
@@ -487,7 +488,7 @@ def q0_analytics() -> dict[str, Any]:
         return _envelope(
             None,
             CASES_ARTIFACTS,
-            warnings=["data/llm/qwen_rating_ledger.parquet is missing; there is nothing to analyse yet."],
+            warnings=["track_q/phase_0/state/qwen_rating_ledger.parquet is missing; there is nothing to analyse yet."],
         )
     payload = analytics_core.analytics(paths, frame)
     warnings = []
@@ -518,7 +519,7 @@ def q0_cases(
         return _envelope(
             None,
             CASES_ARTIFACTS,
-            warnings=["data/llm/qwen_rating_ledger.parquet is missing; the case browser has no source."],
+            warnings=["track_q/phase_0/state/qwen_rating_ledger.parquet is missing; the case browser has no source."],
         )
     payload = analytics_core.case_rows(frame, limit=limit, offset=offset, symbol=symbol, vote=vote, outcome=outcome)
     warnings = [] if payload["total"] else ["No cases match those filters."]

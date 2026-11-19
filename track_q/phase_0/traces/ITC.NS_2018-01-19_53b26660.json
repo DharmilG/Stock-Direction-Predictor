@@ -1,0 +1,23 @@
+{
+ "case_id": "ITC.NS_2018-01-19_53b26660",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: ITC.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 2.62%, volume shock (z): 2.33, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Financial Result Updates. ITC Limited has submitted to the Exchange, the financial results for the period ended December 31, 2017\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The article mentions that ITC Limited submitted their financial results for the period ended December 31, 2017. Since this is about financial results, the event type should be \"earnings_result\". \n\nNext, the base rate. I recall that on the NSE, earnings results can go either way. Sometimes companies report better-than-expected results, which is usually up, but other times they might miss expectations, leading to a down move. However, since the user mentioned not to invent statistics, I should state that the historical precedent is mixed for earnings results.\n\nNow, positioning. The PRE-T context has a 5-day trend of 2.62% and a volume shock (z) of 2.33. The FinBERT prior is 0.00. The 5-day trend is positive, but the volume shock might indicate some volatility. However, since the event is about past financial results (2017), there's no recent news. The FinBERT prior being 0.00 suggests no strong sentiment from the text. So, the move doesn't look priced in because the news is about old results, not recent. \n\nCommitting the vote. Since the event is an earnings result, and the base rate is mixed, but the positioning isn't showing overbought or oversold. However, the 5-day trend is positive, but the volume shock might indicate some uncertainty. Given that the news is about past results, maybe there's no immediate impact. But since the user says to use only the PRE-T context, which includes the 5-day trend and volume shock, but the event is an earnings result. The confidence should be low because it's a single-source filing without recent movement. So, confidence around 0.3. The sentiment would be neutral, so FLAT. Wait, but the instruction says if noise, vote FLAT. Since the event is an earnings result, which isn't noise, but the positioning isn't clear. Hmm. Maybe the vote is FLAT with low confidence. But the base rate is mixed, and the positioning isn't clearly overbought or oversold. So, the answer might be FLAT with confidence 0.3. But I need to check the steps again. Step 1: earnings_result. Step 2: mixed. Step 3: not priced in because the news is about old results. Step 4: commit with confidence based on the evidence. Since it's a confirmed filing but no recent movement, maybe confidence 0.4. Wait, the user says if noise, vote FLAT. But this is an earnings result, which isn't noise. So maybe the vote is FLAT because the positioning isn't clear. But I'm a bit confused here. Let me structure it properly.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 222.3,
+ "attempts": 3
+}

@@ -1,0 +1,23 @@
+{
+ "case_id": "WIPRO.NS_2011-10-28_83c0fd58",
+ "model": "qwen3:8b",
+ "prompt_version": "v1-skeleton",
+ "num_ctx": 2048,
+ "num_predict": 1024,
+ "temperature": 0.6,
+ "top_p": 0.95,
+ "prompt": "SYMBOL: WIPRO.NS  SECTOR: unknown\nPRE-T CONTEXT:\n  5-day trend: 4.60%, volume shock (z): 0.67, FinBERT prior: 0.00\nARTICLE TEXT (full, un-summarized):\n  Allotment of Securities. Wipro Limited has informed the Exchange that Administrative Committee of the Company's Board of Directors vide Circular resolution dated October 26, 2011 resolved to issue and allot 69920 equity shares of Rs. 2/- each pursuant to exercise of the stock options by the eligible employees under Restricted Stock Unit Plan 2004 and Restricted Stock Unit Plan 2005\nINSTRUCTION: You are an NSE equity analyst rating ONE news item for a 5-day directional signal. You have NEVER seen prices after decision_date. Stating otherwise invalidates the answer. Checklist (execute in order, cite step numbers in trace): 1. CLASSIFY the event: earnings_result | earnings_guidance | order_win | mna | regulatory | rating_change | management | capital_action | debt_credit | litigation | expansion | macro_policy | short_seller | noise. If noise, vote FLAT with confidence at most 0.3 and stop. 2. BASE RATE: state the historical precedent for this event type on NSE (usually-up / usually-down / mixed). Do NOT invent statistics. 3. POSITIONING: using ONLY the PRE-T CONTEXT block, judge whether the move looks priced in. Overbought plus good news is a fade candidate; oversold plus bad news is a bounce candidate. 4. COMMIT: vote plus confidence, citing which steps carried weight. Confidence must be proportionate to evidence: single-source rumour at most 0.4, confirmed filing plus supporting positioning at most 0.8, never 1.0. Return STRICT JSON only: {\"sentiment\": <float -1..1>, \"vote\": \"UP\"|\"DOWN\"|\"FLAT\", \"confidence\": <float 0..1>, \"trace_steps\": [1,2,3,4]}. Sentiment sign must agree with vote (positive goes UP, negative goes DOWN, absolute value below 0.2 goes FLAT).\nLimit internal reasoning to about 512 tokens, then commit.",
+ "vote": "FLAT",
+ "sentiment": 0.0,
+ "confidence": 0.3,
+ "thinking": "Okay, let's tackle this step by step. First, I need to classify the event. The news is about the allotment of securities, specifically issuing equity shares to employees under stock option plans. That sounds like a capital action since the company is issuing shares. So step 1 would be capital_action.\n\nNext, the base rate. I remember that on NSE, capital actions like issuing shares can have mixed effects. Sometimes it's seen as positive for increasing capital, but it might dilute existing shares. So the historical precedent is probably mixed. \n\nNow, positioning. The PRE-T context mentions a 5-day trend of 4.60% and volume shock z of 0.67. The FinBERT prior is 0.00. The news is about a past event (2011 resolution), so maybe the market already priced in this? Since it's a past action, the stock might have already reacted, so the move might be priced in. But the volume shock is 0.67, which is moderate. Not sure if overbought or oversold. Maybe not a clear fade or bounce candidate. \n\nCommitting: Since it's a capital action with mixed historical impact and the event is already past, the sentiment might be neutral. Confidence should be low because it's a single event without strong indicators. So vote FLAT with confidence around 0.3. But wait, the instruction says if noise, vote FLAT. Is this noise? The event is a confirmed filing, but it's about share allotment, which might not be a major news. Maybe it's noise. So confidence up to 0.3. But the steps say if noise, vote FLAT. So steps 1 is noise? Wait, the classification was capital_action, not noise. So maybe not. Hmm. Need to check again. The event is a capital action, which is a valid category. So base rate is mixed. Positioning: since it's a past event, maybe the market already priced it, so no new info. Thus, sentiment is neutral, vote FLAT, confidence 0.3. Trace steps 1,2,3,4.\n",
+ "content": "{\"sentiment\": 0.0, \"vote\": \"FLAT\", \"confidence\": 0.3, \"trace_steps\": [1,2,3,4]}",
+ "truncated": false,
+ "no_news": false,
+ "harness_fail": false,
+ "thermal_abort": false,
+ "thermal_temp_c": null,
+ "fail_reason": "",
+ "seconds": 34.7,
+ "attempts": 1
+}
