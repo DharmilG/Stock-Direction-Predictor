@@ -15,7 +15,7 @@ import numpy as np
 import pandas as pd
 
 from ..config import load_settings
-from ..qpipeline.paths import Q3_LEDGER, Q3_RESULTS, Q3_TRACES, Q3_HEARTBEAT, Q3_GPU, Q3_MAIN_LOG
+from ..qpipeline.paths import Q3_LEDGER, Q3_RESULTS, Q3_TRACES, Q3_HEARTBEAT, Q3_GPU, Q3_MAIN_LOG, p0_from
 from ..qpipeline.fio import atomic_append_jsonl, read_jsonl_safe, file_fingerprint, write_text_atomic
 from ..data.q0_d1 import (
     LABEL_TO_VOTE,
@@ -35,7 +35,8 @@ from ..utils.logging import setup_logging
 
 
 def _load_pool() -> pd.DataFrame:
-    path = load_settings().paths.root / "data" / "llm" / "pool_c.parquet"
+    # Pool C lives in the phase-0 folder (single source of truth: qpipeline.paths).
+    path = p0_from(load_settings().paths.root)["data"] / "pool_c.parquet"
     if not path.exists():
         raise FileNotFoundError(f"Pool C not found: {path}")
     return pd.read_parquet(path)
