@@ -40,6 +40,64 @@ a vertical edge, a colour change. The next filters combine those into candle
 bodies and wicks. Deeper filters combine those into a double top or a flag. The
 picture gets smaller at each step, but the description gets richer.
 
+### One stop of the filter, up close
+
+Let us zoom into one single stop. This is the smallest thing the CNN does.
+Everything else is just this, repeated thousands of times.
+
+Imagine the window is 3 x 3. It sits over nine pixels. Each pixel is a number
+for brightness. The filter itself is also nine numbers - its "weights". Here is
+a filter that looks for a bright horizontal line:
+
+| | | |
+|---|---|---|
+| 0 | 0 | 0 |
+| 1 | 1 | 1 |
+| 0 | 0 | 0 |
+
+Now suppose the nine pixels under it look like this:
+
+| | | |
+|---|---|---|
+| 10 | 10 | 10 |
+| 200 | 200 | 200 |
+| 10 | 10 | 10 |
+
+What happens at this one stop:
+
+1. **Multiply.** Each filter weight is multiplied by the pixel under it.
+   0 x 10 = 0, then 0 x 10, then 0 x 10. Then 1 x 200 = 200, three times.
+   Then 0 x 10 three more times.
+2. **Add.** Add the nine results: 0 + 0 + 0 + 200 + 200 + 200 + 0 + 0 + 0 =
+   **600**.
+3. **Add a bias.** A small fixed number is added. Think of it as a threshold
+   nudge. We ignore it here to keep the example clean.
+4. **Activate.** The number goes through **ReLU**: if it is negative it becomes
+   zero, if positive it stays. Here it stays 600.
+5. **Write one cell.** That 600 is written into one cell of the new feature
+   map, at the same place where the window sat.
+
+If the window had sat on a dull patch with all pixels at 10, the answer would be
+30. So a big number means "yes, this shape is here". A small number means "no".
+That is all a filter does - it measures how much the shape it cares about is
+present at that spot.
+
+Now the important part:
+
+- The window **slides one stride** and the same five steps happen again. That
+  produces the next cell. Do it across the whole picture and you have a full
+  feature map.
+- There is not one filter but **64** at conv1. All 64 sit at the same stop and
+  each writes one number. So that one spot becomes 64 numbers - 64 channels.
+  One filter might find a horizontal edge, another a vertical edge, another a
+  colour change.
+- Each later layer takes the feature maps from the layer before it as its
+  "image". So a deep filter is looking at earlier findings, not at raw pixels.
+  That is how edges become candle bodies and candle bodies become a double top.
+
+Nothing is learned live. These filter weights came from ImageNet training long
+ago, and in our model they are frozen. We only use them to measure shapes.
+
 ### The layers, one by one
 
 This is the real ResNet18 used in this project. The sizes below were measured by
@@ -95,10 +153,54 @@ alive along the way. Average pooling squashes those 7 x 7 grids into one number
 per channel, giving the final 512 numbers. The old 1000-photo answer layer is
 removed. Those 512 numbers go to the pattern head and the direction head.
 
+### Feeding one image to the CNN, step by step
+
+Here is the exact path of one chart image, from the moment we hand it over to
+the moment we get an answer. This is what the code in `api/inference.py` does
+when someone uploads a picture in the dashboard.
+
+1. **Load.** The PNG is opened and turned into colour pixels (red, green, blue).
+   It can be any size to start with.
+2. **Resize.** It is squashed to 224 x 224. ResNet18 expects that size. A big
+   chart and a small chart both become the same grid.
+3. **To numbers.** The picture is converted to a tensor - just a fancy name for
+   a structured list of numbers. Three grids of 224 x 224, one per colour.
+4. **Normalise.** We subtract a fixed average colour and divide by a fixed
+   spread. These are the same values the model saw during ImageNet training,
+   so the numbers sit in the range it expects. Without this, the same chart
+   would look different to the model.
+5. **Add a batch of one.** The model is built to handle a stack of pictures, so
+   we wrap our single image in a stack of size one. The shape becomes
+   1 x 3 x 224 x 224.
+6. **Forward pass.** The image goes through conv1, maxpool, the four layers with
+   their eight skip connections, and average pooling. Out come the 512 numbers.
+   This is the reader doing its job. Nothing is trained here - it is pure
+   reading.
+7. **Two answers.** The 512 numbers go to both heads at once. Each head produces
+   raw scores - six scores for the pattern head, three for the direction head.
+8. **Softmax.** Each set of scores is turned into percentages that add to 100%.
+   The biggest one wins. That is the answer and its confidence.
+9. **Map the label.** The direction names are translated for the dashboard:
+   bullish becomes UP, bearish becomes DOWN, neutral becomes FLAT.
+10. **Optional heat map.** GradCAM runs the image again while recording which
+    part of layer4 mattered most, and paints that region on the chart. This is
+    the picture shown next to the answer in the dashboard.
+
+Two things to remember:
+
+- Steps 1 to 5 are the same every time. Steps 6 to 8 are the model. Steps 9 and
+  10 are presentation.
+- The model is cached after the first call, so uploading a second image does
+  not reload the checkpoint from disk. If the checkpoint file changes, the
+  cache is cleared automatically.
+
 ### Short words for the tricky terms
 
 - **Filter** - a small window of numbers that slides over the image.
 - **Feature map** - the new small picture a filter produces.
+- **ReLU** - a rule that turns negative numbers into zero and keeps positive ones.
+- **Tensor** - a structured list of numbers; here, the image stored as three colour grids.
+- **Bias** - a small fixed number added to the filter result, like a threshold nudge.
 - **Stride** - how many pixels the window jumps each step.
 - **Padding** - a zero border so the window can reach the edges.
 - **Pooling** - keeping the strongest value in a patch to shrink the picture.
