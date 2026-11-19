@@ -346,7 +346,13 @@ add_bullets(slide, [
     "Dropout drops some values while learning, so it cannot memorise.",
     "Class weights make the rare FLAT case count more.",
 ], 8.1, 2.75, 4.4, 3.2, size=12, gap=8)
-add_text(slide, "LEARNING RATE: 1e-3 THEN 1e-4", 0.9, 5.15, 3.4, 0.3,
+add_text(slide, "HOW A SCORE BECOMES AN ANSWER", 0.9, 4.85, 6.6, 0.3,
+         9, bold=True, color=GRAY, font=MONO)
+add_text(slide, "softmax:  p_i = e^(z_i) / SUM e^(z_j)", 0.9, 5.2, 6.6, 0.3,
+         11, bold=True, font=MONO)
+add_text(slide, "answer = argmax(p)   |   confidence = max(p)", 0.9, 5.6, 6.6, 0.3,
+         11, bold=True, font=MONO)
+add_text(slide, "LEARNING RATE: 1e-3 THEN 1e-4", 0.9, 6.2, 3.4, 0.3,
          9, bold=True, color=GRAY, font=MONO)
 
 # ---------------------------------------------------------------- 08 gradcam
@@ -367,7 +373,7 @@ slide = base(
     9, TOTAL,
     "08 · RESULTS",
     "It learned the shape. Not the future.",
-    "Chronological holdout · 676 real charts the model never saw.",
+    "Chronological holdout · 676 real charts · accuracy = correct / total (319 / 676).",
     "Holdout number is optimistic: the checkpoint was trained before the split fix.",
 )
 add_table(

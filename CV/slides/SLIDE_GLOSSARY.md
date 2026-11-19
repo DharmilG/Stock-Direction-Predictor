@@ -194,6 +194,96 @@ Two things to remember:
   not reload the checkpoint from disk. If the checkpoint file changes, the
   cache is cleared automatically.
 
+### How the two answers are produced
+
+This is the detail behind slide 7. It answers three questions: how do we get a
+direction and a shape out of the image, how do we know it said UP, and how do we
+measure how sure it is.
+
+**The short version:** each head gives raw scores. Softmax turns them into
+percentages. We take the biggest. The position of the biggest one is looked up
+in a fixed list of names. The percentage itself becomes the confidence.
+
+The six steps, matching the code in `api/inference.py`:
+
+1. **Two sets of raw scores come out.** The pattern head gives 6 numbers. The
+   direction head gives 3 numbers. These are called **logits** - plain scores,
+   not percentages yet. They can be negative or bigger than 1.
+2. **Softmax turns each set into probabilities.** Each score is compared with
+   the others in its own set. The result is a list of numbers between 0 and 1
+   that add up to 1. The pattern list adds to 1; the direction list separately
+   adds to 1.
+3. **Argmax picks the winner.** Argmax means "the position of the biggest
+   value". It gives us a number like 1, not a name.
+4. **A fixed list turns that number into a name.** For direction the list is
+   `["neutral", "bullish", "bearish"]`, so position 0 is neutral, 1 is bullish,
+   2 is bearish. For pattern the list has 6 names (random, head and shoulders,
+   double top, double bottom, bull flag, descending triangle). This order never
+   changes - it is set in `config.py`.
+5. **The direction name becomes a dashboard signal.** bullish becomes **UP**,
+   bearish becomes **DOWN**, neutral becomes **FLAT**. That is the signal shown
+   on the Chart Vision page.
+6. **Confidence is the winning probability.** We take the biggest softmax value
+   and round it to three decimals. That is `signal_confidence` or
+   `pattern_confidence` in the output.
+
+**A worked example - how we know it said UP**
+
+Suppose the direction head outputs these raw scores:
+
+| Class | neutral | bullish | bearish |
+|---|---|---|---|
+| Raw score (logit) | 0.2 | 2.0 | 0.5 |
+
+After softmax they become roughly:
+
+| Class | neutral | bullish | bearish |
+|---|---|---|---|
+| Probability | 0.10 | 0.76 | 0.14 |
+
+- The biggest is 0.76 at position 1, which is **bullish**.
+- The adapter maps bullish to **UP**. That is how we know the model said UP.
+- The confidence is **0.76** - it is 76% sure, and the runner-up (bearish, 0.14)
+  was far behind.
+- Because all three probabilities are shown, you can also see a close call. If
+  the scores were 0.40 / 0.35 / 0.25, the answer is still bullish but the
+  confidence is only 0.40 - much weaker.
+
+**The formulas**
+
+- **Softmax:** `p_i = e^(z_i) / sum over j of e^(z_j)`
+  `z_i` is the raw score for class i. `e` is the exponential function. The top
+  part makes each score positive; the bottom part makes all of them add to 1.
+  In plain words: "turn scores into shares of one whole pie."
+- **Argmax:** `answer = argmax(p)` - take the position of the largest
+  probability. One name comes out.
+- **Confidence:** `confidence = max(p)` - the largest probability itself. A
+  number near 1 means sure; near 1/3 (for three classes) means unsure.
+- **Accuracy** (used on the results slide): `accuracy = correct / total`. Here
+  47.2% means 319 of 676 holdout charts were right.
+- **Cross-entropy loss** (used while training, not while serving):
+  `L = - sum over i of y_i * log(p_i)`
+  `y_i` is 1 for the right class and 0 for the others. `p_i` is the probability
+  given to that class. If the model gives a high probability to the wrong
+  class, the loss is large. Training tries to make it small.
+- **Precision:** `TP / (TP + FP)` - of the ones it called UP, how many were
+  really UP.
+- **Recall:** `TP / (TP + FN)` - of all real UP cases, how many it found.
+- **F1:** `2 * precision * recall / (precision + recall)` - one score balancing
+  the two. Macro F1 averages this across all classes equally.
+- **AUC (one vs rest):** the chance that a random correct case is ranked above
+  a random wrong one. 1.0 is perfect, 0.5 is coin-flip. Ours is 0.564.
+
+`TP` means true positive (rightly called UP). `FP` means false positive (called
+UP but wrong). `FN` means false negative (was UP but missed).
+
+**One honest warning**
+
+Confidence is not correctness. A softmax of 0.90 means the model is sure, not
+that it is right. On real charts this model is only about 47% accurate, so a
+confident UP is still often wrong. That is why the verdict slide says: use it to
+see, not to trade.
+
 ### Short words for the tricky terms
 
 - **Filter** - a small window of numbers that slides over the image.
