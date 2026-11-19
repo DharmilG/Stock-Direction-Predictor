@@ -213,9 +213,20 @@ function Write-SupervisorHeartbeat {
 
 function Stop-StaleSupervisors {
     param([int]$CurrentPid)
+    # The launching shell's command line also contains this script path, so it
+    # must be excluded too or we kill our own parent and the supervisor dies.
+    $parentPid = 0
+    try {
+        $self = Get-CimInstance Win32_Process -Filter "ProcessId=$CurrentPid" -ErrorAction SilentlyContinue
+        if ($null -ne $self) { $parentPid = [int]$self.ParentProcessId }
+    } catch { }
     try {
         $stale = Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |
-            Where-Object { $_.ProcessId -ne $CurrentPid -and [string]$_.CommandLine -match 'run_phase3_supervisor\.ps1' }
+            Where-Object {
+                $_.ProcessId -ne $CurrentPid -and $_.ProcessId -ne $parentPid -and
+                [string]$_.CommandLine -match 'run_phase3_supervisor\.ps1' -and
+                [string]$_.CommandLine -match '\-File'
+            }
         foreach ($p in @($stale)) {
             Write-Log "Stopping stale supervisor PowerShell PID $($p.ProcessId)."
             & $script:Taskkill "/PID" $p.ProcessId "/T" "/F" 2>$null | Out-Null
