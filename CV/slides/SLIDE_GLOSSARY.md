@@ -4,9 +4,110 @@ This file is for you, not for the slides.
 The slides stay short and clean. Here everything is written out properly, in
 plain English. If a word on a slide is not clear, find it below.
 
-The technical words are explained first. Then the code is explained folder by
+The CNN deep-dive comes first, then the short word list, then the code folder by
 folder, then the libraries, then the real numbers, then the commands, and
 finally the honest limits.
+
+---
+
+## The CNN, explained properly (in easy words)
+
+This is the detail behind slides 5 and 6. Read it once and the picture will make
+sense. There is no maths here - just what actually happens to the image.
+
+### What "scanning an image" really means
+
+A computer does not see a chart the way you do. To it, the chart is a grid of
+numbers: 224 rows by 224 columns, and three colour values at each point (red,
+green, blue). That is 224 x 224 x 3 numbers.
+
+The model scans this grid with a **filter**. A filter is a small square of
+numbers - like a 3 x 3 or 7 x 7 window. The window sits on top of the image and
+covers a few pixels. The model multiplies the numbers in the window with the
+pixels underneath, adds them up, and writes one single number into a new image
+called a **feature map**. Then it slides the window along and does it again.
+That is the "scan".
+
+- **Stride** is how far the window moves each step. Stride 2 means it jumps two
+  pixels, so it is faster and the picture gets smaller.
+- **Padding** means adding a border of zeros around the image so the window can
+  sit at the edges too.
+- **Pooling** shrinks the picture further by keeping only the strongest value in
+  a small area.
+
+Why do this? Because the first filters notice tiny things - a horizontal line,
+a vertical edge, a colour change. The next filters combine those into candle
+bodies and wicks. Deeper filters combine those into a double top or a flag. The
+picture gets smaller at each step, but the description gets richer.
+
+### The layers, one by one
+
+This is the real ResNet18 used in this project. The sizes below were measured by
+running the model, not copied from a textbook.
+
+| Step | What it does | Image size after it | Channels |
+|---|---|---|---|
+| Input | the 224 x 224 colour chart | 224 x 224 | 3 |
+| conv1 | one 7 x 7 filter, stride 2, finds edges | 112 x 112 | 64 |
+| maxpool | keeps the strongest values, shrinks | 56 x 56 | 64 |
+| layer1 | 2 blocks, detail stays local | 56 x 56 | 64 |
+| layer2 | 2 blocks, picture halves | 28 x 28 | 128 |
+| layer3 | 2 blocks, picture halves again | 14 x 14 | 256 |
+| layer4 | 2 blocks, final and richest | 7 x 7 | 512 |
+| average pool | one number per channel | 1 x 1 | 512 |
+| output | its old photo answer removed | - | **512 numbers** |
+
+"Channels" just means how many different filters looked at the same spot. More
+channels mean more kinds of things the model can notice. The last 512 numbers
+are the compact description we hand to the two heads.
+
+### Skip connections - all 8 of them
+
+ResNet18 has 4 layers, and each layer has 2 blocks. That is 4 x 2 = **8 blocks**.
+Every block has exactly **one skip connection**. So there are **8 skip
+connections** in total.
+
+A skip connection is a wire that carries the input of a block straight to its
+output, adding it back in. Think of it as a bypass road next to a busy street.
+
+- **5 of them are identity skips.** The input already has the right size, so the
+  wire just passes it through unchanged. These are both blocks in layer1, and
+  the second block of layer2, layer3 and layer4.
+- **3 of them are projection skips.** The size changes at the first block of
+  layer2, layer3 and layer4, so a tiny 1 x 1 filter resizes the signal before it
+  is added back. That tiny filter is called a projection.
+
+Why does this matter? In a deep model, the learning signal can fade as it travels
+backwards - this is called the **vanishing gradient**. The skip wire gives the
+signal a direct route, so an 18-layer model can actually be trained. Without it,
+training would stall.
+
+In our model every skip is frozen, just like the rest of the backbone. We never
+change these wires during training.
+
+### The full journey in one paragraph
+
+The 224 x 224 chart goes in. conv1 finds edges and produces 112 x 112. Maxpool
+shrinks it to 56 x 56. layer1 keeps local details. layer2, layer3 and layer4 keep
+halving the picture while growing the description from 64 to 128 to 256 to 512
+channels, ending at 7 x 7 x 512. Eight skip connections kept the learning signal
+alive along the way. Average pooling squashes those 7 x 7 grids into one number
+per channel, giving the final 512 numbers. The old 1000-photo answer layer is
+removed. Those 512 numbers go to the pattern head and the direction head.
+
+### Short words for the tricky terms
+
+- **Filter** - a small window of numbers that slides over the image.
+- **Feature map** - the new small picture a filter produces.
+- **Stride** - how many pixels the window jumps each step.
+- **Padding** - a zero border so the window can reach the edges.
+- **Pooling** - keeping the strongest value in a patch to shrink the picture.
+- **Channel** - one more way of looking at the same spot.
+- **Block** - two convolutions plus one skip connection.
+- **Identity skip** - a shortcut that passes the signal through unchanged.
+- **Projection skip** - a shortcut with a 1 x 1 filter that resizes the signal.
+- **Vanishing gradient** - the learning signal fading before it reaches early
+  layers. Skips fix this.
 
 ---
 

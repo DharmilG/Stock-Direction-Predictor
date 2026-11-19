@@ -172,7 +172,22 @@ def arrow(slide, left, top, width=0.4, height=0.4):
     add_text(slide, "→", left, top, width, height, 20, bold=True, align=PP_ALIGN.CENTER)
 
 
-TOTAL = 9
+def add_stat_box(slide, number, label, left, top, width, height, *, num_size=40):
+    """A bordered box with a big number and a small label inside it."""
+    shape = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE, Inches(left), Inches(top), Inches(width), Inches(height)
+    )
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = WHITE
+    shape.line.color.rgb = BLACK
+    shape.line.width = Pt(1.1)
+    add_text(slide, number, left + 0.25, top + 0.18, width - 0.5, 0.7, num_size, bold=True)
+    add_text(slide, label, left + 0.25, top + height - 0.5, width - 0.5, 0.3, 9,
+             color=GRAY, font=MONO)
+    return shape
+
+
+TOTAL = 10
 
 # ---------------------------------------------------------------- 01 cover
 slide = base(
@@ -183,12 +198,9 @@ slide = base(
     "Real reports: CV/evaluation/ · cv_metrics.json · pattern_report.txt",
 )
 add_image_fit(slide, ASSETS / "chart_input.png", 9.0, 2.8, 3.8, 3.6)
-add_text(slide, "3,100", 0.9, 3.05, 3.0, 0.8, 44, bold=True)
-add_text(slide, "REAL CHART IMAGES", 0.9, 3.8, 3.2, 0.3, 10, color=GRAY, font=MONO)
-add_text(slide, "50", 0.9, 4.45, 3.0, 0.8, 44, bold=True)
-add_text(slide, "NSE SYMBOLS", 0.9, 5.2, 3.2, 0.3, 10, color=GRAY, font=MONO)
-add_text(slide, "224 x 224", 4.2, 4.55, 3.9, 0.7, 30, bold=True)
-add_text(slide, "WHAT THE MODEL SEES", 4.2, 5.25, 3.4, 0.3, 10, color=GRAY, font=MONO)
+add_stat_box(slide, "3,100", "REAL CHART IMAGES", 0.9, 2.95, 3.2, 1.45, num_size=40)
+add_stat_box(slide, "50", "NSE SYMBOLS", 0.9, 4.6, 3.2, 1.45, num_size=40)
+add_stat_box(slide, "224 x 224", "WHAT THE MODEL SEES", 4.35, 4.6, 4.0, 1.45, num_size=28)
 
 # ---------------------------------------------------------------- 02 why
 slide = base(
@@ -279,15 +291,47 @@ for name, dim in stages:
     x += 1.72
 add_bullets(slide, [
     "Each block is a small set of filters that finds edges, then shapes.",
-    "Skip connections let information pass straight through. Easy to train.",
+    "Skip connections are shortcuts. The next slide shows all 8 of them.",
     "ImageNet = a big photo library the reader learned from before.",
     "We keep the 512 numbers. We throw away its old photo answer.",
 ], 0.9, 4.55, 11.6, 2.1, size=13, gap=7)
 
-# ---------------------------------------------------------------- 06 heads
+# ---------------------------------------------------------------- 06 scanning
 slide = base(
     6, TOTAL,
-    "05 · ARCHITECTURE · ANSWERS",
+    "05 · ARCHITECTURE · SCANNING",
+    "How the reader scans the picture.",
+    "A small window slides over the chart. Every stop becomes one number.",
+    "4 layers x 2 blocks = 8 blocks. Each block owns one skip connection.",
+)
+ladder = [
+    ("INPUT", "224x224x3"),
+    ("CONV1", "112x112"),
+    ("LAYER1", "56x56"),
+    ("LAYER2", "28x28"),
+    ("LAYER3", "14x14"),
+    ("LAYER4", "7x7"),
+    ("POOL", "512 numbers"),
+]
+x = 0.7
+for name, dim in ladder:
+    add_box(slide, f"{name}\n{dim}", x, 2.95, 1.62, 1.0, size=10)
+    x += 1.72
+add_bullets(slide, [
+    "A filter is a small grid that slides across the image.",
+    "Each stop multiplies and adds. One number per stop.",
+    "Early filters see edges. Deeper filters see whole shapes.",
+    "Stride = step size. Pooling shrinks the picture as it goes deeper.",
+    "8 blocks in all. Each block has one skip connection - a shortcut.",
+    "5 skips pass straight through. 3 use a tiny 1x1 filter to resize.",
+    "The shortcut lets information reach the end. That makes 18 layers trainable.",
+    "Last step: average pooling turns 7x7x512 into 512 numbers.",
+], 0.9, 4.2, 11.6, 2.6, size=11.5, gap=6)
+
+# ---------------------------------------------------------------- 07 heads
+slide = base(
+    7, TOTAL,
+    "06 · ARCHITECTURE · ANSWERS",
     "Two heads. Two questions.",
     "Head = a small add-on that turns the 512 numbers into one answer.",
     "512 numbers -> 256 hidden values -> 6 shapes or 3 directions.",
@@ -305,10 +349,10 @@ add_bullets(slide, [
 add_text(slide, "LEARNING RATE: 1e-3 THEN 1e-4", 0.9, 5.15, 3.4, 0.3,
          9, bold=True, color=GRAY, font=MONO)
 
-# ---------------------------------------------------------------- 07 gradcam
+# ---------------------------------------------------------------- 08 gradcam
 slide = base(
-    7, TOTAL,
-    "06 · EXPLAINABILITY",
+    8, TOTAL,
+    "07 · EXPLAINABILITY",
     "See where the model looked.",
     "GradCAM paints the part of the chart that drove the answer.",
     "A heat map on the last ResNet block, shown on the same picture.",
@@ -318,10 +362,10 @@ add_image_fit(slide, ASSETS / "gradcam_gray.png", 7.0, 2.9, 5.4, 3.4)
 add_text(slide, "INPUT CHART", 0.9, 6.4, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
 add_text(slide, "WHERE IT LOOKED", 7.0, 6.4, 5.4, 0.3, 10, bold=True, color=GRAY, font=MONO)
 
-# ---------------------------------------------------------------- 08 results
+# ---------------------------------------------------------------- 09 results
 slide = base(
-    8, TOTAL,
-    "07 · RESULTS",
+    9, TOTAL,
+    "08 · RESULTS",
     "It learned the shape. Not the future.",
     "Chronological holdout · 676 real charts the model never saw.",
     "Holdout number is optimistic: the checkpoint was trained before the split fix.",
@@ -344,10 +388,10 @@ add_image_fit(slide, ASSETS / "confusion_gray.png", 7.0, 2.9, 5.2, 3.5)
 add_text(slide, "CONFUSION MATRIX", 7.0, 6.45, 5.2, 0.3, 9,
          bold=True, color=GRAY, font=MONO)
 
-# ---------------------------------------------------------------- 09 verdict
+# ---------------------------------------------------------------- 10 verdict
 slide = base(
-    9, TOTAL,
-    "08 · VERDICT",
+    10, TOTAL,
+    "09 · VERDICT",
     "Use it to see, not to trade.",
     "The heat map lands on the pattern, not on tomorrow.",
     "Kept isolated - never feeds the main model. Next: clean retrain, then decide.",
