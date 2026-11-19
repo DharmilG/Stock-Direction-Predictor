@@ -15,8 +15,8 @@ import numpy as np
 import pandas as pd
 
 from ..config import load_settings
-from ..qpipeline.paths import Q3_LEDGER, Q3_RESULTS, Q3_TRACES, Q3_HEARTBEAT, Q3_GPU, Q3_MAIN_LOG, p0_from
-from ..qpipeline.fio import atomic_append_jsonl, read_jsonl_safe, file_fingerprint, write_text_atomic
+from ..qpipeline.paths import Q3_LEDGER, Q3_RESULTS, Q3_TRACES, Q3_HEARTBEAT, Q3_GPU, Q3_MAIN_LOG, Q3_DONE, p0_from
+from ..qpipeline.fio import atomic_append_jsonl, read_jsonl_safe, file_fingerprint, dict_fingerprint, write_text_atomic
 from ..data.q0_d1 import (
     LABEL_TO_VOTE,
     ThermalMonitor,
